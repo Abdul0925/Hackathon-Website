@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Raisoni Jr Hackathon 2024</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,8 +66,9 @@
         }
 
         .cover-container>p {
-            padding: 10px 20px;
-            margin: 50px;
+            /* padding: 10px 20px; */
+            margin-top: 50px;
+            margin-left: 50px;
         }
 
         .overlay-text1 {
@@ -110,44 +112,7 @@
             }
         }
 
-        /* .hero-section {
-            position: relative;
-            background: url('./picture/cover_page.jpg') center/cover no-repeat;
-            color: white;
-            text-align: center;
-            height: 70vh;
-            }
-            .hero-overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-        }
-        .hero-text {
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-            }
-            .about-section, .why-section, .schedule-section, .themes-section, .experts-section, .testimonials-section, .sponsors-section {
-                padding: 50px 0;
-                }
-                .section-title {
-                    font-size: 2rem;
-                    margin-bottom: 1rem;
-                    text-align: center;
-                    } */
-        /* .hero-section { */
-            /* position: relative; */
-            /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./picture/cover_page.jpg') center/cover no-repeat; */
-            /* color: white; */
-            /* height: 90vh; */
-            /* display: flex; */
-            /* align-items: center; */
-            /* justify-content: center; */
-            /* text-align: center; */
-        /* } */
+
 
         .hero-section h1 {
             font-size: 3rem;
@@ -161,7 +126,7 @@
             padding: 0.8rem 2rem;
             margin-left: 50px;
             border-radius: 50px;
-            background: #5C0F8B;
+            background: #9e16c3;
             color: white;
             /* margin-top: 1.5rem; */
             transition: background 0.3s ease;
@@ -170,7 +135,7 @@
 
 
         .hero-section .btn:hover {
-            background: #9e16c3;
+            background: #5C0F8B;
         }
 
         /* About Section */
@@ -329,6 +294,37 @@
             font-size: 0.9rem;
         }
 
+        .footer {
+            background-color: #501987;
+            color: #ffffff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer h3 {
+            font-size: 1.1rem;
+            color: #A48FB6;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #f44f36;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: #ffffff;
+        }
+
+        .social-icons a:hover {
+            color: #f44f36;
+        }
+
         /* Keyframes for Animation */
         @keyframes fadeInDown {
             from {
@@ -401,6 +397,7 @@
 
             <div class="d-flex">
                 <a class="navbar-brand" href="index.php">
+                    <img src="./picture/encarta-logo.png" alt="" height="" width="150px">
                     <!-- <img src="uploads\images\671fd3dce42cb1.48550005.png" alt="" height="50px" width="100px"> -->
                 </a>
             </div>
@@ -491,12 +488,6 @@
         </div>
     </div>
 
-    <!-- <header class="hero-section">
-        <div class="hero-content">
-            <h1>Welcome to the RJH Hackathon – <br>Innovate. Collaborate. Compete.</h1>
-            <a href="#registration" class="btn btn-lg">Join the Challenge</a>
-        </div>
-    </header> -->
 
     <!-- About Section -->
     <section class="about">
@@ -554,16 +545,117 @@
         </ul>
     </section>
 
+
+
     <!-- Testimonials Section -->
-    <section class="testimonials">
-        <h2>What Past Participants Say</h2>
-        <p>"Last year’s hackathon changed my career path. I went from a student to a startup founder in six months!" - Alex S.</p>
+    <section class="testimonials-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Testinomials</h2>
+            <div class="row">
+                <!-- Testimonial Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Client 1">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="card-text text-muted">"Great experience! The team was professional, and the service exceeded my expectations."</p>
+                            <small class="text-muted">CEO, TechCorp</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Client 2">
+                            <h5 class="card-title">Jane Smith</h5>
+                            <p class="card-text text-muted">"Fantastic platform! I was able to achieve my goals faster with their support."</p>
+                            <small class="text-muted">Marketing Head, FinPro</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial Card 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Client 3">
+                            <h5 class="card-title">Michael Lee</h5>
+                            <p class="card-text text-muted">"Highly recommend! The quality of service and attention to detail were excellent."</p>
+                            <small class="text-muted">CTO, Innovatech</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 RJH Hackathon. All rights reserved.</p>
+    <!-- Footer  -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- Logo and University Name -->
+                <div class="col-md-3 text-center text-md-start mb-4 mt-5">
+                    <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="University Logo" style="width: 270px;">
+                </div>
+
+                <!-- Important Links -->
+                <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
+                    <h3>IMPORTANT LINKS</h3>
+                    <ul class="list-unstyled p-2">
+                        <li class="mt-2"><a href="#">Apply Now</a></li>
+                        <li class="mt-2"><a href="#">Admission Procedure</a></li>
+                        <li class="mt-2"><a href="#">Programs Offered</a></li>
+                        <li class="mt-2"><a href="#">Contact</a></li>
+                        <li class="mt-2"><a href="#">Hobby Clubs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Portals -->
+                <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
+                    <h3>PORTALS</h3>
+                    <ul class="list-unstyled p-2">
+                        <li class="mt-2"><a href="#">Alumni Portal</a></li>
+                        <li class="mt-2"><a href="#">NSP</a></li>
+                        <li class="mt-2"><a href="#">NAC</a></li>
+                        <li class="mt-2"><a href="#">SGRKF</a></li>
+                        <li class="mt-2"><a href="#">GHRTSCF</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
+                    <h3>GHRSTU NAGPUR</h3>
+                    <p>Riaan Tower, Mangalwari Bazar Rd, Sadar, Nagpur, Maharashtra 440001</p>
+                    <p>📞 8275435110 / 9307900682</p>
+                    <p>✉️ <a href="mailto:encarta@ghrstu.edu.in">encarta@ghrstu.edu.in</a></p>
+                </div>
+            </div>
+
+            <!-- Social Media and Legal Links -->
+            <div class="row text-center mt-2">
+                <div class="col-12 social-icons">
+                    <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="col-12 mt-3">
+                    <p>
+                        <a href="#">Privacy Policy</a> |
+                        <a href="#">Terms & Conditions</a> |
+                        <a href="#">Refund & Cancellation</a>
+                    </p>
+                    <p class="mt-2">© 2024 All Rights Reserved. Design & Developed by Encarta IT Cell's Advisor.</p>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <!-- Font Awesome for Icons -->
+
 
 
 
