@@ -1,0 +1,17 @@
+.my-primary-btn{
+    background-color: #5C0F8B;
+    color: white;
+}
+.my-primary-btn:hover{
+    background-color: #2f024c;
+    color: white;
+}
+.my-primary-btn:active {
+    box-shadow: 2px 2px 5px #fc894d;
+    background-color: #5C0F8B;
+    /* color: white; */
+}
+
+.about{
+    background-color: #f6e8ff;
+}
