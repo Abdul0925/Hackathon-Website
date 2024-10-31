@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Raisoni Jr Hackathon 2024</title>
+    <title>Raisoni Jr Hackfest 2024</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -136,6 +136,7 @@
 
         .hero-section .btn:hover {
             background: #5C0F8B;
+            color: white;
         }
 
         /* About Section */
@@ -409,7 +410,7 @@
             <div class="container-fluid font-style-text">
                 <!-- Left: Logo -->
                 <a class="navbar-brand" href="index.php">
-                    <span class="heading-font">Raisoni Junior Hackathon</span>
+                    <span class="heading-font">Raisoni Junior Hackfest</span>
                 </a>
 
                 <!-- Toggle Button for Mobile View (Right aligned) -->
@@ -426,10 +427,10 @@
                                 About RJH
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                <li><a class="dropdown-item" href="#">RJH Process Flow</a></li>
-                                <li><a class="dropdown-item" href="#">RJH Themes</a></li>
-                                <li><a class="dropdown-item" href="#">Implementation Team</a></li>
-                                <li><a class="dropdown-item" href="#">Our Past Hackathons</a></li>
+                                <li><a class="dropdown-item" href="processFlow.php">RJH Process Flow</a></li>
+                                <li><a class="dropdown-item" href="themes.php">RJH Themes</a></li>
+                                <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
+                                <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
                             </ul>
                         </li>
 
@@ -439,19 +440,19 @@
                                 Guidelines
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="guidelinesDropdown">
-                                <li><a class="dropdown-item" href="#">For Institutes/Universities</a></li>
-                                <li><a class="dropdown-item" href="#">Idea PPT</a></li>
-                                <li><a class="dropdown-item" href="#">Hackathon Process</a></li>
-                                <li><a class="dropdown-item" href="#">Hackathon Timeline</a></li>
+                                <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank">For Institutes</a></li>
+                                <li><a class="dropdown-item" href="./downloadable/Idea-Presentation-Format-SIH2023-College[1].pptx" target="_blank" rel="noopener noreferrer">Idea PPT</a></li>
+                                <li><a class="dropdown-item" href="hackProcess.php">Hackathon Process</a></li>
+                                <li><a class="dropdown-item" href="hackTimeline.php">Hackathon Timeline</a></li>
                             </ul>
                         </li>
 
                         <!-- Other Links -->
                         <li class="nav-item">
-                            <a class="nav-link c-black" href="#">Problem Statements</a>
+                            <a class="nav-link c-black" href="problemStatements.php">Problem Statements</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link c-black" href="#">Contact Us</a>
+                            <a class="nav-link c-black" href="contactUs.php">Contact Us</a>
                         </li>
                     </ul>
 
@@ -482,7 +483,7 @@
             <p><i>"the best way to predict the future is to invent it"</i></p>
             <header class="hero-section">
                 <div class="hero-content">
-                    <a href="#registration" class="btn btn-lg">Join the Challenge</a>
+                    <a href="loginPage.php" class="btn btn-lg">Join the Challenge</a>
                 </div>
             </header>
         </div>
@@ -491,8 +492,8 @@
 
     <!-- About Section -->
     <section class="about">
-        <h2>About RJH Hackathon</h2>
-        <p>"The RJH Hackathon is where creativity meets technology. Join us as we explore new ideas, solve real-world problems, and push the boundaries of what’s possible. Let’s bring your ideas to life!"</p>
+        <h2>About Hackfest</h2>
+        <p>"The Raisoni Junior Hackfest - where creativity meets technology. Join us as we explore new ideas, solve real-world problems, and push the boundaries of what’s possible. Let’s bring your ideas to life!"</p>
 
     </section>
 
