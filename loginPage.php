@@ -57,6 +57,23 @@
 </head>
 
 <body>
+
+<nav class="navbar" style="background-color: #5C0F8B;">
+        <div class="container-fluid">
+            <!-- Left: Logo -->
+            <a class="navbar-brand" href="https://ghrstu.edu.in/">
+                <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="" height="" width="100px">
+            </a>
+
+            <div class="d-flex">
+                <a class="navbar-brand" href="index.php">
+                    <img src="./picture/encarta-logo.png" alt="" height="" width="150px">
+                    <!-- <img src="uploads\images\671fd3dce42cb1.48550005.png" alt="" height="50px" width="100px"> -->
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <!-- Left: Logo -->
