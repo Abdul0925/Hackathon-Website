@@ -493,18 +493,19 @@
     <!-- About Section -->
     <section class="about">
         <h2>About Hackfest</h2>
-        <p>"The Raisoni Junior Hackfest - where creativity meets technology. Join us as we explore new ideas, solve real-world problems, and push the boundaries of what’s possible. Let’s bring your ideas to life!"</p>
+        <p>"The Raisoni Junior Hackfest - Empowering Young Innovators.</p>
+        <p>Hackfests are playgrounds where ideas evolve into breakthroughs, fueled by passion and teamwork. Join us as we explore new ideas, solve real-world problems and push the boundaries of what’s possible!"</p>
 
     </section>
 
     <!-- Highlights Section -->
     <section class="highlights d-block d-lg-flex">
         <div class="highlight-item">
-            <h4>48 Hours of Innovation</h4>
+            <h4>8 Hours of Innovation</h4>
             <p>Continuous coding and brainstorming to create breakthrough solutions.</p>
         </div>
         <div class="highlight-item">
-            <h4>Industry Mentorship</h4>
+            <h4>Mentorship</h4>
             <p>Guidance from top industry professionals and experts.</p>
         </div>
         <div class="highlight-item">
@@ -539,9 +540,10 @@
         <h2>Event Timeline</h2>
         <ul>
             <li>Kick-Off Ceremony</li>
+            <li>Project Showcase</li>
             <li>Workshop Sessions on Latest Tech Trends</li>
             <li>Dedicated Coding Time with Mentors</li>
-            <li>Project Showcase and Judging</li>
+            <li>Result Announcment</li>
             <li>Award Ceremony</li>
         </ul>
     </section>
@@ -558,7 +560,7 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-body text-center">
                             <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Client 1">
-                            <h5 class="card-title">John Doe</h5>
+                            <h5 class="card-title">Vaishnavi Kancharla</h5>
                             <p class="card-text text-muted">"Great experience! The team was professional, and the service exceeded my expectations."</p>
                             <small class="text-muted">CEO, TechCorp</small>
                         </div>
