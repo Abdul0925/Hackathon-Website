@@ -7,13 +7,26 @@ if ($_SESSION['mentor_logged_in'] != true) {
 $email = $_SESSION['email'];
 
 
-$result1 = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
-if (mysqli_num_rows($result1) > 0) {
-    $_SESSION['totalTeams'] = $totalTeams = mysqli_num_rows($result1);
-    mysqli_query($conn, "UPDATE mentor_details SET no_of_teams = $totalTeams WHERE email='$email'");
+// First query to select from `all_team_members`
+$stmt1 = $conn->prepare("SELECT * FROM all_team_members WHERE mentor = ? AND is_leader = 1");
+$stmt1->bind_param("s", $email);
+$stmt1->execute();
+$result1 = $stmt1->get_result();
+
+if ($result1->num_rows > 0) {
+    $_SESSION['totalTeams'] = $totalTeams = $result1->num_rows;
+    
+    // Update query for `mentor_details`
+    $stmt2 = $conn->prepare("UPDATE mentor_details SET no_of_teams = ? WHERE email = ?");
+    $stmt2->bind_param("is", $totalTeams, $email);
+    $stmt2->execute();
 }
 
-$result = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
+// Second query to select from `all_team_members`
+$stmt3 = $conn->prepare("SELECT * FROM all_team_members WHERE mentor = ? AND is_leader = 1");
+$stmt3->bind_param("s", $email);
+$stmt3->execute();
+$result = $stmt3->get_result();
 
 
 

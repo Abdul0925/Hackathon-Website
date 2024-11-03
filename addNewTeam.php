@@ -12,31 +12,39 @@ $no_of_members = isset($_POST['no_of_members']) && $_POST['no_of_members'] >= 2 
     ? (int)$_POST['no_of_members']
     : 2;
 
-if (isset($_POST['submit'])) {
-    $team_name = $_POST["team_name"];
-    $ps = $_POST["ps"];
-    $mentorEmail = $_SESSION["email"];
-
-    echo "<h5 class='text-center text-success mt-5'>Team Information Submitted Successfully:</h5>";
-
-    for ($i = 1; $i <= $no_of_members; $i++) {
-        $name = $_POST["name$i"];
-        $email = $_POST["email$i"];
-        $phone = $_POST["phone$i"];
-        $isLeader = isset($_POST['team_leader']) && $_POST['team_leader'] === "name$i" ? 1 : 0;
-
-        $sql = "INSERT INTO all_team_members (mentor, name, email, phone, team_name, ps,is_leader) 
-                                VALUES ('$mentorEmail', '$name', '$email', '$phone', '$team_name', '$ps',$isLeader)";
-        if ($conn->query($sql) === TRUE) {
-            echo "<p class='text-center'>Team Member $i - <strong>$name</strong>: Saved successfully.</p>";
-        } else {
-            echo "<p class='text-danger text-center'>Error saving Team Member $i: " . $conn->error . "</p>";
+    if (isset($_POST['submit'])) {
+        $team_name = $_POST["team_name"];
+        $ps = $_POST["ps"];
+        $mentorEmail = $_SESSION["email"];
+    
+        echo "<h5 class='text-center text-success mt-5'>Team Information Submitted Successfully:</h5>";
+    
+        // Prepare the SQL statement outside the loop
+        $stmt = $conn->prepare("INSERT INTO all_team_members (mentor, name, email, phone, team_name, ps, is_leader) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?)");
+        
+        // Bind parameters to the prepared statement
+        for ($i = 1; $i <= $no_of_members; $i++) {
+            $name = $_POST["name$i"];
+            $email = $_POST["email$i"];
+            $phone = $_POST["phone$i"];
+            $isLeader = isset($_POST['team_leader']) && $_POST['team_leader'] === "name$i" ? 1 : 0;
+    
+            $stmt->bind_param("ssssssi", $mentorEmail, $name, $email, $phone, $team_name, $ps, $isLeader);
+            
+            if ($stmt->execute()) {
+                echo "<p class='text-center'>Team Member $i - <strong>$name</strong>: Saved successfully.</p>";
+            } else {
+                echo "<p class='text-danger text-center'>Error saving Team Member $i: " . $conn->error . "</p>";
+            }
         }
+    
+        $stmt->close();
+        $conn->close();
+        header('Location: mentor_my_teams.php');
+        exit(); // To ensure the rest of the script doesn't run after the redirect
     }
-
-    $conn->close();
-    header('Location: mentor_my_teams.php');
-}
+    
 ?>
 
 <!DOCTYPE html>

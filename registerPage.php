@@ -34,9 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
         $_SESSION['college'] = $college;
         $_SESSION['role'] = 'Mentor';
 
-        $query = "SELECT * FROM mentor_details WHERE email = '$email'";
+        $query = "SELECT * FROM mentor_details WHERE email = ?";
         $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email); // 's' specifies the variable type => 'string'
         $stmt->execute();
+
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             echo '<script> alert("User Already Exist Try Again!"); window.location.href = "registerPage.php"; </script>';
@@ -228,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
-            
+
         }
 
         .register-container h3 {
@@ -340,12 +342,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
 
     <div class="warning">
-            Only Mentors are allowed to register. Mentors can participate with more than one team.
-        </div>
+        Only Mentors are allowed to register. Mentors can participate with more than one team.
+    </div>
 
     <div class="register-container">
         <!-- Warning Message -->
-        
+
 
         <!-- Display Message if Available -->
         <?php if (isset($message)): ?>

@@ -22,16 +22,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
     // Validate email
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // Generate OTP
-        if ($new_password == $confirm_password && strlen($new_password)>6) {
+        if ($new_password == $confirm_password && strlen($new_password) > 6) {
             $otp = rand(100000, 999999);
             if ($role == 'mentor') {
                 $_SESSION['otp'] = $otp;
                 $_SESSION['email'] = $email;
                 $_SESSION['new_password'] = $new_password;
                 $_SESSION['role'] = 'Mentor';
-                $query = "SELECT * FROM mentor_details WHERE email = '$email'";
+
+                $query = "SELECT * FROM mentor_details WHERE email = ?";
                 $stmt = $conn->prepare($query);
+                $stmt->bind_param("s", $email); // 's' specifies that the parameter is a string
                 $stmt->execute();
+
                 $result = $stmt->get_result();
                 if ($result->num_rows == 0) {
                     echo '<script> alert("User Not Exist!"); window.location.href = "forgetPassword.php"; </script>';
@@ -93,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
     // Check if entered OTP matches the session OTP
     if ($entered_otp == $_SESSION['otp']) {
-        
+
         // OTP is valid
         $reset_success = true;
         $message = "Registration successful! Wait we are redirecting to you on Login Page";
@@ -128,20 +131,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "UPDATE mentor_details SET password = ? WHERE email = ?"; 
+        $query = "UPDATE mentor_details SET password = ? WHERE email = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('ss', $hashedPassword, $email);
         if ($stmt->execute()) {
             // if ($mail->Send()) {
-                echo '<script> alert("Password Reset successful!"); window.location.href = "loginPage.php"; </script>';
+            echo '<script> alert("Password Reset successful!"); window.location.href = "loginPage.php"; </script>';
             // }
-        // } else {
+            // } else {
 
             // echo '<script> alert("Error in reset Password Try Again!"); window.location.href = "loginPage.php"; </script>';
-        }
-        else{
+        } else {
             echo '<script> alert("Error in reset Password Try Again!"); window.location.href = "loginPage.php"; </script>';
-            
         }
     } else {
         // OTP is invalid
@@ -287,10 +288,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
 
     <script>
-        document.getElementById('resetButton').addEventListener('click', ()=>{
-            setTimeout(()=>{
+        document.getElementById('resetButton').addEventListener('click', () => {
+            setTimeout(() => {
                 document.getElementById('resetButton').disabled = true;
-            },500)
+            }, 500)
         })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
