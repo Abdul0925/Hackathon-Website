@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Login Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,25 +15,25 @@
         body {
             background-color: #f4f7f6;
         }
-        
+
         .heading-font {
             font-family: "Playwrite GB S", cursive;
             font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
         }
-        
+
         .font-style-text {
             font-family: "Oxanium", sans-serif;
             font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
         }
-        
+
         .c-black {
             color: black;
         }
-        
+
         .login-container {
             max-width: 400px;
             margin: 80px auto;
@@ -42,50 +42,51 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-        
+
         .login-container h3 {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
             color: #343a40;
         }
-        
+
         .form-control {
             border-radius: 8px;
         }
-        
+
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         .my-primary-btn {
             width: 100%;
             border-radius: 8px;
         }
-        
+
         .extra-links {
             display: flex;
             justify-content: space-between;
             margin-top: 10px;
         }
-        
+
         .extra-links a {
             font-size: 14px;
             color: #5C0F8B;
         }
-        
+
         .dropdown-menu {
             border-radius: 8px;
         }
-        .class-control{
+
+        .class-control {
             border-color: #f4f7f6;
         }
-        </style>
+    </style>
 </head>
 
 <body>
 
-<nav class="navbar" style="background-color: #5C0F8B;">
+    <nav class="navbar" style="background-color: #5C0F8B;">
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
@@ -175,12 +176,12 @@
             <div class="form-group">
                 <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
             </div>
-            
+
             <!-- Password -->
             <div class="form-group">
                 <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
             </div>
-            
+
             <!-- Role Dropdown -->
             <div class="form-group">
                 <select class="form-control" name="role" id="role" required>
@@ -191,10 +192,10 @@
                     <option value="mentor">Mentor</option>
                 </select>
             </div>
-            
+
             <!-- Submit Button -->
             <button type="submit" class="btn my-primary-btn" name="loginBtn">Login</button>
-            
+
             <!-- Extra Links (Register and Forget Password) -->
             <div class="extra-links">
                 <a href="registerPage.php">Register Now</a>
