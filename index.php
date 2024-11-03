@@ -560,9 +560,9 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-body text-center">
                             <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Client 1">
-                            <h5 class="card-title">Vaishnavi Kancharla</h5>
+                            <h5 class="card-title">Ram Ghonmode</h5>
                             <p class="card-text text-muted">"Great experience! The team was professional, and the service exceeded my expectations."</p>
-                            <small class="text-muted">CEO, TechCorp</small>
+                            <small class="text-muted">Founder and Director @ Azlogics Private Limited</small>
                         </div>
                     </div>
                 </div>
@@ -572,15 +572,15 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-body text-center">
                             <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Client 2">
-                            <h5 class="card-title">Jane Smith</h5>
+                            <h5 class="card-title">Vaishnavi Kancharla</h5>
                             <p class="card-text text-muted">"Fantastic platform! I was able to achieve my goals faster with their support."</p>
-                            <small class="text-muted">Marketing Head, FinPro</small>
+                            <small class="text-muted">SDE @ Cisco</small>
                         </div>
                     </div>
                 </div>
 
                 <!-- Testimonial Card 3 -->
-                <div class="col-md-4 mb-4">
+                <!-- <div class="col-md-4 mb-4">
                     <div class="card shadow-sm border-0">
                         <div class="card-body text-center">
                             <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Client 3">
@@ -589,7 +589,7 @@
                             <small class="text-muted">CTO, Innovatech</small>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
