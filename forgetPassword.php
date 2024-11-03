@@ -158,17 +158,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>RJH Forget Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-        body {
-            background-color: #f4f7f6;
-        }
 
         .login-container {
-            max-width: 400px;
+            max-width: 600px;
             margin: 80px auto;
-            background-color: #ffffff;
+            background-color: #efe4ff;
             padding: 30px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
@@ -210,7 +207,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
     </style>
 </head>
 
-<body>
+<body style="background-color: #f4f7f6">
     <?php require('indexNavbar.php'); ?>
 
     <div class="login-container">
@@ -255,7 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary" name="sendOtp" id="resetButton">RESET Password</button>
+            <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="resetButton">RESET Password</button>
 
             <!-- Extra Links (Register and Forget Password) -->
 
@@ -278,7 +275,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                             <label for="otpInput" class="form-label">Enter OTP</label>
                             <input type="text" class="form-control" name="otpInput" placeholder="Enter OTP" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mt-3" name="verifyOtp" id="verifyBtn">Verify OTP</button>
+                        <button type="submit" class="btn my-primary-btn w-100 mt-3" name="verifyOtp" id="verifyBtn">Verify OTP</button>
                     </form>
                 </div>
             </div>

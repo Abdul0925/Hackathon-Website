@@ -442,7 +442,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                             <label for="otpInput" class="form-label">Enter OTP</label>
                             <input type="text" class="form-control" name="otpInput" placeholder="Enter OTP" required>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mt-3" name="verifyOtp" id="verifyBtn">Verify OTP</button>
+                        <button type="submit" class="btn my-primary-btn w-100 mt-3" name="verifyOtp" id="verifyBtn">Verify OTP</button>
                     </form>
                 </div>
             </div>
