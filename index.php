@@ -607,11 +607,11 @@
                 <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
                     <h3>IMPORTANT LINKS</h3>
                     <ul class="list-unstyled p-2">
-                        <li class="mt-2"><a href="#">Apply Now</a></li>
-                        <li class="mt-2"><a href="#">Admission Procedure</a></li>
-                        <li class="mt-2"><a href="#">Programs Offered</a></li>
-                        <li class="mt-2"><a href="#">Contact</a></li>
-                        <li class="mt-2"><a href="#">Hobby Clubs</a></li>
+                        <li class="mt-2"><a href="#">Events</a></li>
+                        <li class="mt-2"><a href="#">About Institute</a></li>
+                        <li class="mt-2"><a href="#">Student Speak</a></li>
+                        <li class="mt-2"><a href="#">Alumni Events</a></li>
+                        <li class="mt-2"><a href="#">IQAC</a></li>
                     </ul>
                 </div>
 
