@@ -607,11 +607,11 @@
                 <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
                     <h3>IMPORTANT LINKS</h3>
                     <ul class="list-unstyled p-2">
-                        <li class="mt-2"><a href="#">Apply Now</a></li>
-                        <li class="mt-2"><a href="#">Admission Procedure</a></li>
-                        <li class="mt-2"><a href="#">Programs Offered</a></li>
-                        <li class="mt-2"><a href="#">Contact</a></li>
-                        <li class="mt-2"><a href="#">Hobby Clubs</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/events">Events</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/about-institute">About Institute</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/student-speak">Sutdent Speak</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/alumni-events">Alumini Events</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/iqac">IQAC</a></li>
                     </ul>
                 </div>
 
