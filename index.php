@@ -607,11 +607,11 @@
                 <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
                     <h3>IMPORTANT LINKS</h3>
                     <ul class="list-unstyled p-2">
-                        <li class="mt-2"><a href="#">Events</a></li>
-                        <li class="mt-2"><a href="#">About Institute</a></li>
-                        <li class="mt-2"><a href="#">Student Speak</a></li>
-                        <li class="mt-2"><a href="#">Alumni Events</a></li>
-                        <li class="mt-2"><a href="#">IQAC</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/events">Events</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/about-institute">About Institute</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/student-speak">Sutdent Speak</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/alumni-events">Alumini Events</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/iqac">IQAC</a></li>
                     </ul>
                 </div>
 
@@ -619,11 +619,11 @@
                 <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
                     <h3>PORTALS</h3>
                     <ul class="list-unstyled p-2">
-                        <li class="mt-2"><a href="#">Alumni Portal</a></li>
-                        <li class="mt-2"><a href="#">NSP</a></li>
-                        <li class="mt-2"><a href="#">NAC</a></li>
-                        <li class="mt-2"><a href="#">SGRKF</a></li>
-                        <li class="mt-2"><a href="#">GHRTSCF</a></li>
+                        <li class="mt-2"><a href="https://alumni.raisoni.net/">Alumni Portal</a></li>
+                        <li class="mt-2"><a href="https://www.rashtriyachhatrasansad.in/">NSP</a></li>
+                        <li class="mt-2"><a href="http://nationalagricultureconclave.com/">NAC</a></li>
+                        <li class="mt-2"><a href="https://sgrkf.com/">SGRKF</a></li>
+                        <li class="mt-2"><a href="http://ghrscf.com/">GHRTSCF</a></li>
                     </ul>
                 </div>
 
@@ -639,17 +639,17 @@
             <!-- Social Media and Legal Links -->
             <div class="row text-center mt-2">
                 <div class="col-12 social-icons">
-                    <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="me-2"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="me-2"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/raisoniworld" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/raisoniworld" class="me-2"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/raisoniworld" class="me-2"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/school/raisoniworld" class="me-2"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="http://youtube.com/raisoniworld" class="me-2"><i class="fab fa-youtube"></i></a>
                 </div>
                 <div class="col-12 mt-3">
                     <p>
-                        <a href="#">Privacy Policy</a> |
-                        <a href="#">Terms & Conditions</a> |
-                        <a href="#">Refund & Cancellation</a>
+                        <a href="https://raisoni.net/document/privacy_policy.html">Privacy Policy</a> |
+                        <a href="https://raisoni.net/document/terms_and_conditions.html">Terms & Conditions</a> |
+                        <a href="https://raisoni.net/document/refund_and_cancellation.html">Refund & Cancellation</a>
                     </p>
                     <p class="mt-2">© 2024 All Rights Reserved. Design & Developed by Encarta IT Cell's Advisor.</p>
                 </div>
