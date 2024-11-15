@@ -452,7 +452,7 @@
                             <a class="nav-link c-black" href="problemStatements.php">Problem Statements</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link c-black" href="contactUs.php">Contact Us</a>
+                            <a class="nav-link c-black" href="contact.php">Contact Us</a>
                         </li>
                     </ul>
 
