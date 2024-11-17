@@ -145,7 +145,7 @@
         .contactForm .inputBox textarea:focus ~ span,
         .contactForm .inputBox textarea:valid ~ span
         {
-        color: #e91e63;
+        color: #5C0F8B;
         font-size: 12px;
         transform: translateY(-20px);
         }
@@ -346,7 +346,7 @@
                             <span>Full Name</span>
                         </div>
                         <div class="inputBox">
-                            <input type="text" name="" required="required">
+                            <input type="email" name="" required="required">
                             <span>Email</span>
                         </div>
                         <div class="inputBox">
