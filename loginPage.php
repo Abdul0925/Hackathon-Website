@@ -213,33 +213,34 @@
             <!-- Email -->
             <div class="inputBox">
                 <input type="email" name="email" id="email" required>
-                <span>Enter your email</span>
+                <span class="font-style-text">Enter your email</span>
             </div>
 
             <!-- Password -->
             <div class="inputBox">
                 <input type="password" name="password" id="password" required>
-                <span>Enter your password</span>
+                <span class="font-style-text">Enter your password</span>
             </div>
 
             <!-- Role Dropdown -->
-            <div class="form-group"  style="margin-bottom: 20px;">
-                <select class="form-control" style="border-radius: 8px;" name="role" id="role" required>
-                    <option selected disabled>Please Select Your Role</option>
-                    <option value="super-admin">Super Admin</option>
-                    <!-- <option value="institute-college">Institute/College</option> -->
-                    <!-- <option value="team-leader">Team Leader</option> -->
-                    <option value="mentor">Mentor</option>
-                </select>
-            </div>
-    
-            <!-- Submit Button -->
-            <button type="submit" class="btn my-primary-btn" name="loginBtn">Login</button>
-
-            <!-- Extra Links (Register and Forget Password) -->
-            <div class="extra-links">
-                <a href="registerPage.php">Register Now</a>
-                <a href="forgetPassword.php">Forget Password?</a>
+            <div class="font-style-text">
+                <div class="form-group"  style="margin-bottom: 20px;">
+                    <select class="form-control" style="border-radius: 8px;" name="role" id="role" required>
+                        <option selected disabled>Please Select Your Role</option>
+                        <option value="super-admin">Super Admin</option>
+                        <!-- <option value="institute-college">Institute/College</option> -->
+                        <!-- <option value="team-leader">Team Leader</option> -->
+                        <option value="mentor">Mentor</option>
+                    </select>
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" class="btn my-primary-btn" name="loginBtn">Login</button>
+                
+                <!-- Extra Links (Register and Forget Password) -->
+                <div class="extra-links">
+                    <a href="registerPage.php">Register Now</a>
+                    <a href="forgetPassword.php">Forget Password?</a>
+                </div>
             </div>
         </form>
     </div>
