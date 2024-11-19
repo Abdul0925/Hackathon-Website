@@ -224,7 +224,7 @@
 
             <!-- Role Dropdown -->
             <div class="font-style-text">
-                <div class="form-group"  style="margin-bottom: 20px;">
+                <div class="form-group"  style="padding-top: 10px; padding-bottom: 20px;">
                     <select class="form-control" style="border-radius: 8px;" name="role" id="role" required>
                         <option selected disabled>Please Select Your Role</option>
                         <option value="super-admin">Super Admin</option>
