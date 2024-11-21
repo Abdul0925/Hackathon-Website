@@ -12,9 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        body {
+        /* body {
             background-color: #f4f7f6;
-        }
+        } */
 
         .heading-font {
             font-family: "Playwrite GB S", cursive;
@@ -37,25 +37,63 @@
         .login-container {
             max-width: 400px;
             margin: 80px auto;
-            background-color: #efe4ff;
+            /* background-color: #efe4ff; */
             padding: 30px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
+            border-radius: 15px;
+            border-bottom: 8px;
+            border-right: 8px;
+            border-style: solid;
         }
 
         .login-container h3 {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
-            color: #343a40;
+            color: black;
+            font-family: "Oxanium", sans-serif;
         }
 
-        .form-control {
-            border-radius: 8px;
+        .login-container .inputBox
+        {
+        position: relative;
+        width: 100%;
+        margin-top: 10px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .login-container .inputBox input,
+        .login-container .inputBox textarea
+        {
+        width: 100%;
+        padding: 5px 0;
+        font-size: 16px;
+        margin: 10px 0;
+        border: none;
+        border-bottom: 2px solid #333;
+        outline: none;
+        resize: none;
+        }
+
+        .login-container .inputBox span
+        {
+        position: absolute;
+        Left: 0;
+        padding: 5px 0;
+        font-size: 16px;
+        margin: 10px 0;
+        pointer-events: none;
+        transition: 0.5s;
+        color: #948686;
+        }
+
+        .login-container .inputBox input:focus ~ span,
+        .login-container .inputBox input:valid ~ span,
+        .login-container .inputBox textarea:focus ~ span,
+        .login-container .inputBox textarea:valid ~ span
+        {
+        color: #5C0F8B;
+        font-size: 12px;
+        transform: translateY(-20px);
         }
 
         .my-primary-btn {
@@ -173,38 +211,40 @@
         <h3>Login to Your Account</h3>
         <form method="POST" action="loginProcess.php">
             <!-- Email -->
-            <div class="form-group">
-                <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
+            <div class="inputBox">
+                <input type="email" name="email" id="email" required>
+                <span class="font-style-text">Enter your email</span>
             </div>
 
             <!-- Password -->
-            <div class="form-group">
-                <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
+            <div class="inputBox">
+                <input type="password" name="password" id="password" required>
+                <span class="font-style-text">Enter your password</span>
             </div>
 
             <!-- Role Dropdown -->
-            <div class="form-group">
-                <select class="form-control" name="role" id="role" required>
-                    <option selected disabled>Please Select Your Role</option>
-                    <option value="super-admin">Super Admin</option>
-                    <!-- <option value="institute-college">Institute/College</option> -->
-                    <!-- <option value="team-leader">Team Leader</option> -->
-                    <option value="mentor">Mentor</option>
-                </select>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn my-primary-btn" name="loginBtn">Login</button>
-
-            <!-- Extra Links (Register and Forget Password) -->
-            <div class="extra-links">
-                <a href="registerPage.php">Register Now</a>
-                <a href="forgetPassword.php">Forget Password?</a>
+            <div class="font-style-text">
+                <div class="form-group"  style="padding-top: 10px; padding-bottom: 20px;">
+                    <select class="form-control" style="border-radius: 8px;" name="role" id="role" required>
+                        <option selected disabled>Please Select Your Role</option>
+                        <option value="super-admin">Super Admin</option>
+                        <!-- <option value="institute-college">Institute/College</option> -->
+                        <!-- <option value="team-leader">Team Leader</option> -->
+                        <option value="mentor">Mentor</option>
+                    </select>
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" class="btn my-primary-btn" name="loginBtn">Login</button>
+                
+                <!-- Extra Links (Register and Forget Password) -->
+                <div class="extra-links">
+                    <a href="registerPage.php">Register Now</a>
+                    <a href="forgetPassword.php">Forget Password?</a>
+                </div>
             </div>
         </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-
 </html>

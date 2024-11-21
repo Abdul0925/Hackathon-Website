@@ -600,7 +600,9 @@
             <div class="row">
                 <!-- Logo and University Name -->
                 <div class="col-md-3 text-center text-md-start mb-4 mt-5">
-                    <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="University Logo" style="width: 270px;">
+                    <a class="navbar-brand" href="https://ghrstu.edu.in/">
+                        <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="University Logo" style="width: 270px;">
+                    </a>
                 </div>
 
                 <!-- Important Links -->
@@ -629,7 +631,7 @@
 
                 <!-- Contact Information -->
                 <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
-                    <h3>GHRSTU NAGPUR</h3>
+                    <h3>GHRCACS NAGPUR</h3>
                     <p>Riaan Tower, Mangalwari Bazar Rd, Sadar, Nagpur, Maharashtra 440001</p>
                     <p>📞 8275435110 / 9307900682</p>
                     <p>✉️ <a href="mailto:encarta@ghrstu.edu.in">encarta@ghrstu.edu.in</a></p>
