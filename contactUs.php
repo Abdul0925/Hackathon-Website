@@ -12,7 +12,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        
+        <link rel="stylesheet" href="style.css">
         <style>
 
             .contact1
@@ -308,8 +308,8 @@
                     </div>
                 </div>
             </nav>
-
         </div>
+        
         <section class="contact1">
                 <div class="content1">
                     <!-- <h2>Contact Us</h2> -->
