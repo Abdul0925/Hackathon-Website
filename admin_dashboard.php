@@ -82,13 +82,14 @@ if ($_SESSION['admin_logged_in'] != true) {
                         <a href="add_notifications.php" class="btn btn-primary w-100">Add</a>
                     </div>
                 </div>
-
+                
                 <!-- See Team Details -->
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">See Team Details</h5>
-                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#teamDetailsModal">View</button>
+                            <a href="view_team_details.php" class="btn btn-primary w-100">View</a>
+                            <!-- <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#teamDetailsModal">View</button> -->
                         </div>
                     </div>
                 </div>
