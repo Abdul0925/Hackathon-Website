@@ -358,7 +358,7 @@
                                 <span>Type your Message...</span>
                             </div>
                             <div class="inputBox">
-                                <input type="submit" name="send" value="Send"/>
+                                <input type="submit" name="send" class="btn my-primary-btn" value="Send"/>
                             </div>
                         </form>
                     </div>
