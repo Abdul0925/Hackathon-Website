@@ -276,13 +276,28 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                         <table class="table table-hover">
                             <tbody>
                                 <?php
+                                $currentDay = date("d");
+                                $currentMonth = date("m");
+                                $currentYaer = date("Y");
+
                                 while ($noti = $result2->fetch_assoc()) {
+
                                     $date = date('d-m-Y', strtotime($noti['date'])) . " - " . date('h:i a', strtotime($noti['date']));
+                                    $oldDay = date('d', strtotime($noti['date']));
+                                    $oldMonth = date('m', strtotime($noti['date']));
+                                    $oldYear = date('Y', strtotime($noti['date']));
+                                    if($currentDay-$oldDay>5 || $currentMonth>$oldMonth || $currentYaer>$oldYear){
+                                        $new = 0;
+                                    }
+                                    else{
+                                        $new = 1;
+                                    }
 
                                 ?>
                                     <tr>
                                         <?php
-                                        if ($noti['new'] == 1) {
+                                        // if ($noti['new'] == 1) {
+                                        if ($new == 1) {
                                             echo '<td><span class="badge badge-reject">NEW</span></td>';
                                         } else {
                                             echo '<td><span class="badge badge-reject"></span></td>';
