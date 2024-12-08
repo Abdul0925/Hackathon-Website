@@ -5,7 +5,8 @@ if ($_SESSION['admin_logged_in'] != true) {
 }
 
 require 'db.php';
-$result = mysqli_query($conn, "SELECT * FROM mentor_details");
+$teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members");
+// $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members");
 ?>
 
 
@@ -112,31 +113,33 @@ $result = mysqli_query($conn, "SELECT * FROM mentor_details");
                     <thead class="table-light">
                         <tr>
                             <th scope="col">Sr No</th>
-                            <th scope="col">Mentor name</th>
-                            <!-- <th scope="col">Email</th> -->
-                            <th scope="col">Mobile</th>
+                            <th scope="col">Team Name</th>
+
+                            <th scope="col">Mentor</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $srno = 0;
-
-                        while ($mentor = $result->fetch_assoc()) {
+                        while ($mentor = $teamName->fetch_assoc()) {
                             $srno++;
-
+                            $team_name = $mentor['team_name'];
+                            $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members WHERE team_name = '$team_name'");
+                            // echo "<pre>";
+                            // echo var_dump($mentorEmail->fetch_assoc());
+                            $mentorEmail = $teamDetails->fetch_assoc();
+                            // echo $mentorEmail['id'];
                         ?>
                             <tr>
                                 <td><?php echo $srno ?></td>
-                                <td><?php echo $mentor['first_name'] . " " . $mentor['last_name']; ?></td>
-                                <td><?php //echo htmlspecialchars($mentor['email']); 
-                                    ?></td>
-                                <td><?php echo $mentor['mobile'] ?></td>
+                                <td><?php echo $mentor['team_name'] ?></td>
+                                <td><?php echo $mentorEmail['mentor'] ?></td>
                                 <td>
                                     <!-- <form action="" method="POST" class="d-inline"> -->
-                                    <input type="hidden" name="noti_id" value="<?php echo $mentor['first_name']; ?>">
+                                    <input type="hidden" name="noti_id" value="<?php echo $mentorEmail['email']; ?>">
                                     <!-- <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#teamDetailsModal">View</button> -->
-                                    <button class="btn btn-primary w-100 view-details-btn" data-id="<?php echo $mentor['id']; ?>">
+                                    <button class="btn btn-primary w-100 view-details-btn" data-id="<?php echo $mentor['team_name']; ?>">
                                         View
                                     </button>
                                     <!-- </form> -->
@@ -180,7 +183,7 @@ $result = mysqli_query($conn, "SELECT * FROM mentor_details");
             // When 'View Details' button is clicked
             $('.view-details-btn').click(function() {
                 var team_id = $(this).data('id'); // Get student ID from button data attribute
-                
+                console.log(team_id)
                 // Make an AJAX request to fetch additional student details
                 $.ajax({
                     url: 'fetch_team_details.php',
@@ -189,7 +192,7 @@ $result = mysqli_query($conn, "SELECT * FROM mentor_details");
                         id: team_id
                     },
                     success: function(data) {
-                        console.log(data);
+                        // console.log(data);
                         // Insert student details into the modal
                         $('#student-details').html(data);
 

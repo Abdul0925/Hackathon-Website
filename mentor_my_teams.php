@@ -14,6 +14,13 @@ $stmt1->execute();
 $result1 = $stmt1->get_result();
 $totalTeams = 0;
 
+$stmt11 = $conn->prepare("SELECT no_of_teams FROM mentor_details WHERE email = ?");
+$stmt11->bind_param("s", $email);
+$stmt11->execute();
+$result11 = $stmt11->get_result();
+$result111=$result11->fetch_assoc();
+$_SESSION['totalTeams'] = $result111['no_of_teams'];
+
 if ($result1->num_rows > 0) {
     $_SESSION['totalTeams'] = $totalTeams = $result1->num_rows;
     

@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginBtn'])) {
                     $_SESSION['college'] = $mentor['college'];
                     $_SESSION['mobile'] = $mentor['mobile'];
                     $_SESSION['email'] = $mentor['email'];
+                    $_SESSION['id'] = $mentor['id'];
                     $_SESSION['mentor_logged_in'] = true;
                     echo '<script>alert("Login successful!"); window.location.href = "mentor_dashboard.php";</script>';
                 } else {
