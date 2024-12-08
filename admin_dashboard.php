@@ -73,58 +73,58 @@ if ($_SESSION['admin_logged_in'] != true) {
 
     <!-- Main Content -->
     <div class="container mt-4">
-        <div class="row">
-            <!-- Add Notification -->
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Add Notification</h5>
-                        <a href="add_notifications.php" class="btn btn-primary w-100">Add</a>
-                    </div>
-                </div>
-                
-                <!-- See Team Details -->
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">See Team Details</h5>
-                            <a href="view_team_details.php" class="btn btn-primary w-100">View</a>
-                            <!-- <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#teamDetailsModal">View</button> -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Announce Result -->
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Announce Result</h5>
-                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#announceResultModal">Announce</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Create Problem Statement -->
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Create Problem Statement</h5>
-                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createProblemModal">Create</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Add Guidelines -->
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Add Guidelines</h5>
-                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addGuidelinesModal">Add</button>
-                        </div>
-                    </div>
+    <div class="row g-4">
+        <!-- Add Notification -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Add Notification</h5>
+                    <a href="add_notifications.php" class="btn btn-primary w-100">Add</a>
                 </div>
             </div>
         </div>
+
+        <!-- See Team Details -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">See Team Details</h5>
+                    <a href="view_team_details.php" class="btn btn-primary w-100">View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announce Result -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Announce Result</h5>
+                    <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#announceResultModal">Announce</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Problem Statement -->
+        <div class="col-12 col-sm-6 col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Create Problem Statement</h5>
+                    <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createProblemModal">Create</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Guidelines -->
+        <div class="col-12 col-sm-6 col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Add Guidelines</h5>
+                    <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addGuidelinesModal">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- Modals -->
 
