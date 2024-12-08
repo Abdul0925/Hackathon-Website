@@ -12,6 +12,7 @@ $stmt1 = $conn->prepare("SELECT * FROM all_team_members WHERE mentor = ? AND is_
 $stmt1->bind_param("s", $email);
 $stmt1->execute();
 $result1 = $stmt1->get_result();
+$totalTeams = 0;
 
 if ($result1->num_rows > 0) {
     $_SESSION['totalTeams'] = $totalTeams = $result1->num_rows;
