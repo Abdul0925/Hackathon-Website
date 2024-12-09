@@ -37,13 +37,12 @@
         .login-container {
             max-width: 400px;
             margin: 80px auto;
-            /* background-color: #efe4ff; */
             padding: 30px;
-            /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
             border-radius: 15px;
             border-bottom: 8px;
             border-right: 8px;
             border-style: solid;
+            font-family: "Oxanium", sans-serif;
         }
 
         .login-container h3 {
@@ -213,17 +212,17 @@
             <!-- Email -->
             <div class="inputBox">
                 <input type="email" name="email" id="email" required>
-                <span class="font-style-text">Enter your email</span>
+                <span>Enter your email</span>
             </div>
 
             <!-- Password -->
             <div class="inputBox">
                 <input type="password" name="password" id="password" required>
-                <span class="font-style-text">Enter your password</span>
+                <span>Enter your password</span>
             </div>
 
             <!-- Role Dropdown -->
-            <div class="font-style-text">
+            <div>
                 <div class="form-group"  style="padding-top: 10px; padding-bottom: 20px;">
                     <select class="form-control" style="border-radius: 8px;" name="role" id="role" required>
                         <option selected disabled>Please Select Your Role</option>

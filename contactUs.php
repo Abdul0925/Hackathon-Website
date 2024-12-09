@@ -22,7 +22,8 @@
             padding: 50px 100px;
             display: flex;
             justify-content: center;
-            align-items: center; flex-direction: column;
+            align-items: center;
+            flex-direction: column;
             background-color: rgb(254, 254, 254) ;
             background-size: cover;
             }

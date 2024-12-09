@@ -164,6 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
 
         .login-container {
@@ -174,6 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             border-bottom: 8px;
             border-right: 8px;
             border-style: solid;
+            font-family: "Oxanium", sans-serif;
         }
 
         .login-container h3 {
@@ -280,36 +282,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             <!-- Email -->
             <div class="inputBox">
                 <input type="email" name="email" id="email" required>
-                <span class="font-style-text">Enter your email</span>
+                <span>Enter your email</span>
             </div>
 
             <!-- Password -->
             <div class="inputBox">
                 <input type="password" name="new_password" id="password" required>
-                <span class="font-style-text">Enter new password</span>
+                <span>Enter new password</span>
             </div>
             <div class="inputBox">
                 <input type="password" name="confirm_password" id="password" required>
-                <span class="font-style-text">Confirm password</span>
+                <span>Confirm password</span>
             </div>
 
             <!-- Role Dropdown -->
-            <div class="font-style-text">
-                <div class="form-group">
-                    <select class="form-control" name="role" id="role" required>
-                        <option selected disabled>Please Select Your Role</option>
-                        <option value="institute-college">Institute/College</option>
-                        <option value="team-leader">Team Leader</option>
-                        <option value="mentor">Mentor</option>
-                    </select>
-                </div>
-                
-                <!-- Submit Button -->
-                <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="resetButton">RESET Password</button>
-               
-                <!-- Extra Links (Register and Forget Password) -->
-                
+            <div class="form-group">
+                <select class="form-control" name="role" id="role" required>
+                    <option selected disabled>Please Select Your Role</option>
+                    <option value="institute-college">Institute/College</option>
+                    <option value="team-leader">Team Leader</option>
+                    <option value="mentor">Mentor</option>
+                </select>
             </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="resetButton">RESET Password</button>
+           
+            <!-- Extra Links (Register and Forget Password) -->
+                
         </form>
     </div>
 
