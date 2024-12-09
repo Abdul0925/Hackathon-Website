@@ -12,6 +12,14 @@ $stmt1 = $conn->prepare("SELECT * FROM all_team_members WHERE mentor = ? AND is_
 $stmt1->bind_param("s", $email);
 $stmt1->execute();
 $result1 = $stmt1->get_result();
+$totalTeams = 0;
+
+$stmt11 = $conn->prepare("SELECT no_of_teams FROM mentor_details WHERE email = ?");
+$stmt11->bind_param("s", $email);
+$stmt11->execute();
+$result11 = $stmt11->get_result();
+$result111=$result11->fetch_assoc();
+$_SESSION['totalTeams'] = $result111['no_of_teams'];
 
 if ($result1->num_rows > 0) {
     $_SESSION['totalTeams'] = $totalTeams = $result1->num_rows;
@@ -37,7 +45,7 @@ $result = $stmt3->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Dashboard</title>
+    <title>My Team Detail</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
