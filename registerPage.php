@@ -190,9 +190,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://getbootstrap.com/docs/5.3/components/alerts/" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: white;
         }
 
         .heading-font {
@@ -211,11 +212,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
         .register-container {
             max-width: 600px;
-            margin: 50px auto;
+            margin: 80px auto;
             padding: 30px;
-            background-color: #efe4ff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            border-radius: 15px;
+            border-bottom: 8px;
+            border-right: 8px;
+            border-style: solid;
+            font-family: "Oxanium", sans-serif;
+        }
+
+
+        .register-container .inputBox
+        {
+        position: relative;
+        width: 100%;
+        margin-top: 10px;
+        }
+
+        .register-container .inputBox input,
+        .register-container .inputBox textarea
+        {
+        width: 100%;
+        padding: 5px 0;
+        font-size: 16px;
+        margin: 10px 0;
+        border: none;
+        border-bottom: 2px solid #333;
+        outline: none;
+        resize: none;
+        }
+
+        .register-container .inputBox span
+        {
+        position: absolute;
+        Left: 0;
+        padding: 5px 0;
+        font-size: 16px;
+        margin: 10px 0;
+        pointer-events: none;
+        transition: 0.5s;
+        color: #948686;
+        }
+
+        .register-container .inputBox input:focus ~ span,
+        .register-container .inputBox input:valid ~ span,
+        .register-container .inputBox textarea:focus ~ span,
+        .register-container .inputBox textarea:valid ~ span
+        {
+        color: #5C0F8B;
+        font-size: 12px;
+        transform: translateY(-20px);
         }
 
         .c-black {
@@ -223,21 +269,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         }
 
         .warning {
-            background-color: #ffc107;
-            padding: 15px;
-            border-radius: 5px;
-            color: #856404;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold;
 
+            color: black;
+            /* text-align: center; */
+            /* font-weight: bold; */
+            /* margin-top: 20px; */
         }
 
         .register-container h3 {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-weight: bold;
-            color: #343a40;
+            color: black;
+            font-family: "Oxanium", sans-serif;
         }
 
         .form-control {
@@ -341,9 +385,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
 
 
-    <div class="warning">
-        Only Mentors are allowed to register. Mentors can participate with more than one team.
-    </div>
+    
 
     <div class="register-container">
         <!-- Warning Message -->
@@ -360,69 +402,80 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         <!-- Form Heading -->
         <h3>Mentor Registration Form</h3>
 
-
         <form method="POST" action="">
             <!-- First Name -->
-            <div class="form-group">
-                <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
+            <div class="inputBox">
+                <input type="text" name="first_name" required>
+                <span>First Name</span>
             </div>
 
             <!-- Last Name -->
-            <div class="form-group">
-                <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+            <div class="inputBox">
+                <input type="text" name="last_name" required>
+                <span>Last Name</span>
             </div>
 
             <!-- Mobile Number -->
-            <div class="form-group">
-                <input type="tel" class="form-control" name="mobile" placeholder="Mobile Number" pattern="[0-9]{10}" required>
+            <div class="inputBox">
+                <input type="tel" name="mobile" pattern="[0-9]{10}" required>
+                <span>Mobile Number</span>
             </div>
 
             <!-- Email -->
-            <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Email" required>
+            <div class="inputBox">
+                <input type="email" name="email" required>
+                <span>Email</span>
             </div>
 
             <!-- Institute/College Dropdown -->
-            <div class="form-group">
-                <select class="form-control" name="college" required>
-                    <option selected disabled>Please Select Your Institute/College</option>
-                    <option>Ambedkar Jr College, Mor Bhavan</option>
-                    <option>Anjuman College, Sadar</option>
-                    <option>Bhavans School, Shrikrishna Nagar</option>
-                    <option>Bishop Cotton, Sadar</option>
-                    <option>Central Indian Public School, Kamptee Road</option>
-                    <option>Delhi Public School, Kamptee Road</option>
-                    <option>Delhi Public School, Off Dhabha Ring Road</option>
-                    <option>Dharmapeth Science, Ambazari</option>
-                    <option>Edify School, Kamptee Road</option>
-                    <option>Hadas Junior College, Alankar Square</option>
-                    <option>Hemant Jakate Jr College, Dighori</option>
-                    <option>Hislop College, Civil Lines</option>
-                    <option>Indian Olympiad School, Kamptee Road</option>
-                    <option>Jain International School, Katol Road</option>
-                    <option>K John, Asoli</option>
-                    <option>LAD Jr College, Ambazari Road</option>
-                    <option>M.K.H Sacheti Public School, Samarth</option>
-                    <option>Modern School, Vidya Nagar</option>
-                    <option>Mohta Science, Sakkardara / Medical Square</option>
-                    <option>Nairs Essence International School, Hingana</option>
-                    <option>Nandanwan Arts, Commerce & Science, CA Road</option>
-                    <option>Palloti, Kamptee Road</option>
-                    <option>School of Scholars, Wandongri / Pratap Nagar</option>
-                    <option>Shivaji Science, Ajni</option>
-                    <option>Somalwar Jr College, Ramdaspeth</option>
-                    <option>Somalwar Junior College, Khamla</option>
-                    <option>SFS, Seminary Hills</option>
-                    <option>St. Xavier's High School, Hiwari Nagar</option>
-                    <option>St Joseph Jr College (Girls), Sadar</option>
-                    <option>St Paul Junior College, Manewada</option>
+            <div>
+                <div class="form-group">
+                    <select class="form-control" style="margin-top: 10px;" name="college" required>
+                        <option selected disabled>Please Select Your Institute/College</option>
+                        <option>Ambedkar Jr College, Mor Bhavan</option>
+                        <option>Anjuman College, Sadar</option>
+                        <option>Bhavans School, Shrikrishna Nagar</option>
+                        <option>Bishop Cotton, Sadar</option>
+                        <option>Central Indian Public School, Kamptee Road</option>
+                        <option>Delhi Public School, Kamptee Road</option>
+                        <option>Delhi Public School, Off Dhabha Ring Road</option>
+                        <option>Dharmapeth Science, Ambazari</option>
+                        <option>Edify School, Kamptee Road</option>
+                        <option>Hadas Junior College, Alankar Square</option>
+                        <option>Hemant Jakate Jr College, Dighori</option>
+                        <option>Hislop College, Civil Lines</option>
+                        <option>Indian Olympiad School, Kamptee Road</option>
+                        <option>Jain International School, Katol Road</option>
+                        <option>K John, Asoli</option>
+                        <option>LAD Jr College, Ambazari Road</option>
+                        <option>M.K.H Sacheti Public School, Samarth</option>
+                        <option>Modern School, Vidya Nagar</option>
+                        <option>Mohta Science, Sakkardara / Medical Square</option>
+                        <option>Nairs Essence International School, Hingana</option>
+                        <option>Nandanwan Arts, Commerce & Science, CA Road</option>
+                        <option>Palloti, Kamptee Road</option>
+                        <option>School of Scholars, Wandongri / Pratap Nagar</option>
+                        <option>Shivaji Science, Ajni</option>
+                        <option>Somalwar Jr College, Ramdaspeth</option>
+                        <option>Somalwar Junior College, Khamla</option>
+                        <option>SFS, Seminary Hills</option>
+                        <option>St. Xavier's High School, Hiwari Nagar</option>
+                        <option>St Joseph Jr College (Girls), Sadar</option>
+                        <option>St Paul Junior College, Manewada</option>                         
+                    </select>
+                </div>
 
-                </select>
+                <!-- <div class="warning">
+            Only Mentors are allowed to register. Mentors can participate with more than one team.
+        </div> -->
+        <div class="alert alert-info" role="alert">
+            Only Mentors are allowed to register. Mentors can participate with more than one team.
+        </div>
+                                    
+                <!-- Send OTP Button -->
+                <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="registerButton">Register</button>
+            
             </div>
-            <!-- Send OTP Button -->
-            <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="registerButton">Register</button>
-
-
         </form>
     </div>
 

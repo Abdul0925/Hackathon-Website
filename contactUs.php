@@ -12,7 +12,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        
+        <link rel="stylesheet" href="style.css">
         <style>
 
             .contact1
@@ -22,7 +22,8 @@
             padding: 50px 100px;
             display: flex;
             justify-content: center;
-            align-items: center; flex-direction: column;
+            align-items: center;
+            flex-direction: column;
             background-color: rgb(254, 254, 254) ;
             background-size: cover;
             }
@@ -357,8 +358,8 @@
                                 <input type="text" name="msg" required="required">
                                 <span>Type your Message...</span>
                             </div>
-                            <div class="inputBox">
-                                <input type="submit" name="send" value="Send"/>
+                            <div >
+                                <input type="submit" class="btn my-primary-btn" style="width: 100px; padding: 10px; margin-top: 10px; font-size: 18px;" name="send" value="Send"/>
                             </div>
                         </form>
                     </div>

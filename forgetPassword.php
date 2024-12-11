@@ -160,22 +160,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RJH Forget Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
 
         .login-container {
             max-width: 600px;
             margin: 80px auto;
-            background-color: #efe4ff;
             padding: 30px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            border-radius: 15px;
+            border-bottom: 8px;
+            border-right: 8px;
+            border-style: solid;
+            font-family: "Oxanium", sans-serif;
         }
 
         .login-container h3 {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
-            color: #343a40;
+            color: black;
+            font-family: "Oxanium", sans-serif;
+        }
+
+        .login-container .inputBox
+        {
+        position: relative;
+        width: 100%;
+        margin-top: 10px;
+        }
+
+        .login-container .inputBox input,
+        .login-container .inputBox textarea
+        {
+        width: 100%;
+        padding: 5px 0;
+        font-size: 16px;
+        margin: 10px 0;
+        border: none;
+        border-bottom: 2px solid #333;
+        outline: none;
+        resize: none;
+        }
+
+        .login-container .inputBox span
+        {
+        position: absolute;
+        Left: 0;
+        padding: 5px 0;
+        font-size: 16px;
+        margin: 10px 0;
+        pointer-events: none;
+        transition: 0.5s;
+        color: #948686;
+        }
+
+        .login-container .inputBox input:focus ~ span,
+        .login-container .inputBox input:valid ~ span,
+        .login-container .inputBox textarea:focus ~ span,
+        .login-container .inputBox textarea:valid ~ span
+        {
+        color: #5C0F8B;
+        font-size: 12px;
+        transform: translateY(-20px);
         }
 
         .form-control {
@@ -183,6 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         }
 
         .form-group {
+            margin-top: 10px;
             margin-bottom: 20px;
         }
 
@@ -207,7 +258,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
     </style>
 </head>
 
-<body style="background-color: #f4f7f6">
+<body style="background-color: white">
     <?php require('indexNavbar.php'); ?>
 
     <div class="login-container">
@@ -229,16 +280,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
         <form method="POST" action="">
             <!-- Email -->
-            <div class="form-group">
-                <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
+            <div class="inputBox">
+                <input type="email" name="email" id="email" required>
+                <span>Enter your email</span>
             </div>
 
             <!-- Password -->
-            <div class="form-group">
-                <input type="password" name="new_password" class="form-control" id="password" placeholder="Enter new password" required>
+            <div class="inputBox">
+                <input type="password" name="new_password" id="password" required>
+                <span>Enter new password</span>
             </div>
-            <div class="form-group">
-                <input type="password" name="confirm_password" class="form-control" id="password" placeholder="Confirm password" required>
+            <div class="inputBox">
+                <input type="password" name="confirm_password" id="password" required>
+                <span>Confirm password</span>
             </div>
 
             <!-- Role Dropdown -->
@@ -250,12 +304,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                     <option value="mentor">Mentor</option>
                 </select>
             </div>
-
+            
             <!-- Submit Button -->
             <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="resetButton">RESET Password</button>
-
+           
             <!-- Extra Links (Register and Forget Password) -->
-
+                
         </form>
     </div>
 
