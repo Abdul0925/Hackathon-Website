@@ -78,7 +78,7 @@ if ($_SESSION['admin_logged_in'] != true) {
 
             <div class="message">
                 <div class="circle"></div>
-                    <a href="add1_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
+                    <a href="show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
                 <div class="dp">
                     <a href=""><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
                 </div>
