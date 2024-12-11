@@ -16,30 +16,25 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>GeeksForGeeks</title>
+        <title>Admin Dashboard</title>
         <link rel="stylesheet" href="admin_dash_style.css">
-        <!-- <link rel="stylesheet" href="style.css"> -->
-        <!-- <link rel="stylesheet" href="admin_dash_responsive.css"> -->
-        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
         <style>
             table{
-                /* border-spacing: 5; */
                 border-collapse: collapse;
                 background-color: #fff;
-                box-shadow: 0 10px 20px 0 rgba(0,0,0,.03);
                 border-radius: 10px;
                 margin: auto;
                 width: 100%;
             }
             th,td {
-                border:1px solid #f2f2f2;
+                border:1px solid rgb(200, 200, 200);
                 padding: 8px 30px;
                 text-align: center;
-                color: black;
             }
             th{
                 text-transform: uppercase;
                 font-weight: 500;
+                border-color: black;
             }
             td{ 
                 font-size: 13px;
@@ -49,7 +44,6 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
     </head>
 
     <body>
-    
         <!-- for header part -->
         <header>
 
@@ -64,7 +58,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
             <div class="message">
                 <div class="circle"></div>
-                    <a href=""><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
+                    <a href="show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
                 <div class="dp">
                     <a href=""><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
                 </div>
@@ -149,7 +143,6 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                 <div class="report-container">
                     <div class="report-header">
                         <h1 class="recent-Articles">Team Details</h1>
-                        <!-- <button class="view">View All</button> -->
                     </div>
 
                     <div class="report-body">
@@ -171,10 +164,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                         $srno++;
                                         $team_name = $mentor['team_name'];
                                         $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members WHERE team_name = '$team_name'");
-                                        // echo "<pre>";
-                                        // echo var_dump($mentorEmail->fetch_assoc());
                                         $mentorEmail = $teamDetails->fetch_assoc();
-                                        // echo $mentorEmail['id'];
                                     ?>
                                         <tr>
                                             <td><?php echo $srno ?></td>
@@ -183,8 +173,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                             <td>
                                                 <!-- <form action="" method="POST" class="d-inline"> -->
                                                 <input type="hidden" name="noti_id" value="<?php echo $mentorEmail['email']; ?>">
-                                                <!-- <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#teamDetailsModal">View</button> -->
-                                                <button class="my-primary-btn" data-id="<?php echo $mentor['team_name']; ?>">View</button>
+                                                <button class="my-primary-btn" style="cursor: pointer;" data-id="<?php echo $mentor['team_name']; ?>">View</button>
                                                 <!-- </form> -->
                                             </td>
                                         </tr>
@@ -192,15 +181,9 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                 </tbody>
                             </table>
                         </div>
-
-                        
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
         <script>
             let menuicn = document.querySelector(".menuicn");

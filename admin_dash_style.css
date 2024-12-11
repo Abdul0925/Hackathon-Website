@@ -132,8 +132,7 @@ header {
 }
 
 .main::-webkit-scrollbar-thumb {
-  background-image: 
-        linear-gradient(to bottom, rgb(0, 0, 85), rgb(0, 0, 50));
+  background-image: linear-gradient(to bottom, rgb(0, 0, 85), rgb(0, 0, 50));
 }
 .main::-webkit-scrollbar {
   width: 5px;
@@ -345,7 +344,6 @@ header {
   background-color: rgb(47, 141, 70);
   border-radius: 5px;
   border: none;
-
 }
 .table .my-primary-btn:hover{
   background-color: rgb(31, 91, 46);

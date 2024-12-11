@@ -11,160 +11,163 @@ if ($_SESSION['admin_logged_in'] != true) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Notification</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #4CAF50;
-            /* Unique Green Theme */
-            --secondary-color: #f4f4f4;
-            --text-color: #333;
-        }
-
-        body {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-        }
-
-        .navbar {
-            background-color: var(--primary-color);
-        }
-
-        .navbar-brand,
-        .navbar-nav .nav-link {
-            color: white !important;
-        }
-
-        .card {
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Admin Dashboard</title>
+        <link rel="stylesheet" href="admin_dash_style.css">
+        <style>
 
         .btn-primary {
-            background-color: var(--primary-color);
+            color: white;
+            width: 80px;
+            height: 40px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
             border: none;
+            margin-top: 10px;
+            font-size: 15px;
+            cursor: pointer;
         }
 
         .btn-primary:hover {
-            background-color: #388E3C;
+            background-color: rgb(31, 91, 46);
+            color: white;
         }
-        body {
-            background-color: #f8f9fa;
-            /* padding: 20px; */
+
+        .btn-primary:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
         }
-        .badge-reject {
-            background-color: #dc3545;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 12px;
+        
+        .report-body .form-body .form-label{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
         }
-        .form-container {
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            margin: 15px;
+
+        .report-body .form-body .form-control{
+            border-radius: 5px;
+            width: 100%;
+            height: 150px;
+            padding-left: 10px;
+            padding-top: 10px;
         }
-        .table-container {
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="admin_dashboard.php">Admin Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Log Out</a>
-                    </li>
-                </ul>
+
+        </style>
+        
+    </head>
+
+    <body>
+    
+        <!-- for header part -->
+        <header>
+
+            <div class="logosec">
+                <div class="logo">Admin</div>
+                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
+            </div>
+
+            <div>
+                <H1>Add Notification</H1>
+            </div>
+
+            <div class="message">
+                <div class="circle"></div>
+                    <a href="add1_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
+                <div class="dp">
+                    <a href=""><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
+                </div>
+            </div>
+
+        </header>
+
+        <div class="main-container">
+            <div class="navcontainer">
+                <nav class="nav">
+                    <div class="nav-upper-options">
+                        <div class="nav-option option1">
+                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png" class="nav-img" alt="dashboard">
+                            <h3> Dashboard</h3>
+                        </div>
+
+                        <a href="" style="text-decoration: none;">
+                            <div class="nav-option option2" style="color: black;">
+                                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png" class="nav-img" alt="blog">
+                                <h3> Profile</h3>
+                            </div>
+                        </a>
+
+                        <a href="logout.php" style="text-decoration: none;">
+                            <div class="nav-option logout" style="color: black;">
+                                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png" class="nav-img" alt="logout">
+                                <h3>Logout</h3>
+                            </div>
+                        </a>
+
+                    </div>
+                </nav>
+            </div>
+
+            <div class="main">
+                <div class="report-container">
+                    <div class="report-header">
+                        <h1 class="recent-Articles">Add New Notifications</h1>
+                    </div>
+
+                    <div class="report-body">
+                        <form action="add_noti_process.php" method="POST">
+                            <div class="form-body">
+                                <label for="notification" class="form-label">Enter New Notification:</label>
+                                <textarea name="notification" id="notification" class="form-control" rows="4" placeholder="Type your notification here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-<div class="container">
-    <!-- Form Section -->
-    <div class="form-container mb-4">
-        <h4 class="mb-3">Add New Notification</h4>
-        <form action="add_noti_process.php" method="POST">
-            <div class="mb-3">
-                <label for="notification" class="form-label">Enter New Notification:</label>
-                <textarea name="notification" id="notification" class="form-control" rows="4" placeholder="Type your notification here..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+        <script>
+            let menuicn = document.querySelector(".menuicn");
+            let nav = document.querySelector(".navcontainer");
 
-    <!-- Notifications Section -->
-    <div class="table-container">
-        <h4 class="mb-3">Notifications</h4>
-        <div class="table-responsive">
-            <table class="table table-hover align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th scope="col">Status</th>
-                        <th scope="col">Notification</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $currentDay = date("d");
-                    $currentMonth = date("m");
-                    $currentYear = date("Y");
+            menuicn.addEventListener("click", () => {
+            nav.classList.toggle("navclose");
+            })
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // When 'View Details' button is clicked
+                $('.view-details-btn').click(function() {
+                    var team_id = $(this).data('id'); // Get student ID from button data attribute
+                    console.log(team_id)
+                    // Make an AJAX request to fetch additional student details
+                    $.ajax({
+                        url: 'fetch_team_details.php',
+                        type: 'POST',
+                        data: {
+                            id: team_id
+                        },
+                        success: function(data) {
+                            // console.log(data);
+                            // Insert student details into the modal
+                            $('#student-details').html(data);
 
-                    while ($noti = $result2->fetch_assoc()) {
-                        $date = date('d-m-Y', strtotime($noti['date'])) . " - " . date('h:i a', strtotime($noti['date']));
-                        $oldDay = date('d', strtotime($noti['date']));
-                        $oldMonth = date('m', strtotime($noti['date']));
-                        $oldYear = date('Y', strtotime($noti['date']));
+                            // Show the modal
+                            $('#teamDetailsModal').modal('show');
+                        }
+                    });
 
-                        $new = ($currentDay - $oldDay <= 5 && $currentMonth == $oldMonth && $currentYear == $oldYear) ? 1 : 0;
-                    ?>
-                        <tr>
-                            <td>
-                                <?php if ($new == 1) { ?>
-                                    <span class="badge badge-reject">NEW</span>
-                                <?php } else { ?>
-                                    <span></span>
-                                <?php } ?>
-                            </td>
-                            <td><?php echo htmlspecialchars($noti['notification']); ?></td>
-                            <td><?php echo $date; ?></td>
-                            <td>
-                                <form action="delete_noti_process.php" method="POST" class="d-inline">
-                                    <input type="hidden" name="noti_id" value="<?php echo $noti['id']; ?>">
-                                    <button class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap Bundle JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
+                    // Set the delete button with the student ID
+                    // $('#delete-btn').data('email', student-details);
+                });
+            });
+        </script>
+    </body>
 </html>
-

@@ -12,9 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* body {
-            background-color: #f4f7f6;
-        } */
 
         .heading-font {
             font-family: "Playwrite GB S", cursive;
@@ -55,34 +52,34 @@
 
         .login-container .inputBox
         {
-        position: relative;
-        width: 100%;
-        margin-top: 10px;
+            position: relative;
+            width: 100%;
+            margin-top: 10px;
         }
 
         .login-container .inputBox input,
         .login-container .inputBox textarea
         {
-        width: 100%;
-        padding: 5px 0;
-        font-size: 16px;
-        margin: 10px 0;
-        border: none;
-        border-bottom: 2px solid #333;
-        outline: none;
-        resize: none;
+            width: 100%;
+            padding: 5px 0;
+            font-size: 16px;
+            margin: 10px 0;
+            border: none;
+            border-bottom: 2px solid #333;
+            outline: none;
+            resize: none;
         }
 
         .login-container .inputBox span
         {
-        position: absolute;
-        Left: 0;
-        padding: 5px 0;
-        font-size: 16px;
-        margin: 10px 0;
-        pointer-events: none;
-        transition: 0.5s;
-        color: #948686;
+            position: absolute;
+            Left: 0;
+            padding: 5px 0;
+            font-size: 16px;
+            margin: 10px 0;
+            pointer-events: none;
+            transition: 0.5s;
+            color: #948686;
         }
 
         .login-container .inputBox input:focus ~ span,
@@ -90,9 +87,9 @@
         .login-container .inputBox textarea:focus ~ span,
         .login-container .inputBox textarea:valid ~ span
         {
-        color: #5C0F8B;
-        font-size: 12px;
-        transform: translateY(-20px);
+            color: #5C0F8B;
+            font-size: 12px;
+            transform: translateY(-20px);
         }
 
         .my-primary-btn {
@@ -211,13 +208,13 @@
         <form method="POST" action="loginProcess.php">
             <!-- Email -->
             <div class="inputBox">
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email" value="admin@rjh" required>
                 <span>Enter your email</span>
             </div>
 
             <!-- Password -->
             <div class="inputBox">
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" value="pass" required>
                 <span>Enter your password</span>
             </div>
 
