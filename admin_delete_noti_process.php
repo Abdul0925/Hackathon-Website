@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param('i', $noti_id);
     if ($stmt->execute()) {
         // echo $noti_id;
-        echo '<script> window.location.href = "show_notifications.php"; </script>';
+        echo '<script> window.location.href = "admin_show_notifications.php"; </script>';
     } else {
 
-        echo '<script> alert("Error! Try Again!"); window.location.href = "show_notifications.php"; </script>';
+        echo '<script> alert("Error! Try Again!"); window.location.href = "admin_show_notifications.php"; </script>';
     }
 }
 

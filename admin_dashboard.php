@@ -110,7 +110,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         <header>
 
             <div class="logosec">
-                <div class="logo">Admin</div>
+                <a href="admin_dashboard.php" style="text-decoration: none;"><div class="logo">Admin</div></a>
                 <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
             </div>
 
@@ -120,7 +120,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
             <div class="message">
                 <div class="circle"></div>
-                    <a href="show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
+                    <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
                 <div class="dp">
                     <a href=""><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
                 </div>
@@ -132,10 +132,12 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             <div class="navcontainer">
                 <nav class="nav">
                     <div class="nav-upper-options">
-                        <div class="nav-option option1">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png" class="nav-img" alt="dashboard">
-                            <h3> Dashboard</h3>
-                        </div>
+                        <a href="admin_dashboard.php" style="text-decoration: none;">
+                            <div class="nav-option option1">
+                                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png" class="nav-img" alt="dashboard">
+                                <h3> Dashboard</h3>
+                            </div>
+                        </a>
 
                         <a href="" style="text-decoration: none;">
                             <div class="nav-option option2" style="color: black;">
@@ -159,7 +161,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
                 <div class="box-container">
 
-                    <a href="">
+                    <a href="admin_problem_statements.php">
                         <div class="box box1">
                             <div class="text">
                                 <h2 class="topic-heading">See</h2>
@@ -179,7 +181,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png" alt="likes">
                     </div>
 
-                    <a href="add_notifications.php">
+                    <a href="admin_add_notifications.php">
                         <div class="box box3">
                             <div class="text">
                                 <h2 class="topic-heading">Add</h2>
