@@ -39,6 +39,68 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             td{ 
                 font-size: 13px;
             }
+            .popup{
+                border: 1px solid black;
+                border-radius: 10px;
+                width: 500px;
+                height: auto;
+                background: white;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                padding: 0 30px 30px;
+                visibility: hidden;
+            }
+            .open-popup{
+                visibility: visible;
+            }
+            .modal-header h2{
+                padding-top: 25px;
+                margin-bottom: 20px;
+                color: #5500cb;
+            }
+            .my-primary-btn{
+                background-color: rgb(220, 0, 0);
+                color: white;
+                width: 60px;
+                height: 30px;
+                border-radius: 5px;
+                border: none;
+                margin-top: 25px;
+            }
+            .my-primary-btn:hover{
+                background-color: rgb(150, 0, 0);
+                color: white;
+            }
+            .my-primary-btn:active {
+                box-shadow: 2px 2px 5px #fc894d;
+                background-color: rgb(220, 0, 0);
+                /* color: white; */
+            }
+            @media screen and (max-width: 400px){
+                .popup{
+                    width: 300px;
+                }
+            }
+            .primary-btn{
+                color: white;
+                width: 100%;
+                height: 30px;
+                background-color: rgb(47, 141, 70);
+                border-radius: 5px;
+                border: none;
+            }
+            .primary-btn:hover{
+                background-color: rgb(31, 91, 46);
+                color: white;
+            }
+            .primary-btn:active {
+                box-shadow: 2px 2px 5px #fc894d;
+                background-color: rgb(47, 141, 70);
+                /* color: white; */
+            }
+
         </style>
         
     </head>
@@ -142,7 +204,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                 <!-- team detail table -->
                 <div class="report-container">
                     <div class="report-header">
-                        <h1 class="recent-Articles">Team Details</h1>
+                        <h1 class="recent-Articles">Teams</h1>
                     </div>
 
                     <div class="report-body">
@@ -173,7 +235,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                             <td>
                                                 <!-- <form action="" method="POST" class="d-inline"> -->
                                                 <input type="hidden" name="noti_id" value="<?php echo $mentorEmail['email']; ?>">
-                                                <button class="my-primary-btn" style="cursor: pointer;" data-id="<?php echo $mentor['team_name']; ?>">View</button>
+                                                <button class="primary-btn w-100 view-details-btn" onclick="openPopup()" style="cursor: pointer;" data-id="<?php echo $mentor['team_name']; ?>">View</button>
                                                 <!-- </form> -->
                                             </td>
                                         </tr>
@@ -182,9 +244,22 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                             </table>
                         </div>
                     </div>
+                    
+                    <div class="popup" id="popup" tabindex="-1">
+                        <div class="modal-header">
+                            <h2>Team Details</h2>
+                        </div>
+                        <div class="modal-body" id="modalBody">
+                            <div id="student-details"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="my-primary-btn" onclick="closePopup()" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
         <script>
             let menuicn = document.querySelector(".menuicn");
             let nav = document.querySelector(".navcontainer");
@@ -217,11 +292,17 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                             $('#teamDetailsModal').modal('show');
                         }
                     });
-
                     // Set the delete button with the student ID
                     // $('#delete-btn').data('email', student-details);
                 });
             });
+            let popup = document.getElementById("popup");
+                    function openPopup(){
+                        popup.classList.add("open-popup")
+                    }
+                    function closePopup(){
+                        popup.classList.remove("open-popup")
+                    }
         </script>
     </body>
 </html>
