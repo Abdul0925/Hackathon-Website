@@ -122,7 +122,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                 <div class="circle"></div>
                     <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
                 <div class="dp">
-                    <a href=""><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
+                    <a href="admin_profile.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
                 </div>
             </div>
 
@@ -139,7 +139,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                             </div>
                         </a>
 
-                        <a href="" style="text-decoration: none;">
+                        <a href="admin_profile.php" style="text-decoration: none;">
                             <div class="nav-option option2" style="color: black;">
                                 <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png" class="nav-img" alt="blog">
                                 <h3> Profile</h3>
@@ -172,7 +172,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                     </a>
 
                     <div class="box box2">
-                        <a href="">
+                        <a href="admin_guidelines.php">
                         <div class="text">
                                 <h2 class="topic-heading">Add</h2>
                                 <h2 class="topic">Guidelines</h2>
@@ -192,7 +192,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                     </a>
 
                     <div class="box box4">
-                        <a href="">
+                        <a href="admin_result_announcement.php">
                             <div class="text">
                                 <h2 class="topic-heading">Result</h2>
                                 <h2 class="topic">Announcement</h2>

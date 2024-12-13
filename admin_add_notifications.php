@@ -18,7 +18,7 @@ if ($_SESSION['admin_logged_in'] != true) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Admin Dashboard</title>
+        <title>Add Notification</title>
         <link rel="stylesheet" href="admin_dash_style.css">
         <style>
 
@@ -80,7 +80,7 @@ if ($_SESSION['admin_logged_in'] != true) {
                 <div class="circle"></div>
                     <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
                 <div class="dp">
-                    <a href=""><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
+                    <a href="admin_profile.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
                 </div>
             </div>
 
@@ -96,7 +96,7 @@ if ($_SESSION['admin_logged_in'] != true) {
                                 <h3> Dashboard</h3>
                             </div>
                         </a>
-                        <a href="" style="text-decoration: none;">
+                        <a href="admin_profile.php" style="text-decoration: none;">
                             <div class="nav-option option2" style="color: black;">
                                 <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png" class="nav-img" alt="blog">
                                 <h3> Profile</h3>
