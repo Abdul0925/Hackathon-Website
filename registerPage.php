@@ -222,46 +222,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         }
 
 
-        .register-container .inputBox
-        {
-        position: relative;
-        width: 100%;
-        margin-top: 10px;
+        .register-container .inputBox {
+            position: relative;
+            width: 100%;
+            margin-top: 10px;
         }
 
         .register-container .inputBox input,
-        .register-container .inputBox textarea
-        {
-        width: 100%;
-        padding: 5px 0;
-        font-size: 16px;
-        margin: 10px 0;
-        border: none;
-        border-bottom: 2px solid #333;
-        outline: none;
-        resize: none;
+        .register-container .inputBox textarea {
+            width: 100%;
+            padding: 5px 0;
+            font-size: 16px;
+            margin: 10px 0;
+            border: none;
+            border-bottom: 2px solid #333;
+            outline: none;
+            resize: none;
         }
 
-        .register-container .inputBox span
-        {
-        position: absolute;
-        Left: 0;
-        padding: 5px 0;
-        font-size: 16px;
-        margin: 10px 0;
-        pointer-events: none;
-        transition: 0.5s;
-        color: #948686;
+        .register-container .inputBox span {
+            position: absolute;
+            Left: 0;
+            padding: 5px 0;
+            font-size: 16px;
+            margin: 10px 0;
+            pointer-events: none;
+            transition: 0.5s;
+            color: #948686;
         }
 
-        .register-container .inputBox input:focus ~ span,
-        .register-container .inputBox input:valid ~ span,
-        .register-container .inputBox textarea:focus ~ span,
-        .register-container .inputBox textarea:valid ~ span
-        {
-        color: #5C0F8B;
-        font-size: 12px;
-        transform: translateY(-20px);
+        .register-container .inputBox input:focus~span,
+        .register-container .inputBox input:valid~span,
+        .register-container .inputBox textarea:focus~span,
+        .register-container .inputBox textarea:valid~span {
+            color: #5C0F8B;
+            font-size: 12px;
+            transform: translateY(-20px);
         }
 
         .c-black {
@@ -304,7 +300,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="" height="" width="100px">
+                <img src="./picture/ghrce-logo-white.png" alt="Error Loading" height="" width="100px">
             </a>
 
             <div class="d-flex">
@@ -321,7 +317,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             <div class="container-fluid font-style-text">
                 <!-- Left: Logo -->
                 <a class="navbar-brand" href="index.php">
-                    <span class="heading-font">Raisoni Junior Hackfest</span>
+                    <span class="heading-font">Raisoni Tech Hackathon</span>
                 </a>
 
                 <!-- Toggle Button for Mobile View (Right aligned) -->
@@ -332,14 +328,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                 <!-- Center: Links with Dropdowns and Login/Register Button -->
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav c-black">
-                        <!-- Dropdown: About RJH -->
+                        <!-- Dropdown: About RTH -->
                         <li class="nav-item dropdown">
                             <a class="nav-link c-black dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                About RJH
+                                About RTH
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                <li><a class="dropdown-item" href="processFlow.php">RJH Process Flow</a></li>
-                                <li><a class="dropdown-item" href="themes.php">RJH Themes</a></li>
+                                <li><a class="dropdown-item" href="processFlow.php">RTH Process Flow</a></li>
+                                <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li>
                                 <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
                                 <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
                             </ul>
@@ -385,7 +381,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
 
 
-    
+
 
     <div class="register-container">
         <!-- Warning Message -->
@@ -427,8 +423,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                 <span>Email</span>
             </div>
 
+            <!-- College -->
+            <div class="inputBox">
+                <input type="text" name="college" required>
+                <span>College</span>
+            </div>
+
             <!-- Institute/College Dropdown -->
-            <div>
+            <!-- <div>
                 <div class="form-group">
                     <select class="form-control" style="margin-top: 10px;" name="college" required>
                         <option selected disabled>Please Select Your Institute/College</option>
@@ -463,20 +465,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                         <option>St Joseph Jr College (Girls), Sadar</option>
                         <option>St Paul Junior College, Manewada</option>                         
                     </select>
-                </div>
+                </div> -->
 
-                <!-- <div class="warning">
+            <!-- <div class="warning">
             Only Mentors are allowed to register. Mentors can participate with more than one team.
         </div> -->
-        <div class="alert alert-info" role="alert">
-            Only Mentors are allowed to register. Mentors can participate with more than one team.
-        </div>
-                                    
-                <!-- Send OTP Button -->
-                <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="registerButton">Register</button>
-            
+            <div class="alert alert-info" role="alert">
+                Only Mentors are allowed to register. Mentors can participate with more than one team.
             </div>
-        </form>
+
+            <!-- Send OTP Button -->
+            <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="registerButton">Register</button>
+
+    </div>
+    </form>
     </div>
 
 

@@ -37,7 +37,7 @@
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="" height="" width="100px">
+                <img src="./picture/ghrce-logo-white.png" alt="Error Loading" height="" width="100px">
             </a>
 
             <div class="d-flex">
@@ -54,7 +54,7 @@
             <div class="container-fluid font-style-text">
                 <!-- Left: Logo -->
                 <a class="navbar-brand" href="index.php">
-                    <span class="heading-font">Raisoni Junior Hackfest</span>
+                    <span class="heading-font">Raisoni Tech Hackathon</span>
                 </a>
 
                 <!-- Toggle Button for Mobile View (Right aligned) -->
@@ -65,14 +65,14 @@
                 <!-- Center: Links with Dropdowns and Login/Register Button -->
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav c-black">
-                        <!-- Dropdown: About RJH -->
+                        <!-- Dropdown: About RTH -->
                         <li class="nav-item dropdown">
                             <a class="nav-link c-black dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                About RJH
+                                About RTH
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                <li><a class="dropdown-item" href="processFlow.php">RJH Process Flow</a></li>
-                                <li><a class="dropdown-item" href="themes.php">RJH Themes</a></li>
+                                <li><a class="dropdown-item" href="processFlow.php">RTH Process Flow</a></li>
+                                <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li>
                                 <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
                                 <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
                             </ul>

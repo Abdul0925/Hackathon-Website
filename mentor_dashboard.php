@@ -187,7 +187,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                 </div>
 
                 <a href="mentor_dashboard.php" class="active nav-link">Dashboard</a>
-                <a href="mentor_my_teams.php" class=" nav-link">My Teams</a>
+                <a href="mentor_my_teams.php" class=" nav-link">My Team</a>
                 <a href="mentor_result.php" class=" nav-link">Results</a>
                 <a href="mentor_problem_statements.php" class=" nav-link">Problem Statements</a>
                 <a href="mentor_guidelines.php" class=" nav-link">Guidelines</a>

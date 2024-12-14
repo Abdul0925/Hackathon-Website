@@ -6,7 +6,6 @@ if ($_SESSION['mentor_logged_in'] != true) {
 }
 $email = $_SESSION['email'];
 
-
 // First query to select from `all_team_members`
 $stmt1 = $conn->prepare("SELECT * FROM all_team_members WHERE mentor = ? AND is_leader = 1");
 $stmt1->bind_param("s", $email);
@@ -14,16 +13,19 @@ $stmt1->execute();
 $result1 = $stmt1->get_result();
 $totalTeams = 0;
 
+$members_info = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email'");
+
+
 $stmt11 = $conn->prepare("SELECT no_of_teams FROM mentor_details WHERE email = ?");
 $stmt11->bind_param("s", $email);
 $stmt11->execute();
 $result11 = $stmt11->get_result();
-$result111=$result11->fetch_assoc();
+$result111 = $result11->fetch_assoc();
 $_SESSION['totalTeams'] = $result111['no_of_teams'];
 
 if ($result1->num_rows > 0) {
     $_SESSION['totalTeams'] = $totalTeams = $result1->num_rows;
-    
+
     // Update query for `mentor_details`
     $stmt2 = $conn->prepare("UPDATE mentor_details SET no_of_teams = ? WHERE email = ?");
     $stmt2->bind_param("is", $totalTeams, $email);
@@ -218,19 +220,19 @@ $result = $stmt3->get_result();
                 <div>
                     <form action="addNewTeam.php">
                         <?php
-                        if (mysqli_num_rows($result) >= 3) :
+                        if (mysqli_num_rows($result) > 0) :
                         ?>
                             <div class="alert alert-warning mt-3" role="alert">
-                                You Cant Add More Than 3 Teams
+                                You can add only one team
                             </div>
                             <button type="submit" class="btn btn-success" id="addNewBtn" disabled>Add New Team</button>
                         <?php
                         endif;
                         ?>
                         <?php
-                        if (mysqli_num_rows($result) < 3) :
+                        if (mysqli_num_rows($result) == 0) :
                         ?>
-                            <button type="submit" class="btn btn-success mt-3" id="addNewBtn">Add New Team</button>
+                            <button type="submit" class="btn btn-success mt-3" id="addNewBtn">Add My Team</button>
                         <?php
                         endif;
                         ?>
@@ -251,46 +253,50 @@ $result = $stmt3->get_result();
                 <?php endif; ?>
 
                 <?php if ($totalTeams != 0): ?>
+                    <div class="dashboard-header">
+                        <?php //echo $members_info['team_name']; ?>
+                    </div>
+                    <div class="dashboard-header">
+                        <h5 class="mb-3">
+                            <?php echo $row1['ps_id'] . " - " . $row1['ps_name']; ?>
+                        </h5>
+                    </div>
                     <!-- Table Section -->
-                    <div class="mt-5">
+                    <div class="mt-2">
                         <h5 class="mb-3">Team List</h5>
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Team Name</th>
+                                        <th>Sr. No.</th>
                                         <th>Leader Name</th>
                                         <th>Email</th>
                                         <th>Mobile</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    while ($row = $result->fetch_assoc()) {
+                                    $srno = 1;
+                                    while ($row = $members_info->fetch_assoc()) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $row['team_name']; ?></td>
+                                            <td><?php echo $srno; ?></td>
                                             <td><?php echo $row['name']; ?></td>
                                             <td><?php echo $row['email']; ?></td>
                                             <td><?php echo $row['phone']; ?></td>
-                                            <td>
-                                                <form action="team_info.php" method="post">
-                                                    <input name="team_name" value="<?php echo $row['team_name']; ?>" hidden>
-                                                    <input name="ps" value="<?php echo $row['ps']; ?>" hidden>
-                                                    <button class="btn btn-primary"> View </button>
-                                            </td>
-                                            </form>
                                         </tr>
                                     <?php
+                                        $srno++;
                                     }
 
                                     ?>
                                 </tbody>
                             </table>
+
                         <?php endif; ?>
                         </div>
                     </div>
+
             </div>
         </div>
     </div>
