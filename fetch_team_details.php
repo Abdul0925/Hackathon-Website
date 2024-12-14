@@ -11,7 +11,7 @@ if (isset($_POST['id'])) {
     $team_id = $_POST['id']; // Retrieve the student ID from the POST data
 
     // Query to fetch job applications associated with the student
-    $query1 = "SELECT * FROM all_team_members WHERE team_name = '$team_id'"; // Get job applications for the user
+    $query1 = "SELECT * FROM all_team_members WHERE team_id = '$team_id'"; // Get job applications for the user
     $result1 = $conn->query($query1); // Execute the query
     $sr_no = 1; // Initialize a serial number for listing the jobs
     // echo "<pre>".var_dump($result1->fetch_assoc());

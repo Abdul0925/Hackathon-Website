@@ -393,7 +393,7 @@
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="" height="" width="100px">
+                <img src="./picture/ghrce-logo-white.png" alt="Error Loading" height="" width="100px">
             </a>
 
             <div class="d-flex">
@@ -410,7 +410,7 @@
             <div class="container-fluid font-style-text">
                 <!-- Left: Logo -->
                 <a class="navbar-brand" href="index.php">
-                    <span class="heading-font">Raisoni Junior Hackfest</span>
+                    <span class="heading-font">Raisoni Tech Hackathon</span>
                 </a>
 
                 <!-- Toggle Button for Mobile View (Right aligned) -->
@@ -421,14 +421,14 @@
                 <!-- Center: Links with Dropdowns and Login/Register Button -->
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav c-black">
-                        <!-- Dropdown: About RJH -->
+                        <!-- Dropdown: About RTH -->
                         <li class="nav-item dropdown">
                             <a class="nav-link c-black dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                About RJH
+                                About RTH
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                <li><a class="dropdown-item" href="processFlow.php">RJH Process Flow</a></li>
-                                <li><a class="dropdown-item" href="themes.php">RJH Themes</a></li>
+                                <li><a class="dropdown-item" href="processFlow.php">RTH Process Flow</a></li>
+                                <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li>
                                 <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
                                 <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
                             </ul>
@@ -479,7 +479,7 @@
             <img src="https://i.pinimg.com/564x/08/ff/65/08ff655ded24544c02b0b22ce255df09.jpg" alt="Hackathon Image" width="50%">
         </div>
         <div class="cover-container">
-            <div class="overlay-text1 font-style-text font-style-text">BE A PART OF THIS HACKATHON</div>
+            <div class="overlay-text1 font-style-text font-style-text">BE A PART OF RTH SEASON 2</div>
             <p><i>"the best way to predict the future is to invent it"</i></p>
             <header class="hero-section">
                 <div class="hero-content">
@@ -492,8 +492,8 @@
 
     <!-- About Section -->
     <section class="about">
-        <h2>About Hackfest</h2>
-        <p>"The Raisoni Junior Hackfest - Empowering Young Innovators.</p>
+        <h2>About Hackathon</h2>
+        <p>"The Raisoni Tech Hackathon S2 - Empowering Young Innovators.</p>
         <p>Hackfests are playgrounds where ideas evolve into breakthroughs, fueled by passion and teamwork. Join us as we explore new ideas, solve real-world problems and push the boundaries of what’s possible!"</p>
 
     </section>
@@ -501,7 +501,7 @@
     <!-- Highlights Section -->
     <section class="highlights d-block d-lg-flex">
         <div class="highlight-item">
-            <h4>8 Hours of Innovation</h4>
+            <h4>48 Hours of Innovation</h4>
             <p>Continuous coding and brainstorming to create breakthrough solutions.</p>
         </div>
         <div class="highlight-item">
