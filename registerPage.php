@@ -129,11 +129,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         // OTP is valid
 
         $registration_success = true;
-        $message = "Registration successful! Wait we are redirecting to you on Login Page";
-
+        echo '<script> alert("Registration successful!"); window.location.href = "loginPage.php"; </script>';
 
         // Clear session OTP after successful verification
-        unset($_SESSION['otp']);
+        
         $password = randomPassword();
 
         $mail = new PHPMailer(true);
@@ -188,14 +187,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                         echo '<script> alert("Registration successful!"); window.location.href = "loginPage.php"; </script>';
                     }
                 } else {
-                    echo '<script> alert("Error in Registration Try Again!"); window.location.href = "loginPage.php"; </script>';
+                    echo '<script> alert("Error in Registration Try Again after some time!"); window.location.href = "loginPage.php"; </script>';
                 }
             } else {
-                echo '<script> alert("Error in Registration Try Again!"); window.location.href = "loginPage.php"; </script>';
+                echo '<script> alert("Error in Registration Try Again after some time!"); window.location.href = "loginPage.php"; </script>';
             }
         } else {
 
-            echo '<script> alert("Error in Registration Try Again!"); window.location.href = "loginPage.php"; </script>';
+            echo '<script> alert("Error in Registration Try Again after some time!"); window.location.href = "loginPage.php"; </script>';
         }
     } else {
         // OTP is invalid
