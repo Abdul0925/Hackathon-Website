@@ -239,6 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
 
                 <a href="mentor_dashboard.php" class=" nav-link">Dashboard</a>
                 <a href="mentor_my_teams.php" class="active nav-link">My Team</a>
+                <a href="leader_payment.php" class="nav-link">Payment</a>
                 <a href="mentor_result.php" class=" nav-link">Results</a>
                 <a href="mentor_problem_statements.php" class=" nav-link">Problem Statements</a>
                 <a href="mentor_guidelines.php" class=" nav-link">Guidelines</a>
