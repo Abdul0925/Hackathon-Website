@@ -5,6 +5,8 @@ require "db.php";
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
     $team_id = $_POST['team_id'];
     $team_name = $_POST['team_name'];
     $problem_statement = $_POST['problem_statement'];
@@ -17,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssi", $team_name, $problem_statement, $team_id);
     if ($stmt->execute()) {
         // Success response
-        header("Location: mentor_my_teams.php?msg=Details added successfully");
+        header("Location: mentor_my_teams.php?msg=Details added successfully $paymentStatus");
         exit;
     } else {
         // Update team details failed

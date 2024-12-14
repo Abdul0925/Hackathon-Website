@@ -47,17 +47,23 @@ $paymentStatusStmt->bind_param("i", $team_id);
 $paymentStatusStmt->execute();
 $statusResult = $paymentStatusStmt->get_result();
 $paymentStatus = $statusResult->fetch_assoc();
+$paymentStatus = $paymentStatus['status'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
     if ($totalMembers > 4) {
-        echo '<script> alert("You can only add 5 members"); window.location.href = "mentor_my_teams.php"; </script>';
+        echo '<script> alert("You can only add 5 members "); window.location.href = "mentor_my_teams.php"; </script>';
+        return;
+    }
+    if ($paymentStatus == "Completed") {
+        echo '<script> alert("You can'."'t".' add members after payment "); window.location.href = "mentor_my_teams.php"; </script>';
         return;
     }
     $memberName = $_POST['memberName'];
     $memberEmail = $_POST['memberEmail'];
     $memberMobile = $_POST['memberMobile'];
     $is_leader = 0;
-
+    $team_name = "";
+    $ps = "";
     $addNewMemberStmt = $conn->prepare("INSERT INTO all_team_members (team_id, mentor, name, email, phone, team_name, ps, is_leader) 
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $addNewMemberStmt->bind_param("issssssi", $team_id, $email, $memberName, $memberEmail, $memberMobile, $team_name, $ps, $is_leader);
@@ -309,7 +315,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
                             <h5>Problem Statement: <?php echo $ps; ?> </h5>
                         </div>
                         <div>
-                            <h5>Payment Status: <span style="color:#dc3545;"> <?php echo $paymentStatus['status']; ?> </span>
+                            <h5>Payment Status: <span style="color:#dc3545;"> <?php echo $paymentStatus; ?> </span>
                             </h5>
                         </div>
                     </h5>
