@@ -114,10 +114,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
     $email = $_SESSION['email'];
     $first_name = $_SESSION['first_name'];
     $last_name = $_SESSION['last_name'];
+    $name = $first_name . " " . $last_name;
     $mobile = $_SESSION['mobile'];
     $college = $_SESSION['college'];
     $role = "Mentor";
+    $status = "Pending";
+    $ps = "";
+    $team_name = "";
     $no_of_teams = 0;
+    $isLeader = 1;
 
     // Check if entered OTP matches the session OTP
     if ($entered_otp == $_SESSION['otp']) {
@@ -157,13 +162,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "INSERT INTO mentor_details(email, first_name, last_name, mobile, college, role, password, no_of_teams) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO mentor_details(email, first_name, last_name, mobile, college, role, password, ps, no_of_teams) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param('sssisssi', $email, $first_name, $last_name, $mobile, $college, $role, $hashedPassword, $no_of_teams);
+        $stmt->bind_param('sssissssi', $email, $first_name, $last_name, $mobile, $college, $role, $hashedPassword, $ps, $no_of_teams);
         if ($stmt->execute()) {
-            if ($mail->Send()) {
-                echo '<script> alert("Registration successful!"); window.location.href = "loginPage.php"; </script>';
+
+            $getId = $conn->prepare("SELECT id FROM mentor_details WHERE email = ?");
+            $getId->bind_param("s", $email);
+            $getId->execute();
+            $result = $getId->get_result();
+            $row = $result->fetch_assoc();
+            $team_id = $row['id'];
+
+            $stmt1 = $conn->prepare("INSERT INTO all_team_members (team_id, mentor, name, email, phone, team_name, ps, is_leader) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt1->bind_param("issssssi", $team_id, $email, $name, $email, $mobile, $team_name, $ps, $isLeader);
+            if ($stmt1->execute()) {
+
+                $stmt2 = $conn->prepare("INSERT INTO payment_details (team_id, status) 
+                                VALUES (?, ?)");
+                $stmt2->bind_param("is", $team_id, $status);
+                if ($stmt2->execute()) {
+                    if ($mail->Send()) {
+                        echo '<script> alert("Registration successful!"); window.location.href = "loginPage.php"; </script>';
+                    }
+                } else {
+                    echo '<script> alert("Error in Registration Try Again!"); window.location.href = "loginPage.php"; </script>';
+                }
+            } else {
+                echo '<script> alert("Error in Registration Try Again!"); window.location.href = "loginPage.php"; </script>';
             }
         } else {
 
