@@ -229,7 +229,7 @@
 
                 <!-- Extra Links (Register and Forget Password) -->
                 <div class="extra-links">
-                    <a href="registerPage.php">Register Now</a>
+                    <a href="registerTeam.php">Register Now</a>
                     <a href="forgetPassword.php">Forget Password?</a>
                 </div>
             </div>
