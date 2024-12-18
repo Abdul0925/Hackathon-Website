@@ -126,6 +126,26 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             /* color: white; */
         }
 
+        .delete-btn {
+            color: white;
+            width: 100%;
+            height: 30px;
+            background-color: rgb(141, 50, 47);
+            border-radius: 5px;
+            border: none;
+        }
+
+        .delete-btn:hover {
+            background-color: rgb(91, 31, 31);
+            color: white;
+        }
+
+        .delete-btn:active {
+            box-shadow: 2px 2px 5pxrgb(252, 77, 77);
+            background-color: rgb(181, 1, 1);
+            /* color: white; */
+        }
+
         .report-container {
             margin-top: 0px;
         }
@@ -303,7 +323,10 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                         echo "<td>" . $row['ps_id'] . "</td>";
                                         echo "<td>" . $row['ps_name'] . "</td>";
                                         echo "<td>" . $row['ps_category'] . "</td>";
-                                        echo '<td><button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button></td>';
+                                        echo '<td>
+                                                <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button>
+                                                <button class="delete-btn" onclick="deletePs(this)" data-id="' . $row['ps_id'] . '">Delete</button>
+                                            </td>';
                                         echo "</tr>";
 
                                         // Modal for each problem statement
@@ -377,7 +400,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
         function openPopup(button) {
             const dataId = button.getAttribute('data-id'); // Get the data-id value
-            console.log('Data ID:', dataId); // Log it to verify
+
             const popup = document.getElementById(dataId); // Get the popup element by ID
             if (popup) {
                 popup.classList.add("open-popup"); // Add the class to open the popup
@@ -390,6 +413,37 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             const dataId = button.getAttribute('data-id'); // Get the data-id value
             const popup = document.getElementById(dataId); // Get the popup element by ID
             popup.classList.remove("open-popup")
+        }
+
+        function deletePs(button) {
+            const psId = button.getAttribute("data-id");
+
+            if (confirm("Are you sure you want to delete this problem statement?")) {
+                fetch("delete_ps.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: `ps_id=${encodeURIComponent(psId)}`,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            alert(data.message);
+                            // Remove the row from the table
+                            const row = button.closest("tr");
+                            if (row) {
+                                row.remove();
+                            }
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("An error occurred while deleting the problem statement.");
+                    });
+            }
         }
     </script>
 </body>
