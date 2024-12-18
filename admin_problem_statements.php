@@ -44,6 +44,17 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             font-size: 13px;
         }
 
+        textarea {
+            width: 100%;
+            /* Fixed width */
+            min-height: 100px;
+            /* Minimum height */
+            resize: vertical;
+            /* Allow resizing only vertically */
+            overflow: hidden;
+            /* Hide overflow */
+        }
+
         .popup {
             border: 1px solid black;
             border-radius: 10px;
@@ -118,6 +129,42 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         .report-container {
             margin-top: 0px;
         }
+
+        .btn-primary {
+            color: white;
+            width: 80px;
+            height: 40px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .btn-primary:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
+        }
+
+        .report-body .form-body .form-label {
+            /* display: flex; */
+            /* flex-direction: column; */
+            /* margin-bottom: 10px; */
+        }
+
+        .report-body .form-body .form-control {
+            /* border-radius: 5px; */
+            /* width: 100%; */
+            /* height: 150px; */
+            /* padding-left: 10px; */
+            /* padding-top: 10px; */
+        }
     </style>
 
 </head>
@@ -146,6 +193,9 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         </div>
 
     </header>
+
+
+
 
     <div class="main-container">
         <div class="navcontainer">
@@ -178,6 +228,48 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
         <div class="main">
             <!-- team detail table -->
+            <div class="report-container">
+                <div class="report-header">
+                    <h1 class="recent-Articles">Add New Problem</h1>
+                </div>
+
+                <div class="report-body">
+                    <form action="admin_add_ps_process.php" method="POST">
+                        <div class="form-body">
+                            <label for="psId" class="form-label">Id: </label>
+                            <input type="text" name="psId" id="psId" class="form-control" placeholder="Enter PS ID" required>
+                        </div>
+                        <div class="form-body">
+                            <label for="psName" class="form-label">Title: </label>
+                            <input type="text" name="psName" id="psName" class="form-control" placeholder="Enter PS Title" required>
+                        </div>
+                        <div class="form-body">
+                            <label for="psCategory" class="form-label">Category: </label>
+                            <input type="text" name="psCategory" id="psCategory" class="form-control" placeholder="Enter PS Category" required>
+                        </div>
+                        <div class="form-body">
+                            <label for="psGivenBy" class="form-label">Given By: </label>
+                            <input type="text" name="psGivenBy" id="psGivenBy" class="form-control" placeholder="Enter PS Giver Name" required>
+                        </div>
+                        <div class="form-body">
+                            <label for="psDificulty" class="form-label">Dificulty Level:</label>
+                            <select name="psDificulty" id="psDificulty" required>
+                                <option value="" selected disabled>Select Level</option>
+                                <option value="">None</option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                        <div class="form-body">
+                            <label for="psDescription" class="form-label">Description:</label>
+                            <textarea name="psDescription" id="psDescription" class="form-control" rows="4" placeholder="Type your description here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">Problems</h1>
