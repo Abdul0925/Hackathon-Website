@@ -18,7 +18,7 @@ if ($_SESSION['admin_logged_in'] != true) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Admin Dashboard</title>
+        <title>Notifications</title>
         <link rel="stylesheet" href="admin_dash_style.css">
         <style>
             
@@ -79,7 +79,7 @@ if ($_SESSION['admin_logged_in'] != true) {
         <header>
 
             <div class="logosec">
-                <div class="logo">Admin</div>
+                <a href="admin_dashboard.php" style="text-decoration: none;"><div class="logo">Admin</div></a>
             </div>
 
             <div>
@@ -88,9 +88,9 @@ if ($_SESSION['admin_logged_in'] != true) {
 
             <div class="message">
                 <div class="circle"></div>
-                    <a href="show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
+                    <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
                 <div class="dp">
-                    <a href=""><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
+                    <a href="admin_profile.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
                 </div>
             </div>
 
@@ -131,7 +131,7 @@ if ($_SESSION['admin_logged_in'] != true) {
                                 <td><?php echo htmlspecialchars($noti['notification']); ?></td>
                                 <td><?php echo $date; ?></td>
                                 <td>
-                                    <form action="delete_noti_process.php" method="POST" class="d-inline">
+                                    <form action="admin_delete_noti_process.php" method="POST" class="d-inline">
                                         <input type="hidden" name="noti_id" value="<?php echo $noti['id']; ?>">
                                         <button class="btn-primary">Delete</button>
                                     </form>

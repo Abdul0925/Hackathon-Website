@@ -18,7 +18,7 @@ if ($_SESSION['admin_logged_in'] != true) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Admin Dashboard</title>
+        <title>Add Notification</title>
         <link rel="stylesheet" href="admin_dash_style.css">
         <style>
 
@@ -68,7 +68,7 @@ if ($_SESSION['admin_logged_in'] != true) {
         <header>
 
             <div class="logosec">
-                <div class="logo">Admin</div>
+                <a href="admin_dashboard.php" style="text-decoration: none;"><div class="logo">Admin</div></a>
                 <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
             </div>
 
@@ -78,9 +78,9 @@ if ($_SESSION['admin_logged_in'] != true) {
 
             <div class="message">
                 <div class="circle"></div>
-                    <a href="show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
+                    <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
                 <div class="dp">
-                    <a href=""><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
+                    <a href="admin_profile.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
                 </div>
             </div>
 
@@ -90,12 +90,13 @@ if ($_SESSION['admin_logged_in'] != true) {
             <div class="navcontainer">
                 <nav class="nav">
                     <div class="nav-upper-options">
-                        <div class="nav-option option1">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png" class="nav-img" alt="dashboard">
-                            <h3> Dashboard</h3>
-                        </div>
-
-                        <a href="" style="text-decoration: none;">
+                        <a href="admin_dashboard.php" style="text-decoration: none;">
+                            <div class="nav-option option1">
+                                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png" class="nav-img" alt="dashboard">
+                                <h3> Dashboard</h3>
+                            </div>
+                        </a>
+                        <a href="admin_profile.php" style="text-decoration: none;">
                             <div class="nav-option option2" style="color: black;">
                                 <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png" class="nav-img" alt="blog">
                                 <h3> Profile</h3>
@@ -120,7 +121,7 @@ if ($_SESSION['admin_logged_in'] != true) {
                     </div>
 
                     <div class="report-body">
-                        <form action="add_noti_process.php" method="POST">
+                        <form action="admin_add_noti_process.php" method="POST">
                             <div class="form-body">
                                 <label for="notification" class="form-label">Enter New Notification:</label>
                                 <textarea name="notification" id="notification" class="form-control" rows="4" placeholder="Type your notification here..." required></textarea>
