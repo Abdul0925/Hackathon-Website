@@ -1,11 +1,11 @@
 <?php
 session_start();
 if ($_SESSION['admin_logged_in'] != true) {
-    header("loginPage.php");
+    header("location:loginPage.php");
 }
 
 require 'db.php';
-$teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members");
+$teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader = 1");
 // $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members");
 ?>
 
@@ -246,19 +246,40 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                     $mentorEmail = $teamDetails->fetch_assoc();
                                 ?>
                                     <tr>
-                                        <td><?php echo $srno ?></td>
-                                        <td><?php echo $mentor['team_name'] ?></td>
-                                        <td><?php echo $mentorEmail['mentor'] ?></td>
-                                        <td>
-                                            <!-- <form action="" method="POST" class="d-inline"> -->
-                                            <input type="hidden" name="noti_id" value="<?php echo $mentorEmail['email']; ?>">
-                                            <button class="primary-btn w-100 view-details-btn" onclick="openPopup()" style="cursor: pointer;" data-id="<?php echo $mentor['team_name']; ?>">View</button>
-                                            <!-- </form> -->
-                                        </td>
+
+                                        <th scope="col">Sr No</th>
+                                        <th scope="col">Team Name</th>
+                                        <th scope="col">Mentor</th>
+                                        <th scope="col">PS</th>
+                                        <th scope="col">Action</th>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $srno = 0;
+                                    while ($mentor = $teamName->fetch_assoc()) {
+                                        $srno++;
+                                        $team_name = $mentor['team_name'];
+                                        // $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members WHERE team_name = '$team_name'");
+                                        // $mentorEmail = $teamDetails->fetch_assoc();
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $srno ?></td>
+                                            <td><?php echo $mentor['team_name'] ?></td>
+                                            <td><?php echo $mentor['email'] ?></td>
+                                            <td><?php echo $mentor['ps'] ?></td>
+                                            <td>
+                                                <!-- <form action="" method="POST" class="d-inline"> -->
+                                                <input type="hidden" name="noti_id" value="<?php echo $mentorEmail['email']; ?>">
+                                                <button class="primary-btn w-100 view-details-btn" onclick="openPopup()" style="cursor: pointer;" data-id="<?php echo $mentor['team_id']; ?>">View</button>
+                                                <!-- </form> -->
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
 

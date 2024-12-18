@@ -162,7 +162,8 @@ if ($_SESSION['mentor_logged_in'] != true) {
                 </div>
 
                 <a href="mentor_dashboard.php" class=" nav-link">Dashboard</a>
-                <a href="mentor_my_teams.php" class=" nav-link">My Teams</a>
+                <a href="mentor_my_teams.php" class=" nav-link">My Team</a>
+                <a href="leader_payment.php" class="nav-link">Payment</a>
                 <a href="mentor_result.php" class=" nav-link">Results</a>
                 <a href="mentor_problem_statements.php" class=" nav-link">Problem Statements</a>
                 <a href="mentor_guidelines.php" class="active nav-link">Guidelines</a>

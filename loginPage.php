@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-
         .heading-font {
             font-family: "Playwrite GB S", cursive;
             font-optical-sizing: auto;
@@ -50,16 +49,14 @@
             font-family: "Oxanium", sans-serif;
         }
 
-        .login-container .inputBox
-        {
+        .login-container .inputBox {
             position: relative;
             width: 100%;
             margin-top: 10px;
         }
 
         .login-container .inputBox input,
-        .login-container .inputBox textarea
-        {
+        .login-container .inputBox textarea {
             width: 100%;
             padding: 5px 0;
             font-size: 16px;
@@ -70,8 +67,7 @@
             resize: none;
         }
 
-        .login-container .inputBox span
-        {
+        .login-container .inputBox span {
             position: absolute;
             Left: 0;
             padding: 5px 0;
@@ -82,11 +78,10 @@
             color: #948686;
         }
 
-        .login-container .inputBox input:focus ~ span,
-        .login-container .inputBox input:valid ~ span,
-        .login-container .inputBox textarea:focus ~ span,
-        .login-container .inputBox textarea:valid ~ span
-        {
+        .login-container .inputBox input:focus~span,
+        .login-container .inputBox input:valid~span,
+        .login-container .inputBox textarea:focus~span,
+        .login-container .inputBox textarea:valid~span {
             color: #5C0F8B;
             font-size: 12px;
             transform: translateY(-20px);
@@ -124,7 +119,7 @@
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="" height="" width="100px">
+                <img src="./picture/ghrce-logo-white.png" alt="Error Loading" height="" width="100px">
             </a>
 
             <div class="d-flex">
@@ -141,7 +136,7 @@
             <div class="container-fluid font-style-text">
                 <!-- Left: Logo -->
                 <a class="navbar-brand" href="index.php">
-                    <span class="heading-font">Raisoni Junior Hackfest</span>
+                    <span class="heading-font">Raisoni Tech Hackathon</span>
                 </a>
 
                 <!-- Toggle Button for Mobile View (Right aligned) -->
@@ -152,14 +147,14 @@
                 <!-- Center: Links with Dropdowns and Login/Register Button -->
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav c-black">
-                        <!-- Dropdown: About RJH -->
+                        <!-- Dropdown: About RTH -->
                         <li class="nav-item dropdown">
                             <a class="nav-link c-black dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                About RJH
+                                About RTH
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                <li><a class="dropdown-item" href="processFlow.php">RJH Process Flow</a></li>
-                                <li><a class="dropdown-item" href="themes.php">RJH Themes</a></li>
+                                <li><a class="dropdown-item" href="processFlow.php">RTH Process Flow</a></li>
+                                <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li>
                                 <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
                                 <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
                             </ul>
@@ -220,7 +215,7 @@
 
             <!-- Role Dropdown -->
             <div>
-                <div class="form-group"  style="padding-top: 10px; padding-bottom: 20px;">
+                <div class="form-group" style="padding-top: 10px; padding-bottom: 20px;">
                     <select class="form-control" style="border-radius: 8px;" name="role" id="role" required>
                         <option selected disabled>Please Select Your Role</option>
                         <option value="super-admin">Super Admin</option>
@@ -231,10 +226,10 @@
                 </div>
                 <!-- Submit Button -->
                 <button type="submit" class="btn my-primary-btn" name="loginBtn">Login</button>
-                
+
                 <!-- Extra Links (Register and Forget Password) -->
                 <div class="extra-links">
-                    <a href="registerPage.php">Register Now</a>
+                    <a href="registerTeam.php">Register Now</a>
                     <a href="forgetPassword.php">Forget Password?</a>
                 </div>
             </div>
@@ -243,4 +238,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+
 </html>
