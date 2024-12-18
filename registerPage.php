@@ -509,14 +509,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
+    <!-- <script>
         document.getElementById('registerButton').addEventListener('click', function() {
             // Disable the register button to prevent multiple requests
             setTimeout(() => {
                 document.getElementById('registerButton').disabled = true;
             }, 500)
         });
-    </script>
+    </script> -->
 
 </body>
 
