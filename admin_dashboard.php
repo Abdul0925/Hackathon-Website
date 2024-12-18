@@ -229,22 +229,14 @@ $teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader 
                     <div class="table">
                         <table>
                             <thead>
-                                <tr>
+                                <!-- <tr>
                                     <th scope="col">Sr No</th>
                                     <th scope="col">Team Name</th>
                                     <th scope="col">Mentor</th>
                                     <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $srno = 0;
-                                while ($mentor = $teamName->fetch_assoc()) {
-                                    $srno++;
-                                    $team_name = $mentor['team_name'];
-                                    $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members WHERE team_name = '$team_name'");
-                                    $mentorEmail = $teamDetails->fetch_assoc();
-                                ?>
+                                </tr> -->
+                           
+                            
                                     <tr>
 
                                         <th scope="col">Sr No</th>

@@ -89,9 +89,9 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             /* color: white; */
         }
 
-        @media screen and (max-width: 400px) {
+        @media screen and (min-width: 400px) {
             .popup {
-                width: 300px;
+                width: 98%;
             }
         }
 
@@ -114,7 +114,8 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             background-color: rgb(47, 141, 70);
             /* color: white; */
         }
-        .report-container{
+
+        .report-container {
             margin-top: 0px;
         }
     </style>
@@ -210,7 +211,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                         echo "<td>" . $row['ps_id'] . "</td>";
                                         echo "<td>" . $row['ps_name'] . "</td>";
                                         echo "<td>" . $row['ps_category'] . "</td>";
-                                        echo '<td><button class="view-btn" onclick="openPopup()" data-id="' . $row['ps_id'] . '">View</button></td>';
+                                        echo '<td><button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button></td>';
                                         echo "</tr>";
 
                                         // Modal for each problem statement
@@ -227,7 +228,9 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                                 <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="close-btn" onclick="closePopup()">Close</button>
+                                                
+                                                <button type="button" class="close-btn" data-id="' . $row['ps_id'] . '" onclick="closePopup(this)">Close</button>
+
                                             </div>
                                         </div>';
                                         $sr_no++; // Increment the serial number
@@ -278,13 +281,22 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             window.location.href = "myProfile.php";
         })
         // yahan pe jo si bhi id dalenga vo popup open honga
-        let popup = document.getElementById("RJH01");
+        // let popup = document.getElementById("RJH01");
 
-        function openPopup() {
-            popup.classList.add("open-popup")
+        function openPopup(button) {
+            const dataId = button.getAttribute('data-id'); // Get the data-id value
+            console.log('Data ID:', dataId); // Log it to verify
+            const popup = document.getElementById(dataId); // Get the popup element by ID
+            if (popup) {
+                popup.classList.add("open-popup"); // Add the class to open the popup
+            } else {
+                console.error(`Popup with ID "${dataId}" not found`);
+            }
         }
 
-        function closePopup() {
+        function closePopup(button) {
+            const dataId = button.getAttribute('data-id'); // Get the data-id value
+            const popup = document.getElementById(dataId); // Get the popup element by ID
             popup.classList.remove("open-popup")
         }
     </script>
