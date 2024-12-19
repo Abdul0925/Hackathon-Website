@@ -58,6 +58,10 @@ if ($_SESSION['admin_logged_in'] != true) {
             padding-top: 10px;
         }
 
+        .report-container {
+            margin-top: 20px ;
+        }
+
         </style>
         
     </head>
