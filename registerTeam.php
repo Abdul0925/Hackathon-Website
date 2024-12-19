@@ -10,27 +10,200 @@
     <!-- Bootstrap JS with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/components/alerts/" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
     <!-- Custom Styles -->
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #ffffff;
         }
 
-        /* .container {
-            max-width: 800px;
-            margin: 30px auto;
+        table {
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: auto;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid rgb(200, 200, 200);
+            padding: 8px 30px;
+            text-align: center;
+        }
+
+        th {
+            text-transform: uppercase;
+            font-weight: 500;
+            border-color: black;
+        }
+
+        td {
+            font-size: 13px;
+        }
+
+        .container {
+            max-width: 70%;
+            margin: 10px auto;
             background: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            /* border-radius: 15px; */
+            /* border-bottom: 8px;
+            border-right: 8px; */
+            /* border-style: solid; */
+            /* background-color: #5C0F8B; */
+        }
+
+
+        .box-body .inputBox {
+            position: relative;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .box-body .inputBox input,
+        .box-body .inputBox textarea {
+            width: 100%;
+            padding: 5px 0;
+            font-size: 16px;
+            margin: 10px 0;
+            border: none;
+            border-bottom: 2px solid #333;
+            outline: none;
+            resize: none;
+        }
+
+        .box-body .inputBox span {
+            position: absolute;
+            Left: 0;
+            padding: 5px 0;
+            font-size: 16px;
+            margin: 10px 0;
+            pointer-events: none;
+            transition: 0.5s;
+            color: #948686;
+        }
+
+        .box-body .inputBox input:focus~span,
+        .box-body .inputBox input:valid~span,
+        .box-body .inputBox textarea:focus~span,
+        .box-body .inputBox textarea:valid~span {
+            color: #5C0F8B;
+            font-size: 12px;
+            transform: translateY(-20px);
+        }
+
+
+
+
+        .container-two {
+            border-radius: 15px;
+            /* border-bottom: 8px;
+            border-right: 8px; */
+            border-style: solid;
+            /* border-color: rgb(193, 124, 235); */
+            padding: 4px 5px 0px 5px;
+            margin-bottom: 30px;
+            /* background-color: #5C0F8B; */
+        }
+
+        .boxF {
+            border-radius: 15px;
+            border-style: solid;
+            /* border-color: rgb(193, 124, 235); */
+            margin-bottom: 15px;
+            margin-top: 15px;
+            background-color: #ffffff;
+            /* padding: 15px 0px 15px 0px; */
+            /* border-bottom: 8px; */
+            /* border-right: 8px; */
+            /* border-top: 5px; */
+        }
+
+        .box {
+            border-radius: 15px;
+            border-style: solid;
+            /* border-color: rgb(193, 124, 235); */
+            margin-bottom: 15px;
+            background-color: #ffffff;
+            /* padding: 15px 0px 15px 0px; */
+            /* border-bottom: 8px; */
+            /* border-right: 8px; */
+            /* border-top: 5px; */
+        }
+
+        .boxL {
+            border-radius: 15px;
+            border-style: solid;
+            /* border-color: rgb(193, 124, 235); */
+            margin-bottom: 15px;
+            background-color: #ffffff;
+            /* padding: 15px 0px 15px 0px; */
+            /* border-bottom: 8px; */
+            /* border-right: 8px; */
+            /* border-top: 5px; */
+        }
+
+        .head-title {
+            border-bottom: solid rgb(0, 0, 0);
+            padding: 13px 13px 13px 20px;
+            color: rgb(255, 255, 255);
+
+        }
+
+        .head-div {
+            /* border: black; */
+            border-radius: 10px 10px 0px 0px;
+            background-color: #5C0F8B;
+        }
+
+        .box-body {
+            padding: 0px 20px 0px 20px;
+        }
+
+        .boxL .box-body {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* .payment-box {
+            margin-left: 20px;
         } */
+
+        .QR-code {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .verify-btn-div {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* .direction{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        } */
+
         h1 {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
+            /* color: #ffffff; */
         }
 
         .form-section {
@@ -45,14 +218,130 @@
             margin-top: 32px;
         }
 
-        .qr-code img {
-            max-width: 200px;
-            display: block;
-            margin: 10px auto;
-        }
 
         .form-footer {
             text-align: center;
+        }
+
+        .verify-btn button {
+            color: white;
+            width: 80px;
+            margin-top: 6px;
+            height: 40px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px 5px 5px 0px;
+            border: none;
+        }
+
+        .verify-btn button:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .verify-btn button:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
+            /* color: white; */
+        }
+
+        .prob-btn button {
+            color: white;
+            width: 80px;
+            /* margin-top: 5px; */
+            height: 40px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
+            border: none;
+        }
+
+        .prob-btn button:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .prob-btn button:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
+            /* color: white; */
+        }
+
+        .add-btn button {
+            color: white;
+            width: 120px;
+            margin: 5px 0px 5px 0px;
+            height: 40px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
+            border: none;
+        }
+
+        .add-btn button:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .add-btn button:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
+            /* color: white; */
+        }
+
+        .register-btn {
+            color: white;
+            width: 50%;
+            height: 50px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
+            border: none;
+        }
+
+        .register-btn:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .register-btn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
+            /* color: white; */
+        }
+
+        @media screen and (max-width: 400px) {
+            .boxL .box-body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0px auto;
+                border-radius: 0px;
+                border: none;
+                padding: 20px 0px 30px 0px;
+            }
+
+            .container-two {
+                border-style: none;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .boxL .box-body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0px auto;
+                border-radius: 0px;
+                border: none;
+                padding: 20px 0px 30px 0px;
+            }
+
+            .container-two {
+                border-style: none;
+            }
         }
     </style>
 </head>
@@ -141,136 +430,183 @@
 
     </div>
 
-    <div class="container my-5">
-    <h1 class="text-center mb-4">Team Registration Form</h1>
-    <form action="submitRegistration.php" method="POST" enctype="multipart/form-data">
+    <div class="container">
+        <h1>Team Registration Form</h1>
 
-        <!-- Team Details Section -->
-        <div class="card shadow mb-4">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Team Details</h4>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="teamName" class="form-label">Team Name</label>
-                    <input type="text" id="teamName" name="teamName" class="form-control" placeholder="Enter your team name" required>
-                </div>
-                <div class="mb-3">
-                    <label for="psId" class="form-label">Problem Statement</label>
-                    <div class="d-flex">
-                        <select id="psId" name="psId" class="form-select me-2" required>
-                            <option value="" disabled selected>Select Problem Statement</option>
-                            <option value="PS1">Problem Statement 1</option>
-                            <option value="PS2">Problem Statement 2</option>
-                            <option value="PS3">Problem Statement 3</option>
-                        </select>
-                        <a href="problemStatements.php" target="_blank" class="btn btn-link">View PS Page</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <form action="submitRegistration.php" method="POST" enctype="multipart/form-data">
+            <div class="container-two">
+                <!-- Team Leader Details Section -->
+                <div class="direction">
 
-        <!-- Team Leader Details Section -->
-        <div class="card shadow mb-4">
-            <div class="card-header bg-success text-white">
-                <h4 class="mb-0">Team Leader Details</h4>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="leaderName" class="form-label">Team Leader Name</label>
-                        <input type="text" id="leaderName" name="leaderName" class="form-control" placeholder="Enter leader's name" required>
+                    <div class="boxF">
+                        <div class="head-div">
+                            <h4 class="head-title">Team Leader Details</h4>
+                        </div>
+                        <div class="box-body">
+
+                            <div class="inputBox">
+                                <input type="text" id="leaderName" name="leaderName" required>
+                                <span>Enter leader's name</span>
+
+                                <div class="verify-btn-div">
+
+                                    <input type="email" id="leaderEmail" name="leaderEmail" required>
+                                    <span>Enter leader's email</span>
+                                    <div class="verify-btn">
+                                        <button type="button">Verify</button>
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <input type="tel" id="leaderMobile" name="leaderMobile" required>
+                                    <span>Enter mobile number</span>
+                                </div>
+
+                            </div>
+
+
+                        </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="leaderEmail" class="form-label">Team Leader Email</label>
-                        <div class="input-group">
-                            <input type="email" id="leaderEmail" name="leaderEmail" class="form-control" placeholder="Enter leader's email" required>
-                            <button type="button" class="btn btn-outline-success">Verify</button>
+
+                    <!-- Team Details Section -->
+                    <div class="box">
+                        <div class="head-div">
+                            <h4 class="head-title">Team Details</h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="inputBox">
+                                <input type="text" name="" value="" required>
+                                <span>Enter your Team name</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="psId" class="form-label">Problem Statement</label>
+                                <div class="d-flex">
+                                    <select id="psId" name="psId" class="form-select me-2" required>
+                                        <option value="" disabled selected>Select Problem Statement</option>
+                                        <option value="PS1">Problem Statement 1</option>
+                                        <option value="PS2">Problem Statement 2</option>
+                                        <option value="PS3">Problem Statement 3</option>
+                                    </select>
+                                    <div class="prob-btn">
+                                        <a href="problemStatements.php"><button type="button">Problems</button></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <div>
 
-                        <label for="leaderMobile" class="form-label">Team Leader Mobile No</label>
-                        <input type="tel" id="leaderMobile" name="leaderMobile" class="form-control" placeholder="Enter mobile number" required>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
 
-        <!-- Mentor Details Section -->
-        <div class="card shadow mb-4">
-            <div class="card-header bg-warning text-dark">
-                <h4 class="mb-0">Mentor Details (Optional)</h4>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="mentorName" class="form-label">Mentor Name</label>
-                    <input type="text" id="mentorName" name="mentorName" class="form-control" placeholder="Enter mentor name">
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="mentorMobile" class="form-label">Mobile No</label>
-                        <input type="tel" id="mentorMobile" name="mentorMobile" class="form-control" placeholder="Enter mobile number">
+                <!-- Mentor Details Section -->
+                <div class="box">
+                    <div class="head-div">
+                        <h4 class="head-title">Mentor Details (Optional)</h4>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="mentorEmail" class="form-label">Email</label>
-                        <input type="email" id="mentorEmail" name="mentorEmail" class="form-control" placeholder="Enter email">
+                    <div class="box-body">
+                        <div class="inputBox">
+                            <input type="text" id="mentorName" name="mentorName" placeholder="(Optional)">
+                            <span>Enter mentor name</span>
+                        </div>
+                        <div class="inputBox">
+                            <div class="">
+                                <input type="tel" id="mentorMobile" name="mentorMobile" placeholder="(Optional)">
+                                <span>Enter mobile number</span>
+                            </div>
+                            <div class="">
+                                <input type="email" id="mentorEmail" name="mentorEmail" placeholder="(Optional)">
+                                <span>Enter email</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Member Details Section -->
-        <div class="card shadow mb-4">
-            <div class="card-header bg-info text-white">
-                <h4 class="mb-0">Member Details</h4>
-            </div>
-            <div class="card-body">
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <label for="member1" class="form-label">Member Name</label>
-                        <input type="text" id="member1" name="memberName" class="form-control" placeholder="Enter member name" required>
+                <!-- Member Details Section -->
+                <div class="box">
+                    <div class="head-div">
+                        <h4 class="head-title">Member Details</h4>
                     </div>
-                    <div class="col-md-4">
-                        <label for="memberMobile1" class="form-label">Mobile No</label>
-                        <input type="tel" id="memberMobile1" name="memberMobile" class="form-control" placeholder="Enter mobile number" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="memberEmail1" class="form-label">Email</label>
-                        <input type="email" id="memberEmail1" name="memberEmail" class="form-control" placeholder="Enter email" required>
+                    <div class="box-body">
+                        <div class="inputBox">
+                            <input type="text" id="member1" name="memberName" required>
+                            <span>Enter member name</span>
+                        </div>
+                        <div class="inputBox">
+                            <input type="tel" id="memberMobile1" name="memberMobile" required>
+                            <span>Enter mobile number</span>
+                        </div>
+                        <div class="inputBox">
+                            <input type="email" id="memberEmail1" name="memberEmail" required>
+                            <span>Enter email</span>
+                            <div class="add-btn">
+                                <button type="button">Add Member</button>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>sr no</th>
+                                    <th>member name</th>
+                                    <th>mobile number</th>
+                                    <th>member email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1</th>
+                                </tr>
+                                <tr>
+                                    <th>2</th>
+                                </tr>
+                                <tr>
+                                    <th>3</th>
+                                </tr>
+                                <tr>
+                                    <th>4</th>
+                                </tr>
+                                <tr>
+                                    <th>5</th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Payment Details Section -->
-        <div class="card shadow mb-4">
-            <div class="card-header bg-secondary text-white">
-                <h4 class="mb-0">Payment Details</h4>
-            </div>
-            <div class="card-body text-center">
-                <img src="https://myonlinevipani.com/wp-content/uploads/2023/05/PhonePe-My-Online-Vipani-large.png" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
-                <p>Scan the QR code to make the payment.</p>
-                <div class="mb-3">
-                    <label for="transactionId" class="form-label">Transaction ID</label>
-                    <input type="text" id="transactionId" name="transactionId" class="form-control" placeholder="Enter transaction ID" required>
-                </div>
-                <div class="mb-3">
-                    <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
-                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*" required>
-                </div>
-            </div>
-        </div>
+                <!-- Payment Details Section -->
+                <div class="boxL">
+                    <div class="head-div">
+                        <h4 class="head-title">Payment Details</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="inputBox">
+                            <div class="QR-code">
 
-        <!-- Submit Button -->
-        <div class="text-center">
-            <button type="submit" class="btn btn-success px-4">Register</button>
-        </div>
-    </form>
-</div>
+                                <img src="https://myonlinevipani.com/wp-content/uploads/2023/05/PhonePe-My-Online-Vipani-large.png" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
+                                <p>Scan the QR code to make the payment.</p>
+                            </div>
+                            <div class="payment-box">
+
+                                <div class="">
+                                    <label for="transactionId" class="form-label">Transaction ID</label>
+                                    <input type="text" id="transactionId" name="transactionId" required>
+                                    <span>Enter transaction ID</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
+                                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="register-btn">Register</button>
+            </div>
+        </form>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ppjTxyf5i0I8sOJ1PHqFCqVbF+3kexW8PaKhycVBKpoM5K2W0S3UCZT60GU4hR9A" crossorigin="anonymous"></script>
