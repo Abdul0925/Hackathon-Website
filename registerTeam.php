@@ -581,7 +581,7 @@
                         <div class="inputBox">
                             <div class="QR-code">
 
-                                <img src="https://myonlinevipani.com/wp-content/uploads/2023/05/PhonePe-My-Online-Vipani-large.png" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
+                                <img src="./picture//payment.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
                                 <p>Scan the QR code to make the payment.</p>
                             </div>
                             <div class="payment-box">
