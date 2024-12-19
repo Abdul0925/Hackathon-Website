@@ -25,6 +25,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             border-radius: 10px;
             margin: auto;
             width: 100%;
+            margin-top: 20px;
         }
 
         th,
@@ -44,6 +45,11 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             font-size: 13px;
         }
 
+        .table {
+            overflow-x: auto;
+
+        }
+
         textarea {
             width: 100%;
             /* Fixed width */
@@ -58,7 +64,6 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         .popup {
             border: 1px solid black;
             border-radius: 10px;
-            width: 60%;
             height: auto;
             background: white;
             position: absolute;
@@ -67,6 +72,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             transform: translate(-50%, -50%);
             padding: 0 30px 30px;
             visibility: hidden;
+            width: 60%;
         }
 
         .open-popup {
@@ -100,7 +106,13 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             /* color: white; */
         }
 
-        @media screen and (min-width: 400px) {
+        @media screen and (max-width: 400px) {
+            .popup {
+                width: 98%;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
             .popup {
                 width: 98%;
             }
@@ -108,7 +120,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
         .view-btn {
             color: white;
-            width: 100%;
+            width: 60px;
             height: 30px;
             background-color: rgb(47, 141, 70);
             border-radius: 5px;
@@ -127,32 +139,34 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         }
 
         .delete-btn {
+            background-color: rgb(200, 0, 0);
             color: white;
-            width: 100%;
+            width: 60px;
             height: 30px;
-            background-color: rgb(141, 50, 47);
             border-radius: 5px;
             border: none;
         }
 
         .delete-btn:hover {
-            background-color: rgb(91, 31, 31);
+            background-color: rgb(150, 0, 0);
             color: white;
         }
 
         .delete-btn:active {
             box-shadow: 2px 2px 5pxrgb(252, 77, 77);
-            background-color: rgb(181, 1, 1);
+            background-color: rgb(200, 0, 0);
             /* color: white; */
         }
 
         .report-container {
-            margin-top: 0px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            
         }
 
         .btn-primary {
             color: white;
-            width: 80px;
+            width: 100px;
             height: 40px;
             background-color: rgb(47, 141, 70);
             border-radius: 5px;
@@ -172,19 +186,28 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             background-color: rgb(47, 141, 70);
         }
 
-        .report-body .form-body .form-label {
-            /* display: flex; */
-            /* flex-direction: column; */
-            /* margin-bottom: 10px; */
+        .form-body {
+            padding-bottom: 10px;
         }
 
-        .report-body .form-body .form-control {
-            /* border-radius: 5px; */
-            /* width: 100%; */
-            /* height: 150px; */
-            /* padding-left: 10px; */
-            /* padding-top: 10px; */
+        .form-body .form-label {
+            font-weight: 500;
         }
+
+        .form-control {
+            padding-left: 5px;
+            width: 300px;
+            height: 40px;
+            margin-left: 5px;
+        }
+
+        .form-body select {
+            padding-left: 5px;
+            width: 120px;
+            height: 40px;
+            margin-left: 5px;
+        }
+
     </style>
 
 </head>
@@ -283,54 +306,53 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                         </div>
                         <div class="form-body">
                             <label for="psDescription" class="form-label">Description:</label>
-                            <textarea name="psDescription" id="psDescription" class="form-control" rows="4" placeholder="Type your description here..." required></textarea>
+                            <textarea name="psDescription" id="psDescription" style="padding: 5px 0px 0px 8px; overflow-y: auto;" rows="4" placeholder="Type your description here..." required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
-            <!-- </div> -->
-
+                <!-- </div> -->
+            </div>
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">Problems</h1>
                 </div>
 
                 <!-- <div class="report-body"> -->
-                    <!-- top hedding -->
-                    <div class="table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Sr No</th>
-                                    <th scope="col">PS ID</th>
-                                    <th scope="col">PS Name</th>
-                                    <th scope="col">PS Category</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
+                <!-- top hedding -->
+                <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Sr No</th>
+                                <th scope="col">PS ID</th>
+                                <th scope="col">PS Name</th>
+                                <th scope="col">PS Category</th>
+                                <th scope="col">View</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
 
-                                // SQL query to fetch all records from the problem_statements table
-                                $sql = "SELECT * FROM problem_statements"; // Assuming your table name is 'ps_data'
-                                $result = $conn->query($sql);
+                            // SQL query to fetch all records from the problem_statements table
+                            $sql = "SELECT * FROM problem_statements"; // Assuming your table name is 'ps_data'
+                            $result = $conn->query($sql);
 
-                                if ($result->num_rows > 0) {
-                                    $sr_no = 1;
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo "<td>" . $sr_no . "</td>";
-                                        echo "<td>" . $row['ps_id'] . "</td>";
-                                        echo "<td>" . $row['ps_name'] . "</td>";
-                                        echo "<td>" . $row['ps_category'] . "</td>";
-                                        echo '<td>
-                                                <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button>
-                                                <button class="delete-btn" onclick="deletePs(this)" data-id="' . $row['ps_id'] . '">Delete</button>
-                                            </td>';
-                                        echo "</tr>";
+                            if ($result->num_rows > 0) {
+                                $sr_no = 1;
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $sr_no . "</td>";
+                                    echo "<td>" . $row['ps_id'] . "</td>";
+                                    echo "<td>" . $row['ps_name'] . "</td>";
+                                    echo "<td>" . $row['ps_category'] . "</td>";
+                                    echo '<td> <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button> </td>';
+                                    echo '<td> <button class="delete-btn" onclick="deletePs(this)" data-id="' . $row['ps_id'] . '">Delete</button>';
+                                    echo "</tr>";
 
-                                        // Modal for each problem statement
-                                        echo '
+                                    // Modal for each problem statement
+                                    echo '
                                         <div class="popup" id="' . $row['ps_id'] . '" tabindex="-1">
                                             <div class="modal-header">
                                                 <h2 class="modal-title">Problem Statement Details</h2>
@@ -348,21 +370,21 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
                                             </div>
                                         </div>';
-                                        $sr_no++; // Increment the serial number
-                                    }
-                                } else {
-                                    echo "<tr><td colspan='5' class='text-center'>No problem statements found</td></tr>";
+                                    $sr_no++; // Increment the serial number
                                 }
+                            } else {
+                                echo "<tr><td colspan='5' class='text-center'>No problem statements found</td></tr>";
+                            }
 
-                                $conn->close();
+                            $conn->close();
 
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+
     </div>
 
     <script>

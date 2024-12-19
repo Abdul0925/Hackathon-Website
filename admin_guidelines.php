@@ -46,6 +46,8 @@ if ($_SESSION['admin_logged_in'] != true) {
             font-size: 13px;
         }
 
+
+
         .delete-btn {
             color: white;
             width: 100%;
@@ -100,6 +102,10 @@ if ($_SESSION['admin_logged_in'] != true) {
             height: 150px;
             padding-left: 10px;
             padding-top: 10px;
+        }
+
+        .report-container {
+            margin-top: 20px ;
         }
     </style>
 
