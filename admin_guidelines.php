@@ -50,21 +50,21 @@ if ($_SESSION['admin_logged_in'] != true) {
 
         .delete-btn {
             color: white;
-            width: 100%;
+            width: 80px;
             height: 30px;
-            background-color: rgb(141, 50, 47);
+            background-color: rgb(200, 0, 0);
             border-radius: 5px;
             border: none;
         }
 
         .delete-btn:hover {
-            background-color: rgb(91, 31, 31);
+            background-color: rgb(150, 0, 0);
             color: white;
         }
 
         .delete-btn:active {
             box-shadow: 2px 2px 5pxrgb(252, 77, 77);
-            background-color: rgb(181, 1, 1);
+            background-color: rgb(200, 0, 0);
             /* color: white; */
         }
 
@@ -211,9 +211,7 @@ if ($_SESSION['admin_logged_in'] != true) {
                                         echo "<tr>";
                                         echo "<td>" . $sr_no . "</td>";
                                         echo "<td>" . $row['guideline'] . "</td>";
-                                        echo '<td>
-                                                <button class="delete-btn" onclick="deleteGuide(this)" data-id="' . $row['id'] . '">Delete</button>
-                                            </td>';
+                                        echo '<td><button class="delete-btn" onclick="deleteGuide(this)" data-id="' . $row['id'] . '">Delete</button></td>';
                                         echo "</tr>";
 
                                         $sr_no++; // Increment the serial number
