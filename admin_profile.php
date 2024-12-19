@@ -67,52 +67,33 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
             color: #5500cb;
         }
 
-        .my-primary-btn {
+        .primary-btn {
             background-color: rgb(220, 0, 0);
             color: white;
             width: 60px;
             height: 30px;
             border-radius: 5px;
             border: none;
-            margin-top: 25px;
-            
         }
 
-        .my-primary-btn:hover {
+        .primary-btn:hover {
             background-color: rgb(150, 0, 0);
             color: white;
         }
 
-        .my-primary-btn:active {
+        .primary-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(220, 0, 0);
-            /* color: white; */
+        }
+
+        .report-container {
+            margin-top: 20px;
         }
 
         @media screen and (max-width: 400px) {
             .popup {
                 width: 300px;
             }
-        }
-
-        .primary-btn {
-            color: white;
-            width: 100%;
-            height: 30px;
-            background-color: rgb(47, 141, 70);
-            border-radius: 5px;
-            border: none;
-        }
-
-        .primary-btn:hover {
-            background-color: rgb(31, 91, 46);
-            color: white;
-        }
-
-        .primary-btn:active {
-            box-shadow: 2px 2px 5px #fc894d;
-            background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
     </style>
 
@@ -208,11 +189,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
                                         <td><?php echo $admin['username'] ?></td>
                                         <td><?php echo $admin['password'] ?></td>
                                         <td><?php echo $admin['contact'] ?></td>
-                                        <td>
-                                            <!-- <form action="" method="POST" class="d-inline"> -->
-                                            <button class="primary-btn w-100 view-details-btn" onclick="" style="cursor: pointer;" data-id="<?php echo $admin['id']; ?>" disabled>Delete</button>
-                                            <!-- </form> -->
-                                        </td>
+                                        <td><button class="primary-btn w-100 view-details-btn" onclick="" style="cursor: pointer;" data-id="<?php echo $admin['id']; ?>" disabled>Delete</button></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
