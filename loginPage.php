@@ -203,13 +203,13 @@
         <form method="POST" action="loginProcess.php">
             <!-- Email -->
             <div class="inputBox">
-                <input type="email" name="email" id="email" value="admin@rjh" required>
+                <input type="email" name="email" id="email" value="" required>
                 <span>Enter your email</span>
             </div>
 
             <!-- Password -->
             <div class="inputBox">
-                <input type="password" name="password" id="password" value="pass" required>
+                <input type="password" name="password" id="password" value="" required>
                 <span>Enter your password</span>
             </div>
 
