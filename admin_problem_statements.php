@@ -288,14 +288,14 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
-            </div>
+            <!-- </div> -->
 
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">Problems</h1>
                 </div>
 
-                <div class="report-body">
+                <!-- <div class="report-body"> -->
                     <!-- top hedding -->
                     <div class="table">
                         <table>
