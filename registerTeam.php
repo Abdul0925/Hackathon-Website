@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+$_SESSION['isVerified'] = false;
+
+// echo $_SESSION['isVerified'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -306,6 +315,106 @@
             /* color: white; */
         }
 
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent black */
+            z-index: 999;
+            /* Ensures overlay is above all other elements */
+            display: none;
+            /* Initially hidden */
+        }
+
+        /* Modal Window */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            height: 30%;
+            transform: translate(-50%, -50%);
+            /* Center the modal */
+            background-color: #fff;
+            /* White background */
+            border-radius: 8px;
+            /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+            z-index: 1000;
+            /* Above the overlay */
+            width: 90%;
+            /* Responsive width */
+            max-width: 400px;
+            /* Max width for desktop */
+            padding: 20px;
+            /* Inner padding */
+            text-align: center;
+            /* Center the text */
+            font-family: Arial, sans-serif;
+            /* Font style */
+        }
+
+        /* Modal Header */
+        .modal h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #333;
+            /* Darker text color */
+        }
+
+        /* Modal Input */
+        .modal input[type="text"] {
+            width: 100%;
+            /* Full width */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            /* Light gray border */
+            border-radius: 4px;
+            /* Rounded corners */
+            font-size: 1rem;
+            box-sizing: border-box;
+            /* Ensures padding doesn't affect width */
+        }
+
+        /* Modal Buttons */
+        .modal button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            /* Smooth transition */
+        }
+
+        .modal button[type="button"]:first-of-type {
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+        }
+
+        .modal button[type="button"]:first-of-type:hover {
+            background-color: #45a049;
+            /* Darker green on hover */
+        }
+
+        .modal button[type="button"]:last-of-type {
+            background-color: #f44336;
+            /* Red */
+            color: white;
+        }
+
+        .modal button[type="button"]:last-of-type:hover {
+            background-color: #d32f2f;
+            /* Darker red on hover */
+        }
+
         @media screen and (max-width: 400px) {
             .boxL .box-body {
                 display: flex;
@@ -433,42 +542,11 @@
     <div class="container">
         <h1>Team Registration Form</h1>
 
-        <form action="submitRegistration.php" method="POST" enctype="multipart/form-data">
+        <!-- <form action="submitRegistration.php" method="POST" enctype="multipart/form-data"> -->
+        <form method="POST" action="register_form_process.php" id="mainForm">
             <div class="container-two">
                 <!-- Team Leader Details Section -->
                 <div class="direction">
-
-                    <div class="boxF">
-                        <div class="head-div">
-                            <h4 class="head-title">Team Leader Details</h4>
-                        </div>
-                        <div class="box-body">
-
-                            <div class="inputBox">
-                                <input type="text" id="leaderName" name="leaderName" required>
-                                <span>Enter leader's name</span>
-
-                                <div class="verify-btn-div">
-
-                                    <input type="email" id="leaderEmail" name="leaderEmail" required>
-                                    <span>Enter leader's email</span>
-                                    <div class="verify-btn">
-                                        <button type="button">Verify</button>
-                                    </div>
-
-                                </div>
-
-                                <div>
-                                    <input type="tel" id="leaderMobile" name="leaderMobile" required>
-                                    <span>Enter mobile number</span>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-                    </div>
-
                     <!-- Team Details Section -->
                     <div class="box">
                         <div class="head-div">
@@ -476,7 +554,7 @@
                         </div>
                         <div class="box-body">
                             <div class="inputBox">
-                                <input type="text" name="" value="" required>
+                                <input type="text" name="teamName" value="" required>
                                 <span>Enter your Team name</span>
                             </div>
                             <div class="mb-3">
@@ -484,9 +562,9 @@
                                 <div class="d-flex">
                                     <select id="psId" name="psId" class="form-select me-2" required>
                                         <option value="" disabled selected>Select Problem Statement</option>
-                                        <option value="PS1">Problem Statement 1</option>
-                                        <option value="PS2">Problem Statement 2</option>
-                                        <option value="PS3">Problem Statement 3</option>
+                                        <option value="rth01">RTH01</option>
+                                        <option value="rth02">RTH02</option>
+                                        <option value="rth03">RTH03</option>
                                     </select>
                                     <div class="prob-btn">
                                         <a href="problemStatements.php"><button type="button">Problems</button></a>
@@ -496,6 +574,55 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="boxF">
+                    <div class="head-div">
+                        <h4 class="head-title">Team Leader Details</h4>
+                    </div>
+                    <div class="box-body">
+
+                        <div class="inputBox">
+                            <input type="text" id="leaderName" name="leaderName" required>
+                            <span>Enter leader's name</span>
+
+                            <div class="verify-btn-div">
+
+                                <input type="email" id="leaderEmail" name="leaderEmail" required>
+                                <span>Enter leader's email</span>
+                                <div class="verify-btn">
+                                    <button
+                                        type="button"
+                                        onclick="openOtpModal()"
+                                        id="verify-otp"
+                                        >
+                                        Verify
+                                    </button>
+
+                                </div>
+                                <!-- <span id="verification-status" style="color: green; display: none;">Verified</span> -->
+                            </div>
+
+                            <div>
+                                <input type="tel" id="leaderMobile" name="leaderMobile" required>
+                                <span>Enter mobile number</span>
+                            </div>
+
+                            <div>
+                                <label for="leaderGender" class="form-label">Leader Gender: </label>
+                                <select class="form-select me-2" name="leaderGender" id="leaderGender">
+                                    <option value="" selected disabled>Choose Only One Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
 
 
                 <!-- Mentor Details Section -->
@@ -607,9 +734,96 @@
             </div>
         </form>
     </div>
-
+    <!-- OTP Modal -->
+    <div class="modal-overlay" id="modal-overlay" style="display: none;"></div>
+    <div class="modal" id="otp-modal" style="display: none;">
+        <div>
+            <h2>Enter OTP</h2>
+            <input type="text" id="otp-input" placeholder="Enter OTP">
+            <button type="button" onclick="verifyOtp()">Submit</button>
+            <button type="button" onclick="closeOtpModal()">Cancel</button>
+        </div>
+    </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ppjTxyf5i0I8sOJ1PHqFCqVbF+3kexW8PaKhycVBKpoM5K2W0S3UCZT60GU4hR9A" crossorigin="anonymous"></script>
+
+    <script>
+        function openOtpModal() {
+            const email = document.getElementById('leaderEmail').value;
+
+            if (!email) {
+                alert('Please enter an email before verifying.');
+                return;
+            }
+
+            const otp = Math.floor(100000 + Math.random() * 900000);
+
+            fetch('send_otp.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `email=${encodeURIComponent(email)}&otp=${otp}`
+                })
+                .then(response => response.text())
+                .then(result => {
+                    console.log(result);
+                })
+                .catch(error => console.error('Error:', error));
+
+            // Show modal
+            document.getElementById('modal-overlay').style.display = 'block';
+            document.getElementById('otp-modal').style.display = 'block';
+
+            // Here you can send an OTP to the email entered by the user via an AJAX call to your server
+            // sessionStorage.setItem('otp', otp);
+            // console.log(`OTP sent to ${email}`);
+        }
+
+        function closeOtpModal() {
+            // Hide modal
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('otp-modal').style.display = 'none';
+        }
+
+        function verifyOtp() {
+            const enteredOtp = document.getElementById('otp-input').value;
+
+            // Send entered OTP to server for verification
+            fetch('verify_otp.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `otp=${enteredOtp}`,
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        // Hide modal and show verification status
+                        // closeOtpModal();
+                        // // const status = document.getElementById('verification-status');
+                        // const verifyOtp = document.getElementById('verify-otp');
+                        // // status.style.display = 'inline';
+                        // // status.textContent = 'Verified';
+                        // verifyOtp.disabled = true;
+                        // alert('Account Verified');
+                        closeOtpModal();
+                        const verifyOtp = document.getElementById('verify-otp');
+                        verifyOtp.disabled = true;
+                        verifyOtp.textContent = "Verified"; // Update button text
+                        alert('Account Verified');
+                    } else {
+                        alert('Incorrect OTP. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+
+
 </body>
 
 </html>
