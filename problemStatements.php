@@ -1,9 +1,6 @@
 <?php
 session_start();
-require "db.php";
-
-
-
+require 'db.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,152 +8,193 @@ require "db.php";
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin_dash_style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         body {
-            background-color: #f4f7f6;
+            background-color: #fff;
         }
 
-        /* Sidebar styles */
-        /* .sidebar {
-            background-color: #f8f9fa;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .sidebar a {
-            display: block;
-            padding: 10px 15px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .sidebar a.active,
-        .sidebar .nav-link:hover {
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-        }
-
-        .logoutBtn {
-            margin-bottom: 2rem;
-            position: absolute;
-            bottom: 0;
-            color: white;
-            width: 14em;
-        } */
-
-        /* Dashboard styles */
-        .listBtn {
-            border: none;
-            background-color: #f4f7f6;
-            display: none;
-        }
-
-        .backBtn {
-            display: none;
-        }
-
-        .dashboard-header {
+        table {
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: auto;
+            width: 100%;
             margin-top: 20px;
-            font-weight: bold;
-            font-size: 24px;
-            display: flex;
         }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
+        th,
+        td {
+            border: 1px solid rgb(200, 200, 200);
+            padding: 8px 30px;
+            text-align: center;
         }
 
-        .card-subtitle {
-            font-size: 14px;
-            color: yellow;
+        th {
+            text-transform: uppercase;
+            font-weight: 500;
+            border-color: black;
         }
 
-        .table th,
-        .table td {
-            vertical-align: middle;
+        td {
+            font-size: 13px;
         }
 
-        .badge-pending {
-            background-color: #ffc107;
+        .table {
+            overflow-x: auto;
+
         }
 
-        .badge-approved {
-            background-color: #28a745;
+        .popup {
+            border: 1px solid black;
+            border-radius: 10px;
+            height: auto;
+            background: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0 30px 30px;
+            visibility: hidden;
+            width: 60%;
         }
 
-        .badge-reject {
-            background-color: #dc3545;
+        .open-popup {
+            visibility: visible;
         }
 
-        /* For the profile picture and name */
-        .profile-section {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
+        .view-btn {
+            color: white;
+            width: 60px;
+            height: 30px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
+            border: none;
         }
 
-        .profile-section img {
-            border-radius: 50%;
-            width: 50px;
-            margin-right: 10px;
+        .view-btn:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
         }
 
-        .profile-section .name {
-            font-weight: bold;
+        .view-btn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                min-height: auto;
-                display: none;
-                z-index: 12;
-                background-color: white;
-                position: absolute;
+        .close-btn-div button {
+            background-color: rgb(200, 0, 0);
+            color: white;
+            width: 60px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            padding: 0px;
+            margin-top: 20px;
+        }
+
+        .close-btn-div button:hover {
+            background-color: rgb(150, 0, 0);
+            color: white;
+        }
+
+        .close-btn-div button:active {
+            box-shadow: 2px 2px 5pxrgb(252, 77, 77);
+            background-color: rgb(200, 0, 0);
+        }
+
+        .report-container {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border: 1px solid black;
+        }
+
+        .form-body {
+            padding-bottom: 10px;
+        }
+
+        .form-body .form-label {
+            font-weight: 500;
+        }
+
+        .form-control {
+            padding-left: 5px;
+            width: 300px;
+            height: 40px;
+            margin-left: 5px;
+        }
+
+        .form-body select {
+            padding-left: 5px;
+            width: 120px;
+            height: 40px;
+            margin-left: 5px;
+        }
+
+        .heading-font {
+            font-family: "Playwrite GB S", cursive;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .font-style-text {
+            font-family: "Oxanium", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .c-black {
+            color: black;
+        }
+
+        .my-primary-btn {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .popup-body p {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .popup-head h2 {
+            color: #5500cb;
+            border-bottom: 2px solid rgba(0, 20, 151, 0.59);
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            padding-left: 0px;
+        }
+
+        .popup-head {
+            padding: 10px 0px 10px 0px;
+        }
+
+        @media screen and (max-width: 400px) {
+            .popup {
+                width: 98%;
             }
-
-            .backBtn {
-                display: block;
-            }
-
-            .logoutBtn {
-                position: relative;
-            }
-
-            .listBtn {
-                display: flex;
-            }
-
-            /* Custom modal width for large screens */
-            .modal-lg {
-                max-width: 100%;
-                /* Customize the width as needed */
-            }
-
-            /* Ensure it stays responsive on small screens */
-
         }
 
-        @media (max-width: 576px) {
-            .modal-lg {
-                max-width: 100%;
-                /* For smaller devices, full width */
+        @media screen and (max-width: 600px) {
+            .popup {
+                width: 98%;
             }
         }
     </style>
+
 </head>
 
 <body>
 
-
-<nav class="navbar" style="background-color: #5C0F8B;">
+    <nav class="navbar" style="background-color: #5C0F8B;">
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
@@ -226,7 +264,7 @@ require "db.php";
                     <!-- Login/Register Button inside collapsible section -->
                     <div class="d-lg-none mt-2">
                         <!-- Hidden on larger screens, visible on mobile within collapsible area -->
-                        <a href="loginPage.php" class="btn btn-primary w-100 cmn-button">Login/Register</a>
+                        <a href="loginPage.php" class="btn my-primary-btn w-100 cmn-button">Login/Register</a>
                     </div>
                 </div>
 
@@ -236,31 +274,29 @@ require "db.php";
                 </div>
             </div>
         </nav>
-
     </div>
 
-    <!-- Main Content -->
-    
-    <div class="col-lg-10 col-md-9 col-sm-12">
-    <!-- Dashboard Header -->
-    <div class="dashboard-header">
-        <!-- Problem Statements -->
-    </div>
-    <div class="container mt-4">
-        <!-- Table Container -->
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
+    <div class="report-container">
+        <div class="report-header">
+            <h1 class="recent-Articles">Problems</h1>
+        </div>
+
+        <!-- <div class="report-body"> -->
+        <!-- top hedding -->
+        <div class="table">
+            <table>
+                <thead>
                     <tr>
                         <th scope="col">Sr No</th>
                         <th scope="col">PS ID</th>
                         <th scope="col">PS Name</th>
                         <th scope="col">PS Category</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">View</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
+
                     // SQL query to fetch all records from the problem_statements table
                     $sql = "SELECT * FROM problem_statements"; // Assuming your table name is 'ps_data'
                     $result = $conn->query($sql);
@@ -273,52 +309,123 @@ require "db.php";
                             echo "<td>" . $row['ps_id'] . "</td>";
                             echo "<td>" . $row['ps_name'] . "</td>";
                             echo "<td>" . $row['ps_category'] . "</td>";
-                            echo '<td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailsModal' . $row['ps_id'] . '">View</button></td>';
+                            echo '<td> <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button> </td>';
                             echo "</tr>";
 
                             // Modal for each problem statement
                             echo '
-                                    <div class="modal fade" id="detailsModal' . $row['ps_id'] . '" tabindex="-1" aria-labelledby="detailsModalLabel' . $row['ps_id'] . '" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="detailsModalLabel' . $row['ps_id'] . '">Problem Statement Details</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p><strong>PS ID:</strong> ' . $row['ps_id'] . '</p>
-                                                    <p><strong>Name:</strong> ' . $row['ps_name'] . '</p>
-                                                    <p><strong>Description:</strong> ' . $row['ps_description'] . '</p>
-                                                    <p><strong>Total Participation:</strong> ' . $row['no_of_participation'] . '</p>
-                                                    <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                </div>
+                                        <div class="popup" id="' . $row['ps_id'] . '" tabindex="-1">
+                                            <div class="popup-head">
+                                                <h2>Problem Statement Details</h2>
                                             </div>
-                                        </div>
-                                    </div>';
+                                            <div class="popup-body">
+                                                <p><strong>PS ID:</strong> ' . $row['ps_id'] . '</p>
+                                                <p><strong>Name:</strong> ' . $row['ps_name'] . '</p>
+                                                <p><strong>Description:</strong> ' . $row['ps_description'] . '</p>
+                                                <p><strong>Total Participation:</strong> ' . $row['no_of_participation'] . '</p>
+                                                <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>
+                                            </div>
+                                            <div class="close-btn-div">
+                                                
+                                                <button type="button" data-id="' . $row['ps_id'] . '" onclick="closePopup(this)">Close</button>
+
+                                            </div>
+                                        </div>';
                             $sr_no++; // Increment the serial number
                         }
                     } else {
                         echo "<tr><td colspan='5' class='text-center'>No problem statements found</td></tr>";
                     }
+
                     $conn->close();
+
                     ?>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
 
+    <script>
+        let menuicn = document.querySelector(".menuicn");
+        let nav = document.querySelector(".navcontainer");
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        menuicn.addEventListener("click", () => {
+            nav.classList.toggle("navclose");
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.getElementById('listBtn').addEventListener('click', () => {
+            if (document.getElementById("sidebar").style.display == 'block') {
+                document.getElementById("sidebar").style.display = 'none';
+            } else {
+                document.getElementById("sidebar").style.display = 'block';
+            }
+        })
 
+        document.getElementById('backBtn').addEventListener('click', () => {
+            if (document.getElementById("sidebar").style.display == 'block') {
+                document.getElementById("sidebar").style.display = 'none';
+            } else {
+                document.getElementById("sidebar").style.display = 'block';
+            }
+        })
 
-   
+        document.getElementById('myProfile').addEventListener('click', () => {
+            window.location.href = "myProfile.php";
+        })
+        // yahan pe jo si bhi id dalenga vo popup open honga
+        // let popup = document.getElementById("RJH01");
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        function openPopup(button) {
+            const dataId = button.getAttribute('data-id'); // Get the data-id value
+
+            const popup = document.getElementById(dataId); // Get the popup element by ID
+            if (popup) {
+                popup.classList.add("open-popup"); // Add the class to open the popup
+            } else {
+                console.error(`Popup with ID "${dataId}" not found`);
+            }
+        }
+
+        function closePopup(button) {
+            const dataId = button.getAttribute('data-id'); // Get the data-id value
+            const popup = document.getElementById(dataId); // Get the popup element by ID
+            popup.classList.remove("open-popup")
+        }
+
+        function deletePs(button) {
+            const psId = button.getAttribute("data-id");
+
+            if (confirm("Are you sure you want to delete this problem statement?")) {
+                fetch("delete_ps.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: `ps_id=${encodeURIComponent(psId)}`,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            alert(data.message);
+                            // Remove the row from the table
+                            const row = button.closest("tr");
+                            if (row) {
+                                row.remove();
+                            }
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("An error occurred while deleting the problem statement.");
+                    });
+            }
+        }
+    </script>
 </body>
 
 </html>

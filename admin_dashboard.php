@@ -86,7 +86,6 @@ $teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader 
         .my-primary-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(220, 0, 0);
-            /* color: white; */
         }
 
         @media screen and (max-width: 400px) {
@@ -112,7 +111,6 @@ $teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader 
         .primary-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
     </style>
 
@@ -188,11 +186,11 @@ $teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader 
 
                 <a href="admin_guidelines.php" class="box box2">
                     <!-- <div class="box box2"> -->
-                        <div class="text">
-                            <h2 class="topic-heading">Add</h2>
-                            <h2 class="topic">Guidelines</h2>
-                        </div>
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png" alt="likes">
+                    <div class="text">
+                        <h2 class="topic-heading">Add</h2>
+                        <h2 class="topic">Guidelines</h2>
+                    </div>
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png" alt="likes">
                     <!-- </div> -->
                 </a>
 
@@ -208,11 +206,11 @@ $teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader 
 
                 <a href="admin_result_announcement.php" class="box box4">
                     <!-- <div class="box box4"> -->
-                        <div class="text">
-                            <h2 class="topic-heading">Result</h2>
-                            <h2 class="topic">Announcement</h2>
-                        </div>
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
+                    <div class="text">
+                        <h2 class="topic-heading">Result</h2>
+                        <h2 class="topic">Announcement</h2>
+                    </div>
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
                     <!-- </div> -->
                 </a>
 
@@ -228,66 +226,56 @@ $teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader 
                     <!-- top hedding -->
                     <div class="table">
                         <table>
-                            <thead>
-                                <!-- <tr>
-                                    <th scope="col">Sr No</th>
-                                    <th scope="col">Team Name</th>
-                                    <th scope="col">Mentor</th>
-                                    <th scope="col">Action</th>
-                                </tr> -->
-                           
-                            
+                            <tr>
+                                <th scope="col">Sr No</th>
+                                <th scope="col">Team Name</th>
+                                <th scope="col">Mentor</th>
+                                <th scope="col">PS</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $srno = 0;
+                                while ($mentor = $teamName->fetch_assoc()) {
+                                    $srno++;
+                                    $team_name = $mentor['team_name'];
+                                    // $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members WHERE team_name = '$team_name'");
+                                    // $mentorEmail = $teamDetails->fetch_assoc();
+                                ?>
                                     <tr>
-
-                                        <th scope="col">Sr No</th>
-                                        <th scope="col">Team Name</th>
-                                        <th scope="col">Mentor</th>
-                                        <th scope="col">PS</th>
-                                        <th scope="col">Action</th>
+                                        <td><?php echo $srno ?></td>
+                                        <td><?php echo $mentor['team_name'] ?></td>
+                                        <td><?php echo $mentor['email'] ?></td>
+                                        <td><?php echo $mentor['ps'] ?></td>
+                                        <td>
+                                            <!-- <form action="" method="POST" class="d-inline"> -->
+                                            <input type="hidden" name="noti_id" value="<?php echo $mentorEmail['email']; ?>">
+                                            <button class="primary-btn w-100 view-details-btn" onclick="openPopup()" style="cursor: pointer;" data-id="<?php echo $mentor['team_id']; ?>">View</button>
+                                            <!-- </form> -->
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $srno = 0;
-                                    while ($mentor = $teamName->fetch_assoc()) {
-                                        $srno++;
-                                        $team_name = $mentor['team_name'];
-                                        // $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members WHERE team_name = '$team_name'");
-                                        // $mentorEmail = $teamDetails->fetch_assoc();
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $srno ?></td>
-                                            <td><?php echo $mentor['team_name'] ?></td>
-                                            <td><?php echo $mentor['email'] ?></td>
-                                            <td><?php echo $mentor['ps'] ?></td>
-                                            <td>
-                                                <!-- <form action="" method="POST" class="d-inline"> -->
-                                                <input type="hidden" name="noti_id" value="<?php echo $mentorEmail['email']; ?>">
-                                                <button class="primary-btn w-100 view-details-btn" onclick="openPopup()" style="cursor: pointer;" data-id="<?php echo $mentor['team_id']; ?>">View</button>
-                                                <!-- </form> -->
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
+            </div>
 
-                <div class="popup" id="popup" tabindex="-1">
-                    <div class="modal-header">
-                        <h2>Team Details</h2>
-                    </div>
-                    <div class="modal-body" id="modalBody">
-                        <div id="student-details"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="my-primary-btn" onclick="closePopup()" data-bs-dismiss="modal">Close</button>
-                    </div>
+            <div class="popup" id="popup" tabindex="-1">
+                <div class="modal-header">
+                    <h2>Team Details</h2>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <div id="student-details"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="my-primary-btn" onclick="closePopup()" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script>

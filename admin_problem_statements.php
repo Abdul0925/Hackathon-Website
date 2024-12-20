@@ -81,8 +81,10 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
         .modal-header h2 {
             padding-top: 25px;
+            padding-bottom: 10px;
             margin-bottom: 20px;
             color: #5500cb;
+            border-bottom: 2px solid rgba(0, 20, 151, 0.59);
         }
 
         .close-btn {
