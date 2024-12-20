@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+if (!isset($_SESSION['members'])) {
+    $_SESSION['members'] = [];
+}
 $_SESSION['isVerified'] = false;
 
 // echo $_SESSION['isVerified'];
@@ -593,8 +596,7 @@ $_SESSION['isVerified'] = false;
                                     <button
                                         type="button"
                                         onclick="openOtpModal()"
-                                        id="verify-otp"
-                                        >
+                                        id="verify-otp">
                                         Verify
                                     </button>
 
@@ -653,49 +655,55 @@ $_SESSION['isVerified'] = false;
                     <div class="head-div">
                         <h4 class="head-title">Member Details</h4>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body" id="add_member_form">
                         <div class="inputBox">
-                            <input type="text" id="member1" name="memberName" required>
+                            <input type="text" id="memberName" name="memberName" >
                             <span>Enter member name</span>
                         </div>
                         <div class="inputBox">
-                            <input type="tel" id="memberMobile1" name="memberMobile" required>
+                            <input type="tel" id="memberMobile" name="memberMobile" >
                             <span>Enter mobile number</span>
                         </div>
                         <div class="inputBox">
-                            <input type="email" id="memberEmail1" name="memberEmail" required>
+                            <input type="email" id="memberEmail" name="memberEmail" >
                             <span>Enter email</span>
-                            <div class="add-btn">
-                                <button type="button">Add Member</button>
-                            </div>
+                        </div>
+                        <div class="inputBox">
+                            <label for="gender">Gender:</label>
+                            <select id="gender" name="gender" >
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="add-btn">
+                            <button type="button" name="add_member" onclick="submitAddMemberForm()">Add Member</button>
                         </div>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>sr no</th>
-                                    <th>member name</th>
-                                    <th>mobile number</th>
-                                    <th>member email</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Gender</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                </tr>
-                                <tr>
-                                    <th>3</th>
-                                </tr>
-                                <tr>
-                                    <th>4</th>
-                                </tr>
-                                <tr>
-                                    <th>5</th>
-                                </tr>
+                                <?php foreach ($_SESSION['members'] as $index => $member): ?>
+                                    <tr data-id="<?php echo $index; ?>">
+                                        <td><?php echo $member['name']; ?></td>
+                                        <td><?php echo $member['email']; ?></td>
+                                        <td><?php echo $member['mobile']; ?></td>
+                                        <td><?php echo $member['gender']; ?></td>
+                                        <td>
+                                            <button type="button" onclick="openEditModal(<?php echo $index; ?>)">Edit</button>
+                                            <button type="button" onclick="deleteMember(<?php echo $index; ?>)">Delete</button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <!-- <div id="member-list"></div>  -->
                     </div>
                 </div>
 
@@ -734,6 +742,25 @@ $_SESSION['isVerified'] = false;
             </div>
         </form>
     </div>
+    <?php foreach ($_SESSION['members'] as $index => $member): ?>
+        <tr>
+            <td><?php echo $member['name']; ?></td>
+            <td><?php echo $member['email']; ?></td>
+            <td><?php echo $member['mobile']; ?></td>
+            <td><?php echo $member['gender']; ?></td>
+            <td>
+                <!-- <form method="POST" style="display: inline;">
+                            <input type="hidden" name="index" value="<?php //echo $index; 
+                                                                        ?>">
+                            <button type="button" onclick="openEditModal(<?php //echo $index; 
+                                                                            ?>)">Edit</button>
+                        </form> -->
+                <button type="button" onclick="openEditModal(<?php echo $index; ?>)">Edit</button>
+                <button type="button" onclick="deleteMember(<?php echo $index; ?>)">Delete</button>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+
     <!-- OTP Modal -->
     <div class="modal-overlay" id="modal-overlay" style="display: none;"></div>
     <div class="modal" id="otp-modal" style="display: none;">
@@ -744,10 +771,45 @@ $_SESSION['isVerified'] = false;
             <button type="button" onclick="closeOtpModal()">Cancel</button>
         </div>
     </div>
+
+    <!-- Modal for editing members -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal" id="edit-modal">
+        <form id="edit-member-form">
+            <input type="hidden" id="edit-index" name="index">
+            <label for="edit-name">Name:</label>
+            <input type="text" id="edit-name" name="name" required>
+
+            <label for="edit-email">Email:</label>
+            <input type="email" id="edit-email" name="email" required>
+
+            <label for="edit-mobile">Mobile:</label>
+            <input type="text" id="edit-mobile" name="mobile" required>
+
+            <label for="edit-gender">Gender:</label>
+            <select id="edit-gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <button type="submit" name="edit_member">Save</button>
+            <button type="button" onclick="closeEditModal()">Cancel</button>
+        </form>
+    </div>
+
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ppjTxyf5i0I8sOJ1PHqFCqVbF+3kexW8PaKhycVBKpoM5K2W0S3UCZT60GU4hR9A" crossorigin="anonymous"></script>
 
     <script>
+        const members = [];
+
+        function getMemberDetails(index) {
+            const member = members[index];
+            console.log(member);
+            return member;
+        }
+
         function openOtpModal() {
             const email = document.getElementById('leaderEmail').value;
 
@@ -820,6 +882,154 @@ $_SESSION['isVerified'] = false;
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        }
+
+        function openEditModal(index) {
+            console.log(index)
+            const modal = document.getElementById('edit-modal');
+            const overlay = document.getElementById('modal-overlay');
+
+            const member = (getMemberDetails(index))?getMemberDetails(index):<?php echo json_encode($_SESSION['members']); ?>[index];
+            console.log(member);
+            document.getElementById('edit-index').value = index;
+            document.getElementById('edit-name').value = member.name;
+            document.getElementById('edit-email').value = member.email;
+            document.getElementById('edit-mobile').value = member.mobile;
+            document.getElementById('edit-gender').value = member.gender;
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+            modal.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        document.getElementById('edit-member-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission (page reload)
+
+            const formData = new FormData(this); // Create a FormData object
+
+            fetch('register_edit_member.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json()) // Parse JSON response
+                .then(result => {
+                    if (result.success) {
+                        alert('Member updated successfully!');
+                        closeEditModal();
+                        // Optionally refresh the UI to reflect changes
+                        location.reload(); // Uncomment to reload page
+                    } else {
+                        alert('Failed to update member: ' + result.error);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+
+        function closeEditModal() {
+            const modal = document.getElementById('edit-modal');
+            const overlay = document.getElementById('modal-overlay');
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function submitAddMemberForm() {
+            // const form = document.getElementById('mainForm');
+            // form.action = 'register_add_member.php';
+            // form.submit();
+            const name = document.getElementById('memberName').value;
+            const mobile = document.getElementById('memberMobile').value;
+            const email = document.getElementById('memberEmail').value;
+            const gender = document.getElementById('gender').value;
+
+            // Validate inputs (optional)
+            if (!name || !mobile || !email) {
+                alert("All fields are required.");
+                return;
+            }
+
+            // Prepare data to send
+            const data = new FormData();
+            data.append('name', name);
+            data.append('mobile', mobile);
+            data.append('email', email);
+            data.append('gender', gender);
+            console.log(data);
+            fetch('register_add_member.php', {
+                    method: 'POST',
+                    body: data,
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        members.push(result.member);
+                        // Dynamically append the new member row to the table
+
+                        const tableBody = document.querySelector('.table tbody');
+                        const newRow = document.createElement('tr');
+                        newRow.innerHTML = `
+                        <td>${result.member.name}</td>
+                            <td>${result.member.email}</td>
+                            <td>${result.member.mobile}</td>
+                            <td>${result.member.gender || '-'}</td>
+                            <td>
+                                <button type="button" onclick="openEditModal(${result.index})">Edit</button>
+                                <button type="button" onclick="deleteMember(${result.index})">Delete</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(newRow);
+                        // Append member to the list dynamically
+                        // const memberList = document.getElementById('member-list');
+                        // const memberDiv = document.createElement('div');
+                        // memberDiv.textContent = `Name: ${result.member.name}, Mobile: ${result.member.mobile}, Email: ${result.member.email}`;
+                        // memberList.appendChild(memberDiv);
+
+                        // Clear input fields
+                        document.getElementById('memberName').value = '';
+                        document.getElementById('memberMobile').value = '';
+                        document.getElementById('memberEmail').value = '';
+                    } else {
+                        alert(result.error || "Failed to add member.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function deleteMember(index) {
+            console.log(index);
+            if (confirm("Are you sure you want to delete this member?")) {
+                // Use AJAX to send the deletion request to the server
+                fetch('register_delete_member.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `index=${index}&delete_member=true`
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            // console.log(result);
+
+                            console.log('Member deleted successfully.');
+                            const table = document.querySelector('.table tbody');
+                            const row = table.rows[index]; // Get the corresponding row by index
+                            if (row) {
+                                row.remove();
+                            }
+                            // Optionally refresh the member list or remove the deleted row
+                            // location.reload(); // Reload the page to update the list
+                        } else {
+                            console.error('Error:', result.error);
+                            alert('Failed to delete member: ' + (result.error || 'Unknown error.'));
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
         }
     </script>
 
