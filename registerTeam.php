@@ -729,7 +729,7 @@ $_SESSION['isVerified'] = true;
                                 </div>
                                 <div class="mb-3">
                                     <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
-                                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*" >
+                                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*">
                                 </div>
                             </div>
                         </div>
@@ -1053,16 +1053,16 @@ $_SESSION['isVerified'] = true;
             console.log("test4");
             console.log(formData);
             console.log("test5");
-            
+
             formData.append('leaderName', document.getElementById('leaderName').value);
             formData.append('leaderEmail', document.getElementById('leaderEmail').value);
             formData.append('leaderMobile', document.getElementById('leaderMobile').value);
             formData.append('leaderGender', document.getElementById('leaderGender').value);
-            
+
             console.log("test6");
             formData.append('transactionId', document.getElementById('transactionId').value);
             formData.append('paymentScreenshot', document.getElementById('paymentScreenshot').files[0]); // Assuming this is a file input
-            
+
             console.log("test7");
             // Get the members from the session (assuming they're in a variable already)
             const members = (getMemberDetails()) ? getMemberDetails() : <?php echo json_encode($_SESSION['members']); ?>;
@@ -1079,8 +1079,8 @@ $_SESSION['isVerified'] = true;
                 .then(response => response.json())
                 .then(result => {
                     if (result.success) {
-                        alert(result.message); // You can show a success message
-                        console.log(result.data); // You can log the data received for debugging
+                        console.log(result.memberEmail); // You can log the data received for debugging
+                        alert(result.name + ' is ' +result.message); // You can show a success message
                     } else {
                         alert('Failed to submit form: ' + result.message);
                     }

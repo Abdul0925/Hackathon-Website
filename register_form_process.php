@@ -18,9 +18,9 @@ function randomPassword()
 function checkAlreadyAMember($memberEmail)
 {
     require "db.php";
+    // return 1;
     // Prepare the SQL query to check for the email
     $checkMemberEmail = "SELECT COUNT(*) AS count FROM leader_and_member_details WHERE memberEmail = ?";
-
     // Initialize a prepared statement
     if ($memberEmailStmt = $conn->prepare($checkMemberEmail)) {
         // Bind the email parameter to the query
@@ -35,31 +35,65 @@ function checkAlreadyAMember($memberEmail)
 
         // Check if the count is greater than 0
         if ($memberEmailrow['count'] > 0) {
+
             return true; // Email exists
         } else {
             return false; // Email does not exist
         }
     } else {
         // Handle query preparation failure
+        return false;
         die("Query preparation failed: " . $conn->error);
     }
+
 
     // Close the statement and connection
     $stmt->close();
     $conn->close();
 }
 
+function addMemberToDatabase($leaderEmail, $memberName, $memberMobile, $memberEmail, $memberGender, $teamName, $psId)
+{
+    require "db.php"; // Ensure this file contains valid `$conn` setup
+    $team_id = 0;
+    $is_leader = 0;
+
+    $insertMemberQuery = "INSERT INTO leader_and_member_details 
+        (team_id, leaderEmail, memberName, memberMobile, memberEmail, memberGender, teamName, psId, is_leader) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    // Prepare the SQL statement
+    if ($stmt = $conn->prepare($insertMemberQuery)) {
+
+        $stmt->bind_param("isssssssi", $team_id, $leaderEmail, $memberName, $memberMobile, $memberEmail, $memberGender, $teamName, $psId, $is_leader);
+
+        if ($stmt->execute()) {
+
+            return 1;
+        } else {
+
+
+            return 0;
+        }
+    } else {
+
+        return 0;
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verification Status
     $isVerified = $_SESSION['isVerified'] ?? false;
-    if ($isVerified) {
+
+    if (!$isVerified) {
         echo json_encode([
             'success' => true,
             'message' => 'Please Verify Email Before Submitting!',
         ]);
         return;
     }
+
 
     // Team Details
     $teamName = $_POST['teamName'];
@@ -83,43 +117,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $memberEmail = $member['email'] ?? 'N/A';
         $memberMobile = $member['mobile'] ?? 'N/A';
         $memberGender = $member['gender'] ?? 'N/A';
+
         $alreadyAMember = checkAlreadyAMember($memberEmail);
-        if($alreadyAMember){
+
+        if ($alreadyAMember) {
             echo json_encode([
-                'success' => false,
-                'message' => 'Team Member Already Exist',
-                'memberEmail' => $memberEmail,
+                'success' => true,
+                'message' => 'Already Exist in any team',
+                'name' => $memberName,
             ]);
-            
-        }
-        else{
-            echo json_encode([
-                'success' => false,
-                'message' => 'Team Member Added',
-                'memberEmail' => $memberEmail,
-            ]);
+            return;
+        } else {
+            $isSuccess = addMemberToDatabase($leaderEmail, $memberName, $memberMobile, $memberEmail, $memberGender, $teamName, $psId);
+            if (!$isSuccess) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Error Adding Member',
+                    'name' => $memberName,
+                ]);
+                return;
+            }
         }
     }
+
+    echo json_encode([
+        'success' => true,
+        'message' => 'All Members Added Successfully',
+    ]);
+    return;
+
 
     // // Payment Details
     // $transactionId = $_POST['transactionId'];
     // $paymentScreenshot = $_POST['paymentScreenshot'];
 
 
-    // echo "Team Details: ";
-    // echo $_POST['teamName'];
-    // echo "<br>";
-    // echo $_POST['psId'];
-    // echo "<br>Leader Details: ";
-    // echo $_POST['leaderName'];
-    // echo "<br>";
-    // echo $_POST['leaderEmail'];
-    // echo "<br>";
-    // echo $_POST['leaderMobile'];
-    // echo "<br>";
-    // echo $_POST['leaderGender'];
-    // echo "<br>Member Details: <pre>";
-    // print_r($_SESSION['members']);
+   
     // echo "</pre><br>Payment Details: ";
     // echo $_POST['transactionId'];
     // echo "<br>";
@@ -128,5 +161,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // echo $_SESSION['isVerified'] ? "true" : "false";
 } else {
     // Handle if the request method is not POST
-    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.', 'error' => 'Error Ocuured']);
 }
