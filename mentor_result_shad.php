@@ -179,6 +179,11 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         .nav-option1 i {
             color: #fff;
         }
+
+        .box-container {
+            display: block;
+            margin: 0px 0px 40px 30px;
+        }
     </style>
 
 </head>
@@ -266,8 +271,20 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         </div>
 
         <div class="main">
+            <div class="box-container">
+                <div class="box box1">
+                    <div class="text">
+                        <h2 class="topic-heading">Result</h2>
+                        <h2 class="topic">No Results is announced yet</h2>
+                    </div>
+                    <!-- <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png" alt="Views"> -->
+                </div>
+            </div>
+            <div class="report-container">
 
-            
+            </div>
+
+
 
 
         </div>

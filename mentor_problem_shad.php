@@ -10,7 +10,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -21,6 +21,10 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            overflow-y: hidden;
+        }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -65,6 +69,15 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             visibility: visible;
         }
 
+        .modal-header {
+            display: block;
+        }
+
+        .modal-body p {
+            margin-bottom: 0px;
+            padding: 0px 0px 5px 10px;
+        }
+
         .modal-header h2 {
             padding-top: 25px;
             padding-bottom: 10px;
@@ -73,22 +86,28 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             border-bottom: 2px solid rgba(0, 20, 151, 0.59);
         }
 
-        .close-btn {
+        .modal-footer {
+            display: block;
+        }
+
+        .modal-footer button {
             background-color: rgb(220, 0, 0);
             color: white;
             width: 60px;
             height: 30px;
             border-radius: 5px;
             border: none;
-            margin-top: 25px;
+            margin: 20px 0px 10px 8px;
+            padding: 0px;
+            font-size: 90%;
         }
 
-        .close-btn:hover {
+        .modal-footer button:hover {
             background-color: rgb(150, 0, 0);
             color: white;
         }
 
-        .close-btn:active {
+        .modal-footer button:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(220, 0, 0);
             /* color: white; */
@@ -254,7 +273,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
 </head>
 
-<body>
+<body> 
     <!-- for header part -->
     <header>
 
@@ -352,8 +371,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                 <th scope="col">PS ID</th>
                                 <th scope="col">PS Name</th>
                                 <th scope="col">PS Category</th>
-                                <th scope="col">View</th>
-                                <th scope="col">Delete</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -372,7 +390,6 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                     echo "<td>" . $row['ps_name'] . "</td>";
                                     echo "<td>" . $row['ps_category'] . "</td>";
                                     echo '<td> <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button> </td>';
-                                    echo '<td> <button class="delete-btn" onclick="deletePs(this)" data-id="' . $row['ps_id'] . '">Delete</button>';
                                     echo "</tr>";
 
                                     // Modal for each problem statement
@@ -389,9 +406,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                                 <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>
                                             </div>
                                             <div class="modal-footer">
-                                                
-                                                <button type="button" class="close-btn" data-id="' . $row['ps_id'] . '" onclick="closePopup(this)">Close</button>
-
+                                                <button type="button" data-id="' . $row['ps_id'] . '" onclick="closePopup(this)">Close</button>
                                             </div>
                                         </div>';
                                     $sr_no++; // Increment the serial number
@@ -437,37 +452,6 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                 const dataId = button.getAttribute('data-id'); // Get the data-id value
                 const popup = document.getElementById(dataId); // Get the popup element by ID
                 popup.classList.remove("open-popup")
-            }
-
-            function deletePs(button) {
-                const psId = button.getAttribute("data-id");
-
-                if (confirm("Are you sure you want to delete this problem statement?")) {
-                    fetch("delete_ps.php", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/x-www-form-urlencoded",
-                            },
-                            body: `ps_id=${encodeURIComponent(psId)}`,
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.status === "success") {
-                                alert(data.message);
-                                // Remove the row from the table
-                                const row = button.closest("tr");
-                                if (row) {
-                                    row.remove();
-                                }
-                            } else {
-                                alert(data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Error:", error);
-                            alert("An error occurred while deleting the problem statement.");
-                        });
-                }
             }
         </script>
 
