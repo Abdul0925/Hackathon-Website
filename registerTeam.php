@@ -5,7 +5,7 @@ if (!isset($_SESSION['members'])) {
     $_SESSION['members'] = [];
 }
 $_SESSION['isVerified'] = false;
-
+// $_SESSION['members'] = [];
 // echo $_SESSION['isVerified'];
 ?>
 
@@ -933,7 +933,18 @@ $_SESSION['isVerified'] = false;
                         alert('Member updated successfully!');
                         closeEditModal();
                         // Optionally refresh the UI to reflect changes
-                        location.reload(); // Uncomment to reload page
+                        // location.reload(); // Uncomment to reload page
+                        // Update the UI dynamically without refreshing
+                        const index = formData.get('index');
+                        console.log(index);
+                        const row = document.querySelector(`tr[data-id="${index}"]`);
+                        console.log(row);
+                        if (row) {
+                            row.children[0].textContent = result.name;
+                            row.children[1].textContent = formData.get('email');
+                            row.children[2].textContent = formData.get('mobile');
+                            row.children[3].textContent = formData.get('gender');
+                        }
                     } else {
                         alert('Failed to update member: ' + result.error);
                     }
@@ -985,6 +996,7 @@ $_SESSION['isVerified'] = false;
 
                         const tableBody = document.querySelector('.table tbody');
                         const newRow = document.createElement('tr');
+                        newRow.setAttribute('data-id', result.member.id || members.length - 1);
                         newRow.innerHTML = `
                         <td>${result.member.name}</td>
                             <td>${result.member.email}</td>

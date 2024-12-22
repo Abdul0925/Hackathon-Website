@@ -11,7 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'mobile' => htmlspecialchars($_POST['mobile']),
             'gender' => htmlspecialchars($_POST['gender'])
         ];
-        echo json_encode(['success' => true]);
+        echo json_encode([
+            'success' => true,
+            'name' => htmlspecialchars($_POST['name']),
+        ]);
     } else {
         echo json_encode(['success' => false, 'error' => 'Member not found.']);
     }
