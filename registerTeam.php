@@ -836,9 +836,16 @@ $_SESSION['isVerified'] = false;
                     },
                     body: `email=${encodeURIComponent(email)}&otp=${otp}`
                 })
-                .then(response => response.text())
+                .then(response => response.json())
                 .then(result => {
-                    console.log(result);
+                    // console.log(result);
+                    if (result.success) {
+                        alert(result.message + result.email);
+                    } else {
+                        alert(result.message);
+                        document.getElementById('modal-overlay').style.display = 'none';
+                        document.getElementById('otp-modal').style.display = 'none';
+                    }
                 })
                 .catch(error => console.error('Error:', error));
 
@@ -1084,7 +1091,7 @@ $_SESSION['isVerified'] = false;
                         window.location.href = "loginPage.php";
                     } else {
                         // alert('Failed to submit form: ' + result.message);
-                        alert(result.name + ' is ' +result.message); // You can show a success message
+                        alert(result.name + ' is ' + result.message); // You can show a success message
                     }
                 })
                 .catch(error => {

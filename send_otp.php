@@ -30,7 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $otp_sent = false;
-            echo "Leader Already Exist Try Again!";
+            echo json_encode([
+                'success' => false,
+                'message' => 'Team Leadet Alreadey Exist',
+            ]);
+            return;
             //    echo '<script> alert("Leader Already Exist Try Again!"); window.location.href = "registerPage.php"; </script>';
         } else {
 
@@ -70,15 +74,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Send OTP
             if ($mail->send()) {
-                $otp_sent = true;
-                echo "OTP sent successfully to " . $email;
+               
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'OTP sent successfully to',
+                    'email' => $email,
+                ]);
+                return;
             } else {
-                $otp_sent = false;
-                echo "Failed to send OTP. Please try again.";
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Failed to send OTP. Please try again.',
+                ]);
+                return;
             }
         }
     } else {
-        $otp_sent = false;
-        echo "Invalid email address.";
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid email address.',
+        ]);
+        return;
     }
 }
