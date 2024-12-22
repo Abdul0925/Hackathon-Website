@@ -1,5 +1,11 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+// Include PHPMailer files for sending emails
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
 session_start();
 
 // $memberEmail = "abdulrahim74264@gmail.com";
@@ -137,106 +143,157 @@ session_start();
 
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // File details
-    $leaderEmail = "faf@gmail.com";
-    $transactionId = $_POST['transactionId'];
-    $paymentScreenshot = $_FILES['paymentScreenshot'];
-    $fileName = $paymentScreenshot['name'];
-    $fileTmpName = $paymentScreenshot['tmp_name'];
-    $fileSize = $paymentScreenshot['size'];
-    $fileError = $paymentScreenshot['error'];
-    $fileType = $paymentScreenshot['type'];
-    $isPaid = addPaymentDetails($transactionId, $paymentScreenshot, $leaderEmail);
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     // File details
+//     $leaderEmail = "faf@gmail.com";
+//     $transactionId = $_POST['transactionId'];
+//     $paymentScreenshot = $_FILES['paymentScreenshot'];
+//     $fileName = $paymentScreenshot['name'];
+//     $fileTmpName = $paymentScreenshot['tmp_name'];
+//     $fileSize = $paymentScreenshot['size'];
+//     $fileError = $paymentScreenshot['error'];
+//     $fileType = $paymentScreenshot['type'];
+//     $isPaid = addPaymentDetails($transactionId, $paymentScreenshot, $leaderEmail);
 
-    // Check for upload errors
-    if ($fileError === 0) {
-        echo "File Name: $fileName<br>";
-        echo "Temporary Location: $fileTmpName<br>";
-        echo "File Size: $fileSize bytes<br>";
-        echo "File Type: $fileType<br>";
-    } else {
-        echo "There was an error uploading the file.";
-    }
-}
+//     // Check for upload errors
+//     if ($fileError === 0) {
+//         echo "File Name: $fileName<br>";
+//         echo "Temporary Location: $fileTmpName<br>";
+//         echo "File Size: $fileSize bytes<br>";
+//         echo "File Type: $fileType<br>";
+//     } else {
+//         echo "There was an error uploading the file.";
+//     }
+// }
 ?>
-<form method="POST" enctype="multipart/form-data">
+<!-- <form method="POST" enctype="multipart/form-data">
 <input type="text" id="transactionId" name="transactionId" required>
     <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
     <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*">
     <button type="submit">Submit</button>
-</form>
+</form> -->
 
 <?php
-function addPaymentDetails($transactionId, $paymentScreenshot, $leaderEmail){
-    require "db.php";
-    echo "Done 1";
-    $team_id = 28;
-    $status = "Completed";
-    $pay_name = $paymentScreenshot;
-    $pay_path = "";
-    $is_approved = false;
-    $file = $_FILES['paymentScreenshot'];
-    $fileName = $file['name'];
-    $fileTmpName = $file['tmp_name'];
-    $fileSize = $file['size'];
-    $fileError = $file['error'];
-    $fileType = $file['type'];
-     // File extension
-     $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+// function addPaymentDetails($transactionId, $paymentScreenshot, $leaderEmail){
+//     require "db.php";
+//     echo "Done 1";
+//     $team_id = 28;
+//     $status = "Completed";
+//     $pay_name = $paymentScreenshot;
+//     $pay_path = "";
+//     $is_approved = false;
+//     $file = $_FILES['paymentScreenshot'];
+//     $fileName = $file['name'];
+//     $fileTmpName = $file['tmp_name'];
+//     $fileSize = $file['size'];
+//     $fileError = $file['error'];
+//     $fileType = $file['type'];
+//      // File extension
+//      $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-     // Allowed file types
-     $allowed = ['jpg', 'jpeg', 'png'];
+//      // Allowed file types
+//      $allowed = ['jpg', 'jpeg', 'png'];
 
-    if (in_array($fileExt, $allowed)) {
-        if ($fileError === 0) {
-            if ($fileSize < 5000000) { // 5MB max size
-                // Create unique file name to avoid overwriting
-                $newFileName = uniqid('', true) . "." . $fileExt;
+//     if (in_array($fileExt, $allowed)) {
+//         if ($fileError === 0) {
+//             if ($fileSize < 5000000) { // 5MB max size
+//                 // Create unique file name to avoid overwriting
+//                 $newFileName = uniqid('', true) . "." . $fileExt;
 
-                // Upload directory
-                $uploadDir = 'uploads/payments/';
-                if (!file_exists($uploadDir)) {
-                    mkdir($uploadDir, 0777, true); // Create directory if it doesn't exist
-                }
+//                 // Upload directory
+//                 $uploadDir = 'uploads/payments/';
+//                 if (!file_exists($uploadDir)) {
+//                     mkdir($uploadDir, 0777, true); // Create directory if it doesn't exist
+//                 }
 
-                // File destination
-                $fileDestination = $uploadDir . $newFileName;
+//                 // File destination
+//                 $fileDestination = $uploadDir . $newFileName;
 
-                // Move the file to the upload directory
-                if (move_uploaded_file($fileTmpName, $fileDestination)) {
-                    // Insert or update in the database
-                     // Ensure email is set in session
-                     $paymentDetailQuery = "INSERT INTO payment_details
-                     (team_id, transactionId, status, pay_name, pay_path, is_approved) 
-                     VALUES (?, ?, ?, ?, ?, ?)";
+//                 // Move the file to the upload directory
+//                 if (move_uploaded_file($fileTmpName, $fileDestination)) {
+//                     // Insert or update in the database
+//                      // Ensure email is set in session
+//                      $paymentDetailQuery = "INSERT INTO payment_details
+//                      (team_id, transactionId, status, pay_name, pay_path, is_approved) 
+//                      VALUES (?, ?, ?, ?, ?, ?)";
                     
-                    $stmt = $conn->prepare($paymentDetailQuery);
+//                     $stmt = $conn->prepare($paymentDetailQuery);
                     
-                    $stmt->bind_param("sssssi", $team_id, $transactionId, $status, $newFileName, $fileDestination, $is_approved);
-                    if ($stmt->execute()) {
-                        echo "Done 2";
-                        // echo "Profile picture updated successfully.";
-                    } else {
-                        echo "Not Done";
-                        // echo "Database error: " . $conn->error;
-                    }
+//                     $stmt->bind_param("sssssi", $team_id, $transactionId, $status, $newFileName, $fileDestination, $is_approved);
+//                     if ($stmt->execute()) {
+//                         echo "Done 2";
+//                         // echo "Profile picture updated successfully.";
+//                     } else {
+//                         echo "Not Done";
+//                         // echo "Database error: " . $conn->error;
+//                     }
                     
-                } else {
-                    echo "Not Done";
-                    // echo "There was an error uploading your file.";
-                }
-            } else {
-                echo "Not Done";
-                // echo "File size exceeds the 5MB limit.";
-            }
+//                 } else {
+//                     echo "Not Done";
+//                     // echo "There was an error uploading your file.";
+//                 }
+//             } else {
+//                 echo "Not Done";
+//                 // echo "File size exceeds the 5MB limit.";
+//             }
+//         } else {
+//             echo "Not Done";
+//             // echo "There was an error uploading the file.";
+//         }
+//     } else {
+//         echo "Not Done";
+//         // echo "Invalid file type. Only JPG, JPEG, and PNG are allowed.";
+//     }
+
+// }
+sentmail('abdul954518@gmail.com','Abdul', 'rth01','Real MAdrid');
+function sentmail($leaderEmail, $leaderName, $psId, $teamName)
+{
+    if (filter_var($leaderEmail, FILTER_VALIDATE_EMAIL)) {
+
+
+
+        $mail = new PHPMailer(true);
+
+        // Configure the mail server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';           // SMTP server address
+        $mail->SMTPAuth = true;
+        $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
+        $mail->Password = 'iotg jqut wkks sjrt';       // Your email password (use an app-specific password if needed)
+        $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
+        $mail->Port = 465;                        // Port for SSL
+
+        // Set the sender's email and name
+        $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
+
+        // Add the recipient's email (student's email)
+        $mail->addAddress($leaderEmail);
+
+        // Set the email format to HTML
+        $mail->isHTML(true);
+
+        // Set the email subject
+        $mail->Subject = "Registartion Successfull";
+
+        // Construct the email body with the student's login details
+        $msg = 'Dear ' . strtoupper($leaderName) . '<p>, Thank you for your initiative toward this hackathon.</p>' .
+            '<p>Your team ' . $teamName . ' has chosen a problem statement no ' . strtoupper($psId) . '</p>' .
+            '<p>We will send you your login crediantials after verifying your payment status</p>' .
+            '<p>You will receive your login credentials via email. If you do not receive an email regarding your submission, please contact the hackathon volunteers.</p>';
+
+        // Set the email message content
+        $mail->Body = $msg;
+
+        // Send the email
+
+        // Send OTP
+        if ($mail->send()) {
+            return 1;
         } else {
-            echo "Not Done";
-            // echo "There was an error uploading the file.";
+            return 0;
         }
     } else {
-        echo "Not Done";
-        // echo "Invalid file type. Only JPG, JPEG, and PNG are allowed.";
+        return 0;
     }
-
 }

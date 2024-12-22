@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['admin_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("loginPage.php");
 }
 

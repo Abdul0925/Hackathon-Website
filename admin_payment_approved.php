@@ -5,7 +5,7 @@ if ($_SESSION['admin_logged_in'] != true) {
 }
 
 require 'db.php';
-$adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
+$adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
 ?>
 
 <!DOCTYPE html>
@@ -136,14 +136,14 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
                     </a>
 
                     <a href="admin_profile.php" style="text-decoration: none;">
-                        <div class="nav-option option1">
+                        <div class="nav-option option2">
                             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png" class="nav-img" alt="blog">
                             <h3> Profile</h3>
                         </div>
                     </a>
 
                     <a href="admin_payment_approved.php" style="text-decoration: none;">
-                        <div class="nav-option option2" style="color: black;">
+                        <div class="nav-option option1" style="color: black;">
                             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png" class="nav-img" alt="blog">
                             <h3> Payment</h3>
                         </div>
@@ -179,9 +179,11 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
                                 <tr>
 
                                     <th scope="col">Sr No</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Password</th>
+                                    <th scope="col">Team Name</th>
+                                    <th scope="col">Transaction ID</th>
                                     <th scope="col">Contact</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">View</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -189,14 +191,45 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
                                 <?php
                                 $srno = 0;
                                 while ($admin = $adminDetails->fetch_assoc()) {
+                                    // Fetch teamName from team_and_leader_details
                                     $srno++;
+                                    $stmt = $conn->prepare("SELECT * FROM team_and_leader_details WHERE id = ?");
+                                    $stmt->bind_param("i", $admin['team_id']); // Bind the team_id as a parameter
+                                    $stmt->execute();
+                                    $teamResult = $stmt->get_result();
+                                    $team = $teamResult->fetch_assoc();
+                                    $teamName = $team['teamName'] ?? 'Unknown'; // Default to 'Unknown' if no team found
+                                    $leaderMobile = $team['leaderMobile'] ?? '';
+                                    // Free resources
+                                    $stmt->close();
                                 ?>
                                     <tr>
                                         <td><?php echo $srno ?></td>
-                                        <td><?php echo $admin['username'] ?></td>
-                                        <td><?php echo $admin['password'] ?></td>
-                                        <td><?php echo $admin['contact'] ?></td>
-                                        <td><button class="primary-btn w-100 view-details-btn" onclick="" style="cursor: pointer;" data-id="<?php echo $admin['id']; ?>" disabled>Delete</button></td>
+                                        <td><?php echo $teamName ?></td>
+                                        <td><?php echo $admin['transactionId'] ?></td>
+                                        <td><?php echo $leaderMobile ?></td>
+                                        <td><?php echo ($admin['is_approved'] == 0) ? 'Pending' : 'Accepted' ?></td>
+
+                                        <td>
+                                            <button class="primary-btn w-100 view-details-btn" onclick="" style="cursor: pointer;" data-id="<?php echo $admin['id']; ?>">
+                                                <a href="<?php echo $admin['pay_path'] ?>">
+                                                    View
+                                                </a>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button 
+                                                class="primary-btn w-100 view-details-btn" 
+                                                onclick="approvedPayment(this)" 
+                                                style="cursor: pointer;" 
+                                                data-id="<?php echo $admin['id']; ?>"
+                                                data-email="<?php echo $team['leaderEmail']; ?>"
+                                                data-name="<?php echo $team['leaderName']; ?>"
+                                                data-pass="<?php echo $team['password']; ?>"
+                                                >
+                                                Approve
+                                            </button>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -217,6 +250,38 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
         menuicn.addEventListener("click", () => {
             nav.classList.toggle("navclose");
         })
+
+        function approvedPayment(button) {
+            const id = button.getAttribute('data-id'); // Fetch the data-id
+            const leaderEmail = button.getAttribute('data-email'); // Fetch the data-id
+            const leaderName = button.getAttribute('data-name'); // Fetch the data-id
+            const password = button.getAttribute('data-pass'); // Fetch the data-id
+            console.log("Approved Payment ID:", id);
+            console.log("Approved Leader Email:", leaderEmail);
+            console.log("Approved Leader Name:", leaderName);
+            console.log("Approved Password:", password);
+            const data = new FormData();
+            data.append('id', id);
+            data.append('leaderEmail', leaderEmail);
+            data.append('leaderName', leaderName);
+            data.append('password', password);
+            fetch('payment_approved_process.php', {
+                    method: 'POST',
+                    body: data,
+                })
+                .then(response => response.json())
+                .then(result=>{
+                    if(result.success){
+                        alert(result.message);
+                        location.reload();
+                    }else{
+                        alert(result.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                })
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
