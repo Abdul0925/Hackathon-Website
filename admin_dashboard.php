@@ -5,7 +5,7 @@ if ($_SESSION['admin_logged_in'] != true) {
 }
 
 require 'db.php';
-$teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader = 1");
+$teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE is_leader = 1");
 // $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members");
 ?>
 
@@ -159,6 +159,13 @@ $teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader 
                         </div>
                     </a>
 
+                    <a href="admin_payment_approved.php" style="text-decoration: none;">
+                        <div class="nav-option option2" style="color: black;">
+                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png" class="nav-img" alt="blog">
+                            <h3> Payment</h3>
+                        </div>
+                    </a>
+
                     <a href="logout.php" style="text-decoration: none;">
                         <div class="nav-option logout" style="color: black;">
                             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png" class="nav-img" alt="logout">
@@ -237,21 +244,21 @@ $teamName = mysqli_query($conn, "SELECT * FROM all_team_members WHERE is_leader 
                             <tbody>
                                 <?php
                                 $srno = 0;
-                                while ($mentor = $teamName->fetch_assoc()) {
+                                while ($leader = $teamName->fetch_assoc()) {
                                     $srno++;
-                                    $team_name = $mentor['team_name'];
+                                    $team_name = $leader['teamName'];
                                     // $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members WHERE team_name = '$team_name'");
                                     // $mentorEmail = $teamDetails->fetch_assoc();
                                 ?>
                                     <tr>
                                         <td><?php echo $srno ?></td>
-                                        <td><?php echo $mentor['team_name'] ?></td>
-                                        <td><?php echo $mentor['email'] ?></td>
-                                        <td><?php echo $mentor['ps'] ?></td>
+                                        <td><?php echo $leader['teamName'] ?></td>
+                                        <td><?php echo $leader['leaderEmail'] ?></td>
+                                        <td><?php echo $leader['psId'] ?></td>
                                         <td>
                                             <!-- <form action="" method="POST" class="d-inline"> -->
-                                            <input type="hidden" name="noti_id" value="<?php echo $mentorEmail['email']; ?>">
-                                            <button class="primary-btn w-100 view-details-btn" onclick="openPopup()" style="cursor: pointer;" data-id="<?php echo $mentor['team_id']; ?>">View</button>
+                                            <input type="hidden" name="noti_id" value="<?php echo $leader['leaderEmail']; ?>">
+                                            <button class="primary-btn w-100 view-details-btn" onclick="openPopup()" style="cursor: pointer;" data-id="<?php echo $leader['team_id']; ?>">View</button>
                                             <!-- </form> -->
                                         </td>
                                     </tr>
