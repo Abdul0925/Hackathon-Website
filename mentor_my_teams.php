@@ -1,10 +1,10 @@
 <?php
 session_start();
 require "db.php";
-if ($_SESSION['mentor_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
-$email = $_SESSION['email'];
+$email = $_SESSION['leaderEmail'];
 $team_id = $_SESSION['id'];
 
 // First query to select from `all_team_members`

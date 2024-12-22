@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
 }
 
 
-$result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
+// $result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
 $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
 
@@ -185,7 +185,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
-                <div class="logo">Mentor</div>
+                <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
@@ -284,14 +284,14 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                 <div class="box box3">
                     <div class="text">
                         <h2 class="topic">Date</h2>
-                        <h2 class="topic-heading">25th Dec 2024</h2>
+                        <h2 class="topic-heading">10 Feb 2024</h2>
                     </div>
                     <!-- <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png" alt="comments"> -->
                 </div>
 
             </div>
 
-            <div class="report-container">
+            <!-- <div class="report-container">
                 <div class="mt-5">
                     <h5 class="mb-3">Team Details</h5>
                     <div class="table-responsive">
@@ -305,26 +305,26 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                                     <th>Gender</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php $sr_no= 1 ; ?>
-                                <?php while ($row1 = $result1->fetch_assoc()) {
+                            <tbody> -->
+                                <?php //$sr_no= 1 ; ?>
+                                <?php //while ($row1 = $result1->fetch_assoc()) {
                                     // $date = date('d-m-Y', strtotime($row1['date']));
-                                    $date = "";
+                                    //$date = "";
                                 ?>
                                     <tr>
-                                        <td><?php echo $sr_no++; ?></td>
-                                        <td><?php echo $row1['memberName']; ?></td>
-                                        <td><?php echo $row1['memberMobile']; ?></td>
-                                        <td><?php echo $row1['memberEmail']; ?></td>
-                                        <td><?php echo $row1['memberGender']; ?></td>
+                                        <td><?php //echo $sr_no++; ?></td>
+                                        <td><?php //echo $row1['memberName']; ?></td>
+                                        <td><?php //echo $row1['memberMobile']; ?></td>
+                                        <td><?php //echo $row1['memberEmail']; ?></td>
+                                        <td><?php //echo $row1['memberGender']; ?></td>
                                     </tr>
                                 <?php
-                                } ?>
-                            </tbody>
+                               // } ?>
+                            <!-- </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
             <div class="report-container">
