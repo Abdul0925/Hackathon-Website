@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION['members'])) {
     $_SESSION['members'] = [];
 }
-$_SESSION['isVerified'] = true;
+$_SESSION['isVerified'] = false;
 
 // echo $_SESSION['isVerified'];
 ?>
@@ -729,7 +729,7 @@ $_SESSION['isVerified'] = true;
                                 </div>
                                 <div class="mb-3">
                                     <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
-                                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*">
+                                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*" required>
                                 </div>
                             </div>
                         </div>
@@ -1079,10 +1079,12 @@ $_SESSION['isVerified'] = true;
                 .then(response => response.json())
                 .then(result => {
                     if (result.success) {
-                        console.log(result.memberEmail); // You can log the data received for debugging
-                        alert(result.name + ' is ' +result.message); // You can show a success message
+                        alert(result.message); // You can log the data received for debugging
+                        alert("You will receive your login credentials via email. If you do not receive an email regarding your submission, please contact the hackathon volunteers.")
+                        window.location.href = "loginPage.php";
                     } else {
-                        alert('Failed to submit form: ' + result.message);
+                        // alert('Failed to submit form: ' + result.message);
+                        alert(result.name + ' is ' +result.message); // You can show a success message
                     }
                 })
                 .catch(error => {

@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -11,25 +12,27 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $otp = $_POST['otp'];
-    
-  
+
+
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-       
 
+        require "db.php";
         // Store OTP in session for verification later
         $_SESSION['otp'] = $otp;
         $_SESSION['email'] = $email;
 
-       // $query = "SELECT * FROM mentor_details WHERE email = ?";
-        //$stmt = $conn->prepare($query);
-        //$stmt->bind_param("s", $email); // 's' specifies the variable type => 'string'
-       // $stmt->execute();
+        $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email); // 's' specifies the variable type => 'string'
+        $stmt->execute();
 
-       // $result = $stmt->get_result();
-       // if ($result->num_rows > 0) {
-        //    echo '<script> alert("User Already Exist Try Again!"); window.location.href = "registerPage.php"; </script>';
-       // } else {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $otp_sent = false;
+            echo "Leader Already Exist Try Again!";
+            //    echo '<script> alert("Leader Already Exist Try Again!"); window.location.href = "registerPage.php"; </script>';
+        } else {
 
 
             // $email = $_POST['email'];
@@ -77,6 +80,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $otp_sent = false;
         echo "Invalid email address.";
- //   }
-    
+    }
 }
