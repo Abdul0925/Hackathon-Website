@@ -546,7 +546,8 @@ $_SESSION['isVerified'] = false;
         <h1>Team Registration Form</h1>
 
         <!-- <form action="submitRegistration.php" method="POST" enctype="multipart/form-data"> -->
-        <form method="POST" action="register_form_process.php" id="mainForm">
+        <!-- <form method="POST" action="register_form_process.php" id="mainForm"> -->
+        <form id="mainForm">
             <div class="container-two">
                 <!-- Team Leader Details Section -->
                 <div class="direction">
@@ -557,7 +558,7 @@ $_SESSION['isVerified'] = false;
                         </div>
                         <div class="box-body">
                             <div class="inputBox">
-                                <input type="text" name="teamName" value="" required>
+                                <input type="text" id="teamName" name="teamName" required>
                                 <span>Enter your Team name</span>
                             </div>
                             <div class="mb-3">
@@ -657,20 +658,20 @@ $_SESSION['isVerified'] = false;
                     </div>
                     <div class="box-body" id="add_member_form">
                         <div class="inputBox">
-                            <input type="text" id="memberName" name="memberName" >
+                            <input type="text" id="memberName" name="memberName">
                             <span>Enter member name</span>
                         </div>
                         <div class="inputBox">
-                            <input type="tel" id="memberMobile" name="memberMobile" >
+                            <input type="tel" id="memberMobile" name="memberMobile">
                             <span>Enter mobile number</span>
                         </div>
                         <div class="inputBox">
-                            <input type="email" id="memberEmail" name="memberEmail" >
+                            <input type="email" id="memberEmail" name="memberEmail">
                             <span>Enter email</span>
                         </div>
                         <div class="inputBox">
                             <label for="gender">Gender:</label>
-                            <select id="gender" name="gender" >
+                            <select id="gender" name="gender">
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -742,24 +743,32 @@ $_SESSION['isVerified'] = false;
             </div>
         </form>
     </div>
-    <?php foreach ($_SESSION['members'] as $index => $member): ?>
-        <tr>
-            <td><?php echo $member['name']; ?></td>
-            <td><?php echo $member['email']; ?></td>
-            <td><?php echo $member['mobile']; ?></td>
-            <td><?php echo $member['gender']; ?></td>
-            <td>
-                <!-- <form method="POST" style="display: inline;">
+    <?php //foreach ($_SESSION['members'] as $index => $member): 
+    ?>
+    <!-- <tr>
+            <td><?php //echo $member['name']; 
+                ?></td>
+            <td><?php //echo $member['email']; 
+                ?></td>
+            <td><?php //echo $member['mobile']; 
+                ?></td>
+            <td><?php //echo $member['gender']; 
+                ?></td>
+            <td> -->
+    <!-- <form method="POST" style="display: inline;">
                             <input type="hidden" name="index" value="<?php //echo $index; 
                                                                         ?>">
                             <button type="button" onclick="openEditModal(<?php //echo $index; 
                                                                             ?>)">Edit</button>
                         </form> -->
-                <button type="button" onclick="openEditModal(<?php echo $index; ?>)">Edit</button>
-                <button type="button" onclick="deleteMember(<?php echo $index; ?>)">Delete</button>
+    <!-- <button type="button" onclick="openEditModal(<?php //echo $index; 
+                                                        ?>)">Edit</button>
+                <button type="button" onclick="deleteMember(<?php //echo $index; 
+                                                            ?>)">Delete</button>
             </td>
-        </tr>
-    <?php endforeach; ?>
+        </tr> -->
+    <?php //endforeach; 
+    ?>
 
     <!-- OTP Modal -->
     <div class="modal-overlay" id="modal-overlay" style="display: none;"></div>
@@ -827,9 +836,16 @@ $_SESSION['isVerified'] = false;
                     },
                     body: `email=${encodeURIComponent(email)}&otp=${otp}`
                 })
-                .then(response => response.text())
+                .then(response => response.json())
                 .then(result => {
-                    console.log(result);
+                    // console.log(result);
+                    if (result.success) {
+                        alert(result.message + result.email);
+                    } else {
+                        alert(result.message);
+                        document.getElementById('modal-overlay').style.display = 'none';
+                        document.getElementById('otp-modal').style.display = 'none';
+                    }
                 })
                 .catch(error => console.error('Error:', error));
 
@@ -889,7 +905,7 @@ $_SESSION['isVerified'] = false;
             const modal = document.getElementById('edit-modal');
             const overlay = document.getElementById('modal-overlay');
 
-            const member = (getMemberDetails(index))?getMemberDetails(index):<?php echo json_encode($_SESSION['members']); ?>[index];
+            const member = (getMemberDetails(index)) ? getMemberDetails(index) : <?php echo json_encode($_SESSION['members']); ?>[index];
             console.log(member);
             document.getElementById('edit-index').value = index;
             document.getElementById('edit-name').value = member.name;
@@ -1031,6 +1047,57 @@ $_SESSION['isVerified'] = false;
                     .catch(error => console.error('Error:', error));
             }
         }
+
+        document.getElementById('mainForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log("test1");
+            // Get the form data or the necessary values to send
+            const formData = new FormData();
+            console.log("test2");
+            formData.append('teamName', document.getElementById('teamName').value);
+            console.log("test3");
+            formData.append('psId', document.getElementById('psId').value);
+            console.log("test4");
+            console.log(formData);
+            console.log("test5");
+
+            formData.append('leaderName', document.getElementById('leaderName').value);
+            formData.append('leaderEmail', document.getElementById('leaderEmail').value);
+            formData.append('leaderMobile', document.getElementById('leaderMobile').value);
+            formData.append('leaderGender', document.getElementById('leaderGender').value);
+
+            console.log("test6");
+            formData.append('transactionId', document.getElementById('transactionId').value);
+            formData.append('paymentScreenshot', document.getElementById('paymentScreenshot').files[0]); // Assuming this is a file input
+
+            console.log("test7");
+            // Get the members from the session (assuming they're in a variable already)
+            const members = (getMemberDetails()) ? getMemberDetails() : <?php echo json_encode($_SESSION['members']); ?>;
+            console.log("test8");
+            console.log(members);
+            console.log("test9");
+            formData.append('members', members); // Send members as a JSON string
+            console.log("test10");
+            // Send the data using fetch
+            fetch('register_form_process.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(result.message); // You can log the data received for debugging
+                        alert("You will receive your login credentials via email. If you do not receive an email regarding your submission, please contact the hackathon volunteers.")
+                        window.location.href = "loginPage.php";
+                    } else {
+                        // alert('Failed to submit form: ' + result.message);
+                        alert(result.name + ' is ' + result.message); // You can show a success message
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
     </script>
 
 

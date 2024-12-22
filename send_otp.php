@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -11,25 +12,31 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $otp = $_POST['otp'];
-    
-  
+
+
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-       
 
+        require "db.php";
         // Store OTP in session for verification later
         $_SESSION['otp'] = $otp;
         $_SESSION['email'] = $email;
 
-       // $query = "SELECT * FROM mentor_details WHERE email = ?";
-        //$stmt = $conn->prepare($query);
-        //$stmt->bind_param("s", $email); // 's' specifies the variable type => 'string'
-       // $stmt->execute();
+        $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email); // 's' specifies the variable type => 'string'
+        $stmt->execute();
 
-       // $result = $stmt->get_result();
-       // if ($result->num_rows > 0) {
-        //    echo '<script> alert("User Already Exist Try Again!"); window.location.href = "registerPage.php"; </script>';
-       // } else {
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $otp_sent = false;
+            echo json_encode([
+                'success' => false,
+                'message' => 'Team Leadet Alreadey Exist',
+            ]);
+            return;
+            //    echo '<script> alert("Leader Already Exist Try Again!"); window.location.href = "registerPage.php"; </script>';
+        } else {
 
 
             // $email = $_POST['email'];
@@ -67,16 +74,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Send OTP
             if ($mail->send()) {
-                $otp_sent = true;
-                echo "OTP sent successfully to " . $email;
+               
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'OTP sent successfully to',
+                    'email' => $email,
+                ]);
+                return;
             } else {
-                $otp_sent = false;
-                echo "Failed to send OTP. Please try again.";
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Failed to send OTP. Please try again.',
+                ]);
+                return;
             }
         }
     } else {
-        $otp_sent = false;
-        echo "Invalid email address.";
- //   }
-    
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid email address.',
+        ]);
+        return;
+    }
 }

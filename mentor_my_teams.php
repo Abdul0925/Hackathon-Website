@@ -391,7 +391,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
                 </div>
                 <div class="modal-body">
                     <div class="text-center mb-4">
-                        <form id="profilePicForm" method="POST" enctype="multipart/form-data" action="changeProfilePic.php">
+                        <form id="profilePicForm" method="POST" enctype="multipart/form-data" action="changeProfilePic.php"> 
                             <div class="text-center mb-4">
                                 <div class="position-relative d-inline-block">
                                     <img src="<?php echo $_SESSION['imagePath']; ?>" id="profilePic" class="rounded-circle" alt="Profile Picture" width="100">
