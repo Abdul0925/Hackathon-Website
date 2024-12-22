@@ -1,7 +1,7 @@
 <?php
 session_start();
-if ($_SESSION['admin_logged_in'] != true) {
-    header("loginPage.php");
+if ($_SESSION['mentor_logged_in'] != true) {
+    header("location:loginPage.php");
 }
 
 require 'db.php';
