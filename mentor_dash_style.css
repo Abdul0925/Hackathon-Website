@@ -397,7 +397,7 @@ header {
     display: none;
   }
   .main {
-    padding: 40px 30px 30px 30px;
+    padding: 40px 5px 30px 5px;
   }
   .searchbar2 {
     width: 100%;
@@ -417,6 +417,9 @@ header {
 }
 
 @media screen and (max-width: 490px) {
+  .main {
+    padding: 40px 5px 30px 5px;
+  }
   .message {
     display: none;
   }
@@ -453,6 +456,9 @@ header {
 }
 
 @media screen and (max-width: 400px) {
+  .main {
+    padding: 40px 5px 30px 5px;
+  }
   .recent-Articles {
     font-size: 17px;
   }
@@ -471,6 +477,9 @@ header {
 }
 
 @media screen and (max-width: 320px) {
+  .main {
+    padding: 40px 5px 30px 5px;
+  }
   .recent-Articles {
     font-size: 12px;
   }

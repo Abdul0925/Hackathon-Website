@@ -1,15 +1,13 @@
 <?php
+session_start();
+if ($_SESSION['mentor_logged_in'] != true) {
+    header("location:loginPage.php");
+}
+
 require 'db.php';
 $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 ?>
 
-<?php
-session_start();
-//require "db.php";
-if ($_SESSION['admin_logged_in'] != true) {
-    header("location:loginPage.php");
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,6 +92,12 @@ if ($_SESSION['admin_logged_in'] != true) {
 
         .nav-option1 i {
             color: #fff;
+        }
+
+        .report-container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            
         }
     </style>
 

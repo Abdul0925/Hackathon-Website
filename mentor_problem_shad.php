@@ -1,7 +1,10 @@
 <?php
 session_start();
+
+
 if ($_SESSION['leader_logged_in'] != true) {
-    header("loginPage.php");
+    header("location:loginPage.php");
+
 }
 
 require 'db.php';

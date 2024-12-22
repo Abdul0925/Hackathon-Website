@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
         return;
     }
     if ($paymentStatus == "Completed") {
-        echo '<script> alert("You can'."'t".' add members after payment "); window.location.href = "mentor_my_teams.php"; </script>';
+        echo '<script> alert("You can' . "'t" . ' add members after payment "); window.location.href = "mentor_my_teams.php"; </script>';
         return;
     }
     $memberName = $_POST['memberName'];
@@ -296,12 +296,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
                     <?php //echo $members_info['team_name']; 
                     ?>
                 </div>
-                <button class="btn btn-success" 
-                data-bs-toggle="modal"
-                data-bs-target="#editTeamModal" 
-                data-name="<?php echo $team_name; ?>"
-                data-ps="<?php echo $ps; ?>"
-                >
+                <button class="btn btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTeamModal"
+                    data-name="<?php echo $team_name; ?>"
+                    data-ps="<?php echo $ps; ?>">
                     Edit Team Details
                 </button>
                 <div class="dashboard-header">
@@ -533,44 +532,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
 
 
     <!-- Add Team Modal -->
-<div class="modal fade" id="editTeamModal" tabindex="-1" aria-labelledby="editTeamModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form method="POST" action="edit_team.php">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editTeamModalLabel">Team Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Team Name -->
-                    <div class="mb-3">
-                        <label for="teamName" class="form-label">Team Name</label>
-                        <input type="text" class="form-control" id="teamName" name="team_name" required>
+    <div class="modal fade" id="editTeamModal" tabindex="-1" aria-labelledby="editTeamModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" action="edit_team.php">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editTeamModalLabel">Team Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <input type="text" class="form-control" id="teamId" name="team_id" value="<?php echo $team_id ?>" hidden>
-                    
-                    <!-- Problem Statement -->
-                    <div class="mb-3">
-                        <label for="problemStatement" class="form-label">Problem Statement</label>
-                        <select class="form-control" name="problem_statement" id="problemStatement" required>
-                            <option value="" disabled selected>Choose Any One</option>
-                            <option value="RTH01">RTH01</option>
-                            <option value="RTH02">RTH02</option>
-                            <option value="RTH03">RTH03</option>
-                            <option value="RTH04">RTH04</option>
-                            <option value="RTH05">RTH05</option>
-                        </select>
-                    </div>
+                    <div class="modal-body">
+                        <!-- Team Name -->
+                        <div class="mb-3">
+                            <label for="teamName" class="form-label">Team Name</label>
+                            <input type="text" class="form-control" id="teamName" name="team_name" required>
+                        </div>
+                        <input type="text" class="form-control" id="teamId" name="team_id" value="<?php echo $team_id ?>" hidden>
 
+                        <!-- Problem Statement -->
+                        <div class="mb-3">
+                            <label for="problemStatement" class="form-label">Problem Statement</label>
+                            <select class="form-control" name="problem_statement" id="problemStatement" required>
+                                <option value="" disabled selected>Choose Any One</option>
+                                <option value="RTH01">RTH01</option>
+                                <option value="RTH02">RTH02</option>
+                                <option value="RTH03">RTH03</option>
+                                <option value="RTH04">RTH04</option>
+                                <option value="RTH05">RTH05</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Team</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Team</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
     <script>
         document.getElementById('listBtn').addEventListener('click', () => {
@@ -591,35 +590,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
 
 
         // Get the modal element
-        const editModal = document.getElementById('editModal');                    
-        const editTeamModal = document.getElementById('editTeamModal');                    
+        const editModal = document.getElementById('editModal');
+        const editTeamModal = document.getElementById('editTeamModal');
 
         // Event listener for when the modal is triggered
         editModal.addEventListener('show.bs.modal', function(event) {
             // Button that triggered the modal
             const button = event.relatedTarget;
-            
+
             // Extract data attributes from the button
             const id = button.getAttribute('data-id');
             const name = button.getAttribute('data-name');
             const email = button.getAttribute('data-email');
             const phone = button.getAttribute('data-phone');
-            
+
             // Populate the modal fields
             document.getElementById('edit-id').value = id;
             document.getElementById('edit-name').value = name;
             document.getElementById('edit-email').value = email;
             document.getElementById('edit-phone').value = phone;
         });
-        
+
         function confirmDelete(id) {
             if (confirm("Are you sure you want to delete this member?")) {
                 // Redirect to the delete page with the member's ID
                 window.location.href = `delete_member.php?id=${id}`;
             }
         }
-        
-        editTeamModal.addEventListener('show.bs.modal', function(event){
+
+        editTeamModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
             const team_name = button.getAttribute('data-name');
             const ps = button.getAttribute('data-ps');

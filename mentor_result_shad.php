@@ -184,6 +184,11 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             display: block;
             margin: 0px 0px 40px 30px;
         }
+
+        .report-container {
+            margin-top: 20px;
+            margin-bottom: 20px; 
+        }
     </style>
 
 </head>

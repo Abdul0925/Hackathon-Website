@@ -215,6 +215,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
         .pay-status {
             padding: 40px 0px 10px 20px;
         }
+
+        .report-container {
+            margin-top: 20px;
+            margin-bottom: 20px; 
+        }
     </style>
 
 </head>
