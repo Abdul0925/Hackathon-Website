@@ -69,22 +69,22 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
         }
 
         .primary-btn {
-            background-color: rgb(220, 0, 0);
+            background-color: rgb(47, 141, 70);
             color: white;
-            width: 60px;
+            width: 80px;
             height: 30px;
             border-radius: 5px;
             border: none;
         }
 
         .primary-btn:hover {
-            background-color: rgb(150, 0, 0);
+            background-color: rgb(31, 91, 46);
             color: white;
         }
 
         .primary-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
-            background-color: rgb(220, 0, 0);
+            background-color: rgb(47, 141, 70);
         }
 
         .report-container {
@@ -230,11 +230,11 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
                                         <td><?php echo ($admin['is_approved'] == 0) ? 'Pending' : 'Accepted' ?></td>
 
                                         <td>
-                                            <button class="primary-btn w-100 view-details-btn" onclick="" style="cursor: pointer;" data-id="<?php echo $admin['id']; ?>">
-                                                <a href="<?php echo $admin['pay_path'] ?>">
+                                            <a style="text-decoration: none; color: white;" href="<?php echo $admin['pay_path'] ?>">
+                                                <button class="primary-btn w-100 view-details-btn" onclick="" style="cursor: pointer;" data-id="<?php echo $admin['id']; ?>">
                                                     View
-                                                </a>
-                                            </button>
+                                                </button>
+                                            </a>
                                         </td>
                                         <td>
                                             <button
