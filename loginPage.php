@@ -220,8 +220,8 @@
                         <option selected disabled>Please Select Your Role</option>
                         <option value="super-admin">Super Admin</option>
                         <!-- <option value="institute-college">Institute/College</option> -->
-                        <!-- <option value="team-leader">Team Leader</option> -->
-                        <option value="mentor">Mentor</option>
+                        <option value="Team Leader">Team Leader</option>
+                        <!-- <option value="mentor">Mentor</option>  -->
                     </select>
                 </div>
                 <!-- Submit Button -->

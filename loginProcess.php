@@ -9,8 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginBtn'])) {
     $role = $_POST['role'];
     echo $role;
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        if ($role == 'mentor') {
-            $query = "SELECT * FROM mentor_details WHERE email = ?";
+        if ($role == 'Team Leader') {
+            $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('s', $email);
             $stmt->execute();
@@ -20,16 +20,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginBtn'])) {
                 $mentor = $result->fetch_assoc(); 
 
                 if (password_verify($password, $mentor['password'])) {
-                    $_SESSION['first_name'] = $mentor['first_name'];
-                    $_SESSION['last_name'] = $mentor['last_name'];
-                    $_SESSION['college'] = $mentor['college'];
-                    $_SESSION['mobile'] = $mentor['mobile'];
-                    $_SESSION['email'] = $mentor['email'];
+                // if ($password == $mentor['password']) {
+                    $_SESSION['leaderName'] = $mentor['leaderName'];
+                    $_SESSION['leaderMobile'] = $mentor['leaderMobile'];
+                    $_SESSION['leaderEmail'] = $mentor['leaderEmail'];
                     $_SESSION['id'] = $mentor['id'];
-                    $_SESSION['mentor_logged_in'] = true;
+                    $_SESSION['leader_logged_in'] = true;
                     echo '<script>alert("Login successful!"); window.location.href = "mentor_dashboard_shad.php";</script>';
                 } else {
-                    echo '<script>alert("Invalid password. Please try again."); window.location.href = "loginPage.php";</script>';
+                    if ($password == $mentor['password']) {
+                        $_SESSION['leaderName'] = $mentor['leaderName'];
+                        $_SESSION['leaderMobile'] = $mentor['leaderMobile'];
+                        $_SESSION['leaderEmail'] = $mentor['leaderEmail'];
+                        $_SESSION['id'] = $mentor['id'];
+                        $_SESSION['leader_logged_in'] = true;
+                        echo '<script>alert("Login successful!"); window.location.href = "mentor_dashboard_shad.php";</script>';
+                    }else{
+
+                        echo '<script>alert("Invalid password. Please try again."); window.location.href = "loginPage.php";</script>';
+                    }
                 }
             } else {
                 echo '<script>alert("No user found with that email."); window.location.href = "loginPage.php";</script>';

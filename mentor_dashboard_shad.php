@@ -1,11 +1,11 @@
 <?php
 session_start();
 require "db.php";
-if ($_SESSION['mentor_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
 
-$email = $_SESSION['email'];
+$email = $_SESSION['leaderEmail'];
 
 // Query to get the image path
 $sql = "SELECT * FROM mentor_details WHERE email = ?";
@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
 }
 
 
-$result1 = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
+$result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
 $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
 
@@ -298,21 +298,25 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Team Name</th>
-                                    <th>Leader Name</th>
-                                    <th>Participation Date</th>
-                                    <th>Status</th>
+                                    <th>Sr No</th>
+                                    <th>Members</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $sr_no= 1 ; ?>
                                 <?php while ($row1 = $result1->fetch_assoc()) {
-                                    $date = date('d-m-Y', strtotime($row1['date']));
+                                    // $date = date('d-m-Y', strtotime($row1['date']));
+                                    $date = "";
                                 ?>
                                     <tr>
-                                        <td><?php echo $row1['team_name']; ?></td>
-                                        <td><?php echo $row1['name']; ?></td>
-                                        <td><?php echo $date; ?></td>
-                                        <td><span class="badge badge-approved">Approved</span></td>
+                                        <td><?php echo $sr_no++; ?></td>
+                                        <td><?php echo $row1['memberName']; ?></td>
+                                        <td><?php echo $row1['memberMobile']; ?></td>
+                                        <td><?php echo $row1['memberEmail']; ?></td>
+                                        <td><?php echo $row1['memberGender']; ?></td>
                                     </tr>
                                 <?php
                                 } ?>

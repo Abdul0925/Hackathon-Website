@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['members'])) {
+    $_SESSION['members'] = [];
+}
+$_SESSION['isVerified'] = false;
+// $_SESSION['members'] = [];
+// echo $_SESSION['isVerified'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -306,6 +318,106 @@
             /* color: white; */
         }
 
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent black */
+            z-index: 999;
+            /* Ensures overlay is above all other elements */
+            display: none;
+            /* Initially hidden */
+        }
+
+        /* Modal Window */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            height: 30%;
+            transform: translate(-50%, -50%);
+            /* Center the modal */
+            background-color: #fff;
+            /* White background */
+            border-radius: 8px;
+            /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+            z-index: 1000;
+            /* Above the overlay */
+            width: 90%;
+            /* Responsive width */
+            max-width: 400px;
+            /* Max width for desktop */
+            padding: 20px;
+            /* Inner padding */
+            text-align: center;
+            /* Center the text */
+            font-family: Arial, sans-serif;
+            /* Font style */
+        }
+
+        /* Modal Header */
+        .modal h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #333;
+            /* Darker text color */
+        }
+
+        /* Modal Input */
+        .modal input[type="text"] {
+            width: 100%;
+            /* Full width */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            /* Light gray border */
+            border-radius: 4px;
+            /* Rounded corners */
+            font-size: 1rem;
+            box-sizing: border-box;
+            /* Ensures padding doesn't affect width */
+        }
+
+        /* Modal Buttons */
+        .modal button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            /* Smooth transition */
+        }
+
+        .modal button[type="button"]:first-of-type {
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+        }
+
+        .modal button[type="button"]:first-of-type:hover {
+            background-color: #45a049;
+            /* Darker green on hover */
+        }
+
+        .modal button[type="button"]:last-of-type {
+            background-color: #f44336;
+            /* Red */
+            color: white;
+        }
+
+        .modal button[type="button"]:last-of-type:hover {
+            background-color: #d32f2f;
+            /* Darker red on hover */
+        }
+
         @media screen and (max-width: 400px) {
             .boxL .box-body {
                 display: flex;
@@ -433,42 +545,12 @@
     <div class="container">
         <h1>Team Registration Form</h1>
 
-        <form action="submitRegistration.php" method="POST" enctype="multipart/form-data">
+        <!-- <form action="submitRegistration.php" method="POST" enctype="multipart/form-data"> -->
+        <!-- <form method="POST" action="register_form_process.php" id="mainForm"> -->
+        <form id="mainForm">
             <div class="container-two">
                 <!-- Team Leader Details Section -->
                 <div class="direction">
-
-                    <div class="boxF">
-                        <div class="head-div">
-                            <h4 class="head-title">Team Leader Details</h4>
-                        </div>
-                        <div class="box-body">
-
-                            <div class="inputBox">
-                                <input type="text" id="leaderName" name="leaderName" required>
-                                <span>Enter leader's name</span>
-
-                                <div class="verify-btn-div">
-
-                                    <input type="email" id="leaderEmail" name="leaderEmail" required>
-                                    <span>Enter leader's email</span>
-                                    <div class="verify-btn">
-                                        <button type="button">Verify</button>
-                                    </div>
-
-                                </div>
-
-                                <div>
-                                    <input type="tel" id="leaderMobile" name="leaderMobile" required>
-                                    <span>Enter mobile number</span>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-                    </div>
-
                     <!-- Team Details Section -->
                     <div class="box">
                         <div class="head-div">
@@ -476,7 +558,7 @@
                         </div>
                         <div class="box-body">
                             <div class="inputBox">
-                                <input type="text" name="" value="" required>
+                                <input type="text" id="teamName" name="teamName" required>
                                 <span>Enter your Team name</span>
                             </div>
                             <div class="mb-3">
@@ -484,9 +566,9 @@
                                 <div class="d-flex">
                                     <select id="psId" name="psId" class="form-select me-2" required>
                                         <option value="" disabled selected>Select Problem Statement</option>
-                                        <option value="PS1">Problem Statement 1</option>
-                                        <option value="PS2">Problem Statement 2</option>
-                                        <option value="PS3">Problem Statement 3</option>
+                                        <option value="rth01">RTH01</option>
+                                        <option value="rth02">RTH02</option>
+                                        <option value="rth03">RTH03</option>
                                     </select>
                                     <div class="prob-btn">
                                         <a href="problemStatements.php"><button type="button">Problems</button></a>
@@ -496,6 +578,54 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="boxF">
+                    <div class="head-div">
+                        <h4 class="head-title">Team Leader Details</h4>
+                    </div>
+                    <div class="box-body">
+
+                        <div class="inputBox">
+                            <input type="text" id="leaderName" name="leaderName" required>
+                            <span>Enter leader's name</span>
+
+                            <div class="verify-btn-div">
+
+                                <input type="email" id="leaderEmail" name="leaderEmail" required>
+                                <span>Enter leader's email</span>
+                                <div class="verify-btn">
+                                    <button
+                                        type="button"
+                                        onclick="openOtpModal()"
+                                        id="verify-otp">
+                                        Verify
+                                    </button>
+
+                                </div>
+                                <!-- <span id="verification-status" style="color: green; display: none;">Verified</span> -->
+                            </div>
+
+                            <div>
+                                <input type="tel" id="leaderMobile" name="leaderMobile" required>
+                                <span>Enter mobile number</span>
+                            </div>
+
+                            <div>
+                                <label for="leaderGender" class="form-label">Leader Gender: </label>
+                                <select class="form-select me-2" name="leaderGender" id="leaderGender">
+                                    <option value="" selected disabled>Choose Only One Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
 
 
                 <!-- Mentor Details Section -->
@@ -526,49 +656,55 @@
                     <div class="head-div">
                         <h4 class="head-title">Member Details</h4>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body" id="add_member_form">
                         <div class="inputBox">
-                            <input type="text" id="member1" name="memberName" required>
+                            <input type="text" id="memberName" name="memberName">
                             <span>Enter member name</span>
                         </div>
                         <div class="inputBox">
-                            <input type="tel" id="memberMobile1" name="memberMobile" required>
+                            <input type="tel" id="memberMobile" name="memberMobile">
                             <span>Enter mobile number</span>
                         </div>
                         <div class="inputBox">
-                            <input type="email" id="memberEmail1" name="memberEmail" required>
+                            <input type="email" id="memberEmail" name="memberEmail">
                             <span>Enter email</span>
-                            <div class="add-btn">
-                                <button type="button">Add Member</button>
-                            </div>
+                        </div>
+                        <div class="inputBox">
+                            <label for="gender">Gender:</label>
+                            <select id="gender" name="gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="add-btn">
+                            <button type="button" name="add_member" onclick="submitAddMemberForm()">Add Member</button>
                         </div>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>sr no</th>
-                                    <th>member name</th>
-                                    <th>mobile number</th>
-                                    <th>member email</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Gender</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>1</th>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                </tr>
-                                <tr>
-                                    <th>3</th>
-                                </tr>
-                                <tr>
-                                    <th>4</th>
-                                </tr>
-                                <tr>
-                                    <th>5</th>
-                                </tr>
+                                <?php foreach ($_SESSION['members'] as $index => $member): ?>
+                                    <tr data-id="<?php echo $index; ?>">
+                                        <td><?php echo $member['name']; ?></td>
+                                        <td><?php echo $member['email']; ?></td>
+                                        <td><?php echo $member['mobile']; ?></td>
+                                        <td><?php echo $member['gender']; ?></td>
+                                        <td>
+                                            <button type="button" onclick="openEditModal(<?php echo $index; ?>)">Edit</button>
+                                            <button type="button" onclick="deleteMember(<?php echo $index; ?>)">Delete</button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <!-- <div id="member-list"></div>  -->
                     </div>
                 </div>
 
@@ -581,7 +717,7 @@
                         <div class="inputBox">
                             <div class="QR-code">
 
-                                <img src="https://myonlinevipani.com/wp-content/uploads/2023/05/PhonePe-My-Online-Vipani-large.png" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
+                                <img src="./picture//payment.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
                                 <p>Scan the QR code to make the payment.</p>
                             </div>
                             <div class="payment-box">
@@ -607,9 +743,376 @@
             </div>
         </form>
     </div>
+    <?php //foreach ($_SESSION['members'] as $index => $member): 
+    ?>
+    <!-- <tr>
+            <td><?php //echo $member['name']; 
+                ?></td>
+            <td><?php //echo $member['email']; 
+                ?></td>
+            <td><?php //echo $member['mobile']; 
+                ?></td>
+            <td><?php //echo $member['gender']; 
+                ?></td>
+            <td> -->
+    <!-- <form method="POST" style="display: inline;">
+                            <input type="hidden" name="index" value="<?php //echo $index; 
+                                                                        ?>">
+                            <button type="button" onclick="openEditModal(<?php //echo $index; 
+                                                                            ?>)">Edit</button>
+                        </form> -->
+    <!-- <button type="button" onclick="openEditModal(<?php //echo $index; 
+                                                        ?>)">Edit</button>
+                <button type="button" onclick="deleteMember(<?php //echo $index; 
+                                                            ?>)">Delete</button>
+            </td>
+        </tr> -->
+    <?php //endforeach; 
+    ?>
+
+    <!-- OTP Modal -->
+    <div class="modal-overlay" id="modal-overlay" style="display: none;"></div>
+    <div class="modal" id="otp-modal" style="display: none;">
+        <div>
+            <h2>Enter OTP</h2>
+            <input type="text" id="otp-input" placeholder="Enter OTP">
+            <button type="button" onclick="verifyOtp()">Submit</button>
+            <button type="button" onclick="closeOtpModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Modal for editing members -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal" id="edit-modal">
+        <form id="edit-member-form">
+            <input type="hidden" id="edit-index" name="index">
+            <label for="edit-name">Name:</label>
+            <input type="text" id="edit-name" name="name" required>
+
+            <label for="edit-email">Email:</label>
+            <input type="email" id="edit-email" name="email" required>
+
+            <label for="edit-mobile">Mobile:</label>
+            <input type="text" id="edit-mobile" name="mobile" required>
+
+            <label for="edit-gender">Gender:</label>
+            <select id="edit-gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <button type="submit" name="edit_member">Save</button>
+            <button type="button" onclick="closeEditModal()">Cancel</button>
+        </form>
+    </div>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ppjTxyf5i0I8sOJ1PHqFCqVbF+3kexW8PaKhycVBKpoM5K2W0S3UCZT60GU4hR9A" crossorigin="anonymous"></script>
+
+    <script>
+        const members = [];
+
+        function getMemberDetails(index) {
+            const member = members[index];
+            console.log(member);
+            return member;
+        }
+
+        function openOtpModal() {
+            const email = document.getElementById('leaderEmail').value;
+
+            if (!email) {
+                alert('Please enter an email before verifying.');
+                return;
+            }
+
+            const otp = Math.floor(100000 + Math.random() * 900000);
+
+            fetch('send_otp.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `email=${encodeURIComponent(email)}&otp=${otp}`
+                })
+                .then(response => response.json())
+                .then(result => {
+                    // console.log(result);
+                    if (result.success) {
+                        alert(result.message + result.email);
+                    } else {
+                        alert(result.message);
+                        document.getElementById('modal-overlay').style.display = 'none';
+                        document.getElementById('otp-modal').style.display = 'none';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+
+            // Show modal
+            document.getElementById('modal-overlay').style.display = 'block';
+            document.getElementById('otp-modal').style.display = 'block';
+
+            // Here you can send an OTP to the email entered by the user via an AJAX call to your server
+            // sessionStorage.setItem('otp', otp);
+            // console.log(`OTP sent to ${email}`);
+        }
+
+        function closeOtpModal() {
+            // Hide modal
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('otp-modal').style.display = 'none';
+        }
+
+        function verifyOtp() {
+            const enteredOtp = document.getElementById('otp-input').value;
+
+            // Send entered OTP to server for verification
+            fetch('verify_otp.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `otp=${enteredOtp}`,
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        // Hide modal and show verification status
+                        // closeOtpModal();
+                        // // const status = document.getElementById('verification-status');
+                        // const verifyOtp = document.getElementById('verify-otp');
+                        // // status.style.display = 'inline';
+                        // // status.textContent = 'Verified';
+                        // verifyOtp.disabled = true;
+                        // alert('Account Verified');
+                        closeOtpModal();
+                        const verifyOtp = document.getElementById('verify-otp');
+                        verifyOtp.disabled = true;
+                        verifyOtp.textContent = "Verified"; // Update button text
+                        alert('Account Verified');
+                    } else {
+                        alert('Incorrect OTP. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function openEditModal(index) {
+            console.log(index)
+            const modal = document.getElementById('edit-modal');
+            const overlay = document.getElementById('modal-overlay');
+
+            const member = (getMemberDetails(index)) ? getMemberDetails(index) : <?php echo json_encode($_SESSION['members']); ?>[index];
+            console.log(member);
+            document.getElementById('edit-index').value = index;
+            document.getElementById('edit-name').value = member.name;
+            document.getElementById('edit-email').value = member.email;
+            document.getElementById('edit-mobile').value = member.mobile;
+            document.getElementById('edit-gender').value = member.gender;
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+            modal.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        document.getElementById('edit-member-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission (page reload)
+
+            const formData = new FormData(this); // Create a FormData object
+
+            fetch('register_edit_member.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json()) // Parse JSON response
+                .then(result => {
+                    if (result.success) {
+                        alert('Member updated successfully!');
+                        closeEditModal();
+                        // Optionally refresh the UI to reflect changes
+                        // location.reload(); // Uncomment to reload page
+                        // Update the UI dynamically without refreshing
+                        const index = formData.get('index');
+                        console.log(index);
+                        const row = document.querySelector(`tr[data-id="${index}"]`);
+                        console.log(row);
+                        if (row) {
+                            row.children[0].textContent = result.name;
+                            row.children[1].textContent = formData.get('email');
+                            row.children[2].textContent = formData.get('mobile');
+                            row.children[3].textContent = formData.get('gender');
+                        }
+                    } else {
+                        alert('Failed to update member: ' + result.error);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+
+        function closeEditModal() {
+            const modal = document.getElementById('edit-modal');
+            const overlay = document.getElementById('modal-overlay');
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function submitAddMemberForm() {
+            // const form = document.getElementById('mainForm');
+            // form.action = 'register_add_member.php';
+            // form.submit();
+            const name = document.getElementById('memberName').value;
+            const mobile = document.getElementById('memberMobile').value;
+            const email = document.getElementById('memberEmail').value;
+            const gender = document.getElementById('gender').value;
+
+            // Validate inputs (optional)
+            if (!name || !mobile || !email) {
+                alert("All fields are required.");
+                return;
+            }
+
+            // Prepare data to send
+            const data = new FormData();
+            data.append('name', name);
+            data.append('mobile', mobile);
+            data.append('email', email);
+            data.append('gender', gender);
+            console.log(data);
+            fetch('register_add_member.php', {
+                    method: 'POST',
+                    body: data,
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        members.push(result.member);
+                        // Dynamically append the new member row to the table
+
+                        const tableBody = document.querySelector('.table tbody');
+                        const newRow = document.createElement('tr');
+                        newRow.setAttribute('data-id', result.member.id || members.length - 1);
+                        newRow.innerHTML = `
+                        <td>${result.member.name}</td>
+                            <td>${result.member.email}</td>
+                            <td>${result.member.mobile}</td>
+                            <td>${result.member.gender || '-'}</td>
+                            <td>
+                                <button type="button" onclick="openEditModal(${result.index})">Edit</button>
+                                <button type="button" onclick="deleteMember(${result.index})">Delete</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(newRow);
+                        // Append member to the list dynamically
+                        // const memberList = document.getElementById('member-list');
+                        // const memberDiv = document.createElement('div');
+                        // memberDiv.textContent = `Name: ${result.member.name}, Mobile: ${result.member.mobile}, Email: ${result.member.email}`;
+                        // memberList.appendChild(memberDiv);
+
+                        // Clear input fields
+                        document.getElementById('memberName').value = '';
+                        document.getElementById('memberMobile').value = '';
+                        document.getElementById('memberEmail').value = '';
+                    } else {
+                        alert(result.error || "Failed to add member.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function deleteMember(index) {
+            console.log(index);
+            if (confirm("Are you sure you want to delete this member?")) {
+                // Use AJAX to send the deletion request to the server
+                fetch('register_delete_member.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `index=${index}&delete_member=true`
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            // console.log(result);
+
+                            console.log('Member deleted successfully.');
+                            const table = document.querySelector('.table tbody');
+                            const row = table.rows[index]; // Get the corresponding row by index
+                            if (row) {
+                                row.remove();
+                            }
+                            // Optionally refresh the member list or remove the deleted row
+                            // location.reload(); // Reload the page to update the list
+                        } else {
+                            console.error('Error:', result.error);
+                            alert('Failed to delete member: ' + (result.error || 'Unknown error.'));
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+
+        document.getElementById('mainForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log("test1");
+            // Get the form data or the necessary values to send
+            const formData = new FormData();
+            console.log("test2");
+            formData.append('teamName', document.getElementById('teamName').value);
+            console.log("test3");
+            formData.append('psId', document.getElementById('psId').value);
+            console.log("test4");
+            console.log(formData);
+            console.log("test5");
+
+            formData.append('leaderName', document.getElementById('leaderName').value);
+            formData.append('leaderEmail', document.getElementById('leaderEmail').value);
+            formData.append('leaderMobile', document.getElementById('leaderMobile').value);
+            formData.append('leaderGender', document.getElementById('leaderGender').value);
+
+            console.log("test6");
+            formData.append('transactionId', document.getElementById('transactionId').value);
+            formData.append('paymentScreenshot', document.getElementById('paymentScreenshot').files[0]); // Assuming this is a file input
+
+            console.log("test7");
+            // Get the members from the session (assuming they're in a variable already)
+            const members = (getMemberDetails()) ? getMemberDetails() : <?php echo json_encode($_SESSION['members']); ?>;
+            console.log("test8");
+            console.log(members);
+            console.log("test9");
+            formData.append('members', members); // Send members as a JSON string
+            console.log("test10");
+            // Send the data using fetch
+            fetch('register_form_process.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(result.message); // You can log the data received for debugging
+                        alert("You will receive your login credentials via email. If you do not receive an email regarding your submission, please contact the hackathon volunteers.")
+                        window.location.href = "loginPage.php";
+                    } else {
+                        // alert('Failed to submit form: ' + result.message);
+                        alert(result.name + ' is ' + result.message); // You can show a success message
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+
+
 </body>
 
 </html>
