@@ -163,7 +163,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         .report-container {
             margin-top: 20px;
             margin-bottom: 20px;
-            
+
         }
 
         .btn-primary {
@@ -188,7 +188,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             background-color: rgb(47, 141, 70);
         }
 
-        .form-body {
+        /* .form-body {
             padding-bottom: 10px;
         }
 
@@ -208,8 +208,63 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             width: 120px;
             height: 40px;
             margin-left: 5px;
+        } */
+
+        .report-body {
+            /* max-width: 600px; */
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #ddd; */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgb(255, 255, 255);
         }
 
+        .form-body {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-body label {
+            font-weight: 600;
+            width: 150px;
+            /* Fixed width for labels */
+        }
+
+        .form-control,
+        select,
+        textarea {
+            padding: 10px;
+            width: 100%;
+            /* Full width for inputs */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: rgb(97, 19, 207);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #5500cb;
+        }
     </style>
 
 </head>
@@ -293,8 +348,8 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                             <input type="text" name="psCategory" id="psCategory" class="form-control" placeholder="Enter PS Category" required>
                         </div>
                         <div class="form-body">
-                            <label for="psGivenBy" class="form-label">Given By: </label>
-                            <input type="text" name="psGivenBy" id="psGivenBy" class="form-control" placeholder="Enter PS Giver Name" required>
+                            <label for="psGivenBy" class="form-label">Organization: </label>
+                            <input type="text" name="psGivenBy" id="psGivenBy" class="form-control" placeholder="Enter PS Organization Name" required>
                         </div>
                         <div class="form-body">
                             <label for="psDificulty" class="form-label">Dificulty Level:</label>
@@ -362,6 +417,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                             <div class="modal-body">
                                                 <p><strong>PS ID:</strong> ' . $row['ps_id'] . '</p>
                                                 <p><strong>Name:</strong> ' . $row['ps_name'] . '</p>
+                                                <p><strong>Organization:</strong> ' . $row['ps_given_by'] . '</p>
                                                 <p><strong>Description:</strong> ' . $row['ps_description'] . '</p>
                                                 <p><strong>Total Participation:</strong> ' . $row['no_of_participation'] . '</p>
                                                 <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>

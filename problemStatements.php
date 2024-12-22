@@ -321,6 +321,7 @@ require 'db.php';
                                             <div class="popup-body">
                                                 <p><strong>PS ID:</strong> ' . $row['ps_id'] . '</p>
                                                 <p><strong>Name:</strong> ' . $row['ps_name'] . '</p>
+                                                <p><strong>Organization:</strong> ' . $row['ps_given_by'] . '</p>
                                                 <p><strong>Description:</strong> ' . $row['ps_description'] . '</p>
                                                 <p><strong>Total Participation:</strong> ' . $row['no_of_participation'] . '</p>
                                                 <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>

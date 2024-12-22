@@ -254,7 +254,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                                         <td><?php echo $srno ?></td>
                                         <td><?php echo $leader['teamName'] ?></td>
                                         <td><?php echo $leader['leaderEmail'] ?></td>
-                                        <td><?php echo $leader['psId'] ?></td>
+                                        <td><?php echo  strtoupper($leader['psId']) ?></td>
                                         <td>
                                             <!-- <form action="" method="POST" class="d-inline"> -->
                                             <input type="hidden" name="noti_id" value="<?php echo $leader['leaderEmail']; ?>">
