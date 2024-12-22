@@ -10,15 +10,21 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="admin_dash_style.css">
+    <title>Mentor Dashboard</title>
+    <link rel="stylesheet" href="mentor_dash_style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            overflow-y: hidden;
+        }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -45,22 +51,6 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             font-size: 13px;
         }
 
-        .table {
-            overflow-x: auto;
-
-        }
-
-        textarea {
-            width: 100%;
-            /* Fixed width */
-            min-height: 100px;
-            /* Minimum height */
-            resize: vertical;
-            /* Allow resizing only vertically */
-            overflow: hidden;
-            /* Hide overflow */
-        }
-
         .popup {
             border: 1px solid black;
             border-radius: 10px;
@@ -79,6 +69,15 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             visibility: visible;
         }
 
+        .modal-header {
+            display: block;
+        }
+
+        .modal-body p {
+            margin-bottom: 0px;
+            padding: 0px 0px 5px 10px;
+        }
+
         .modal-header h2 {
             padding-top: 25px;
             padding-bottom: 10px;
@@ -87,22 +86,28 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             border-bottom: 2px solid rgba(0, 20, 151, 0.59);
         }
 
-        .close-btn {
+        .modal-footer {
+            display: block;
+        }
+
+        .modal-footer button {
             background-color: rgb(220, 0, 0);
             color: white;
             width: 60px;
             height: 30px;
             border-radius: 5px;
             border: none;
-            margin-top: 25px;
+            margin: 20px 0px 10px 8px;
+            padding: 0px;
+            font-size: 90%;
         }
 
-        .close-btn:hover {
+        .modal-footer button:hover {
             background-color: rgb(150, 0, 0);
             color: white;
         }
 
-        .close-btn:active {
+        .modal-footer button:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(220, 0, 0);
             /* color: white; */
@@ -110,14 +115,69 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
         @media screen and (max-width: 400px) {
             .popup {
-                width: 98%;
+                width: 300px;
             }
         }
 
-        @media screen and (max-width: 600px) {
-            .popup {
-                width: 98%;
-            }
+        .primary-btn {
+            color: white;
+            width: 100%;
+            height: 30px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
+            border: none;
+        }
+
+        .primary-btn:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .primary-btn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
+        }
+
+        .nav-option i {
+            font-size: 185%;
+        }
+
+        .main {
+            background-color: #cad7fda4;
+        }
+
+        .nav-upper-options {
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-upper-options h3 {
+            font-size: 18px;
+            margin-bottom: 0px;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .badge {
+            background-color: rgb(229, 0, 0);
+        }
+
+        .mt-5 h5 {
+            color: #5500cb;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            border-bottom: solid rgba(0, 20, 151, 0.59);
+        }
+
+        .DHead h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 0px;
+        }
+
+        .nav-option1 i {
+            color: #fff;
         }
 
         .view-btn {
@@ -209,60 +269,84 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             height: 40px;
             margin-left: 5px;
         }
-
     </style>
 
 </head>
 
-<body>
+<body> 
     <!-- for header part -->
     <header>
 
         <div class="logosec">
-            <a href="admin_dashboard.php" style="text-decoration: none;">
-                <div class="logo">Admin</div>
+            <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
+                <div class="logo">Mentor</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
 
-        <div>
-            <H1>Dashboard</H1>
+        <div class="DHead">
+            <H1>Problem</H1>
         </div>
 
         <div class="message">
-            <div class="circle"></div>
-            <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
+            <!-- <div class="circle"></div> -->
+            <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
             <div class="dp">
-                <a href="admin_profile.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
+                <a href="mentor_my_teams_shad.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
         </div>
 
     </header>
 
-
-
-
     <div class="main-container">
         <div class="navcontainer">
             <nav class="nav">
                 <div class="nav-upper-options">
-                    <a href="admin_dashboard.php" style="text-decoration: none;">
-                        <div class="nav-option option1">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png" class="nav-img" alt="dashboard">
-                            <h3> Dashboard</h3>
+                    <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
+                        <div class="nav-option option2">
+                            <i style="color: black;" class="bi-columns"></i>
+                            <h3 style="color: black;"> Dashboard</h3>
                         </div>
                     </a>
 
-                    <a href="admin_profile.php" style="text-decoration: none;">
-                        <div class="nav-option option2" style="color: black;">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png" class="nav-img" alt="blog">
-                            <h3> Profile</h3>
+                    <a href="mentor_my_teams_shad.php" style="text-decoration: none;">
+                        <div class="nav-option option6" style="color: black;">
+                            <i class="bi-file-earmark-person"></i>
+                            <h3> My Team</h3>
+                        </div>
+                    </a>
+
+                    <a href="mentor_payment_shad.php" style="text-decoration: none;">
+                        <div class="nav-option option5" style="color: black;">
+                            <i class="bi-patch-check"></i>
+                            <h3> Payment</h3>
+                        </div>
+                    </a>
+
+                    <a href="mentor_result_shad.php" style="text-decoration: none;">
+                        <div class="nav-option option4" style="color: black;">
+                            <i class="bi-award"></i>
+                            <h3> Result</h3>
+                        </div>
+                    </a>
+
+                    <a href="mentor_problem_shad.php" style="text-decoration: none;">
+                        <div class="nav-option option1" style="color: black;">
+                            <i style="color: #fff;" class="bi-eye"></i>
+                            <h3 style="color: #fff;"> Problems</h3>
+                        </div>
+                    </a>
+
+                    <a href="mentor_guideline_shad.php" style="text-decoration: none;">
+                        <div class="nav-option option3" style="color: black;">
+                            <i class="bi-card-checklist"></i>
+                            <h3> Guidelines</h3>
                         </div>
                     </a>
 
                     <a href="logout.php" style="text-decoration: none;">
                         <div class="nav-option logout" style="color: black;">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png" class="nav-img" alt="logout">
+                            <i class="bi-arrow-left-circle"></i>
                             <h3>Logout</h3>
                         </div>
                     </a>
@@ -272,49 +356,6 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         </div>
 
         <div class="main">
-            <!-- team detail table -->
-            <div class="report-container">
-                <div class="report-header">
-                    <h1 class="recent-Articles">Add New Problem</h1>
-                </div>
-
-                <div class="report-body">
-                    <form action="admin_add_ps_process.php" method="POST">
-                        <div class="form-body">
-                            <label for="psId" class="form-label">Id: </label>
-                            <input type="text" name="psId" id="psId" class="form-control" placeholder="Enter PS ID" required>
-                        </div>
-                        <div class="form-body">
-                            <label for="psName" class="form-label">Title: </label>
-                            <input type="text" name="psName" id="psName" class="form-control" placeholder="Enter PS Title" required>
-                        </div>
-                        <div class="form-body">
-                            <label for="psCategory" class="form-label">Category: </label>
-                            <input type="text" name="psCategory" id="psCategory" class="form-control" placeholder="Enter PS Category" required>
-                        </div>
-                        <div class="form-body">
-                            <label for="psGivenBy" class="form-label">Given By: </label>
-                            <input type="text" name="psGivenBy" id="psGivenBy" class="form-control" placeholder="Enter PS Giver Name" required>
-                        </div>
-                        <div class="form-body">
-                            <label for="psDificulty" class="form-label">Dificulty Level:</label>
-                            <select name="psDificulty" id="psDificulty" required>
-                                <option value="" selected disabled>Select Level</option>
-                                <option value="">None</option>
-                                <option value="easy">Easy</option>
-                                <option value="medium">Medium</option>
-                                <option value="hard">Hard</option>
-                            </select>
-                        </div>
-                        <div class="form-body">
-                            <label for="psDescription" class="form-label">Description:</label>
-                            <textarea name="psDescription" id="psDescription" style="padding: 5px 0px 0px 8px; overflow-y: auto;" rows="4" placeholder="Type your description here..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
-                </div>
-                <!-- </div> -->
-            </div>
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">Problems</h1>
@@ -330,8 +371,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                 <th scope="col">PS ID</th>
                                 <th scope="col">PS Name</th>
                                 <th scope="col">PS Category</th>
-                                <th scope="col">View</th>
-                                <th scope="col">Delete</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -350,7 +390,6 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                     echo "<td>" . $row['ps_name'] . "</td>";
                                     echo "<td>" . $row['ps_category'] . "</td>";
                                     echo '<td> <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button> </td>';
-                                    echo '<td> <button class="delete-btn" onclick="deletePs(this)" data-id="' . $row['ps_id'] . '">Delete</button>';
                                     echo "</tr>";
 
                                     // Modal for each problem statement
@@ -367,9 +406,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                                 <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>
                                             </div>
                                             <div class="modal-footer">
-                                                
-                                                <button type="button" class="close-btn" data-id="' . $row['ps_id'] . '" onclick="closePopup(this)">Close</button>
-
+                                                <button type="button" data-id="' . $row['ps_id'] . '" onclick="closePopup(this)">Close</button>
                                             </div>
                                         </div>';
                                     $sr_no++; // Increment the serial number
@@ -387,89 +424,37 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             </div>
         </div>
 
-    </div>
+        <script>
+            let menuicn = document.querySelector(".menuicn");
+            let nav = document.querySelector(".navcontainer");
 
-    <script>
-        let menuicn = document.querySelector(".menuicn");
-        let nav = document.querySelector(".navcontainer");
+            menuicn.addEventListener("click", () => {
+                nav.classList.toggle("navclose");
+            })
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        menuicn.addEventListener("click", () => {
-            nav.classList.toggle("navclose");
-        })
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.getElementById('listBtn').addEventListener('click', () => {
-            if (document.getElementById("sidebar").style.display == 'block') {
-                document.getElementById("sidebar").style.display = 'none';
-            } else {
-                document.getElementById("sidebar").style.display = 'block';
+        <script>
+            function openPopup(button) {
+                const dataId = button.getAttribute('data-id'); // Get the data-id value
+
+                const popup = document.getElementById(dataId); // Get the popup element by ID
+                if (popup) {
+                    popup.classList.add("open-popup"); // Add the class to open the popup
+                } else {
+                    console.error(`Popup with ID "${dataId}" not found`);
+                }
             }
-        })
 
-        document.getElementById('backBtn').addEventListener('click', () => {
-            if (document.getElementById("sidebar").style.display == 'block') {
-                document.getElementById("sidebar").style.display = 'none';
-            } else {
-                document.getElementById("sidebar").style.display = 'block';
+            function closePopup(button) {
+                const dataId = button.getAttribute('data-id'); // Get the data-id value
+                const popup = document.getElementById(dataId); // Get the popup element by ID
+                popup.classList.remove("open-popup")
             }
-        })
+        </script>
 
-        document.getElementById('myProfile').addEventListener('click', () => {
-            window.location.href = "myProfile.php";
-        })
-        // yahan pe jo si bhi id dalenga vo popup open honga
-        // let popup = document.getElementById("RJH01");
-
-        function openPopup(button) {
-            const dataId = button.getAttribute('data-id'); // Get the data-id value
-
-            const popup = document.getElementById(dataId); // Get the popup element by ID
-            if (popup) {
-                popup.classList.add("open-popup"); // Add the class to open the popup
-            } else {
-                console.error(`Popup with ID "${dataId}" not found`);
-            }
-        }
-
-        function closePopup(button) {
-            const dataId = button.getAttribute('data-id'); // Get the data-id value
-            const popup = document.getElementById(dataId); // Get the popup element by ID
-            popup.classList.remove("open-popup")
-        }
-
-        function deletePs(button) {
-            const psId = button.getAttribute("data-id");
-
-            if (confirm("Are you sure you want to delete this problem statement?")) {
-                fetch("delete_ps.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                        },
-                        body: `ps_id=${encodeURIComponent(psId)}`,
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === "success") {
-                            alert(data.message);
-                            // Remove the row from the table
-                            const row = button.closest("tr");
-                            if (row) {
-                                row.remove();
-                            }
-                        } else {
-                            alert(data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        alert("An error occurred while deleting the problem statement.");
-                    });
-            }
-        }
-    </script>
 </body>
 
 </html>
