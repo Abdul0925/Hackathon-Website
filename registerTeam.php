@@ -36,6 +36,13 @@ $_SESSION['isVerified'] = false;
             background-color: #ffffff;
         }
 
+        .heading-font {
+            font-family: "Playwrite GB S", cursive;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -529,13 +536,13 @@ $_SESSION['isVerified'] = false;
                     <!-- Login/Register Button inside collapsible section -->
                     <div class="d-lg-none mt-2">
                         <!-- Hidden on larger screens, visible on mobile within collapsible area -->
-                        <a href="loginPage.php" class="btn my-primary-btn w-100 cmn-button">Login/Register</a>
+                        <a href="loginPage.php" class="btn my-primary-btn w-100 cmn-button">Login</a>
                     </div>
                 </div>
 
                 <!-- Login/Register Button visible only on larger screens -->
                 <div class="d-none d-lg-flex">
-                    <a href="loginPage.php" class="btn my-primary-btn">Login/Register</a>
+                    <a href="loginPage.php" class="btn my-primary-btn">Login</a>
                 </div>
             </div>
         </nav>
@@ -1063,6 +1070,8 @@ $_SESSION['isVerified'] = false;
         document.getElementById('mainForm').addEventListener('submit', function(e) {
             e.preventDefault();
             console.log("test1");
+            const registerBtn = document.querySelector('.register-btn');
+            registerBtn.disabled = true;
             // Get the form data or the necessary values to send
             const formData = new FormData();
             console.log("test2");
@@ -1104,6 +1113,7 @@ $_SESSION['isVerified'] = false;
                     } else {
                         // alert('Failed to submit form: ' + result.message);
                         alert(result.name + ' is ' + result.message); // You can show a success message
+                        registerBtn.disabled = false;
                     }
                 })
                 .catch(error => {

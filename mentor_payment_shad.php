@@ -1,10 +1,10 @@
 <?php
 session_start();
 require "db.php";
-if ($_SESSION['mentor_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
-$email = $_SESSION['email'];
+$email = $_SESSION['leaderEmail'];
 $team_id = $_SESSION['id'];
 
 $paymentStatusStmt = $conn->prepare("SELECT * FROM payment_details WHERE team_id = ?");
@@ -12,36 +12,11 @@ $paymentStatusStmt->bind_param("i", $team_id);
 $paymentStatusStmt->execute();
 $statusResult = $paymentStatusStmt->get_result();
 $paymentStatus = $statusResult->fetch_assoc();
-$paymentStatus = $paymentStatus['status'];
+$paymentStat = $paymentStatus['status'];
+$ssPath = $paymentStatus['pay_path'];
+// echo $ssPath;
+// echo htmlspecialchars($ssPath);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
-    if ($totalMembers > 4) {
-        echo '<script> alert("You can only add 5 members "); window.location.href = "mentor_my_teams.php"; </script>';
-        return;
-    }
-    if ($paymentStatus == "Completed") {
-        echo '<script> alert("You can' . "'t" . ' add members after payment "); window.location.href = "mentor_my_teams.php"; </script>';
-        return;
-    }
-    $memberName = $_POST['memberName'];
-    $memberEmail = $_POST['memberEmail'];
-    $memberMobile = $_POST['memberMobile'];
-    $is_leader = 0;
-    $team_name = "";
-    $ps = "";
-    $addNewMemberStmt = $conn->prepare("INSERT INTO all_team_members (team_id, mentor, name, email, phone, team_name, ps, is_leader) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $addNewMemberStmt->bind_param("issssssi", $team_id, $email, $memberName, $memberEmail, $memberMobile, $team_name, $ps, $is_leader);
-    if ($addNewMemberStmt->execute()) {
-    } else {
-        echo '<script> alert("Error Adding New Member!"); window.location.href = "mentor_my_teams.php"; </script>';
-    }
-    $addNewMemberStmt->close();
-    $conn->close();
-    echo '<script> window.location.href = "mentor_my_teams.php"; </script>';
-    // return;
-
-}
 
 
 ?>
@@ -230,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
 
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
-                <div class="logo">Mentor</div>
+                <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
@@ -310,24 +285,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
             <div class="report-container">
                 <div class="pay-status">
                     <h5>
-                        Your Payment Status: <span style="color: <?php echo $paymentStatus === 'Pending' ? 'red' : ($paymentStatus === 'Completed' ? 'green' : 'black'); ?>;"> <?php echo ucfirst($paymentStatus); ?></span>
+                        Your Payment Status: <span style="color: <?php echo $paymentStat === 'Pending' ? 'red' : ($paymentStat === 'Completed' ? 'green' : 'black'); ?>;"> <?php echo ucfirst($paymentStat); ?></span>
                         <button type="button" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="If you have already submitted the payment screenshot and your status still shows as pending, kindly wait for the admin to process your request. This might take some time. However, if the status remains pending for more than 6 hours, please reach out to a hackathon volunteer for assistance.">!</button>
                     </h5>
                 </div>
 
                 <div class="QRcode">
-                    <img src="./picture/QRcodephoto.jpg" alt="payment" height width="400">
+                    <img src="<?php echo $ssPath ?>" alt="payment" height width="400">
                 </div>
-                <form action="">
-                    <div class="pay">
-                        <label for="paymentproof">Upload Screen Shot of Your Payment: </label>
-                        <input type="file" name="paymentproof" id="paymentproof" required>
-                        <button class="upload-btn btn-primary" type="submit">Uplaod</button>
-                    </div>
-                </form>
+                
             </div>
         </div>
-
+        
 
 
 

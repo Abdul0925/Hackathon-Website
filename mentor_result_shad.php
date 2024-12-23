@@ -1,11 +1,11 @@
 <?php
 session_start();
 require "db.php";
-if ($_SESSION['mentor_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
 
-$email = $_SESSION['email'];
+$email = $_SESSION['leaderEmail'];
 
 // Query to get the image path
 $sql = "SELECT * FROM mentor_details WHERE email = ?";
@@ -199,7 +199,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
-                <div class="logo">Mentor</div>
+                <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>

@@ -185,13 +185,13 @@
                     <!-- Login/Register Button inside collapsible section -->
                     <div class="d-lg-none mt-2">
                         <!-- Hidden on larger screens, visible on mobile within collapsible area -->
-                        <a href="loginPage.php" class="btn my-primary-btn w-100 cmn-button">Login/Register</a>
+                        <a href="loginPage.php" class="btn my-primary-btn w-100 cmn-button">Register Now</a>
                     </div>
                 </div>
 
                 <!-- Login/Register Button visible only on larger screens -->
                 <div class="d-none d-lg-flex">
-                    <a href="loginPage.php" class="btn my-primary-btn">Login/Register</a>
+                    <a href="registerTeam.php" class="btn my-primary-btn">Register Now</a>
                 </div>
             </div>
         </nav>

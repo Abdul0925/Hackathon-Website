@@ -1,11 +1,11 @@
 <?php
 session_start();
 require "db.php";
-if ($_SESSION['mentor_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
 
-$email = $_SESSION['email'];
+$email = $_SESSION['leaderEmail'];
 
 // Query to get the image path
 $sql = "SELECT * FROM mentor_details WHERE email = ?";

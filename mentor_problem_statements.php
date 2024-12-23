@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "db.php";
-if ($_SESSION['mentor_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
 
@@ -171,7 +171,7 @@ if ($_SESSION['mentor_logged_in'] != true) {
                         <img src="<?php echo $_SESSION['imagePath'] ?>" alt="Profile Picture">
                         <div>
                             <div class="name"> <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?> </div>
-                            <small>Mentor</small>
+                            <small>Leader</small>
                         </div>
                     </div>
                 </div>

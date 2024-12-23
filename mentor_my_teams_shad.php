@@ -1,11 +1,11 @@
 <?php
 session_start();
 require "db.php";
-if ($_SESSION['mentor_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
 
-$email = $_SESSION['email'];
+$email = $_SESSION['leaderEmail'];
 
 // Query to get the image path
 $sql = "SELECT * FROM mentor_details WHERE email = ?";
@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
 }
 
 
-$result1 = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
+$result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
 $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
 
@@ -189,7 +189,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
-                <div class="logo">Mentor</div>
+                <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
@@ -267,7 +267,40 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
         <div class="main">
 
-            
+        <div class="report-container">
+                <div class="mt-5">
+                    <h5 class="mb-3">Team Details</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>Members</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $sr_no= 1 ; ?>
+                                <?php while ($row1 = $result1->fetch_assoc()) {
+                                    // $date = date('d-m-Y', strtotime($row1['date']));
+                                    $date = "";
+                                ?>
+                                    <tr>
+                                        <td><?php echo $sr_no++; ?></td>
+                                        <td><?php echo $row1['memberName']; ?></td>
+                                        <td><?php echo $row1['memberMobile']; ?></td>
+                                        <td><?php echo $row1['memberEmail']; ?></td>
+                                        <td><?php echo $row1['memberGender']; ?></td>
+                                    </tr>
+                                <?php
+                                } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
 
         </div>

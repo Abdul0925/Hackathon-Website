@@ -282,7 +282,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
-                <div class="logo">Mentor</div>
+                <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
