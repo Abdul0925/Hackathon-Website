@@ -125,50 +125,30 @@ $_SESSION['isVerified'] = false;
 
         .container-two {
             border-radius: 15px;
-            /* border-bottom: 8px;
-            border-right: 8px; */
-            border-style: solid;
-            /* border-color: rgb(193, 124, 235); */
             padding: 4px 5px 0px 5px;
             margin-bottom: 30px;
-            /* background-color: #5C0F8B; */
         }
 
         .boxF {
             border-radius: 15px;
             border-style: solid;
-            /* border-color: rgb(193, 124, 235); */
             margin-bottom: 15px;
             margin-top: 15px;
             background-color: #ffffff;
-            /* padding: 15px 0px 15px 0px; */
-            /* border-bottom: 8px; */
-            /* border-right: 8px; */
-            /* border-top: 5px; */
         }
 
         .box {
             border-radius: 15px;
             border-style: solid;
-            /* border-color: rgb(193, 124, 235); */
             margin-bottom: 15px;
             background-color: #ffffff;
-            /* padding: 15px 0px 15px 0px; */
-            /* border-bottom: 8px; */
-            /* border-right: 8px; */
-            /* border-top: 5px; */
         }
 
         .boxL {
             border-radius: 15px;
             border-style: solid;
-            /* border-color: rgb(193, 124, 235); */
             margin-bottom: 15px;
             background-color: #ffffff;
-            /* padding: 15px 0px 15px 0px; */
-            /* border-bottom: 8px; */
-            /* border-right: 8px; */
-            /* border-top: 5px; */
         }
 
         .head-title {
@@ -179,7 +159,6 @@ $_SESSION['isVerified'] = false;
         }
 
         .head-div {
-            /* border: black; */
             border-radius: 10px 10px 0px 0px;
             background-color: #5C0F8B;
         }
@@ -195,10 +174,6 @@ $_SESSION['isVerified'] = false;
             justify-content: center;
         }
 
-        /* .payment-box {
-            margin-left: 20px;
-        } */
-
         .QR-code {
             display: flex;
             flex-direction: column;
@@ -211,18 +186,10 @@ $_SESSION['isVerified'] = false;
             flex-direction: row;
         }
 
-        /* .direction{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        } */
-
         h1 {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
-            /* color: #ffffff; */
         }
 
         .form-section {
@@ -260,13 +227,11 @@ $_SESSION['isVerified'] = false;
         .verify-btn button:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
 
         .prob-btn button {
             color: white;
             width: 80px;
-            /* margin-top: 5px; */
             height: 40px;
             background-color: rgb(47, 141, 70);
             border-radius: 5px;
@@ -281,7 +246,6 @@ $_SESSION['isVerified'] = false;
         .prob-btn button:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
 
         .add-btn button {
@@ -302,7 +266,6 @@ $_SESSION['isVerified'] = false;
         .add-btn button:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
 
         .register-btn {
@@ -322,7 +285,6 @@ $_SESSION['isVerified'] = false;
         .register-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
 
         /* Modal Overlay */

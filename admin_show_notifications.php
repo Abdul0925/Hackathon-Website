@@ -79,6 +79,15 @@ if ($_SESSION['admin_logged_in'] != true) {
             background-color: rgb(200, 0, 0);
         }
 
+        .badge {
+            background-color: rgb(229, 0, 0);
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+            border-radius: 7px;
+            padding: 1px 7px 1px 7px;
+        }
+
         @media screen and (max-width: 400px) {
             .report-container {
                 width: 98%;

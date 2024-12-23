@@ -28,6 +28,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
         .table {
             margin-bottom: 0px;
+            overflow-x: auto;
         }
 
         table {
@@ -371,6 +372,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                 <th scope="col">PS ID</th>
                                 <th scope="col">PS Name</th>
                                 <th scope="col">PS Category</th>
+                                <th scope="col">Total Participation</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -389,6 +391,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                     echo "<td>" . $row['ps_id'] . "</td>";
                                     echo "<td>" . $row['ps_name'] . "</td>";
                                     echo "<td>" . $row['ps_category'] . "</td>";
+                                    echo "<td>" . $row['no_of_participation'] . "</td>";
                                     echo '<td> <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button> </td>';
                                     echo "</tr>";
 
