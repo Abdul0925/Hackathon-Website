@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
                     $mail->addAddress($email);
                     $mail->isHTML(true);
                     $mail->Subject = "OTP for Reset Password";
-                    $msg = 'Dear ' . strtoupper($mentor['first_name']) . '<p> your one time password for password process is:</p>' .
+                    $msg = 'Dear ' . strtoupper($mentor['leaderName']) . '<p> your one time password for password process is:</p>' .
                         '<p>OTP: ' . $_SESSION['otp'] . '</p>';
                     $mail->Body = $msg;
                     if ($mail->send()) {
@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         $mail->Subject = "Login Credentials";
 
         // Construct the email body with the student's login details
-        $msg = 'Dear ' . strtoupper($first_name) . '<p> Your password for RJH has Changed Successfully if its not you than contact us</p>' .
+        $msg = 'Dear ' . strtoupper($leaderName) . '<p> Your password for RJH has Changed Successfully if its not you than contact us</p>' .
             '<p>Username: ' . $email . '</p>';
 
         // Set the email message content
