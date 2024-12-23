@@ -26,6 +26,10 @@ if ($result->num_rows > 0) {
 
 // $result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
 $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
+$countPS = mysqli_query($conn, "SELECT COUNT(*) as total FROM problem_statements");
+$rowPS = mysqli_fetch_assoc($countPS);
+$totalPS = $rowPS['total'];
+
 
 
 
@@ -276,7 +280,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                 <div class="box box2">
                     <div class="text">
                         <h2 class="topic">Total Problem Statement</h2>
-                        <h2 class="topic-heading">9</h2>
+                        <h2 class="topic-heading"><?php echo $totalPS ?></h2>
                     </div>
                     <!-- <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png" alt="likes"> -->
                 </div>

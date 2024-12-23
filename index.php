@@ -479,15 +479,17 @@
             <img src="https://i.pinimg.com/564x/08/ff/65/08ff655ded24544c02b0b22ce255df09.jpg" alt="Hackathon Image" width="50%">
         </div>
         <div class="cover-container">
-            <div class="overlay-text1 font-style-text font-style-text">BE A PART OF RTH SEASON 2</div>
+            <div class="overlay-text1 font-style-text font-style-text">The Raisoni Tech Hackathon Seasone 2</div>
             <p><i>"the best way to predict the future is to invent it"</i></p>
+            <p></p>
             <header class="hero-section">
                 <div class="hero-content">
-                    <a href="loginPage.php" class="btn btn-lg">Join the Challenge</a>
+                    <a href="registerTeam.php" class="btn btn-lg">Join the Challenge</a>
                 </div>
             </header>
         </div>
     </div>
+    
 
 
     <!-- About Section -->
@@ -501,7 +503,7 @@
     <!-- Highlights Section -->
     <section class="highlights d-block d-lg-flex">
         <div class="highlight-item">
-            <h4>48 Hours of Innovation</h4>
+            <h4>36 Hours of Innovation</h4>
             <p>Continuous coding and brainstorming to create breakthrough solutions.</p>
         </div>
         <div class="highlight-item">
@@ -601,7 +603,7 @@
                 <!-- Logo and University Name -->
                 <div class="col-md-3 text-center text-md-start mb-4 mt-5">
                     <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                        <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="University Logo" style="width: 270px;">
+                        <img src="./picture/ghru-nagpur.webp" alt="University Logo" style="width: 270px;">
                     </a>
                 </div>
 

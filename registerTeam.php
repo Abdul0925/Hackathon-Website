@@ -1081,16 +1081,16 @@ $_SESSION['isVerified'] = false;
             console.log("test4");
             console.log(formData);
             console.log("test5");
-            
+
             formData.append('leaderName', document.getElementById('leaderName').value);
             formData.append('leaderEmail', document.getElementById('leaderEmail').value);
             formData.append('leaderMobile', document.getElementById('leaderMobile').value);
             formData.append('leaderGender', document.getElementById('leaderGender').value);
-            
+
             console.log("test6");
             formData.append('transactionId', document.getElementById('transactionId').value);
             formData.append('paymentScreenshot', document.getElementById('paymentScreenshot').files[0]); // Assuming this is a file input
-            
+
             console.log("test7");
             // Get the members from the session (assuming they're in a variable already)
             const members = (getMemberDetails()) ? getMemberDetails() : <?php echo json_encode($_SESSION['members']); ?>;
@@ -1101,19 +1101,19 @@ $_SESSION['isVerified'] = false;
             console.log("test10");
             // Send the data using fetch
             fetch('register_form_process.php', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    alert(result.message); // You can log the data received for debugging
-                    alert("You will receive your login credentials via email. If you do not receive an email regarding your submission, please contact the hackathon volunteers.")
-                    window.location.href = "loginPage.php";
-                } else {
-                    // alert('Failed to submit form: ' + result.message);
-                    alert(result.name + ' is ' + result.message); // You can show a success message
-                    registerBtn.disabled = false;
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(result.message); // You can log the data received for debugging
+                        alert("You will receive your login credentials via email. If you do not receive an email regarding your submission, please contact the hackathon volunteers.")
+                        window.location.href = "loginPage.php";
+                    } else {
+                        // alert('Failed to submit form: ' + result.message);
+                        alert(result.name + ' is ' + result.message); // You can show a success message
+                        registerBtn.disabled = false;
                     }
                 })
                 .catch(error => {
