@@ -1017,7 +1017,7 @@ $_SESSION['isVerified'] = false;
             const mobile = document.getElementById('memberMobile').value;
             const email = document.getElementById('memberEmail').value;
             const gender = document.getElementById('gender').value;
-
+            const leaderGender = document.getElementById('leaderGender').value;
             // Validate inputs (optional)
             if (!name || !mobile || !email) {
                 alert("All fields are required.");
@@ -1030,6 +1030,7 @@ $_SESSION['isVerified'] = false;
             data.append('mobile', mobile);
             data.append('email', email);
             data.append('gender', gender);
+            data.append('leaderGender', leaderGender);
             console.log(data);
             fetch('register_add_member.php', {
                     method: 'POST',
