@@ -217,7 +217,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             padding: 20px;
             /* border: 1px solid #ddd; */
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
             background-color: rgb(255, 255, 255);
         }
 
