@@ -18,6 +18,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="admin_dash_style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <style>
         table {
             border-collapse: collapse;
@@ -265,6 +266,24 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         button[type="submit"]:hover {
             background-color: #5500cb;
         }
+
+        .nav-upper-options {
+            /* gap: 10px; */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-upper-options h3 {
+            font-size: 18px;
+            /* margin-bottom: 0px; */
+            font-weight: bold;
+            padding-left: 10px;
+            text-decoration: none;
+        }
+
+        .nav-option i {
+            font-size: 185%;
+        }
     </style>
 
 </head>
@@ -303,21 +322,28 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                 <div class="nav-upper-options">
                     <a href="admin_dashboard.php" style="text-decoration: none;">
                         <div class="nav-option option1">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png" class="nav-img" alt="dashboard">
+                            <i class="bi-columns"></i>
                             <h3> Dashboard</h3>
                         </div>
                     </a>
 
                     <a href="admin_profile.php" style="text-decoration: none;">
                         <div class="nav-option option2" style="color: black;">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png" class="nav-img" alt="blog">
+                            <i class="bi-file-person"></i>
                             <h3> Profile</h3>
+                        </div>
+                    </a>
+
+                    <a href="admin_payment_approved.php" style="text-decoration: none;">
+                        <div class="nav-option option3" style="color: black;">
+                            <i class="bi-patch-check"></i>
+                            <h3> Payment</h3>
                         </div>
                     </a>
 
                     <a href="logout.php" style="text-decoration: none;">
                         <div class="nav-option logout" style="color: black;">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png" class="nav-img" alt="logout">
+                            <i class="bi-arrow-left-circle"></i>
                             <h3>Logout</h3>
                         </div>
                     </a>
