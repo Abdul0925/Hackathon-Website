@@ -1,3 +1,12 @@
+<style>
+    .modalClass{
+        background-color: #f9f9f9;
+        border: 1px solid #888;
+        border-radius: 5px;
+        padding: 8px;
+        margin: 8px;
+    }
+</style>
 <?php
 require 'db.php'; // Include your database connection file
 session_start(); // Start a new session or resume the existing session
@@ -18,11 +27,13 @@ if (isset($_POST['id'])) {
 
     // Loop through the job applications and display each one
     while ($row1 = $result1->fetch_assoc()) {
-       echo "<hr>";
+       echo "<div class='modalClass'>"; 
+      
        echo "<p><strong>$sr_no Member Name:</strong> " . $row1['memberName'] ." ".(($row1['is_leader'])?"(Team Leader)":"") . "</p>"; // Display the student's first name
        echo "<p><strong>Mobile Number:</strong> " . $row1['memberMobile'] . "</p>"; // Display the student's mobile number
        echo "<p><strong>Email:</strong> " . $row1['memberEmail'] . "</p>"; // Display the student's email address
-       echo "<hr>";
+     
+       echo "</div>"; 
         $sr_no++; // Increment the serial number for the next job
     }
 }
