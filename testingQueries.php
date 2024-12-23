@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -216,9 +217,9 @@ session_start();
 //                      $paymentDetailQuery = "INSERT INTO payment_details
 //                      (team_id, transactionId, status, pay_name, pay_path, is_approved) 
 //                      VALUES (?, ?, ?, ?, ?, ?)";
-                    
+
 //                     $stmt = $conn->prepare($paymentDetailQuery);
-                    
+
 //                     $stmt->bind_param("sssssi", $team_id, $transactionId, $status, $newFileName, $fileDestination, $is_approved);
 //                     if ($stmt->execute()) {
 //                         echo "Done 2";
@@ -227,7 +228,7 @@ session_start();
 //                         echo "Not Done";
 //                         // echo "Database error: " . $conn->error;
 //                     }
-                    
+
 //                 } else {
 //                     echo "Not Done";
 //                     // echo "There was an error uploading your file.";
@@ -246,54 +247,98 @@ session_start();
 //     }
 
 // }
-sentmail('abdul954518@gmail.com','Abdul', 'rth01','Real MAdrid');
-function sentmail($leaderEmail, $leaderName, $psId, $teamName)
-{
-    if (filter_var($leaderEmail, FILTER_VALIDATE_EMAIL)) {
+// sentmail('abdul954518@gmail.com','Abdul', 'rth01','Real MAdrid');
+// function sentmail($leaderEmail, $leaderName, $psId, $teamName)
+// {
+//     if (filter_var($leaderEmail, FILTER_VALIDATE_EMAIL)) {
 
 
 
-        $mail = new PHPMailer(true);
+//         $mail = new PHPMailer(true);
 
-        // Configure the mail server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';           // SMTP server address
-        $mail->SMTPAuth = true;
-        $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
-        $mail->Password = 'iotg jqut wkks sjrt';       // Your email password (use an app-specific password if needed)
-        $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
-        $mail->Port = 465;                        // Port for SSL
+//         // Configure the mail server settings
+//         $mail->isSMTP();
+//         $mail->Host = 'smtp.gmail.com';           // SMTP server address
+//         $mail->SMTPAuth = true;
+//         $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
+//         $mail->Password = 'iotg jqut wkks sjrt';       // Your email password (use an app-specific password if needed)
+//         $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
+//         $mail->Port = 465;                        // Port for SSL
 
-        // Set the sender's email and name
-        $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
+//         // Set the sender's email and name
+//         $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
 
-        // Add the recipient's email (student's email)
-        $mail->addAddress($leaderEmail);
+//         // Add the recipient's email (student's email)
+//         $mail->addAddress($leaderEmail);
 
-        // Set the email format to HTML
-        $mail->isHTML(true);
+//         // Set the email format to HTML
+//         $mail->isHTML(true);
 
-        // Set the email subject
-        $mail->Subject = "Registartion Successfull";
+//         // Set the email subject
+//         $mail->Subject = "Registartion Successfull";
 
-        // Construct the email body with the student's login details
-        $msg = 'Dear ' . strtoupper($leaderName) . '<p>, Thank you for your initiative toward this hackathon.</p>' .
-            '<p>Your team ' . $teamName . ' has chosen a problem statement no ' . strtoupper($psId) . '</p>' .
-            '<p>We will send you your login crediantials after verifying your payment status</p>' .
-            '<p>You will receive your login credentials via email. If you do not receive an email regarding your submission, please contact the hackathon volunteers.</p>';
+//         // Construct the email body with the student's login details
+//         $msg = 'Dear ' . strtoupper($leaderName) . '<p>, Thank you for your initiative toward this hackathon.</p>' .
+//             '<p>Your team ' . $teamName . ' has chosen a problem statement no ' . strtoupper($psId) . '</p>' .
+//             '<p>We will send you your login crediantials after verifying your payment status</p>' .
+//             '<p>You will receive your login credentials via email. If you do not receive an email regarding your submission, please contact the hackathon volunteers.</p>';
 
-        // Set the email message content
-        $mail->Body = $msg;
+//         // Set the email message content
+//         $mail->Body = $msg;
 
-        // Send the email
+//         // Send the email
 
-        // Send OTP
-        if ($mail->send()) {
-            return 1;
-        } else {
-            return 0;
-        }
+//         // Send OTP
+//         if ($mail->send()) {
+//             return 1;
+//         } else {
+//             return 0;
+//         }
+//     } else {
+//         return 0;
+//     }
+// }
+
+require "db.php";
+$leaderEmail = "abdulrahim74264@gmail.com";
+$password = "QGH331RT";
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+echo $hashedPassword;
+echo "<br>";
+$updatePasswordQuery = "UPDATE team_and_leader_details SET password = ? WHERE leaderEmail = ?";
+if ($stmt = $conn->prepare($updatePasswordQuery)) {
+    $stmt->bind_param("ss",$hashedPassword, $leaderEmail);
+    if ($stmt->execute()) {
+        $stmt->close();
+        echo "true executed";
+        echo "<br>";
     } else {
-        return 0;
+        
+        echo "false not executed";
+        echo "<br>";
+    }
+} else {
+    
+    echo "false not prepare";
+    echo "<br>";
+    }
+$query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('s', $leaderEmail);
+$stmt->execute();
+$result = $stmt->get_result();
+echo $result->num_rows;
+if ($result->num_rows > 0) {
+    $mentor = $result->fetch_assoc();
+    echo "<br>";
+    echo $mentor['password'];
+    echo "<br>";
+    echo $password;
+    echo "<br>";
+    if (password_verify($password, $mentor['password'])) {
+        echo "<br>";
+        echo "Match";
+        echo "<br>";
     }
 }
+

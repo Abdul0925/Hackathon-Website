@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -389,7 +390,7 @@ function sentmail($leaderEmail, $leaderName, $psId, $teamName)
         $mail->Subject = "Registartion Successfull";
 
         // Construct the email body with the student's login details
-        $msg = 'Dear ' . strtoupper($leaderName) . '<p>, Thank you for your initiative toward this hackathon.</p>' .
+        $msg = 'Dear ' . strtoupper($leaderName) . '<p>Thank you for your initiative toward this hackathon.</p>' .
             '<p>Your team ' . $teamName . ' has chosen a problem statement no ' . strtoupper($psId) . '</p>' .
             '<p>We will send you your login crediantials after verifying your payment status</p>' .
             '<p>You will receive your login credentials via email. If you do not receive an email regarding your submission, please contact the hackathon volunteers.</p>';
