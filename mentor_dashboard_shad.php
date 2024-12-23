@@ -48,6 +48,10 @@ $totalPS = $rowPS['total'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .table {
+            margin-bottom: 0rem;
+        }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -167,17 +171,14 @@ $totalPS = $rowPS['total'];
             background-color: rgb(229, 0, 0);
         }
 
-        .mt-5 h5 {
-            color: #5500cb;
-            padding-top: 20px;
-            padding-bottom: 10px;
-            border-bottom: solid rgba(0, 20, 151, 0.59);
-        }
-
         .DHead h1 {
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 0px;
+        }
+
+        .table-responsive {
+            padding-top: 20px;
         }
     </style>
 
@@ -310,21 +311,28 @@ $totalPS = $rowPS['total'];
                                 </tr>
                             </thead>
                             <tbody> -->
-                                <?php //$sr_no= 1 ; ?>
-                                <?php //while ($row1 = $result1->fetch_assoc()) {
-                                    // $date = date('d-m-Y', strtotime($row1['date']));
-                                    //$date = "";
-                                ?>
-                                    <tr>
-                                        <td><?php //echo $sr_no++; ?></td>
-                                        <td><?php //echo $row1['memberName']; ?></td>
-                                        <td><?php //echo $row1['memberMobile']; ?></td>
-                                        <td><?php //echo $row1['memberEmail']; ?></td>
-                                        <td><?php //echo $row1['memberGender']; ?></td>
-                                    </tr>
-                                <?php
-                               // } ?>
-                            <!-- </tbody>
+            <?php //$sr_no= 1 ; 
+            ?>
+            <?php //while ($row1 = $result1->fetch_assoc()) {
+            // $date = date('d-m-Y', strtotime($row1['date']));
+            //$date = "";
+            ?>
+            <tr>
+                <td><?php //echo $sr_no++; 
+                    ?></td>
+                <td><?php //echo $row1['memberName']; 
+                    ?></td>
+                <td><?php //echo $row1['memberMobile']; 
+                    ?></td>
+                <td><?php //echo $row1['memberEmail']; 
+                    ?></td>
+                <td><?php //echo $row1['memberGender']; 
+                    ?></td>
+            </tr>
+            <?php
+            // } 
+            ?>
+            <!-- </tbody>
                         </table>
                     </div>
                 </div>
@@ -333,7 +341,10 @@ $totalPS = $rowPS['total'];
 
             <div class="report-container">
                 <div class="mt-5">
-                    <h5 class="mb-3">Notifications</h5>
+                    <div class="report-header">
+                        <h1 class="recent-Articles">Notifications</h1>
+                    </div>
+
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <tbody>
@@ -383,11 +394,7 @@ $totalPS = $rowPS['total'];
                     </div>
                 </div>
             </div>
-
-
-
         </div>
-    </div>
     </div>
 
     <script>
