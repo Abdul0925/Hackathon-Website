@@ -141,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "UPDATE mentor_details SET password = ? WHERE email = ?";
+        $query = "UPDATE team_and_leader_details SET password = ? WHERE leaderEmail = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('ss', $hashedPassword, $email);
         if ($stmt->execute()) {
