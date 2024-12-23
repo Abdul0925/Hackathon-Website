@@ -418,6 +418,46 @@ $_SESSION['isVerified'] = false;
             /* Darker red on hover */
         }
 
+        .edit-btn {
+            color: white;
+            width: 60px;
+            height: 30px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
+            border: none;
+            margin-top: 0px;
+        }
+
+        .edit-btn:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .edit-btn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
+        }
+
+        .delete-btn {
+            background-color: rgb(220, 0, 0);
+            color: white;
+            width: 60px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 0px;
+        }
+
+        .delete-btn:hover {
+            background-color: rgb(150, 0, 0);
+            color: white;
+        }
+
+        .delete-btn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(220, 0, 0);
+        }
+
         @media screen and (max-width: 400px) {
             .boxL .box-body {
                 display: flex;
@@ -697,8 +737,8 @@ $_SESSION['isVerified'] = false;
                                         <td><?php echo $member['mobile']; ?></td>
                                         <td><?php echo $member['gender']; ?></td>
                                         <td>
-                                            <button type="button" onclick="openEditModal(<?php echo $index; ?>)">Edit</button>
-                                            <button type="button" onclick="deleteMember(<?php echo $index; ?>)">Delete</button>
+                                            <button class="edit-btn" type="button" onclick="openEditModal(<?php echo $index; ?>)">Edit</button>
+                                            <button class="delete-btn" type="button" onclick="deleteMember(<?php echo $index; ?>)">Delete</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
