@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-
 if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
-
 }
 
 require 'db.php';
@@ -26,6 +24,10 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
     <style>
         body {
             overflow-y: hidden;
+        }
+
+        .table {
+            margin-bottom: 0px;
         }
 
         table {
@@ -226,7 +228,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         .report-container {
             margin-top: 20px;
             margin-bottom: 20px;
-            
+
         }
 
         .btn-primary {
@@ -273,24 +275,20 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             margin-left: 5px;
         }
     </style>
-
 </head>
 
-<body> 
+<body>
     <!-- for header part -->
     <header>
-
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
                 <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-
         <div class="DHead">
             <H1>Problem</H1>
         </div>
-
         <div class="message">
             <!-- <div class="circle"></div> -->
             <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
@@ -298,7 +296,6 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                 <a href="mentor_my_teams_shad.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
         </div>
-
     </header>
 
     <div class="main-container">
@@ -426,38 +423,38 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                 </div>
             </div>
         </div>
+    </div>
 
-        <script>
-            let menuicn = document.querySelector(".menuicn");
-            let nav = document.querySelector(".navcontainer");
+    <script>
+        let menuicn = document.querySelector(".menuicn");
+        let nav = document.querySelector(".navcontainer");
 
-            menuicn.addEventListener("click", () => {
-                nav.classList.toggle("navclose");
-            })
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        menuicn.addEventListener("click", () => {
+            nav.classList.toggle("navclose");
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <script>
-            function openPopup(button) {
-                const dataId = button.getAttribute('data-id'); // Get the data-id value
+    <script>
+        function openPopup(button) {
+            const dataId = button.getAttribute('data-id'); // Get the data-id value
 
-                const popup = document.getElementById(dataId); // Get the popup element by ID
-                if (popup) {
-                    popup.classList.add("open-popup"); // Add the class to open the popup
-                } else {
-                    console.error(`Popup with ID "${dataId}" not found`);
-                }
+            const popup = document.getElementById(dataId); // Get the popup element by ID
+            if (popup) {
+                popup.classList.add("open-popup"); // Add the class to open the popup
+            } else {
+                console.error(`Popup with ID "${dataId}" not found`);
             }
+        }
 
-            function closePopup(button) {
-                const dataId = button.getAttribute('data-id'); // Get the data-id value
-                const popup = document.getElementById(dataId); // Get the popup element by ID
-                popup.classList.remove("open-popup")
-            }
-        </script>
-
+        function closePopup(button) {
+            const dataId = button.getAttribute('data-id'); // Get the data-id value
+            const popup = document.getElementById(dataId); // Get the popup element by ID
+            popup.classList.remove("open-popup")
+        }
+    </script>
 </body>
 
 </html>

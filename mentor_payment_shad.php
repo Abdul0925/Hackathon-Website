@@ -17,8 +17,6 @@ $ssPath = $paymentStatus['pay_path'];
 // echo $ssPath;
 // echo htmlspecialchars($ssPath);
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -184,7 +182,7 @@ $ssPath = $paymentStatus['pay_path'];
 
         .QRcode {
             padding-left: 20px;
-            margin-top: 10px;
+            margin: 10px 0px 20px 0px;
         }
 
         .pay-status {
@@ -193,27 +191,23 @@ $ssPath = $paymentStatus['pay_path'];
 
         .report-container {
             margin-top: 20px;
-            margin-bottom: 20px; 
+            height: 560px;
         }
     </style>
-
 </head>
 
 <body>
     <!-- for header part -->
     <header>
-
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
                 <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-
         <div class="DHead">
             <H1>Payment</H1>
         </div>
-
         <div class="message">
             <!-- <div class="circle"></div> -->
             <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
@@ -221,7 +215,6 @@ $ssPath = $paymentStatus['pay_path'];
                 <a href="mentor_my_teams_shad.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
         </div>
-
     </header>
 
     <div class="main-container">
@@ -291,15 +284,10 @@ $ssPath = $paymentStatus['pay_path'];
                 </div>
 
                 <div class="QRcode">
-                    <img src="<?php echo $ssPath ?>" alt="payment" height width="400">
+                    <img src="<?php echo $ssPath ?>" alt="payment" height="420">
                 </div>
-                
             </div>
         </div>
-        
-
-
-
     </div>
 
     <script>

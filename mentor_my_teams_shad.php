@@ -23,12 +23,8 @@ if ($result->num_rows > 0) {
     $imagePath = 'https://via.placeholder.com/100';
 }
 
-
 $result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
 $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
-
-
-
 
 ?>
 
@@ -44,6 +40,10 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .table {
+            margin-bottom: 0rem;
+        }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -163,13 +163,6 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             background-color: rgb(229, 0, 0);
         }
 
-        .mt-5 h5 {
-            color: #5500cb;
-            padding-top: 20px;
-            padding-bottom: 10px;
-            border-bottom: solid rgba(0, 20, 151, 0.59);
-        }
-
         .DHead h1 {
             font-size: 32px;
             font-weight: bold;
@@ -179,6 +172,14 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         .nav-option1 i {
             color: #fff;
         }
+
+        .table-responsive {
+            padding-top: 20px;
+        }
+
+        .mt-5 {
+            margin-top: 20px !important;
+        }
     </style>
 
 </head>
@@ -186,18 +187,15 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 <body>
     <!-- for header part -->
     <header>
-
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
                 <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-
         <div class="DHead">
             <H1>My Team</H1>
         </div>
-
         <div class="message">
             <!-- <div class="circle"></div> -->
             <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
@@ -205,7 +203,6 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                 <a href="mentor_my_teams_shad.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
         </div>
-
     </header>
 
     <div class="main-container">
@@ -266,10 +263,12 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         </div>
 
         <div class="main">
-
-        <div class="report-container">
+            <div class="report-container">
                 <div class="mt-5">
-                    <h5 class="mb-3">Team Details</h5>
+                    <div class="report-header">
+                        <h1 class="recent-Articles">Team Details</h1>
+                    </div>
+
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -282,7 +281,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $sr_no= 1 ; ?>
+                                <?php $sr_no = 1; ?>
                                 <?php while ($row1 = $result1->fetch_assoc()) {
                                     // $date = date('d-m-Y', strtotime($row1['date']));
                                     $date = "";
@@ -301,10 +300,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                     </div>
                 </div>
             </div>
-
-
         </div>
-    </div>
     </div>
 
     <script>

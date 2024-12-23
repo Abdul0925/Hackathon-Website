@@ -23,12 +23,8 @@ if ($result->num_rows > 0) {
     $imagePath = 'https://via.placeholder.com/100';
 }
 
-
 $result1 = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
 $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
-
-
-
 
 ?>
 
@@ -187,27 +183,31 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
         .report-container {
             margin-top: 20px;
-            margin-bottom: 20px; 
+            margin-bottom: 20px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .report-container h5 {
+            color: rgb(125, 125, 125);
         }
     </style>
-
 </head>
 
 <body>
     <!-- for header part -->
     <header>
-
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
                 <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-
         <div class="DHead">
             <H1>Result</H1>
         </div>
-
         <div class="message">
             <!-- <div class="circle"></div> -->
             <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
@@ -215,7 +215,6 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                 <a href="mentor_my_teams_shad.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
         </div>
-
     </header>
 
     <div class="main-container">
@@ -280,20 +279,16 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                 <div class="box box1">
                     <div class="text">
                         <h2 class="topic-heading">Result</h2>
-                        <h2 class="topic">No Results is announced yet</h2>
+                        <h2 class="topic">No Result is announced yet</h2>
                     </div>
                     <!-- <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png" alt="Views"> -->
                 </div>
             </div>
             <div class="report-container">
+                <h5>NO Result is announced yet</h5>
 
             </div>
-
-
-
-
         </div>
-    </div>
     </div>
 
     <script>
