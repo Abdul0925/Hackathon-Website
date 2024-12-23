@@ -1050,8 +1050,8 @@ $_SESSION['isVerified'] = false;
                             <td>${result.member.mobile}</td>
                             <td>${result.member.gender || '-'}</td>
                             <td>
-                                <button type="button" onclick="openEditModal(${result.index})">Edit</button>
-                                <button type="button" onclick="deleteMember(${result.index})">Delete</button>
+                                <button class="edit-btn" type="button" onclick="openEditModal(${result.index})">Edit</button>
+                                <button class="delete-btn" type="button" onclick="deleteMember(${result.index})">Delete</button>
                             </td>
                         `;
                         tableBody.appendChild(newRow);
