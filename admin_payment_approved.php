@@ -101,7 +101,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
         }
 
         .filter-container input {
-            width: 50%;
+            width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -211,7 +211,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
                 </div>
 
                 <div class="filter-container">
-                    <label for="filterInput">Search</label>
+                    <!-- <label for="filterInput">Search</label> -->
                     <input type="text" id="filterInput" placeholder="Search by Team Name or Transaction ID" onkeyup="filterTable()">
                 </div>
                 <script>
@@ -237,8 +237,6 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
                     <div class="table">
                         <table>
                             <thead>
-
-
                                 <tr>
                                     <th scope="col">Sr No</th>
                                     <th scope="col">Team Name</th>
@@ -304,44 +302,44 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
     </div>
 
     <script>
-    $(document).ready(function() {
-        $('th').click(function() {
-            let table = $(this).closest('table');
-            let rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
-            this.asc = !this.asc;
+        $(document).ready(function() {
+            $('th').click(function() {
+                let table = $(this).closest('table');
+                let rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+                this.asc = !this.asc;
 
-            if (!this.asc) {
-                rows.reverse();
+                if (!this.asc) {
+                    rows.reverse();
+                }
+
+                // Append rows efficiently
+                let fragment = document.createDocumentFragment();
+                rows.forEach(row => fragment.appendChild(row));
+                table.find('tbody').append(fragment);
+
+                // Update sorting indicator
+                $('th').removeClass('asc desc'); // Reset all headers
+                $(this).addClass(this.asc ? 'asc' : 'desc'); // Highlight current column
+            });
+
+            function comparer(index) {
+                return function(a, b) {
+                    let valA = getCellValue(a, index);
+                    let valB = getCellValue(b, index);
+
+                    if ($.isNumeric(valA) && $.isNumeric(valB)) {
+                        return parseFloat(valA) - parseFloat(valB); // Numeric comparison
+                    } else {
+                        return valA.localeCompare(valB); // String comparison
+                    }
+                };
             }
 
-            // Append rows efficiently
-            let fragment = document.createDocumentFragment();
-            rows.forEach(row => fragment.appendChild(row));
-            table.find('tbody').append(fragment);
-
-            // Update sorting indicator
-            $('th').removeClass('asc desc'); // Reset all headers
-            $(this).addClass(this.asc ? 'asc' : 'desc'); // Highlight current column
+            function getCellValue(row, index) {
+                return $(row).children('td').eq(index).text().trim();
+            }
         });
-
-        function comparer(index) {
-            return function(a, b) {
-                let valA = getCellValue(a, index);
-                let valB = getCellValue(b, index);
-
-                if ($.isNumeric(valA) && $.isNumeric(valB)) {
-                    return parseFloat(valA) - parseFloat(valB); // Numeric comparison
-                } else {
-                    return valA.localeCompare(valB); // String comparison
-                }
-            };
-        }
-
-        function getCellValue(row, index) {
-            return $(row).children('td').eq(index).text().trim();
-        }
-    });
-</script>
+    </script>
 
     <script>
         let menuicn = document.querySelector(".menuicn");
@@ -385,7 +383,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   
+
 
 
 </body>

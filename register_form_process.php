@@ -159,7 +159,7 @@ function addLedarDetails($teamName, $psId, $leaderName, $leaderMobile, $leaderEm
         if ($stmt->execute()) {
             $addLeaderToMember = addMemberToDatabase($leaderEmail, $leaderName, $leaderMobile, $leaderEmail, $leaderGender, $teamName, $psId, $is_leader);
             $updatedSuccess = updateTeamId($leaderEmail);
-            // $updatePS = updateProblemStatement($psId);
+            $updatePS = updateProblemStatement($psId);
             return 1;
         } else {
             return 0;
@@ -416,7 +416,7 @@ function updateProblemStatement($psId)
 {
     require "db.php";
     $updateStmt = $conn->prepare("UPDATE problem_statements SET no_of_participation = no_of_participation + 1 WHERE ps_id = ?");
-    $updateStmt->bind_param("s", strtoupper($psId));
+    $updateStmt->bind_param("s", $psId);
     if ($updateStmt->execute()) {
         $updateStmt->close();
         return true;

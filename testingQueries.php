@@ -299,46 +299,58 @@ session_start();
 //     }
 // }
 
-require "db.php";
-$leaderEmail = "abdulrahim74264@gmail.com";
-$password = "QGH331RT";
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-echo $hashedPassword;
-echo "<br>";
-$updatePasswordQuery = "UPDATE team_and_leader_details SET password = ? WHERE leaderEmail = ?";
-if ($stmt = $conn->prepare($updatePasswordQuery)) {
-    $stmt->bind_param("ss",$hashedPassword, $leaderEmail);
-    if ($stmt->execute()) {
-        $stmt->close();
-        echo "true executed";
-        echo "<br>";
-    } else {
+// require "db.php";
+// $leaderEmail = "abdulrahim74264@gmail.com";
+// $password = "QGH331RT";
+// $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+// echo $hashedPassword;
+// echo "<br>";
+// $updatePasswordQuery = "UPDATE team_and_leader_details SET password = ? WHERE leaderEmail = ?";
+// if ($stmt = $conn->prepare($updatePasswordQuery)) {
+//     $stmt->bind_param("ss",$hashedPassword, $leaderEmail);
+//     if ($stmt->execute()) {
+//         $stmt->close();
+//         echo "true executed";
+//         echo "<br>";
+//     } else {
         
-        echo "false not executed";
-        echo "<br>";
-    }
-} else {
+//         echo "false not executed";
+//         echo "<br>";
+//     }
+// } else {
     
-    echo "false not prepare";
-    echo "<br>";
+//     echo "false not prepare";
+//     echo "<br>";
+//     }
+// $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
+// $stmt = $conn->prepare($query);
+// $stmt->bind_param('s', $leaderEmail);
+// $stmt->execute();
+// $result = $stmt->get_result();
+// echo $result->num_rows;
+// if ($result->num_rows > 0) {
+//     $mentor = $result->fetch_assoc();
+//     echo "<br>";
+//     echo $mentor['password'];
+//     echo "<br>";
+//     echo $password;
+//     echo "<br>";
+//     if (password_verify($password, $mentor['password'])) {
+//         echo "<br>";
+//         echo "Match";
+//         echo "<br>";
+//     }
+// }
+$psId = "rth01";
+require "db.php";
+    $updateStmt = $conn->prepare("UPDATE problem_statements SET no_of_participation = no_of_participation + 1 WHERE ps_id = ?");
+    $updateStmt->bind_param("s", $psId);
+    if ($updateStmt->execute()) {
+        $updateStmt->close();
+        echo "true";
+    } else {
+        // Log error for debugging
+        error_log("Execute failed: " . $updateStmt->error);
+        $updateStmt->close();
+        echo "false";
     }
-$query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param('s', $leaderEmail);
-$stmt->execute();
-$result = $stmt->get_result();
-echo $result->num_rows;
-if ($result->num_rows > 0) {
-    $mentor = $result->fetch_assoc();
-    echo "<br>";
-    echo $mentor['password'];
-    echo "<br>";
-    echo $password;
-    echo "<br>";
-    if (password_verify($password, $mentor['password'])) {
-        echo "<br>";
-        echo "Match";
-        echo "<br>";
-    }
-}
-

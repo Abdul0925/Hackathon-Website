@@ -25,7 +25,11 @@ if ($result->num_rows > 0) {
 
 
 $result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
-$result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
+
+$teamDetails = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE leaderEmail='$email'");
+$teamDetailsRow = $teamDetails->fetch_assoc();
+$teamName = $teamDetailsRow['teamName'];
+$psId = $teamDetailsRow['psId'];
 
 
 
@@ -270,6 +274,15 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         <div class="report-container">
                 <div class="mt-5">
                     <h5 class="mb-3">Team Details</h5>
+                    <h6>
+                        Team Name: <?php echo $teamName; ?>
+                    </h6> 
+                    <h6>
+                        Problem Statement ID: 
+                        <a href="mentor_problem_shad.php">
+                            <?php echo strtoupper($psId); ?>
+                        </a>
+                    </h6> 
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -289,7 +302,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                                 ?>
                                     <tr>
                                         <td><?php echo $sr_no++; ?></td>
-                                        <td><?php echo $row1['memberName']; ?></td>
+                                        <td><?php echo $row1['memberName']; echo ($row1['is_leader']?" (Leader)":"") ?></td>
                                         <td><?php echo $row1['memberMobile']; ?></td>
                                         <td><?php echo $row1['memberEmail']; ?></td>
                                         <td><?php echo $row1['memberGender']; ?></td>

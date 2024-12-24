@@ -887,7 +887,7 @@ $_SESSION['isVerified'] = false;
                 .then(result => {
                     // console.log(result);
                     if (result.success) {
-                        alert(result.message + result.email);
+                        alert(result.message + " " + result.email);
                     } else {
                         alert(result.message);
                         document.getElementById('modal-overlay').style.display = 'none';

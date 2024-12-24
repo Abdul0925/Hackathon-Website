@@ -19,7 +19,33 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="admin_dash_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <style>
+        .searchFeature {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .searchLable {
+            margin: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .searchInput {
+            margin: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid rgb(200, 200, 200);
+            padding: 1rem;
+        }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -39,6 +65,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
             text-transform: uppercase;
             font-weight: 500;
             border-color: black;
+            cursor: pointer;
         }
 
         td {
@@ -247,18 +274,33 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                 <div class="report-header">
                     <h1 class="recent-Articles">Teams</h1>
                 </div>
+                <div class="searchFeature">
+
+                    <!-- <label for="" class="searchLable">Search: </label> -->
+                    <input class="searchInput" type="text" id="searchBox" placeholder="Search by Team Name or Mentor Email">
+                </div>
+
+                <!-- For PPT -->
+                <!-- <label for="">Select PS ID: </label>
+                <select name="" id="searchBox">
+                    <option value="">All</option>
+                    <option value="RTH01">RTH01</option>
+                    <option value="RTH02">RTH02</option>
+                    <option value="RTH03">RTH03</option>
+                </select> -->
 
                 <div class="report-body">
                     <!-- top hedding -->
                     <div class="table">
                         <table>
-                            <tr>
-                                <th scope="col">Sr No</th>
-                                <th scope="col">Team Name</th>
-                                <th scope="col">Mentor</th>
-                                <th scope="col">PS</th>
-                                <th scope="col">Action</th>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sr No</th>
+                                    <th scope="col">Team Name</th>
+                                    <th scope="col">Mentor</th>
+                                    <th scope="col">PS</th>
+                                    <th scope="col">Action</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <?php
@@ -312,6 +354,52 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
             nav.classList.toggle("navclose");
         })
     </script>
+    <script>
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function() {
+            const searchQuery = this.value.toLowerCase();
+            const rows = document.querySelectorAll('table tbody tr'); // Target only tbody rows
+
+            rows.forEach(row => {
+                const cells = Array.from(row.cells);
+                const matches = cells.some(cell =>
+                    cell.textContent.toLowerCase().includes(searchQuery)
+                );
+                row.style.display = matches ? '' : 'none'; // Show or hide rows
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('th').click(function() {
+                const table = $(this).parents('table');
+                const tbody = table.find('tbody');
+                const columnIndex = $(this).index();
+                const rows = tbody.find('tr').toArray();
+
+                // Determine sort order
+                const isAscending = $(this).data('isAscending') || false;
+                $(this).data('isAscending', !isAscending);
+
+                rows.sort(function(a, b) {
+                    const cellA = $(a).children('td').eq(columnIndex).text().toLowerCase();
+                    const cellB = $(b).children('td').eq(columnIndex).text().toLowerCase();
+
+                    if ($.isNumeric(cellA) && $.isNumeric(cellB)) {
+                        return isAscending ? cellA - cellB : cellB - cellA;
+                    }
+
+                    return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+                });
+
+                // Append sorted rows to tbody
+                $.each(rows, function(index, row) {
+                    tbody.append(row);
+                });
+            });
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
