@@ -102,6 +102,7 @@ if ($_SESSION['admin_logged_in'] != true) {
 
         .report-container {
             margin-top: 20px;
+            min-height: 0px;
         }
 
         .nav-upper-options {
