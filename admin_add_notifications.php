@@ -39,10 +39,6 @@ if ($_SESSION['admin_logged_in'] != true) {
             color: white;
         }
 
-        .btn-primary:active {
-            background-color: rgb(97, 19, 207);
-        }
-
         .report-body .form-body .form-label {
             display: flex;
             flex-direction: column;

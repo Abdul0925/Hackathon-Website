@@ -217,7 +217,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         }
 
         button[type="submit"]:hover {
-            background-color: #5500cb;
+            background-color: rgb(79, 0, 190);
         }
 
         .nav-upper-options {

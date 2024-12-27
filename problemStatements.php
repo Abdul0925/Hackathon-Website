@@ -1,23 +1,27 @@
 <?php
 session_start();
 require 'db.php';
+$teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members");
 ?>
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Problem statements</title>
-    <link rel="stylesheet" href="admin_dash_style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Problem Statements</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         body {
             background-color: #fff;
+        }
+
+        .table {
+            margin-bottom: 0px;
         }
 
         table {
@@ -110,9 +114,30 @@ require 'db.php';
         }
 
         .report-container {
-            margin-top: 40px;
-            margin-bottom: 20px;
             border: 1px solid black;
+            min-height: 300px;
+            max-width: 1200px;
+            margin: 80px auto 140px auto;
+            background-color: #ffffff;
+            border-radius: 30px;
+            box-shadow: 3px 3px 10px rgb(188, 188, 188);
+            padding: 0px 20px 20px 20px;
+        }
+
+        .report-header {
+            height: 80px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 20px 10px 20px;
+            border-bottom: 2px solid rgba(0, 20, 151, 0.59);
+        }
+
+        .recent-Articles {
+            font-size: 30px;
+            font-weight: 600;
+            color: #5500cb;
         }
 
         .form-body {
@@ -177,22 +202,96 @@ require 'db.php';
             padding: 10px 0px 10px 0px;
         }
 
-        @media screen and (max-width: 400px) {
-            .popup {
-                width: 98%;
-            }
+        .heading-font {
+            font-family: "Playwrite GB S", cursive;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
         }
 
-        @media screen and (max-width: 600px) {
-            .popup {
-                width: 98%;
+        .heading-font1 {
+            font-size: 28px;
+            font-weight: 400;
+            color: #000000;
+            padding-top: 10;
+            font-family: "Oxanium", sans-serif;
+        }
+
+        .font-style-text {
+            font-family: "Oxanium", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .c-black {
+            color: black;
+        }
+
+        /* Footer Section */
+        footer {
+            background: #333;
+            color: #ffffff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background-color: #501987;
+            color: #ffffff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer h3 {
+            font-size: 1.1rem;
+            color: #A48FB6;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #f44f36;
+        }
+
+        /* Responsive Text Size */
+        @media (max-width: 768px) {
+            .image-container {
+                width: 75%
+            }
+
+            .overlay-text1 {
+                font-size: 1.5rem;
+                padding: 8px 15px;
+            }
+
+            .cover-container>p {
+                margin: 50px 15px 50px 15px;
+                display: flex;
+                justify-content: center;
+            }
+
+            .hero-content {
+                display: flex;
+                justify-content: center
+            }
+
+            .hero-content .btn {
+                margin-left: 0px;
             }
         }
     </style>
-
 </head>
 
-<body>
+
+<body class="font-style-text">
 
     <nav class="navbar" style="background-color: #5C0F8B;">
         <div class="container-fluid">
@@ -204,7 +303,6 @@ require 'db.php';
             <div class="d-flex">
                 <a class="navbar-brand" href="index.php">
                     <img src="./picture/encarta-logo.png" alt="" height="" width="150px">
-                    <!-- <img src="uploads\images\671fd3dce42cb1.48550005.png" alt="" height="50px" width="100px"> -->
                 </a>
             </div>
         </div>
@@ -276,6 +374,7 @@ require 'db.php';
         </nav>
     </div>
 
+
     <div class="report-container">
         <div class="report-header">
             <h1 class="recent-Articles">Problems</h1>
@@ -314,24 +413,24 @@ require 'db.php';
 
                             // Modal for each problem statement
                             echo '
-                                        <div class="popup" id="' . $row['ps_id'] . '" tabindex="-1">
-                                            <div class="popup-head">
-                                                <h2>Problem Statement Details</h2>
-                                            </div>
-                                            <div class="popup-body">
-                                                <p><strong>PS ID:</strong> ' . $row['ps_id'] . '</p>
-                                                <p><strong>Name:</strong> ' . $row['ps_name'] . '</p>
-                                                <p><strong>Organization:</strong> ' . $row['ps_given_by'] . '</p>
-                                                <p><strong>Description:</strong> ' . $row['ps_description'] . '</p>
-                                                <p><strong>Total Participation:</strong> ' . $row['no_of_participation'] . '</p>
-                                                <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>
-                                            </div>
-                                            <div class="close-btn-div">
-                                                
-                                                <button type="button" data-id="' . $row['ps_id'] . '" onclick="closePopup(this)">Close</button>
-
-                                            </div>
-                                        </div>';
+                            <div class="popup" id="' . $row['ps_id'] . '" tabindex="-1">
+                                <div class="popup-head">
+                                    <h2>Problem Statement Details</h2>
+                                </div>
+                                <div class="popup-body">
+                                    <p><strong>PS ID:</strong> ' . $row['ps_id'] . '</p>
+                                    <p><strong>Name:</strong> ' . $row['ps_name'] . '</p>
+                                    <p><strong>Organization:</strong> ' . $row['ps_given_by'] . '</p>
+                                    <p><strong>Description:</strong> ' . $row['ps_description'] . '</p>
+                                    <p><strong>Total Participation:</strong> ' . $row['no_of_participation'] . '</p>
+                                    <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>
+                                </div>
+                                <div class="close-btn-div">
+                                    
+                                    <button type="button" data-id="' . $row['ps_id'] . '" onclick="closePopup(this)">Close</button
+                        
+                                </div>
+                            </div>';
                             $sr_no++; // Increment the serial number
                         }
                     } else {
@@ -346,16 +445,76 @@ require 'db.php';
         </div>
     </div>
 
-    <script>
-        let menuicn = document.querySelector(".menuicn");
-        let nav = document.querySelector(".navcontainer");
 
-        menuicn.addEventListener("click", () => {
-            nav.classList.toggle("navclose");
-        })
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Footer  -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- Logo and University Name -->
+                <div class="col-md-3 text-center text-md-start mb-4 mt-5">
+                    <a class="navbar-brand" href="https://ghrstu.edu.in/">
+                        <img src="./picture/ghru-nagpur.webp" alt="University Logo" style="width: 270px;">
+                    </a>
+                </div>
+
+                <!-- Important Links -->
+                <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
+                    <h3>IMPORTANT LINKS</h3>
+                    <ul class="list-unstyled p-2">
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/events">Events</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/about-institute">About Institute</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/student-speak">Sutdent Speak</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/alumni-events">Alumini Events</a></li>
+                        <li class="mt-2"><a href="https://ghrcacsn.raisoni.net/iqac">IQAC</a></li>
+                    </ul>
+                </div>
+
+                <!-- Portals -->
+                <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
+                    <h3>PORTALS</h3>
+                    <ul class="list-unstyled p-2">
+                        <li class="mt-2"><a href="https://alumni.raisoni.net/">Alumni Portal</a></li>
+                        <li class="mt-2"><a href="https://www.rashtriyachhatrasansad.in/">NSP</a></li>
+                        <li class="mt-2"><a href="http://nationalagricultureconclave.com/">NAC</a></li>
+                        <li class="mt-2"><a href="https://sgrkf.com/">SGRKF</a></li>
+                        <li class="mt-2"><a href="http://ghrscf.com/">GHRTSCF</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="col-md-3 mb-4 text-md-start" style="text-align: left;">
+                    <h3>GHRCACS NAGPUR</h3>
+                    <p>Riaan Tower, Mangalwari Bazar Rd, Sadar, Nagpur, Maharashtra 440001</p>
+                    <p>📞 8275435110 / 9307900682</p>
+                    <p>✉️ <a href="mailto:encarta@ghrcacs.edu.in">encarta@ghrcacs.edu.in</a></p>
+                </div>
+            </div>
+
+            <!-- Social Media and Legal Links -->
+            <div class="row text-center mt-2">
+                <div class="col-12 social-icons">
+                    <a href="https://www.facebook.com/raisoniworld" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/raisoniworld" class="me-2"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/raisoniworld" class="me-2"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/school/raisoniworld" class="me-2"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="http://youtube.com/raisoniworld" class="me-2"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="col-12 mt-3">
+                    <p>
+                        <a href="https://raisoni.net/document/privacy_policy.html">Privacy Policy</a> |
+                        <a href="https://raisoni.net/document/terms_and_conditions.html">Terms & Conditions</a> |
+                        <a href="https://raisoni.net/document/refund_and_cancellation.html">Refund & Cancellation</a>
+                    </p>
+                    <p class="mt-2">© 2024 All Rights Reserved. Design & Developed by Encarta IT Cell's Advisor.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- For open and close popup  -->
     <script>
         document.getElementById('listBtn').addEventListener('click', () => {
             if (document.getElementById("sidebar").style.display == 'block') {
@@ -427,6 +586,7 @@ require 'db.php';
             }
         }
     </script>
+
 </body>
 
 </html>
