@@ -171,7 +171,8 @@ $_SESSION['isVerified'] = false;
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: center;
+            justify-content: space-evenly;
+            margin: 50px auto 20px auto;
         }
 
         .QR-code {
@@ -427,6 +428,10 @@ $_SESSION['isVerified'] = false;
             background-color: rgb(220, 0, 0);
         }
 
+        .inputBox select {
+            padding: 5px;
+        }
+
         @media screen and (max-width: 400px) {
             .boxL .box-body {
                 display: flex;
@@ -598,8 +603,22 @@ $_SESSION['isVerified'] = false;
                             <input type="text" id="leaderName" name="leaderName" required>
                             <span>Enter leader's name</span>
 
-                            <div class="verify-btn-div">
 
+                            <div>
+                                <input type="tel" id="leaderMobile" name="leaderMobile" required>
+                                <span>Enter mobile number</span>
+                            </div>
+
+                            <div class="inputBox" style="margin-bottom: 15px">
+                                <label for="gender">Gender:</label>
+                                <select id="gender" name="gender">
+                                    <option value="" selected disabled>Choose Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="verify-btn-div">
                                 <input type="email" id="leaderEmail" name="leaderEmail" required>
                                 <span>Enter leader's email</span>
                                 <div class="verify-btn">
@@ -609,33 +628,13 @@ $_SESSION['isVerified'] = false;
                                         id="verify-otp">
                                         Verify
                                     </button>
-
                                 </div>
                                 <!-- <span id="verification-status" style="color: green; display: none;">Verified</span> -->
                             </div>
 
-                            <div>
-                                <input type="tel" id="leaderMobile" name="leaderMobile" required>
-                                <span>Enter mobile number</span>
-                            </div>
-
-                            <div>
-                                <label for="leaderGender" class="form-label">Leader Gender: </label>
-                                <select class="form-select me-2" name="leaderGender" id="leaderGender">
-                                    <option value="" selected disabled>Choose Only One Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                            </div>
-
                         </div>
-
-
                     </div>
                 </div>
-
-
-
 
                 <!-- Mentor Details Section -->
                 <div class="box">
@@ -667,20 +666,21 @@ $_SESSION['isVerified'] = false;
                     </div>
                     <div class="box-body" id="add_member_form">
                         <div class="inputBox">
-                            <input type="text" id="memberName" name="memberName">
-                            <span>Enter member name</span>
+                            <input type="text" id="memberName" placeholder="(member)" name="memberName">
+                            <span>Enter name</span>
                         </div>
                         <div class="inputBox">
-                            <input type="tel" id="memberMobile" name="memberMobile">
+                            <input type="tel" id="memberMobile" placeholder="(member)" name="memberMobile">
                             <span>Enter mobile number</span>
                         </div>
                         <div class="inputBox">
-                            <input type="email" id="memberEmail" name="memberEmail">
+                            <input type="email" id="memberEmail" placeholder="(member)" name="memberEmail">
                             <span>Enter email</span>
                         </div>
                         <div class="inputBox">
                             <label for="gender">Gender:</label>
                             <select id="gender" name="gender">
+                                <option value="" selected disabled>Choose Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -723,23 +723,20 @@ $_SESSION['isVerified'] = false;
                         <h4 class="head-title">Payment Details</h4>
                     </div>
                     <div class="box-body">
-                        <div class="inputBox">
-                            <div class="QR-code">
+                        <div class="QR-code">
+                            <img src="picture\QRcodephoto.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
+                            <p>Scan the QR code to make the payment.</p>
+                        </div>
 
-                                <img src="./picture//payment.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
-                                <p>Scan the QR code to make the payment.</p>
+                        <div class="payment-box">
+                            <div class="inputBox">
+                                <label for="transactionId" class="form-label">Transaction ID</label>
+                                <input type="text" id="transactionId" name="transactionId" required>
+                                <span>Enter transaction ID</span>
                             </div>
-                            <div class="payment-box">
-
-                                <div class="">
-                                    <label for="transactionId" class="form-label">Transaction ID</label>
-                                    <input type="text" id="transactionId" name="transactionId" required>
-                                    <span>Enter transaction ID</span>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
-                                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*" required>
-                                </div>
+                            <div class="">
+                                <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
+                                <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*" required>
                             </div>
                         </div>
                     </div>
@@ -748,7 +745,7 @@ $_SESSION['isVerified'] = false;
 
             <!-- Submit Button -->
             <div class="text-center">
-                <button type="submit" class="register-btn">Register</button>
+                <button type="submit" class="register-btn">Register Now</button>
             </div>
         </form>
     </div>
