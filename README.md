@@ -128,8 +128,8 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 For queries or suggestions, feel free to reach out:
 
-- **Project Maintainer**: Abdul0925
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
+- **Project Maintainer**: Abdul and Team
+- **Email**: [abdulrahim74264@gmail.com](mailto:abdulrahim74264@gmail.com)
 
 ---
 
