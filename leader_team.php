@@ -4,18 +4,27 @@ require "db.php";
 if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
-$email = $_SESSION['leaderEmail'];
-$team_id = $_SESSION['id'];
 
-$paymentStatusStmt = $conn->prepare("SELECT * FROM payment_details WHERE team_id = ?");
-$paymentStatusStmt->bind_param("i", $team_id);
-$paymentStatusStmt->execute();
-$statusResult = $paymentStatusStmt->get_result();
-$paymentStatus = $statusResult->fetch_assoc();
-$paymentStat = $paymentStatus['status'];
-$ssPath = $paymentStatus['pay_path'];
-// echo $ssPath;
-// echo htmlspecialchars($ssPath);
+$email = $_SESSION['leaderEmail'];
+
+// Query to get the image path
+$sql = "SELECT * FROM mentor_details WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $imagePath = $row['image_path']; // The path of the uploaded image
+    $_SESSION['imagePath'] = $imagePath; // The path of the uploaded image
+} else {
+    // If no image found, use a placeholder image
+    $imagePath = 'https://via.placeholder.com/100';
+}
+
+$result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
+$result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
 ?>
 
@@ -27,10 +36,14 @@ $ssPath = $paymentStatus['pay_path'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Mentor Dashboard</title>
-    <link rel="stylesheet" href="mentor_dash_style.css">
+    <link rel="stylesheet" href="leader_dashboard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .table {
+            margin-bottom: 0rem;
+        }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -106,23 +119,21 @@ $ssPath = $paymentStatus['pay_path'];
             }
         }
 
-        .upload-btn {
+        .primary-btn {
             color: white;
-            width: 100px;
-            height: 40px;
+            width: 100%;
+            height: 30px;
             background-color: rgb(47, 141, 70);
             border-radius: 5px;
             border: none;
-            margin: 20px;
-
         }
 
-        .upload-btn:hover {
+        .primary-btn:hover {
             background-color: rgb(31, 91, 46);
             color: white;
         }
 
-        .upload-btn:active {
+        .primary-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
         }
@@ -148,11 +159,8 @@ $ssPath = $paymentStatus['pay_path'];
             padding-left: 10px;
         }
 
-        .mt-5 h5 {
-            color: #5500cb;
-            padding-top: 20px;
-            padding-bottom: 10px;
-            border-bottom: solid rgba(0, 20, 151, 0.59);
+        .badge {
+            background-color: rgb(229, 0, 0);
         }
 
         .DHead h1 {
@@ -165,54 +173,34 @@ $ssPath = $paymentStatus['pay_path'];
             color: #fff;
         }
 
-        .pay {
-            display: flex;
-            flex-direction: column;
+        .table-responsive {
+            padding-top: 20px;
         }
 
-        .pay input {
-            padding-left: 20px;
-            margin-top: 10px;
-        }
-
-        .pay label {
-            padding-left: 20px;
-            margin-top: 10px;
-        }
-
-        .QRcode {
-            padding-left: 20px;
-            margin: 10px 0px 20px 0px;
-        }
-
-        .pay-status {
-            padding: 40px 0px 10px 20px;
-        }
-
-        .report-container {
-            margin-top: 20px;
-            height: 560px;
+        .mt-5 {
+            margin-top: 20px !important;
         }
     </style>
+
 </head>
 
 <body>
     <!-- for header part -->
     <header>
         <div class="logosec">
-            <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
+            <a href="leader_dashboard.php" style="text-decoration: none;">
                 <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
         <div class="DHead">
-            <H1>Payment</H1>
+            <H1>My Team</H1>
         </div>
         <div class="message">
             <!-- <div class="circle"></div> -->
             <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
             <div class="dp">
-                <a href="mentor_my_teams_shad.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
+                <a href="leader_team.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
         </div>
     </header>
@@ -221,43 +209,43 @@ $ssPath = $paymentStatus['pay_path'];
         <div class="navcontainer">
             <nav class="nav">
                 <div class="nav-upper-options">
-                    <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
+                    <a href="leader_dashboard.php" style="text-decoration: none;">
                         <div class="nav-option option2">
                             <i style="color: black;" class="bi-columns"></i>
                             <h3 style="color: black;"> Dashboard</h3>
                         </div>
                     </a>
 
-                    <a href="mentor_my_teams_shad.php" style="text-decoration: none;">
-                        <div class="nav-option option6" style="color: black;">
-                            <i class="bi-file-earmark-person"></i>
-                            <h3> My Team</h3>
-                        </div>
-                    </a>
-
-                    <a href="mentor_payment_shad.php" style="text-decoration: none;">
+                    <a href="leader_team.php" style="text-decoration: none;">
                         <div class="nav-option option1" style="color: black;">
-                            <i style="color: #fff;" class="bi-patch-check"></i>
-                            <h3 style="color: #fff;"> Payment</h3>
+                            <i style="color: #fff;" class="bi-file-earmark-person"></i>
+                            <h3 style="color: #fff;"> My Team</h3>
                         </div>
                     </a>
 
-                    <a href="mentor_result_shad.php" style="text-decoration: none;">
+                    <a href="leader_payment.php" style="text-decoration: none;">
+                        <div class="nav-option option3" style="color: black;">
+                            <i class="bi-patch-check"></i>
+                            <h3> Payment</h3>
+                        </div>
+                    </a>
+
+                    <a href="leader_result.php" style="text-decoration: none;">
                         <div class="nav-option option4" style="color: black;">
                             <i class="bi-award"></i>
                             <h3> Result</h3>
                         </div>
                     </a>
 
-                    <a href="mentor_problem_shad.php" style="text-decoration: none;">
+                    <a href="leader_problem_statement.php" style="text-decoration: none;">
                         <div class="nav-option option5" style="color: black;">
                             <i class="bi-eye"></i>
                             <h3> Problems</h3>
                         </div>
                     </a>
 
-                    <a href="mentor_guideline_shad.php" style="text-decoration: none;">
-                        <div class="nav-option option3" style="color: black;">
+                    <a href="leader_guideline.php" style="text-decoration: none;">
+                        <div class="nav-option option6" style="color: black;">
                             <i class="bi-card-checklist"></i>
                             <h3> Guidelines</h3>
                         </div>
@@ -276,15 +264,40 @@ $ssPath = $paymentStatus['pay_path'];
 
         <div class="main">
             <div class="report-container">
-                <div class="pay-status">
-                    <h5>
-                        Your Payment Status: <span style="color: <?php echo $paymentStat === 'Pending' ? 'red' : ($paymentStat === 'Completed' ? 'green' : 'black'); ?>;"> <?php echo ucfirst($paymentStat); ?></span>
-                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="If you have already submitted the payment screenshot and your status still shows as pending, kindly wait for the admin to process your request. This might take some time. However, if the status remains pending for more than 6 hours, please reach out to a hackathon volunteer for assistance.">!</button>
-                    </h5>
-                </div>
+                <div class="mt-5">
+                    <div class="report-header">
+                        <h1 class="recent-Articles">Team Details</h1>
+                    </div>
 
-                <div class="QRcode">
-                    <img src="<?php echo $ssPath ?>" alt="payment" height="420">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>Members</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $sr_no = 1; ?>
+                                <?php while ($row1 = $result1->fetch_assoc()) {
+                                    // $date = date('d-m-Y', strtotime($row1['date']));
+                                    $date = "";
+                                ?>
+                                    <tr>
+                                        <td><?php echo $sr_no++; ?></td>
+                                        <td><?php echo $row1['memberName']; ?></td>
+                                        <td><?php echo $row1['memberMobile']; ?></td>
+                                        <td><?php echo $row1['memberEmail']; ?></td>
+                                        <td><?php echo $row1['memberGender']; ?></td>
+                                    </tr>
+                                <?php
+                                } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -298,16 +311,6 @@ $ssPath = $paymentStatus['pay_path'];
             nav.classList.toggle("navclose");
         })
     </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            tooltipTriggerList.forEach(function(tooltipTriggerEl) {
-                new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-        });
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

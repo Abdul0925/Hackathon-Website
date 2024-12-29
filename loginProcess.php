@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginBtn'])) {
                     $_SESSION['leaderEmail'] = $mentor['leaderEmail'];
                     $_SESSION['id'] = $mentor['id'];
                     $_SESSION['leader_logged_in'] = true;
-                    echo '<script>alert("Login successful!"); window.location.href = "mentor_dashboard_shad.php";</script>';
+                    echo '<script>alert("Login successful!"); window.location.href = "leader_dashboard.php";</script>';
                 } else {
                     if ($password == $mentor['password']) {
                         $_SESSION['leaderName'] = $mentor['leaderName'];
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginBtn'])) {
                         $_SESSION['leaderEmail'] = $mentor['leaderEmail'];
                         $_SESSION['id'] = $mentor['id'];
                         $_SESSION['leader_logged_in'] = true;
-                        echo '<script>alert("Login successful!"); window.location.href = "mentor_dashboard_shad.php";</script>';
+                        echo '<script>alert("Login successful!"); window.location.href = "leader_dashboard.php";</script>';
                     }else{
 
                         echo '<script>alert("Invalid password. Please try again."); window.location.href = "loginPage.php";</script>';

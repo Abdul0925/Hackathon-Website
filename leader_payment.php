@@ -1,10 +1,10 @@
 <?php
 session_start();
 require "db.php";
-if ($_SESSION['mentor_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
-$email = $_SESSION['email'];
+$email = $_SESSION['leaderEmail'];
 $team_id = $_SESSION['id'];
 
 $paymentStatusStmt = $conn->prepare("SELECT * FROM payment_details WHERE team_id = ?");
@@ -12,336 +12,305 @@ $paymentStatusStmt->bind_param("i", $team_id);
 $paymentStatusStmt->execute();
 $statusResult = $paymentStatusStmt->get_result();
 $paymentStatus = $statusResult->fetch_assoc();
-$paymentStatus = $paymentStatus['status'];
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addNewMember'])) {
-    if ($totalMembers > 4) {
-        echo '<script> alert("You can only add 5 members "); window.location.href = "mentor_my_teams.php"; </script>';
-        return;
-    }
-    if ($paymentStatus == "Completed") {
-        echo '<script> alert("You can' . "'t" . ' add members after payment "); window.location.href = "mentor_my_teams.php"; </script>';
-        return;
-    }
-    $memberName = $_POST['memberName'];
-    $memberEmail = $_POST['memberEmail'];
-    $memberMobile = $_POST['memberMobile'];
-    $is_leader = 0;
-    $team_name = "";
-    $ps = "";
-    $addNewMemberStmt = $conn->prepare("INSERT INTO all_team_members (team_id, mentor, name, email, phone, team_name, ps, is_leader) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $addNewMemberStmt->bind_param("issssssi", $team_id, $email, $memberName, $memberEmail, $memberMobile, $team_name, $ps, $is_leader);
-    if ($addNewMemberStmt->execute()) {
-    } else {
-        echo '<script> alert("Error Adding New Member!"); window.location.href = "mentor_my_teams.php"; </script>';
-    }
-    $addNewMemberStmt->close();
-    $conn->close();
-    echo '<script> window.location.href = "mentor_my_teams.php"; </script>';
-    // return;
-
-}
-
-
+$paymentStat = $paymentStatus['status'];
+$ssPath = $paymentStatus['pay_path'];
+// echo $ssPath;
+// echo htmlspecialchars($ssPath);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Team Detail</title>
-    <!-- Bootstrap CSS -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Mentor Dashboard</title>
+    <link rel="stylesheet" href="leader_dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
-        body {
-            background-color: #f4f7f6;
+        table {
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: auto;
+            width: 100%;
         }
 
-        /* Sidebar styles */
-        .sidebar {
-            background-color: #f8f9fa;
-            min-height: 100vh;
-            padding: 20px;
+        th,
+        td {
+            border: 1px solid rgb(200, 200, 200);
+            padding: 8px 30px;
+            text-align: center;
         }
 
-        .sidebar a {
-            display: block;
-            padding: 10px 15px;
-            font-weight: 600;
-            color: #333;
+        th {
+            text-transform: uppercase;
+            font-weight: 500;
+            border-color: black;
         }
 
-        .sidebar a.active,
-        .sidebar .nav-link:hover {
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
+        td {
+            font-size: 13px;
         }
 
-        .logoutBtn {
-            margin-bottom: 2rem;
+        .popup {
+            border: 1px solid black;
+            border-radius: 10px;
+            width: 500px;
+            height: auto;
+            background: white;
             position: absolute;
-            bottom: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0 30px 30px;
+            visibility: hidden;
+        }
+
+        .open-popup {
+            visibility: visible;
+        }
+
+        .modal-header h2 {
+            padding-top: 25px;
+            margin-bottom: 20px;
+            color: #5500cb;
+        }
+
+        .my-primary-btn {
+            background-color: rgb(220, 0, 0);
             color: white;
-            width: 14em;
-        }
-
-        /* Dashboard styles */
-        .listBtn {
+            width: 60px;
+            height: 30px;
+            border-radius: 5px;
             border: none;
-            background-color: #f4f7f6;
-            display: none;
+            margin-top: 25px;
         }
 
-        .backBtn {
-            display: none;
+        .my-primary-btn:hover {
+            background-color: rgb(150, 0, 0);
+            color: white;
         }
 
-        .dashboard-header {
-            margin-top: 20px;
-            font-weight: bold;
-            font-size: 24px;
-            display: flex;
+        .my-primary-btn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(220, 0, 0);
         }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
+        @media screen and (max-width: 400px) {
+            .popup {
+                width: 300px;
+            }
         }
 
-        .card-subtitle {
-            font-size: 14px;
-            color: yellow;
+        .upload-btn {
+            color: white;
+            width: 100px;
+            height: 40px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
+            border: none;
+            margin: 20px;
+
         }
 
-        .table th,
-        .table td {
-            vertical-align: middle;
+        .upload-btn:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
         }
 
-        .badge-pending {
-            background-color: #ffc107;
+        .upload-btn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
         }
 
-        .badge-approved {
-            background-color: #28a745;
+        .nav-option i {
+            font-size: 185%;
         }
 
-        .badge-reject {
-            background-color: #dc3545;
+        .main {
+            background-color: #cad7fda4;
         }
 
-        /* For the profile picture and name */
-        .profile-section {
-            display: flex;
+        .nav-upper-options {
+            gap: 10px;
+            justify-content: center;
             align-items: center;
-            cursor: pointer;
         }
 
-        .profile-section img {
-            border-radius: 50%;
-            width: 50px;
-            margin-right: 10px;
-        }
-
-        .profile-section .name {
+        .nav-upper-options h3 {
+            font-size: 18px;
+            margin-bottom: 0px;
             font-weight: bold;
+            padding-left: 10px;
         }
 
-        .tooltip-inner {
-            max-width: 300px;
-            /* Increase the tooltip width */
-            white-space: pre-wrap;
-            /* Allow wrapping for long text */
-            font-size: 14px;
-            /* Optional: Adjust the font size */
-            background-color:rgb(255, 182, 11);
-            color: black;
+        .mt-5 h5 {
+            color: #5500cb;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            border-bottom: solid rgba(0, 20, 151, 0.59);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                min-height: auto;
-                display: none;
-                z-index: 12;
-                background-color: white;
-                position: absolute;
-            }
+        .DHead h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 0px;
+        }
 
-            .backBtn {
-                display: block;
-            }
+        .nav-option1 i {
+            color: #fff;
+        }
 
-            .logoutBtn {
-                position: relative;
-            }
+        .pay {
+            display: flex;
+            flex-direction: column;
+        }
 
-            .listBtn {
-                display: flex;
-            }
+        .pay input {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
 
+        .pay label {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .QRcode {
+            padding-left: 20px;
+            margin: 10px 0px 20px 0px;
+        }
+
+        .pay-status {
+            padding: 40px 0px 10px 20px;
+        }
+
+        .report-container {
+            margin-top: 20px;
+            height: 560px;
         }
     </style>
 </head>
 
 <body>
-    <!-- <script>document.getElementById('addNewBtn').blocked = 'true';</script> -->
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-lg-2 col-md-3 sidebar" id="sidebar">
-
-                <div class="profile-section mb-4">
-                    <div class="m-2 backBtn" id="backBtn">
-                        <button type="button" class="btn-close" aria-label="Close"></button>
-                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
-                            <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
-                        </svg> -->
-                    </div>
-                    <div id="myProfile" class="d-flex" data-bs-toggle="modal" data-bs-target="#myProfileModal">
-                        <img src="<?php echo $_SESSION['imagePath']; ?>" alt="Profile Picture">
-                        <div>
-                            <div class="name"> <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?> </div>
-                            <small>Mentor</small>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="mentor_dashboard.php" class=" nav-link">Dashboard</a>
-                <a href="mentor_my_teams.php" class="nav-link">My Team</a>
-                <a href="leader_payment.php" class="active nav-link">Payment</a>
-                <a href="mentor_result.php" class=" nav-link">Results</a>
-                <a href="mentor_problem_statements.php" class=" nav-link">Problem Statements</a>
-                <a href="mentor_guidelines.php" class=" nav-link">Guidelines</a>
-                <a href="logout.php" class="btn btn-danger logoutBtn">Log Out</a>
+    <!-- for header part -->
+    <header>
+        <div class="logosec">
+            <a href="leader_dashboard.php" style="text-decoration: none;">
+                <div class="logo">Leader</div>
+            </a>
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
+        </div>
+        <div class="DHead">
+            <H1>Payment</H1>
+        </div>
+        <div class="message">
+            <!-- <div class="circle"></div> -->
+            <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
+            <div class="dp">
+                <a href="leader_team.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
+        </div>
+    </header>
 
-            <div class="col-lg-10 col-md-9 p-4">
-                <!-- Dashboard Header -->
-                <div>
+    <div class="main-container">
+        <div class="navcontainer">
+            <nav class="nav">
+                <div class="nav-upper-options">
+                    <a href="leader_dashboard.php" style="text-decoration: none;">
+                        <div class="nav-option option2">
+                            <i style="color: black;" class="bi-columns"></i>
+                            <h3 style="color: black;"> Dashboard</h3>
+                        </div>
+                    </a>
+
+                    <a href="leader_team.php" style="text-decoration: none;">
+                        <div class="nav-option option6" style="color: black;">
+                            <i class="bi-file-earmark-person"></i>
+                            <h3> My Team</h3>
+                        </div>
+                    </a>
+
+                    <a href="leader_payment.php" style="text-decoration: none;">
+                        <div class="nav-option option1" style="color: black;">
+                            <i style="color: #fff;" class="bi-patch-check"></i>
+                            <h3 style="color: #fff;"> Payment</h3>
+                        </div>
+                    </a>
+
+                    <a href="leader_result.php" style="text-decoration: none;">
+                        <div class="nav-option option4" style="color: black;">
+                            <i class="bi-award"></i>
+                            <h3> Result</h3>
+                        </div>
+                    </a>
+
+                    <a href="leader_problem_statement.php" style="text-decoration: none;">
+                        <div class="nav-option option5" style="color: black;">
+                            <i class="bi-eye"></i>
+                            <h3> Problems</h3>
+                        </div>
+                    </a>
+
+                    <a href="leader_guideline.php" style="text-decoration: none;">
+                        <div class="nav-option option3" style="color: black;">
+                            <i class="bi-card-checklist"></i>
+                            <h3> Guidelines</h3>
+                        </div>
+                    </a>
+
+                    <a href="logout.php" style="text-decoration: none;">
+                        <div class="nav-option logout" style="color: black;">
+                            <i class="bi-arrow-left-circle"></i>
+                            <h3>Logout</h3>
+                        </div>
+                    </a>
+
+                </div>
+            </nav>
+        </div>
+
+        <div class="main">
+            <div class="report-container">
+                <div class="pay-status">
                     <h5>
-                        Your Payment Status: <span style="color: <?php echo $paymentStatus === 'Pending' ? 'red' : ($paymentStatus === 'Completed' ? 'green' : 'black'); ?>;"> <?php echo ucfirst($paymentStatus); ?></span>
-                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="right"
-                            title="If you have already submitted the payment screenshot and your status still shows as pending, kindly wait for the admin to process your request. This might take some time. However, if the status remains pending for more than 6 hours, please reach out to a hackathon volunteer for assistance.">
-                            i
-                        </button>
+                        Your Payment Status: <span style="color: <?php echo $paymentStat === 'Pending' ? 'red' : ($paymentStat === 'Completed' ? 'green' : 'black'); ?>;"> <?php echo ucfirst($paymentStat); ?></span>
+                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="If you have already submitted the payment screenshot and your status still shows as pending, kindly wait for the admin to process your request. This might take some time. However, if the status remains pending for more than 6 hours, please reach out to a hackathon volunteer for assistance.">!</button>
                     </h5>
                 </div>
 
-                <div>
-                    <img src="./picture/payment.jpg" alt="payment" height width="400">
-                </div>
-                <form action="">
-                    <div>
-                        <label for="paymentproof">Upload Screen Shot of Your Payment: </label>
-                        <input type="file" name="paymentproof" id="paymentproof" required>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary" type="submit">Uplaod</button>
-                    </div>
-                </form>
-            </div>
-
-
-            <!-- MyProfile Modal -->
-            <div class="modal fade" id="myProfileModal" tabindex="-1" aria-labelledby="myProfileModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="myProfileModalLabel">My Profile</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="text-center mb-4">
-                                <form id="profilePicForm" method="POST" enctype="multipart/form-data" action="changeProfilePic.php">
-                                    <div class="text-center mb-4">
-                                        <div class="position-relative d-inline-block">
-                                            <img src="<?php echo $_SESSION['imagePath']; ?>" id="profilePic" class="rounded-circle" alt="Profile Picture" width="100">
-                                            <input type="file" id="changePicInput" name="profile_pic" accept="image/*" required>
-                                            <div class="position-absolute top-50 start-50 translate-middle text-white" id="changePicHover" style="cursor: pointer; display: none;">
-                                                <i class="fas fa-camera"></i> Change
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-
-                            <!-- Profile Picture Section -->
-
-                            <!-- Name -->
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter your name" value="<?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?>" disabled>
-                            </div>
-
-                            <!-- College Name -->
-                            <div class="mb-3">
-                                <label for="collegeName" class="form-label">College Name</label>
-                                <input type="text" class="form-control" id="collegeName" placeholder="Enter your college name" value="<?php echo $_SESSION['college']; ?>" disabled>
-                            </div>
-
-                            <!-- Mobile Number -->
-                            <div class="mb-3">
-                                <label for="mobileNumber" class="form-label">Mobile Number</label>
-                                <input type="tel" class="form-control" id="mobileNumber" placeholder="Enter your mobile number" value="<?php echo $_SESSION['mobile']; ?>" disabled>
-                            </div>
-
-                            <!-- Email Address -->
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter your email" value="<?php echo $_SESSION['email']; ?>" disabled>
-                            </div>
-
-                            <!-- Forget Password -->
-                            <div class="text-center mt-3">
-                                <a href="#" id="forgetPassword" class="text-primary" data-bs-toggle="modal" data-bs-target="#formModal">Forget Password?</a>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <!-- <button type="button" class="btn btn-primary" id="saveChanges">Save Changes</button> -->
-                            <button type="submit" id="hiddenSubmitButton" class="btn btn-primary">Upload</button>
-
-                        </div>
-                        </form>
-                    </div>
+                <div class="QRcode">
+                    <img src="<?php echo $ssPath ?>" alt="payment" height="420">
                 </div>
             </div>
+        </div>
+    </div>
 
+    <script>
+        let menuicn = document.querySelector(".menuicn");
+        let nav = document.querySelector(".navcontainer");
 
-            <script>
-                document.getElementById('listBtn').addEventListener('click', () => {
-                    if (document.getElementById("sidebar").style.display == 'block') {
-                        document.getElementById("sidebar").style.display = 'none';
-                    } else {
-                        document.getElementById("sidebar").style.display = 'block';
-                    }
-                })
+        menuicn.addEventListener("click", () => {
+            nav.classList.toggle("navclose");
+        })
+    </script>
 
-                document.getElementById('backBtn').addEventListener('click', () => {
-                    if (document.getElementById("sidebar").style.display == 'block') {
-                        document.getElementById("sidebar").style.display = 'none';
-                    } else {
-                        document.getElementById("sidebar").style.display = 'block';
-                    }
-                })
-            </script>
-            <!-- Include Bootstrap Tooltip Initialization -->
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-                    tooltipTriggerList.forEach(function(tooltipTriggerEl) {
-                        new bootstrap.Tooltip(tooltipTriggerEl);
-                    });
-                });
-            </script>
-            <!-- Bootstrap JS and dependencies -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(function(tooltipTriggerEl) {
+                new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>
