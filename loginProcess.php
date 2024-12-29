@@ -26,20 +26,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginBtn'])) {
                     $_SESSION['leaderEmail'] = $mentor['leaderEmail'];
                     $_SESSION['id'] = $mentor['id'];
                     $_SESSION['leader_logged_in'] = true;
-                    echo '<script>alert("Login successful!"); window.location.href = "leader_dashboard.php";</script>';
+                    echo '<script>alert("Login successful!"); window.location.href = "mentor_dashboard_shad.php";</script>';
                 } else {
-                    if ($password == $mentor['password']) {
-                        $_SESSION['leaderName'] = $mentor['leaderName'];
-                        $_SESSION['leaderMobile'] = $mentor['leaderMobile'];
-                        $_SESSION['leaderEmail'] = $mentor['leaderEmail'];
-                        $_SESSION['id'] = $mentor['id'];
-                        $_SESSION['leader_logged_in'] = true;
-                        echo '<script>alert("Login successful!"); window.location.href = "leader_dashboard.php";</script>';
-                    }else{
-
+                    // if ($password == $mentor['password']) {
+                    //     $_SESSION['leaderName'] = $mentor['leaderName'];
+                    //     $_SESSION['leaderMobile'] = $mentor['leaderMobile'];
+                    //     $_SESSION['leaderEmail'] = $mentor['leaderEmail'];
+                    //     $_SESSION['id'] = $mentor['id'];
+                    //     $_SESSION['leader_logged_in'] = true;
+                    //     echo '<script>alert("Login successful!"); window.location.href = "mentor_dashboard_shad.php";</script>';
+                    // }else{
+                        // echo $password;
+                        // echo $mentor['password'];
+                        // if (password_verify($password, $mentor['password'])) {
+                        //     echo "done";
+                        // }
+                        // echo "notdone";
                         echo '<script>alert("Invalid password. Please try again."); window.location.href = "loginPage.php";</script>';
                     }
-                }
+                
             } else {
                 echo '<script>alert("No user found with that email."); window.location.href = "loginPage.php";</script>';
             }
