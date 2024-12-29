@@ -12,8 +12,8 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $otp = $_POST['otp'];
-
-
+    $leaderName = $_POST['name'];
+    $leaderGender = $_POST['gender'];
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Store OTP in session for verification later
         $_SESSION['otp'] = $otp;
         $_SESSION['email'] = $email;
+        $_SESSION['leaderName'] = $leaderName;
+        $_SESSION['leaderGender'] = $leaderGender;
 
         $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
         $stmt = $conn->prepare($query);
@@ -82,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
                 return;
             } else {
+                session_reset();
                 echo json_encode([
                     'success' => false,
                     'message' => 'Failed to send OTP. Please try again.',

@@ -15,9 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = htmlspecialchars($_POST['name']);
         $email = htmlspecialchars($_POST['email']);
         $mobile = htmlspecialchars($_POST['mobile']);
-        $gender = htmlspecialchars($_POST['gender']);
-        $leaderGender = htmlspecialchars($_POST['leaderGender']);
-        // if ($leaderGender == 'Male') {
+        $gender = htmlspecialchars($_POST['memberGender']);
+        if ($_SESSION['leaderGender'] == '') {
+            echo json_encode([
+                'success' => false,
+                'error' => 'Please Verify Leader Email Before Adding Members.',
+            ]);
+            return;
+        }
+
+        if ($_SESSION['leaderGender'] == 'Male') {
             if ($gender == 'Male') {
                 $_SESSION['maleCount']++;
             }
@@ -31,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
                 return;
             }
-        // }
+        }
 
         $newMember = [
             'name' => $name,
