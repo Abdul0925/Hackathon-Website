@@ -24,13 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
         // Generate OTP
         if ($new_password == $confirm_password && strlen($new_password) > 6) {
             $otp = rand(100000, 999999);
-            if ($role == 'mentor') {
+            if ($role == 'Team Leader') {
                 $_SESSION['otp'] = $otp;
                 $_SESSION['email'] = $email;
                 $_SESSION['new_password'] = $new_password;
-                $_SESSION['role'] = 'Mentor';
+                $_SESSION['role'] = 'Team Leader';
 
-                $query = "SELECT * FROM mentor_details WHERE email = ?";
+                $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("s", $email); // 's' specifies that the parameter is a string
                 $stmt->execute();
@@ -39,6 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
                 if ($result->num_rows == 0) {
                     echo '<script> alert("User Not Exist!"); window.location.href = "forgetPassword.php"; </script>';
                 } else {
+                    echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
+                        setTimeout(()=>{
+                            document.getElementById('resetButton').disabled = true;
+                        },500)
+                    })</script>";
                     $mentor = $result->fetch_assoc();
                     $email = $_POST['email'];
                     $mail = new PHPMailer(true);
@@ -54,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
                     $mail->addAddress($email);
                     $mail->isHTML(true);
                     $mail->Subject = "OTP for Reset Password";
-                    $msg = 'Dear ' . strtoupper($mentor['first_name']) . '<p> your one time password for password process is:</p>' .
+                    $msg = 'Dear ' . strtoupper($mentor['leaderName']) . '<p> your one time password for password process is:</p>' .
                         '<p>OTP: ' . $_SESSION['otp'] . '</p>';
                     $mail->Body = $msg;
                     if ($mail->send()) {
@@ -63,26 +68,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
                     } else {
                         $otp_sent = false;
                         $message = "Failed to send OTP. Please try again.";
+                        echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
+                            setTimeout(()=>{
+                                document.getElementById('resetButton').disabled = false;
+                            },500)
+                        })</script>";
                     }
                 }
             } else {
-                $message1 = "Only Mentor can change password if your are other than mentor plz contact admin";
+                $message1 = "Only Leader can change password If your are already a Leader and got Login credentials plz contact admin";
             }
         } else {
-            echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
-            setTimeout(()=>{
-                document.getElementById('resetButton').disabled = true;
-            },500)
-        })</script>";
+        //     echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
+        //     setTimeout(()=>{
+        //         document.getElementById('resetButton').disabled = true;
+        //     },500)
+        // })</script>";
             $message1 = "Password Not Match OR Please create password more than 6 characters";
         }
     } else {
         $otp_sent = false;
-        echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
-            setTimeout(()=>{
-                document.getElementById('resetButton').disabled = true;
-            },500)
-        })</script>";
+        // echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
+        //     setTimeout(()=>{
+        //         document.getElementById('resetButton').disabled = true;
+        //     },500)
+        // })</script>";
         $message1 = "Invalid email address.";
     }
 }
@@ -122,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         $mail->Subject = "Login Credentials";
 
         // Construct the email body with the student's login details
-        $msg = 'Dear ' . strtoupper($first_name) . '<p> Your password for RJH has Changed Successfully if its not you than contact us</p>' .
+        $msg = 'Dear ' . strtoupper($leaderName) . '<p> Your password for RJH has Changed Successfully if its not you than contact us</p>' .
             '<p>Username: ' . $email . '</p>';
 
         // Set the email message content
@@ -131,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "UPDATE mentor_details SET password = ? WHERE email = ?";
+        $query = "UPDATE team_and_leader_details SET password = ? WHERE leaderEmail = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('ss', $hashedPassword, $email);
         if ($stmt->execute()) {
@@ -300,7 +310,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                 <select class="form-control" name="role" id="role" required>
                     <option selected disabled>Please Select Your Role</option>
                     <option value="institute-college">Institute/College</option>
-                    <option value="team-leader">Team Leader</option>
+                    <option value="Team Leader">Team Leader</option>
                     <option value="mentor">Mentor</option>
                 </select>
             </div>
@@ -339,11 +349,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
 
     <script>
-        document.getElementById('resetButton').addEventListener('click', () => {
-            setTimeout(() => {
-                document.getElementById('resetButton').disabled = true;
-            }, 500)
-        })
+        // document.getElementById('resetButton').addEventListener('click', () => {
+        //     setTimeout(() => {
+        //         document.getElementById('resetButton').disabled = true;
+        //     }, 500)
+        // })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

@@ -18,6 +18,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
     <title>Admin Profile</title>
     <link rel="stylesheet" href="admin_dash_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         table {
             border-collapse: collapse;
@@ -38,6 +39,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
             text-transform: uppercase;
             font-weight: 500;
             border-color: black;
+            cursor: pointer;
         }
 
         td {
@@ -85,6 +87,25 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
         .primary-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
+        }
+
+        .filter-container {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 20px 0px 20px;
+        }
+
+        .filter-container label {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .filter-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         .report-container {
@@ -189,14 +210,34 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
                     <h1 class="recent-Articles">Admin List</h1>
                 </div>
 
+                <div class="filter-container">
+                    <!-- <label for="filterInput">Search</label> -->
+                    <input type="text" id="filterInput" placeholder="Search by Team Name or Transaction ID" onkeyup="filterTable()">
+                </div>
+                <script>
+                    function filterTable() {
+                        const input = document.getElementById('filterInput');
+                        const filter = input.value.toLowerCase();
+                        const table = document.querySelector('table tbody');
+                        const rows = table.getElementsByTagName('tr');
+
+                        for (let i = 0; i < rows.length; i++) {
+                            const teamName = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+                            const transactionId = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
+                            if (teamName.includes(filter) || transactionId.includes(filter)) {
+                                rows[i].style.display = '';
+                            } else {
+                                rows[i].style.display = 'none';
+                            }
+                        }
+                    }
+                </script>
                 <div class="report-body">
                     <!-- top hedding -->
                     <div class="table">
                         <table>
                             <thead>
-
                                 <tr>
-
                                     <th scope="col">Sr No</th>
                                     <th scope="col">Team Name</th>
                                     <th scope="col">Transaction ID</th>
@@ -260,6 +301,45 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
         </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $('th').click(function() {
+                let table = $(this).closest('table');
+                let rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+                this.asc = !this.asc;
+
+                if (!this.asc) {
+                    rows.reverse();
+                }
+
+                // Append rows efficiently
+                let fragment = document.createDocumentFragment();
+                rows.forEach(row => fragment.appendChild(row));
+                table.find('tbody').append(fragment);
+
+                // Update sorting indicator
+                $('th').removeClass('asc desc'); // Reset all headers
+                $(this).addClass(this.asc ? 'asc' : 'desc'); // Highlight current column
+            });
+
+            function comparer(index) {
+                return function(a, b) {
+                    let valA = getCellValue(a, index);
+                    let valB = getCellValue(b, index);
+
+                    if ($.isNumeric(valA) && $.isNumeric(valB)) {
+                        return parseFloat(valA) - parseFloat(valB); // Numeric comparison
+                    } else {
+                        return valA.localeCompare(valB); // String comparison
+                    }
+                };
+            }
+
+            function getCellValue(row, index) {
+                return $(row).children('td').eq(index).text().trim();
+            }
+        });
+    </script>
 
     <script>
         let menuicn = document.querySelector(".menuicn");
@@ -303,6 +383,8 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 
 </body>
 

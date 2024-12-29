@@ -24,7 +24,13 @@ if ($result->num_rows > 0) {
 }
 
 $result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
-$result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
+
+
+$teamDetails = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE leaderEmail='$email'");
+$teamDetailsRow = $teamDetails->fetch_assoc();
+$teamName = $teamDetailsRow['teamName'];
+$psId = $teamDetailsRow['psId'];
+
 
 ?>
 
@@ -36,7 +42,9 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Mentor Dashboard</title>
+
     <link rel="stylesheet" href="leader_dashboard.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -188,7 +196,9 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
     <!-- for header part -->
     <header>
         <div class="logosec">
+
             <a href="leader_dashboard.php" style="text-decoration: none;">
+
                 <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
@@ -200,7 +210,9 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             <!-- <div class="circle"></div> -->
             <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
             <div class="dp">
+
                 <a href="leader_team.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
+
             </div>
         </div>
     </header>
@@ -209,42 +221,54 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         <div class="navcontainer">
             <nav class="nav">
                 <div class="nav-upper-options">
+
                     <a href="leader_dashboard.php" style="text-decoration: none;">
+
                         <div class="nav-option option2">
                             <i style="color: black;" class="bi-columns"></i>
                             <h3 style="color: black;"> Dashboard</h3>
                         </div>
                     </a>
 
+
                     <a href="leader_team.php" style="text-decoration: none;">
+
                         <div class="nav-option option1" style="color: black;">
                             <i style="color: #fff;" class="bi-file-earmark-person"></i>
                             <h3 style="color: #fff;"> My Team</h3>
                         </div>
                     </a>
 
+
                     <a href="leader_payment.php" style="text-decoration: none;">
+
                         <div class="nav-option option3" style="color: black;">
                             <i class="bi-patch-check"></i>
                             <h3> Payment</h3>
                         </div>
                     </a>
 
+
                     <a href="leader_result.php" style="text-decoration: none;">
+
                         <div class="nav-option option4" style="color: black;">
                             <i class="bi-award"></i>
                             <h3> Result</h3>
                         </div>
                     </a>
 
+
                     <a href="leader_problem_statement.php" style="text-decoration: none;">
+
                         <div class="nav-option option5" style="color: black;">
                             <i class="bi-eye"></i>
                             <h3> Problems</h3>
                         </div>
                     </a>
 
+
                     <a href="leader_guideline.php" style="text-decoration: none;">
+
                         <div class="nav-option option6" style="color: black;">
                             <i class="bi-card-checklist"></i>
                             <h3> Guidelines</h3>
@@ -265,9 +289,19 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         <div class="main">
             <div class="report-container">
                 <div class="mt-5">
-                    <div class="report-header">
-                        <h1 class="recent-Articles">Team Details</h1>
-                    </div>
+
+
+                    <h5 class="mb-3">Team Details</h5>
+                    <h6>
+                        Team Name: <?php echo $teamName; ?>
+                    </h6> 
+                    <h6>
+                        Problem Statement ID: 
+                        <a href="mentor_problem_shad.php">
+                            <?php echo strtoupper($psId); ?>
+                        </a>
+                    </h6> 
+
 
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -288,7 +322,9 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                                 ?>
                                     <tr>
                                         <td><?php echo $sr_no++; ?></td>
-                                        <td><?php echo $row1['memberName']; ?></td>
+
+                                        <td><?php echo $row1['memberName']; echo ($row1['is_leader']?" (Leader)":"") ?></td>
+
                                         <td><?php echo $row1['memberMobile']; ?></td>
                                         <td><?php echo $row1['memberEmail']; ?></td>
                                         <td><?php echo $row1['memberGender']; ?></td>

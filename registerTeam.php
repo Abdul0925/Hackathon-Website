@@ -5,7 +5,11 @@ if (!isset($_SESSION['members'])) {
     $_SESSION['members'] = [];
 }
 $_SESSION['isVerified'] = false;
-// $_SESSION['members'] = [];
+$_SESSION['leaderGender'] = '';
+$_SESSION['maleCount'] = 0;
+
+$_SESSION['members'] = [];
+// print_r($_SESSION['members']);
 // echo $_SESSION['isVerified'];
 ?>
 
@@ -610,8 +614,8 @@ $_SESSION['isVerified'] = false;
                             </div>
 
                             <div class="inputBox" style="margin-bottom: 15px">
-                                <label for="gender">Gender:</label>
-                                <select id="gender" name="gender">
+                                <label for="leaderGender">Gender:</label>
+                                <select id="leaderGender" name="leaderGender">
                                     <option value="" selected disabled>Choose Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -637,7 +641,7 @@ $_SESSION['isVerified'] = false;
                 </div>
 
                 <!-- Mentor Details Section -->
-                <div class="box">
+                <!-- <div class="box">
                     <div class="head-div">
                         <h4 class="head-title">Mentor Details (Optional)</h4>
                     </div>
@@ -657,7 +661,7 @@ $_SESSION['isVerified'] = false;
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Member Details Section -->
                 <div class="box">
@@ -678,8 +682,8 @@ $_SESSION['isVerified'] = false;
                             <span>Enter email</span>
                         </div>
                         <div class="inputBox">
-                            <label for="gender">Gender:</label>
-                            <select id="gender" name="gender">
+                            <label for="memberGender">Gender:</label>
+                            <select id="memberGender" name="memberGender">
                                 <option value="" selected disabled>Choose Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -706,8 +710,8 @@ $_SESSION['isVerified'] = false;
                                         <td><?php echo $member['mobile']; ?></td>
                                         <td><?php echo $member['gender']; ?></td>
                                         <td>
-                                            <button class="edit-btn" type="button" onclick="openEditModal(<?php echo $index; ?>)">Edit</button>
-                                            <button class="delete-btn" type="button" onclick="deleteMember(<?php echo $index; ?>)">Delete</button>
+                                            <!-- <button class="edit-btn" type="button" onclick="openEditModal(<?php echo $index; ?>)">Edit</button> -->
+                                            <button class="delete-btn" type="button" onclick="deleteMember(<?php echo $index; ?>, '<?php echo htmlspecialchars($member['gender'], ENT_QUOTES); ?>')">Delete</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -827,9 +831,16 @@ $_SESSION['isVerified'] = false;
 
         function openOtpModal() {
             const email = document.getElementById('leaderEmail').value;
+            const leaderName = document.getElementById('leaderName').value;
+            const leaderGender = document.getElementById('leaderGender').value;
 
             if (!email) {
                 alert('Please enter an email before verifying.');
+                return;
+            }
+
+            if (!leaderName || !leaderGender) {
+                alert('Please fill the leader details before verifying.');
                 return;
             }
 
@@ -840,13 +851,13 @@ $_SESSION['isVerified'] = false;
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    body: `email=${encodeURIComponent(email)}&otp=${otp}`
+                    body: `email=${encodeURIComponent(email)}&otp=${otp}&name=${leaderName}&gender=${leaderGender}`,
                 })
                 .then(response => response.json())
                 .then(result => {
                     // console.log(result);
                     if (result.success) {
-                        alert(result.message + result.email);
+                        alert(result.message + " " + result.email);
                     } else {
                         alert(result.message);
                         document.getElementById('modal-overlay').style.display = 'none';
@@ -895,7 +906,11 @@ $_SESSION['isVerified'] = false;
                         closeOtpModal();
                         const verifyOtp = document.getElementById('verify-otp');
                         verifyOtp.disabled = true;
+
                         verifyOtp.textContent = "✅Verified"; // Update button text
+
+                        verifyOtp.style.backgroundColor = 'gray'; // Change button color
+
                         alert('Account Verified');
                     } else {
                         alert('Incorrect OTP. Please try again.');
@@ -972,10 +987,12 @@ $_SESSION['isVerified'] = false;
             // const form = document.getElementById('mainForm');
             // form.action = 'register_add_member.php';
             // form.submit();
+            console.log("test1");
             const name = document.getElementById('memberName').value;
             const mobile = document.getElementById('memberMobile').value;
             const email = document.getElementById('memberEmail').value;
-            const gender = document.getElementById('gender').value;
+            const memberGender = document.getElementById('memberGender').value;
+
 
             // Validate inputs (optional)
             if (!name || !mobile || !email) {
@@ -988,7 +1005,7 @@ $_SESSION['isVerified'] = false;
             data.append('name', name);
             data.append('mobile', mobile);
             data.append('email', email);
-            data.append('gender', gender);
+            data.append('memberGender', memberGender);
             console.log(data);
             fetch('register_add_member.php', {
                     method: 'POST',
@@ -1003,16 +1020,20 @@ $_SESSION['isVerified'] = false;
                         const tableBody = document.querySelector('.table tbody');
                         const newRow = document.createElement('tr');
                         newRow.setAttribute('data-id', result.member.id || members.length - 1);
+                        // <button class="edit-btn" type="button" onclick="openEditModal(${result.index})">Edit</button> // line 1014
                         newRow.innerHTML = `
                         <td>${result.member.name}</td>
                             <td>${result.member.email}</td>
                             <td>${result.member.mobile}</td>
                             <td>${result.member.gender || '-'}</td>
                             <td>
-                                <button class="edit-btn" type="button" onclick="openEditModal(${result.index})">Edit</button>
-                                <button class="delete-btn" type="button" onclick="deleteMember(${result.index})">Delete</button>
+                                
+                                <button class="delete-btn" type="button" onclick="deleteMember(${result.index}, '${result.member.gender}')">Delete</button>
                             </td>
                         `;
+                        
+
+
                         tableBody.appendChild(newRow);
                         // Append member to the list dynamically
                         // const memberList = document.getElementById('member-list');
@@ -1024,6 +1045,7 @@ $_SESSION['isVerified'] = false;
                         document.getElementById('memberName').value = '';
                         document.getElementById('memberMobile').value = '';
                         document.getElementById('memberEmail').value = '';
+                        document.getElementById('memberGender').value = '';
                     } else {
                         alert(result.error || "Failed to add member.");
                     }
@@ -1033,8 +1055,9 @@ $_SESSION['isVerified'] = false;
                 });
         }
 
-        function deleteMember(index) {
+        function deleteMember(index, gender) {
             console.log(index);
+            console.log(gender);
             if (confirm("Are you sure you want to delete this member?")) {
                 // Use AJAX to send the deletion request to the server
                 fetch('register_delete_member.php', {
@@ -1042,7 +1065,7 @@ $_SESSION['isVerified'] = false;
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded'
                         },
-                        body: `index=${index}&delete_member=true`
+                        body: `index=${index}&gender=${gender}&delete_member=true`
                     })
                     .then(response => response.json())
                     .then(result => {
@@ -1050,14 +1073,17 @@ $_SESSION['isVerified'] = false;
                             // console.log(result);
 
                             console.log('Member deleted successfully.');
+                            // Remove the corresponding row from the table
                             const table = document.querySelector('.table tbody');
                             const row = table.rows[index]; // Get the corresponding row by index
                             if (row) {
                                 row.remove();
                             }
+                            
                             // Optionally refresh the member list or remove the deleted row
                             // location.reload(); // Reload the page to update the list
                         } else {
+                            
                             console.error('Error:', result.error);
                             alert('Failed to delete member: ' + (result.error || 'Unknown error.'));
                         }
@@ -1071,6 +1097,9 @@ $_SESSION['isVerified'] = false;
             console.log("test1");
             const registerBtn = document.querySelector('.register-btn');
             registerBtn.disabled = true;
+            registerBtn.textContent = 'Registering...';
+            registerBtn.style.cursor = 'not-allowed';
+            registerBtn.style.backgroundColor = 'gray';
             // Get the form data or the necessary values to send
             const formData = new FormData();
             console.log("test2");
@@ -1113,6 +1142,9 @@ $_SESSION['isVerified'] = false;
                         // alert('Failed to submit form: ' + result.message);
                         alert(result.name + ' is ' + result.message); // You can show a success message
                         registerBtn.disabled = false;
+                        registerBtn.textContent = 'Register';
+                        registerBtn.style.cursor = 'pointer';
+                        registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
                     }
                 })
                 .catch(error => {
