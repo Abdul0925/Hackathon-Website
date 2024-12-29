@@ -216,7 +216,7 @@ $_SESSION['members'] = [];
 
         .verify-btn button {
             color: white;
-            width: 80px;
+            width: 90px;
             margin-top: 6px;
             height: 40px;
             background-color: rgb(47, 141, 70);
@@ -906,8 +906,11 @@ $_SESSION['members'] = [];
                         closeOtpModal();
                         const verifyOtp = document.getElementById('verify-otp');
                         verifyOtp.disabled = true;
-                        verifyOtp.textContent = "Verified"; // Update button text
+
+                        verifyOtp.textContent = "✅Verified"; // Update button text
+
                         verifyOtp.style.backgroundColor = 'gray'; // Change button color
+
                         alert('Account Verified');
                     } else {
                         alert('Incorrect OTP. Please try again.');
