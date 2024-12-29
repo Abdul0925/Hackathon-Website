@@ -181,12 +181,22 @@ $psId = $teamDetailsRow['psId'];
             color: #fff;
         }
 
-        .table-responsive {
-            padding-top: 20px;
-        }
-
         .mt-5 {
             margin-top: 20px !important;
+        }
+
+        .team-title {
+            padding: 15px 0px 15px 2px;
+        }
+
+        .team-title h6 {
+            margin-bottom: 0px;
+            line-height: 1.6;
+        }
+
+        .report-header h1 {
+            margin-bottom: 0px;
+            line-height: normal;
         }
     </style>
 
@@ -289,18 +299,20 @@ $psId = $teamDetailsRow['psId'];
         <div class="main">
             <div class="report-container">
                 <div class="mt-5">
-
-
-                    <h5 class="mb-3">Team Details</h5>
-                    <h6>
-                        Team Name: <?php echo $teamName; ?>
-                    </h6> 
-                    <h6>
-                        Problem Statement ID: 
-                        <a href="mentor_problem_shad.php">
-                            <?php echo strtoupper($psId); ?>
-                        </a>
-                    </h6> 
+                    <div class="report-header">
+                        <h1 class="recent-Articles">Team Details</h1>
+                    </div>
+                    <div class="team-title">
+                        <h6>
+                            Team Name:<strong> <?php echo $teamName; ?></strong>
+                        </h6>
+                        <h6>
+                            Problem Statement ID:
+                            <a href="leader_problem_statement.php">
+                                <strong><?php echo strtoupper($psId); ?></strong>
+                            </a>
+                        </h6>
+                    </div>
 
 
                     <div class="table-responsive">
@@ -323,7 +335,8 @@ $psId = $teamDetailsRow['psId'];
                                     <tr>
                                         <td><?php echo $sr_no++; ?></td>
 
-                                        <td><?php echo $row1['memberName']; echo ($row1['is_leader']?" (Leader)":"") ?></td>
+                                        <td><?php echo $row1['memberName'];
+                                            echo ($row1['is_leader'] ? " (Leader)" : "") ?></td>
 
                                         <td><?php echo $row1['memberMobile']; ?></td>
                                         <td><?php echo $row1['memberEmail']; ?></td>
