@@ -40,7 +40,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
             margin: 10px;
             margin-bottom: 10px;
             width: 100%;
-            height: 30px;
+            height: 40px;
             border-radius: 5px;
             border: 1px solid rgb(200, 200, 200);
             padding: 1rem;
@@ -157,6 +157,10 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
 
         .nav-option i {
             font-size: 185%;
+        }
+
+        .report-body {
+            padding: 0px 20px 20px 20px;
         }
     </style>
 
