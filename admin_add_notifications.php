@@ -24,9 +24,9 @@ if ($_SESSION['admin_logged_in'] != true) {
     <style>
         .btn-primary {
             color: white;
-            width: 80px;
+            width: 100%;
             height: 40px;
-            background-color: rgb(47, 141, 70);
+            background-color: rgb(97, 19, 207);
             border-radius: 5px;
             border: none;
             margin-top: 10px;
@@ -35,13 +35,8 @@ if ($_SESSION['admin_logged_in'] != true) {
         }
 
         .btn-primary:hover {
-            background-color: rgb(31, 91, 46);
+            background-color: rgb(79, 0, 190);
             color: white;
-        }
-
-        .btn-primary:active {
-            box-shadow: 2px 2px 5px #fc894d;
-            background-color: rgb(47, 141, 70);
         }
 
         .report-body .form-body .form-label {

@@ -167,57 +167,10 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
         }
 
-        .btn-primary {
-            color: white;
-            width: 100px;
-            height: 40px;
-            background-color: rgb(47, 141, 70);
-            border-radius: 5px;
-            border: none;
-            margin-top: 10px;
-            font-size: 15px;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            background-color: rgb(31, 91, 46);
-            color: white;
-        }
-
-        .btn-primary:active {
-            box-shadow: 2px 2px 5px #fc894d;
-            background-color: rgb(47, 141, 70);
-        }
-
-        /* .form-body {
-            padding-bottom: 10px;
-        }
-
-        .form-body .form-label {
-            font-weight: 500;
-        }
-
-        .form-control {
-            padding-left: 5px;
-            width: 300px;
-            height: 40px;
-            margin-left: 5px;
-        }
-
-        .form-body select {
-            padding-left: 5px;
-            width: 120px;
-            height: 40px;
-            margin-left: 5px;
-        } */
-
         .report-body {
-            /* max-width: 600px; */
             margin: auto;
             padding: 20px;
-            /* border: 1px solid #ddd; */
             border-radius: 8px;
-            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
             background-color: rgb(255, 255, 255);
         }
 
@@ -264,7 +217,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         }
 
         button[type="submit"]:hover {
-            background-color: #5500cb;
+            background-color: rgb(79, 0, 190);
         }
 
         .nav-upper-options {
@@ -411,6 +364,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                 <th scope="col">PS ID</th>
                                 <th scope="col">PS Name</th>
                                 <th scope="col">PS Category</th>
+                                <th scope="col">Total Participation</th>
                                 <th scope="col">View</th>
                                 <th scope="col">Delete</th>
                             </tr>
@@ -430,6 +384,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                     echo "<td>" . $row['ps_id'] . "</td>";
                                     echo "<td>" . $row['ps_name'] . "</td>";
                                     echo "<td>" . $row['ps_category'] . "</td>";
+                                    echo "<td>" . $row['no_of_participation'] . "</td>";
                                     echo '<td> <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button> </td>';
                                     echo '<td> <button class="delete-btn" onclick="deletePs(this)" data-id="' . $row['ps_id'] . '">Delete</button>';
                                     echo "</tr>";

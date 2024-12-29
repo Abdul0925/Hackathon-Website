@@ -125,50 +125,30 @@ $_SESSION['isVerified'] = false;
 
         .container-two {
             border-radius: 15px;
-            /* border-bottom: 8px;
-            border-right: 8px; */
-            border-style: solid;
-            /* border-color: rgb(193, 124, 235); */
             padding: 4px 5px 0px 5px;
             margin-bottom: 30px;
-            /* background-color: #5C0F8B; */
         }
 
         .boxF {
             border-radius: 15px;
             border-style: solid;
-            /* border-color: rgb(193, 124, 235); */
             margin-bottom: 15px;
             margin-top: 15px;
             background-color: #ffffff;
-            /* padding: 15px 0px 15px 0px; */
-            /* border-bottom: 8px; */
-            /* border-right: 8px; */
-            /* border-top: 5px; */
         }
 
         .box {
             border-radius: 15px;
             border-style: solid;
-            /* border-color: rgb(193, 124, 235); */
             margin-bottom: 15px;
             background-color: #ffffff;
-            /* padding: 15px 0px 15px 0px; */
-            /* border-bottom: 8px; */
-            /* border-right: 8px; */
-            /* border-top: 5px; */
         }
 
         .boxL {
             border-radius: 15px;
             border-style: solid;
-            /* border-color: rgb(193, 124, 235); */
             margin-bottom: 15px;
             background-color: #ffffff;
-            /* padding: 15px 0px 15px 0px; */
-            /* border-bottom: 8px; */
-            /* border-right: 8px; */
-            /* border-top: 5px; */
         }
 
         .head-title {
@@ -179,7 +159,6 @@ $_SESSION['isVerified'] = false;
         }
 
         .head-div {
-            /* border: black; */
             border-radius: 10px 10px 0px 0px;
             background-color: #5C0F8B;
         }
@@ -192,12 +171,9 @@ $_SESSION['isVerified'] = false;
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: center;
+            justify-content: space-evenly;
+            margin: 50px auto 20px auto;
         }
-
-        /* .payment-box {
-            margin-left: 20px;
-        } */
 
         .QR-code {
             display: flex;
@@ -211,18 +187,10 @@ $_SESSION['isVerified'] = false;
             flex-direction: row;
         }
 
-        /* .direction{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        } */
-
         h1 {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
-            /* color: #ffffff; */
         }
 
         .form-section {
@@ -260,13 +228,11 @@ $_SESSION['isVerified'] = false;
         .verify-btn button:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
 
         .prob-btn button {
             color: white;
             width: 80px;
-            /* margin-top: 5px; */
             height: 40px;
             background-color: rgb(47, 141, 70);
             border-radius: 5px;
@@ -281,7 +247,6 @@ $_SESSION['isVerified'] = false;
         .prob-btn button:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
 
         .add-btn button {
@@ -302,7 +267,6 @@ $_SESSION['isVerified'] = false;
         .add-btn button:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
 
         .register-btn {
@@ -322,7 +286,6 @@ $_SESSION['isVerified'] = false;
         .register-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(47, 141, 70);
-            /* color: white; */
         }
 
         /* Modal Overlay */
@@ -463,6 +426,10 @@ $_SESSION['isVerified'] = false;
         .delete-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
             background-color: rgb(220, 0, 0);
+        }
+
+        .inputBox select {
+            padding: 5px;
         }
 
         @media screen and (max-width: 400px) {
@@ -636,8 +603,22 @@ $_SESSION['isVerified'] = false;
                             <input type="text" id="leaderName" name="leaderName" required>
                             <span>Enter leader's name</span>
 
-                            <div class="verify-btn-div">
 
+                            <div>
+                                <input type="tel" id="leaderMobile" name="leaderMobile" required>
+                                <span>Enter mobile number</span>
+                            </div>
+
+                            <div class="inputBox" style="margin-bottom: 15px">
+                                <label for="gender">Gender:</label>
+                                <select id="gender" name="gender">
+                                    <option value="" selected disabled>Choose Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="verify-btn-div">
                                 <input type="email" id="leaderEmail" name="leaderEmail" required>
                                 <span>Enter leader's email</span>
                                 <div class="verify-btn">
@@ -647,33 +628,13 @@ $_SESSION['isVerified'] = false;
                                         id="verify-otp">
                                         Verify
                                     </button>
-
                                 </div>
                                 <!-- <span id="verification-status" style="color: green; display: none;">Verified</span> -->
                             </div>
 
-                            <div>
-                                <input type="tel" id="leaderMobile" name="leaderMobile" required>
-                                <span>Enter mobile number</span>
-                            </div>
-
-                            <div>
-                                <label for="leaderGender" class="form-label">Leader Gender: </label>
-                                <select class="form-select me-2" name="leaderGender" id="leaderGender">
-                                    <option value="" selected disabled>Choose Only One Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                            </div>
-
                         </div>
-
-
                     </div>
                 </div>
-
-
-
 
                 <!-- Mentor Details Section -->
                 <div class="box">
@@ -705,20 +666,21 @@ $_SESSION['isVerified'] = false;
                     </div>
                     <div class="box-body" id="add_member_form">
                         <div class="inputBox">
-                            <input type="text" id="memberName" name="memberName">
-                            <span>Enter member name</span>
+                            <input type="text" id="memberName" placeholder="(member)" name="memberName">
+                            <span>Enter name</span>
                         </div>
                         <div class="inputBox">
-                            <input type="tel" id="memberMobile" name="memberMobile">
+                            <input type="tel" id="memberMobile" placeholder="(member)" name="memberMobile">
                             <span>Enter mobile number</span>
                         </div>
                         <div class="inputBox">
-                            <input type="email" id="memberEmail" name="memberEmail">
+                            <input type="email" id="memberEmail" placeholder="(member)" name="memberEmail">
                             <span>Enter email</span>
                         </div>
                         <div class="inputBox">
                             <label for="gender">Gender:</label>
                             <select id="gender" name="gender">
+                                <option value="" selected disabled>Choose Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -761,23 +723,20 @@ $_SESSION['isVerified'] = false;
                         <h4 class="head-title">Payment Details</h4>
                     </div>
                     <div class="box-body">
-                        <div class="inputBox">
-                            <div class="QR-code">
+                        <div class="QR-code">
+                            <img src="picture\QRcodephoto.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
+                            <p>Scan the QR code to make the payment.</p>
+                        </div>
 
-                                <img src="./picture//payment.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
-                                <p>Scan the QR code to make the payment.</p>
+                        <div class="payment-box">
+                            <div class="inputBox">
+                                <label for="transactionId" class="form-label">Transaction ID</label>
+                                <input type="text" id="transactionId" name="transactionId" required>
+                                <span>Enter transaction ID</span>
                             </div>
-                            <div class="payment-box">
-
-                                <div class="">
-                                    <label for="transactionId" class="form-label">Transaction ID</label>
-                                    <input type="text" id="transactionId" name="transactionId" required>
-                                    <span>Enter transaction ID</span>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
-                                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*" required>
-                                </div>
+                            <div class="">
+                                <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
+                                <input type="file" id="paymentScreenshot" name="paymentScreenshot" class="form-control" accept="image/*" required>
                             </div>
                         </div>
                     </div>
@@ -786,7 +745,7 @@ $_SESSION['isVerified'] = false;
 
             <!-- Submit Button -->
             <div class="text-center">
-                <button type="submit" class="register-btn">Register</button>
+                <button type="submit" class="register-btn">Register Now</button>
             </div>
         </form>
     </div>

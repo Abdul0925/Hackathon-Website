@@ -88,6 +88,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
         }
 
         .report-container {
+            min-height: 0px;
             margin-top: 20px;
         }
 
@@ -201,7 +202,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
                                     <th scope="col">Username</th>
                                     <th scope="col">Password</th>
                                     <th scope="col">Contact</th>
-                                    <th scope="col">Action</th>
+                                    <!-- <th scope="col">Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -215,7 +216,8 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
                                         <td><?php echo $admin['username'] ?></td>
                                         <td><?php echo $admin['password'] ?></td>
                                         <td><?php echo $admin['contact'] ?></td>
-                                        <td><button class="primary-btn w-100 view-details-btn" onclick="" style="cursor: pointer;" data-id="<?php echo $admin['id']; ?>" disabled>Delete</button></td>
+                                        <!-- <td><button class="primary-btn w-100 view-details-btn" onclick="" style="cursor: pointer;" data-id="<?php //echo $admin['id']; 
+                                                                                                                                                    ?>" disabled>Delete</button></td> -->
                                     </tr>
                                 <?php } ?>
                             </tbody>

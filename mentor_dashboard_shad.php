@@ -272,8 +272,8 @@ $totalPS = $rowPS['total'];
 
                 <div class="box box1">
                     <div class="text">
-                        <h2 class="topic">Hackathon Prize</h2>
-                        <h2 class="topic-heading">Rs. 15,000/-</h2>
+                        <h2 class="topic">Hackathon Prize per PS</h2>
+                        <h2 class="topic-heading">Rs. 5,000/-</h2>
                     </div>
                     <!-- <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png" alt="Views"> -->
                 </div>

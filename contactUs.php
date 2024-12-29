@@ -280,9 +280,55 @@
                     <span class="heading-font">Raisoni Tech Hackathon</span>
                 </a>
 
-                <a>
-                    <span class="heading-font1">Contact Us</span>
-                </a>
+                <!-- Toggle Button for Mobile View (Right aligned) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Center: Links with Dropdowns and Login/Register Button -->
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav c-black">
+                        <!-- Dropdown: About RTH -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link c-black dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                About RTH
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                                <li><a class="dropdown-item" href="processFlow.php">RTH Process Flow</a></li>
+                                <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li>
+                                <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
+                                <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Dropdown: Guidelines -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle c-black" href="#" id="guidelinesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Guidelines
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="guidelinesDropdown">
+                                <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank">For Institutes</a></li>
+                                <li><a class="dropdown-item" href="./downloadable/Idea-Presentation-Format-SIH2023-College[1].pptx" target="_blank" rel="noopener noreferrer">Idea PPT</a></li>
+                                <li><a class="dropdown-item" href="hackProcess.php">Hackathon Process</a></li>
+                                <li><a class="dropdown-item" href="hackTimeline.php">Hackathon Timeline</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Other Links -->
+                        <li class="nav-item">
+                            <a class="nav-link c-black" href="problemStatements.php">Problem Statements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link c-black" href="contactUs.php">Contact Us</a>
+                        </li>
+                    </ul>
+
+                    <!-- Login/Register Button inside collapsible section -->
+                    <div class="d-lg-none mt-2">
+                        <!-- Hidden on larger screens, visible on mobile within collapsible area -->
+                        <a href="loginPage.php" class="btn my-primary-btn w-100 cmn-button">Login/Register</a>
+                    </div>
+                </div>
 
                 <!-- Login/Register Button visible only on larger screens -->
                 <div class="d-none d-lg-flex">
@@ -290,8 +336,8 @@
                 </div>
             </div>
         </nav>
-
     </div>
+
     <section class="contact1">
         <div class="content1">
             <!-- <h2>Contact Us</h2> -->
@@ -353,7 +399,7 @@
                 <!-- Logo and University Name -->
                 <div class="col-md-3 text-center text-md-start mb-4 mt-5">
                     <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                        <img src="https://ghrstu.edu.in/assets/images/ghru-nagpur.png" alt="University Logo" style="width: 270px;">
+                        <img src="./picture/ghru-nagpur.webp" alt="University Logo" style="width: 270px;">
                     </a>
                 </div>
 
