@@ -21,24 +21,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
         return;
     }
-    sentmail($leaderEmail,$leaderName,$password);
+    sentmail($leaderEmail, $leaderName, $password);
+    updatePassword($leaderEmail, $password);
     echo json_encode([
         'success' => true,
         'message' => 'Team Approved',
     ]);
-    
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid request method.', 'error' => 'Error Ocuured']);
 }
 
 
-function approvePayment($id){
+function approvePayment($id)
+{
     require "db.php";
-   
+
     $updatePaymentIdQuery = "UPDATE payment_details SET is_approved = true WHERE id = ?";
     if ($stmt = $conn->prepare($updatePaymentIdQuery)) {
 
-        $stmt->bind_param("i",$id);
+        $stmt->bind_param("i", $id);
 
         if ($stmt->execute()) {
             $stmt->close();
@@ -56,8 +57,8 @@ function approvePayment($id){
     }
 }
 
-function sentmail($leaderEmail,$leaderName,$password)
-{   
+function sentmail($leaderEmail, $leaderName, $password)
+{
 
 
     if (filter_var($leaderEmail, FILTER_VALIDATE_EMAIL)) {
@@ -81,13 +82,13 @@ function sentmail($leaderEmail,$leaderName,$password)
         $mail->isHTML(true);
 
         // Set the email subject
-        $mail->Subject = "Registartion Successfull";
+        $mail->Subject = "Login Credentials";
 
         // Construct the email body with the student's login details
-        $msg = 'Dear ' . strtoupper($leaderName) . '<p>, Thank you for your initiative toward this hackathon.</p>' .
-        '<p>your login crediantials are</p>' .
-            '<p>Username: ' . $leaderEmail .'</p>' .
-            '<p>Password: '. $password .'</p>';
+        $msg = 'Dear ' . strtoupper($leaderName) . '<p>Thank you we approved your payment.</p>' .
+            '<p>Your login crediantials are</p>' .
+            '<p>Username: ' . $leaderEmail . '</p>' .
+            '<p>Password: ' . $password . '</p>';
 
         // Set the email message content
         $mail->Body = $msg;
@@ -102,5 +103,29 @@ function sentmail($leaderEmail,$leaderName,$password)
         }
     } else {
         return 0;
+    }
+}
+
+
+function updatePassword($leaderEmail, $pass)
+{
+    require "db.php";
+    $hashedPassword = password_hash($pass, PASSWORD_BCRYPT);
+    $updatePasswordQuery = "UPDATE team_and_leader_details SET password = ? WHERE leaderEmail = ?";
+    if ($stmt = $conn->prepare($updatePasswordQuery)) {
+        $stmt->bind_param("ss", $hashedPassword, $leaderEmail);
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        } else {
+            // Log error for debugging
+            error_log("Execute failed: " . $stmt->error);
+            $stmt->close();
+            return false;
+        }
+    } else {
+        // Log error for debugging
+        error_log("Prepare failed: " . $conn->error);
+        return false;
     }
 }
