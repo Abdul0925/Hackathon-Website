@@ -21,6 +21,10 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .table {
+            margin-bottom: 0px;
+        }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -97,7 +101,10 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         .report-container {
             margin-top: 20px;
             margin-bottom: 20px;
-            
+        }
+
+        .report-body {
+            padding: 20px 0px 0px 0px;
         }
     </style>
 
@@ -106,18 +113,15 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 <body>
     <!-- for header part -->
     <header>
-
         <div class="logosec">
             <a href="mentor_dashboard_shad.php" style="text-decoration: none;">
                 <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-
         <div class="DHead">
             <H1>Guideline</H1>
         </div>
-
         <div class="message">
             <!-- <div class="circle"></div> -->
             <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
@@ -125,7 +129,6 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                 <a href="mentor_my_teams_shad.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
         </div>
-
     </header>
 
     <div class="main-container">
@@ -230,11 +233,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                     </div>
                 </div>
             </div>
-
-
-
         </div>
-    </div>
     </div>
 
     <script>
