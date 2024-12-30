@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $otp_sent = false;
             echo json_encode([
                 'success' => false,
-                'message' => 'Team Leadet Alreadey Exist',
+                'message' => 'Team Leader Alreadey Exist',
             ]);
             return;
             //    echo '<script> alert("Leader Already Exist Try Again!"); window.location.href = "registerPage.php"; </script>';

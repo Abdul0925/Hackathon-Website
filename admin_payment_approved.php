@@ -15,7 +15,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Profile</title>
+    <title>Admin Payment</title>
     <link rel="stylesheet" href="admin_dash_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -216,7 +216,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
             <!-- team detail table -->
             <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">Admin List</h1>
+                    <h1 class="recent-Articles">Teams Payment</h1>
                 </div>
 
                 <div class="filter-container">

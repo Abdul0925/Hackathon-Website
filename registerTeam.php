@@ -234,7 +234,7 @@ $_SESSION['members'] = [];
         }
 
         .verify-btn button:active {
-            box-shadow: 2px 2px 5px #fc894d;
+            /* box-shadow: 2px 2px 5px #fc894d; */
             background-color: rgb(47, 141, 70);
         }
 
@@ -912,11 +912,8 @@ $_SESSION['members'] = [];
                         closeOtpModal();
                         const verifyOtp = document.getElementById('verify-otp');
                         verifyOtp.disabled = true;
-
                         verifyOtp.textContent = "✅Verified"; // Update button text
-
-                        verifyOtp.style.backgroundColor = 'rgb(47, 141, 70)'; // Change button color
-
+                        verifyOtp.style.backgroundColor = 'rgb(31, 91, 46)'; // Change button color
                         alert('Account Verified');
                     } else {
                         alert('Incorrect OTP. Please try again.');
@@ -1089,7 +1086,6 @@ $_SESSION['members'] = [];
                             // Optionally refresh the member list or remove the deleted row
                             // location.reload(); // Reload the page to update the list
                         } else {
-                            
                             console.error('Error:', result.error);
                             alert('Failed to delete member: ' + (result.error || 'Unknown error.'));
                         }
