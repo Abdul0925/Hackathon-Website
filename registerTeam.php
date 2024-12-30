@@ -36,8 +36,12 @@ $_SESSION['members'] = [];
     <!-- Custom Styles -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Oxanium", sans-serif;
             background-color: #ffffff;
+        }
+
+        .c-black {
+            color: black;
         }
 
         .heading-font {
@@ -216,7 +220,7 @@ $_SESSION['members'] = [];
 
         .verify-btn button {
             color: white;
-            width: 90px;
+            width: 100px;
             margin-top: 6px;
             height: 40px;
             background-color: rgb(47, 141, 70);
@@ -236,7 +240,7 @@ $_SESSION['members'] = [];
 
         .prob-btn button {
             color: white;
-            width: 80px;
+            width: 100px;
             height: 40px;
             background-color: rgb(47, 141, 70);
             border-radius: 5px;
