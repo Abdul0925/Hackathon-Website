@@ -334,7 +334,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     echo json_encode([
         'success' => true,
-        'message' => 'From Submitted Successfully',
+        'message' => 'Form Submitted Successfully',
     ]);
     return;
 
@@ -356,15 +356,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode(['success' => false, 'message' => 'Invalid request method.', 'error' => 'Error Ocuured']);
 }
 
-
-
-
-
 function sentmail($leaderEmail, $leaderName, $psId, $teamName)
 {
     if (filter_var($leaderEmail, FILTER_VALIDATE_EMAIL)) {
-
-
 
         $mail = new PHPMailer(true);
 

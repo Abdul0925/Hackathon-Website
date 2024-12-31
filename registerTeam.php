@@ -36,8 +36,12 @@ $_SESSION['members'] = [];
     <!-- Custom Styles -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Oxanium", sans-serif;
             background-color: #ffffff;
+        }
+
+        .c-black {
+            color: black;
         }
 
         .heading-font {
@@ -216,7 +220,7 @@ $_SESSION['members'] = [];
 
         .verify-btn button {
             color: white;
-            width: 90px;
+            width: 100px;
             margin-top: 6px;
             height: 40px;
             background-color: rgb(47, 141, 70);
@@ -230,13 +234,13 @@ $_SESSION['members'] = [];
         }
 
         .verify-btn button:active {
-            box-shadow: 2px 2px 5px #fc894d;
+            /* box-shadow: 2px 2px 5px #fc894d; */
             background-color: rgb(47, 141, 70);
         }
 
         .prob-btn button {
             color: white;
-            width: 80px;
+            width: 100px;
             height: 40px;
             background-color: rgb(47, 141, 70);
             border-radius: 5px;
@@ -288,7 +292,7 @@ $_SESSION['members'] = [];
         }
 
         .register-btn:active {
-            box-shadow: 2px 2px 5px #fc894d;
+            /* box-shadow: 2px 2px 5px #fc894d; */
             background-color: rgb(47, 141, 70);
         }
 
@@ -587,6 +591,8 @@ $_SESSION['members'] = [];
                                         <option value="rth01">RTH01</option>
                                         <option value="rth02">RTH02</option>
                                         <option value="rth03">RTH03</option>
+                                        <option value="rth03">RTH04</option>
+                                        <option value="rth03">RTH05</option>
                                     </select>
                                     <div class="prob-btn">
                                         <a href="problemStatements.php"><button type="button">Problems</button></a>
@@ -906,11 +912,8 @@ $_SESSION['members'] = [];
                         closeOtpModal();
                         const verifyOtp = document.getElementById('verify-otp');
                         verifyOtp.disabled = true;
-
                         verifyOtp.textContent = "✅Verified"; // Update button text
-
-                        verifyOtp.style.backgroundColor = 'gray'; // Change button color
-
+                        verifyOtp.style.backgroundColor = 'rgb(31, 91, 46)'; // Change button color
                         alert('Account Verified');
                     } else {
                         alert('Incorrect OTP. Please try again.');
@@ -1083,7 +1086,6 @@ $_SESSION['members'] = [];
                             // Optionally refresh the member list or remove the deleted row
                             // location.reload(); // Reload the page to update the list
                         } else {
-                            
                             console.error('Error:', result.error);
                             alert('Failed to delete member: ' + (result.error || 'Unknown error.'));
                         }

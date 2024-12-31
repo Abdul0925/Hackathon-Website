@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo json_encode([
             'success' => false,
-            'error' => 'Maximum 4 members can be added.',
+            'error' => 'Maximum 3 members can be added.',
         ]);
     }
 } else {

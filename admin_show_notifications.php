@@ -24,6 +24,7 @@ if ($_SESSION['admin_logged_in'] != true) {
         .main .report-container {
             padding-top: 20px;
             overflow-x: auto;
+            min-height: auto;
         }
 
         .report-container .table {

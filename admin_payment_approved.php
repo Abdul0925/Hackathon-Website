@@ -15,7 +15,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Profile</title>
+    <title>Admin Payment</title>
     <link rel="stylesheet" href="admin_dash_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -90,22 +90,27 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
         }
 
         .filter-container {
-            width: 100%;
-            padding: 10px;
-            margin: 20px 20px 0px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px;
         }
 
         .filter-container label {
+            margin: 10px;
             font-size: 20px;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
         .filter-container input {
+            margin: 10px;
+            margin-bottom: 10px;
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid rgb(200, 200, 200);
+            padding: 1rem;
         }
 
         .report-container {
@@ -128,6 +133,10 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
 
         .nav-option i {
             font-size: 185%;
+        }
+
+        .report-body {
+            padding: 0px 20px 20px 20px;
         }
 
         @media screen and (max-width: 400px) {
@@ -207,7 +216,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
             <!-- team detail table -->
             <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">Admin List</h1>
+                    <h1 class="recent-Articles">Teams Payment</h1>
                 </div>
 
                 <div class="filter-container">
@@ -268,7 +277,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
                                         <td><?php echo $teamName ?></td>
                                         <td><?php echo $admin['transactionId'] ?></td>
                                         <td><?php echo $leaderMobile ?></td>
-                                        <td><?php echo ($admin['is_approved'] == 0) ? 'Pending' : 'Accepted' ?></td>
+                                        <td><?php echo ($admin['is_approved'] == 0) ? '❗Pending' : '✅Accepted' ?></td>
 
                                         <td>
                                             <a style="text-decoration: none; color: white;" href="<?php echo $admin['pay_path'] ?>">
