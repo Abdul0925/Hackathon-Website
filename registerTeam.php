@@ -591,8 +591,8 @@ $_SESSION['members'] = [];
                                         <option value="rth01">RTH01</option>
                                         <option value="rth02">RTH02</option>
                                         <option value="rth03">RTH03</option>
-                                        <option value="rth03">RTH04</option>
-                                        <option value="rth03">RTH05</option>
+                                        <option value="rth04">RTH04</option>
+                                        <option value="rth05">RTH05</option>
                                     </select>
                                     <div class="prob-btn">
                                         <a href="problemStatements.php"><button type="button">Problems</button></a>
@@ -912,7 +912,7 @@ $_SESSION['members'] = [];
                         closeOtpModal();
                         const verifyOtp = document.getElementById('verify-otp');
                         verifyOtp.disabled = true;
-                        verifyOtp.textContent = "✅Verified"; // Update button text
+                        verifyOtp.textContent = "Verified"; // Update button text
                         verifyOtp.style.backgroundColor = 'rgb(31, 91, 46)'; // Change button color
                         alert('Account Verified');
                     } else {
