@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require 'db.php';
 if (!isset($_SESSION['members'])) {
     $_SESSION['members'] = [];
 }
@@ -588,11 +589,21 @@ $_SESSION['members'] = [];
                                 <div class="d-flex">
                                     <select id="psId" name="psId" class="form-select me-2" required>
                                         <option value="" disabled selected>Select Problem Statement</option>
-                                        <option value="rth01">RTH01</option>
-                                        <option value="rth02">RTH02</option>
-                                        <option value="rth03">RTH03</option>
-                                        <option value="rth04">RTH04</option>
-                                        <option value="rth05">RTH05</option>
+
+                                        <?php
+                                        $sql = "SELECT * FROM problem_statements";
+                                        $result = $conn->query($sql);
+
+                                        if ($result->num_rows > 0) {
+                                            $sr_no = 1;
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<option value='" . $row['ps_id'] . "'>" . $row['ps_id'] . "</option>";
+                                                $sr_no++;
+                                            }
+                                        }
+                                        $conn->close();
+                                        ?>
+                                        
                                     </select>
                                     <div class="prob-btn">
                                         <a href="problemStatements.php"><button type="button">Problems</button></a>
@@ -1034,7 +1045,7 @@ $_SESSION['members'] = [];
                                 <button class="delete-btn" type="button" onclick="deleteMember(${result.index}, '${result.member.gender}')">Delete</button>
                             </td>
                         `;
-                        
+
 
 
                         tableBody.appendChild(newRow);
@@ -1082,7 +1093,7 @@ $_SESSION['members'] = [];
                             if (row) {
                                 row.remove();
                             }
-                            
+
                             // Optionally refresh the member list or remove the deleted row
                             // location.reload(); // Reload the page to update the list
                         } else {

@@ -1,7 +1,6 @@
 <?php
 session_start();
 require 'db.php';
-$teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members");
 ?>
 
 <!doctype html>
