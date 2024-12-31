@@ -292,7 +292,7 @@ $_SESSION['members'] = [];
         }
 
         .register-btn:active {
-            box-shadow: 2px 2px 5px #fc894d;
+            /* box-shadow: 2px 2px 5px #fc894d; */
             background-color: rgb(47, 141, 70);
         }
 
