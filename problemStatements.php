@@ -13,6 +13,7 @@ require 'db.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -260,6 +261,16 @@ require 'db.php';
             color: #f44f36;
         }
 
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: #ffffff;
+        }
+
+        .social-icons a:hover {
+            color: #f44f36;
+        }
+
         /* Responsive Text Size */
         @media (max-width: 768px) {
             .image-container {
@@ -492,11 +503,11 @@ require 'db.php';
             <!-- Social Media and Legal Links -->
             <div class="row text-center mt-2">
                 <div class="col-12 social-icons">
-                    <a href="https://www.facebook.com/raisoniworld" class="me-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/raisoniworld" class="me-2"><i class="fab fa-instagram"></i></a>
-                    <a href="https://twitter.com/raisoniworld" class="me-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/school/raisoniworld" class="me-2"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="http://youtube.com/raisoniworld" class="me-2"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/raisoniworld" class="me-2"><i class="bi-facebook"></i></a>
+                    <a href="https://instagram.com/raisoniworld" class="me-2"><i class="bi-instagram"></i></a>
+                    <a href="https://twitter.com/raisoniworld" class="me-2"><i class="bi-twitter"></i></a>
+                    <a href="https://www.linkedin.com/school/raisoniworld" class="me-2"><i class="bi-linkedin"></i></a>
+                    <a href="http://youtube.com/raisoniworld" class="me-2"><i class="bi-youtube"></i></a>
                 </div>
                 <div class="col-12 mt-3">
                     <p>
