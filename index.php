@@ -68,7 +68,9 @@
         .cover-container>p {
             /* padding: 10px 20px; */
             margin-top: 50px;
-            margin-left: 50px;
+            /* margin-left: 50px; */
+            display: flex;
+            justify-content: center;
         }
 
         .overlay-text1 {
@@ -112,7 +114,10 @@
             }
         }
 
-
+        .hero-section {
+            display: flex;
+            justify-content: center;
+        }
 
         .hero-section h1 {
             font-size: 3rem;
@@ -124,7 +129,7 @@
         .hero-section .btn {
             font-weight: 600;
             padding: 0.8rem 2rem;
-            margin-left: 50px;
+            /* margin-left: 50px; */
             border-radius: 50px;
             background: #9e16c3;
             color: white;
@@ -481,7 +486,7 @@
         <div class="cover-container">
             <div class="overlay-text1 font-style-text font-style-text">The Raisoni Tech Hackathon Seasone 2</div>
             <p><i>"the best way to predict the future is to invent it"</i></p>
-            <p></p>
+            <!-- <p></p> -->
             <header class="hero-section">
                 <div class="hero-content">
                     <a href="registerTeam.php" class="btn btn-lg">Join the Challenge</a>
@@ -489,8 +494,6 @@
             </header>
         </div>
     </div>
-    
-
 
     <!-- About Section -->
     <section class="about">
