@@ -79,11 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
                 $message1 = "Only Leader can change password If your are already a Leader and got Login credentials plz contact admin";
             }
         } else {
-        //     echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
-        //     setTimeout(()=>{
-        //         document.getElementById('resetButton').disabled = true;
-        //     },500)
-        // })</script>";
+            //     echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
+            //     setTimeout(()=>{
+            //         document.getElementById('resetButton').disabled = true;
+            //     },500)
+            // })</script>";
             $message1 = "Password Not Match OR Please create password more than 6 characters";
         }
     } else {
@@ -174,9 +174,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <style>
-
         .login-container {
             max-width: 600px;
             margin: 80px auto;
@@ -196,46 +198,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             font-family: "Oxanium", sans-serif;
         }
 
-        .login-container .inputBox
-        {
-        position: relative;
-        width: 100%;
-        margin-top: 10px;
+        .login-container .inputBox {
+            position: relative;
+            width: 100%;
+            margin-top: 10px;
         }
 
         .login-container .inputBox input,
-        .login-container .inputBox textarea
-        {
-        width: 100%;
-        padding: 5px 0;
-        font-size: 16px;
-        margin: 10px 0;
-        border: none;
-        border-bottom: 2px solid #333;
-        outline: none;
-        resize: none;
+        .login-container .inputBox textarea {
+            width: 100%;
+            padding: 5px 0;
+            font-size: 16px;
+            margin: 10px 0;
+            border: none;
+            border-bottom: 2px solid #333;
+            outline: none;
+            resize: none;
         }
 
-        .login-container .inputBox span
-        {
-        position: absolute;
-        Left: 0;
-        padding: 5px 0;
-        font-size: 16px;
-        margin: 10px 0;
-        pointer-events: none;
-        transition: 0.5s;
-        color: #948686;
+        .login-container .inputBox span {
+            position: absolute;
+            Left: 0;
+            padding: 5px 0;
+            font-size: 16px;
+            margin: 10px 0;
+            pointer-events: none;
+            transition: 0.5s;
+            color: #948686;
         }
 
-        .login-container .inputBox input:focus ~ span,
-        .login-container .inputBox input:valid ~ span,
-        .login-container .inputBox textarea:focus ~ span,
-        .login-container .inputBox textarea:valid ~ span
-        {
-        color: #5C0F8B;
-        font-size: 12px;
-        transform: translateY(-20px);
+        .login-container .inputBox input:focus~span,
+        .login-container .inputBox input:valid~span,
+        .login-container .inputBox textarea:focus~span,
+        .login-container .inputBox textarea:valid~span {
+            color: #5C0F8B;
+            font-size: 12px;
+            transform: translateY(-20px);
         }
 
         .form-control {
@@ -264,6 +262,88 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
         .dropdown-menu {
             border-radius: 8px;
+        }
+
+        .inputBox #toggleBtn {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 0px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .inputBox #toggleBtn::before {
+            content: '\f070';
+            font-family: fontAwesome;
+        }
+
+        .inputBox #toggleBtn.hide::before {
+            content: '\f06e';
+        }
+
+        .inputBox #toggleBtnconf {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 0px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .inputBox #toggleBtnconf::before {
+            content: '\f070';
+            font-family: fontAwesome;
+        }
+
+        .inputBox #toggleBtnconf.hide::before {
+            content: '\f06e';
+        }
+
+        .validation {
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+
+        .validation ul {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 5px;
+        }
+
+        .validation ul li {
+            position: relative;
+            list-style: none;
+            color: black;
+            font-size: 0.85em;
+            transition: 0.5s;
+        }
+
+        .validation ul li.valid {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .validation ul li::before {
+            content: '\f192';
+            width: 20px;
+            height: 10px;
+            font-family: fontAwesome;
+            display: inline-flex;
+        }
+
+        .validation ul li.valid::before {
+            content: '\f00c';
+            color: #0f0;
         }
     </style>
 </head>
@@ -297,12 +377,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 
             <!-- Password -->
             <div class="inputBox">
-                <input type="password" name="new_password" id="password" required>
+                <input type="password" name="new_password" id="password" onkeyup="checkPassword(this.value)" required>
                 <span>Enter new password</span>
+                <label id="toggleBtn"></label>
             </div>
+            <div class="validation">
+                <ul>
+                    <li id="lower">At least one lowercase character</li>
+                    <li id="upper">At least one uppercase character</li>
+                    <li id="number">At least one number</li>
+                    <li id="special">At least one special character</li>
+                    <li id="length">At least 8 characters</li>
+                </ul>
+            </div>
+
             <div class="inputBox">
-                <input type="password" name="confirm_password" id="password" required>
+                <input type="password" name="confirm_password" id="passwordconf" required>
                 <span>Confirm password</span>
+                <label id="toggleBtnconf"></label>
             </div>
 
             <!-- Role Dropdown -->
@@ -314,12 +406,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                     <option value="mentor">Mentor</option>
                 </select>
             </div>
-            
+
             <!-- Submit Button -->
             <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="resetButton">RESET Password</button>
-           
+
             <!-- Extra Links (Register and Forget Password) -->
-                
+
         </form>
     </div>
 
@@ -354,6 +446,86 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         //         document.getElementById('resetButton').disabled = true;
         //     }, 500)
         // })
+    </script>
+    <script>
+        let lowerCase = document.getElementById('lower');
+        let upperCase = document.getElementById('upper');
+        let digit = document.getElementById('number');
+        let specialChar = document.getElementById('special');
+        let minLength = document.getElementById('length');
+
+        function checkPassword(data) {
+            // javascript regular expression pattern
+            const lower = new RegExp('(?=.*[a-z])');
+            const upper = new RegExp('(?=.*[A-Z])');
+            const number = new RegExp('(?=.*[0-9])');
+            const special = new RegExp('(?=.[!@#\$%\^&\])');
+            const length = new RegExp('(?=.{8,})');
+
+            // Lower case validation check
+            if (lower.test(data)) {
+                lowerCase.classList.add('valid');
+            } else {
+                lowerCase.classList.remove('valid');
+            }
+
+            // upper case validation check
+            if (upper.test(data)) {
+                upperCase.classList.add('valid');
+            } else {
+                upperCase.classList.remove('valid');
+            }
+
+            // number case validation check
+            if (number.test(data)) {
+                digit.classList.add('valid');
+            } else {
+                digit.classList.remove('valid');
+            }
+
+            // special character validation check
+            if (special.test(data)) {
+                specialChar.classList.add('valid');
+            } else {
+                specialChar.classList.remove('valid');
+            }
+
+            // minimum length validation check
+            if (length.test(data)) {
+                minLength.classList.add('valid');
+            } else {
+                minLength.classList.remove('valid');
+            }
+        }
+    </script>
+    <script>
+        // show and hide password
+        let pswrd = document.getElementById('password');
+        let toggleBtn = document.getElementById('toggleBtn');
+
+        toggleBtn.onclick = function() {
+            if (pswrd.type === 'password') {
+                pswrd.setAttribute('type', 'text');
+                toggleBtn.classList.add('hide');
+            } else {
+                pswrd.setAttribute('type', 'password');
+                toggleBtn.classList.remove('hide');
+            }
+        }
+
+        // show and hide confirm password
+        let pswrdconf = document.getElementById('passwordconf');
+        let toggleBtnconf = document.getElementById('toggleBtnconf');
+
+        toggleBtnconf.onclick = function() {
+            if (pswrdconf.type === 'password') {
+                pswrdconf.setAttribute('type', 'text');
+                toggleBtnconf.classList.add('hide');
+            } else {
+                pswrdconf.setAttribute('type', 'password');
+                toggleBtnconf.classList.remove('hide');
+            }
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

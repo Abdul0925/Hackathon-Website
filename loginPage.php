@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <style>
         .heading-font {
@@ -110,6 +113,28 @@
         .class-control {
             border-color: #f4f7f6;
         }
+
+        .inputBox #toggleBtn {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 0px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .inputBox #toggleBtn::before {
+            content: '\f070';
+            font-family: fontAwesome;
+        }
+
+        .inputBox #toggleBtn.hide::before {
+            content: '\f06e';
+        }
     </style>
 </head>
 
@@ -209,8 +234,9 @@
 
             <!-- Password -->
             <div class="inputBox">
-                <input type="password" name="password" id="password" value="" required>
+                <input type="password" name="password" id="password" onkeyup="checkPassword(this.value)" required>
                 <span>Enter your password</span>
+                <label id="toggleBtn"></label>
             </div>
 
             <!-- Role Dropdown -->
@@ -235,7 +261,21 @@
             </div>
         </form>
     </div>
+    <script>
+        // show and hide password
+        let pswrd = document.getElementById('password');
+        let toggleBtn = document.getElementById('toggleBtn');
 
+        toggleBtn.onclick = function() {
+            if (pswrd.type === 'password') {
+                pswrd.setAttribute('type', 'text');
+                toggleBtn.classList.add('hide');
+            } else {
+                pswrd.setAttribute('type', 'password');
+                toggleBtn.classList.remove('hide');
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
