@@ -311,6 +311,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         .validation {
             margin-top: 10px;
             border-radius: 8px;
+            display: none;
         }
 
         .validation ul {
@@ -502,6 +503,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         // show and hide password
         let pswrd = document.getElementById('password');
         let toggleBtn = document.getElementById('toggleBtn');
+        const validation = document.querySelector('.validation');
+
+        // Listen for the input event
+        pswrd.addEventListener('input', function() {
+            if (pswrd.value.length > 0) {
+                validation.style.display = 'block'; // Show validation
+            } else {
+                validation.style.display = 'none'; // Hide validation
+            }
+        });
 
         toggleBtn.onclick = function() {
             if (pswrd.type === 'password') {
