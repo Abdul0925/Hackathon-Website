@@ -225,6 +225,16 @@
             color: #f44f36;
         }
 
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: #ffffff;
+        }
+
+        .social-icons a:hover {
+            color: #f44f36;
+        }
+
         /* Responsive Text Size */
         @media (max-width: 768px) {
             .image-container {
@@ -439,11 +449,11 @@
             <!-- Social Media and Legal Links -->
             <div class="row text-center mt-2">
                 <div class="col-12 social-icons">
-                    <a href="https://www.facebook.com/raisoniworld" class="me-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/raisoniworld" class="me-2"><i class="fab fa-instagram"></i></a>
-                    <a href="https://twitter.com/raisoniworld" class="me-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/school/raisoniworld" class="me-2"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="http://youtube.com/raisoniworld" class="me-2"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/raisoniworld" class="me-2"><i class="bi-facebook"></i></a>
+                    <a href="https://instagram.com/raisoniworld" class="me-2"><i class="bi-instagram"></i></a>
+                    <a href="https://twitter.com/raisoniworld" class="me-2"><i class="bi-twitter"></i></a>
+                    <a href="https://www.linkedin.com/school/raisoniworld" class="me-2"><i class="bi-linkedin"></i></a>
+                    <a href="http://youtube.com/raisoniworld" class="me-2"><i class="bi-youtube"></i></a>
                 </div>
                 <div class="col-12 mt-3">
                     <p>

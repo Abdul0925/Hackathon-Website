@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <style>
         .primary-bgpurple,
@@ -68,7 +69,9 @@
         .cover-container>p {
             /* padding: 10px 20px; */
             margin-top: 50px;
-            margin-left: 50px;
+            /* margin-left: 50px; */
+            display: flex;
+            justify-content: center;
         }
 
         .overlay-text1 {
@@ -112,7 +115,10 @@
             }
         }
 
-
+        .hero-section {
+            display: flex;
+            justify-content: center;
+        }
 
         .hero-section h1 {
             font-size: 3rem;
@@ -124,7 +130,7 @@
         .hero-section .btn {
             font-weight: 600;
             padding: 0.8rem 2rem;
-            margin-left: 50px;
+            /* margin-left: 50px; */
             border-radius: 50px;
             background: #9e16c3;
             color: white;
@@ -481,7 +487,7 @@
         <div class="cover-container">
             <div class="overlay-text1 font-style-text font-style-text">The Raisoni Tech Hackathon Seasone 2</div>
             <p><i>"the best way to predict the future is to invent it"</i></p>
-            <p></p>
+            <!-- <p></p> -->
             <header class="hero-section">
                 <div class="hero-content">
                     <a href="registerTeam.php" class="btn btn-lg">Join the Challenge</a>
@@ -489,8 +495,6 @@
             </header>
         </div>
     </div>
-    
-
 
     <!-- About Section -->
     <section class="about">
@@ -643,11 +647,11 @@
             <!-- Social Media and Legal Links -->
             <div class="row text-center mt-2">
                 <div class="col-12 social-icons">
-                    <a href="https://www.facebook.com/raisoniworld" class="me-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/raisoniworld" class="me-2"><i class="fab fa-instagram"></i></a>
-                    <a href="https://twitter.com/raisoniworld" class="me-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/school/raisoniworld" class="me-2"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="http://youtube.com/raisoniworld" class="me-2"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/raisoniworld" class="me-2"><i class="bi-facebook"></i></a>
+                    <a href="https://instagram.com/raisoniworld" class="me-2"><i class="bi-instagram"></i></a>
+                    <a href="https://twitter.com/raisoniworld" class="me-2"><i class="bi-twitter"></i></a>
+                    <a href="https://www.linkedin.com/school/raisoniworld" class="me-2"><i class="bi-linkedin"></i></a>
+                    <a href="http://youtube.com/raisoniworld" class="me-2"><i class="bi-youtube"></i></a>
                 </div>
                 <div class="col-12 mt-3">
                     <p>
