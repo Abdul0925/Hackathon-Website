@@ -346,6 +346,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             content: '\f00c';
             color: #0f0;
         }
+
+        .btn:disabled {
+            background-color: #5C0F8B !important;
+            color: white !important;
+        }
     </style>
 </head>
 
@@ -497,9 +502,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             } else {
                 minLength.classList.remove('valid');
             }
+
+            if (lower.test(data) && upper.test(data) && number.test(data) && special.test(data) && length.test(data)) {
+                document.getElementById('resetButton').disabled = false;
+                validation.style.display = 'none';
+            } else {
+                document.getElementById('resetButton').disabled = true;
+            }
         }
-    </script>
-    <script>
+
+
         // show and hide password
         let pswrd = document.getElementById('password');
         let toggleBtn = document.getElementById('toggleBtn');
