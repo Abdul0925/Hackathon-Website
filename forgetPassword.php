@@ -346,6 +346,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             content: '\f00c';
             color: #0f0;
         }
+
+        .btn:disabled {
+            background-color: #5C0F8B !important;
+            color: white !important;
+        }
+
+        .confirmpass {
+            margin-top: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .confirmpass ul {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 5px;
+        }
+
+        .confirmpass ul li {
+            position: relative;
+            list-style: none;
+            color: black;
+            font-size: 0.85em;
+            transition: 0.5s;
+        }
+
+        .confirmpass ul li::before {
+            content: '\f00d';
+            width: 20px;
+            height: 10px;
+            font-family: fontAwesome;
+            display: inline-flex;
+            color: red;
+        }
     </style>
 </head>
 
@@ -396,6 +432,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                 <input type="password" name="confirm_password" id="passwordconf" required>
                 <span>Confirm password</span>
                 <label id="toggleBtnconf"></label>
+            </div>
+            <div class="confirmpass">
+                <ul>
+                    <li id="confirm">Password Not Match</li>
+                </ul>
             </div>
 
             <!-- Role Dropdown -->
@@ -497,9 +538,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             } else {
                 minLength.classList.remove('valid');
             }
+
+            if (lower.test(data) && upper.test(data) && number.test(data) && special.test(data) && length.test(data)) {
+                document.getElementById('resetButton').disabled = false;
+                validation.style.display = 'none';
+            } else {
+                document.getElementById('resetButton').disabled = true;
+            }
         }
-    </script>
-    <script>
+
+        // Confirm Password Listen for the input event
+        let passwordconf = document.getElementById('passwordconf');
+        const confirmpass = document.querySelector('.confirmpass');
+        passwordconf.addEventListener('input', function() {
+            if (passwordconf.value.length > 0) {
+                confirmpass.style.display = 'block'; // Show confirmpass
+            } else {
+                confirmpass.style.display = 'none'; // Hide confirmpass
+            }
+            if (passwordconf.value === password.value) {
+                // document.getElementById('resetButton').disabled = false;
+                confirmpass.style.display = 'none';
+            } else {
+                // document.getElementById('resetButton').disabled = true;
+                confirmpass.style.display = 'block';
+            }
+        });
+
         // show and hide password
         let pswrd = document.getElementById('password');
         let toggleBtn = document.getElementById('toggleBtn');
