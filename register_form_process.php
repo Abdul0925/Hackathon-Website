@@ -248,7 +248,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$isVerified) {
         echo json_encode([
             'success' => false,
-            'message' => 'Please Verify Email Before Submitting!',
+            'message' => 'not verified Please Verify Email Before Submitting!',
+            'name' => 'Leader Email',
         ]);
         return;
     }
@@ -270,6 +271,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Payment Details
     $transactionId = $_POST['transactionId'];
     $paymentScreenshot = $_FILES['paymentScreenshot'];
+
+    // If file size is greater than 5 mb then return
+    if ($paymentScreenshot['size'] > 5000000) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'greater than 5MB',
+            'name' => 'Screenshot size',
+        ]);
+        return;
+    }
 
     $no_of_members = 0;
     // // Member Details
