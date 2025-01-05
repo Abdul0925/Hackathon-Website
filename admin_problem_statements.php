@@ -334,7 +334,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                             <label for="psDificulty" class="form-label">Dificulty Level:</label>
                             <select name="psDificulty" id="psDificulty" required>
                                 <option value="" selected disabled>Select Level</option>
-                                <option value="">None</option>
+                                <option value="None">None</option>
                                 <option value="easy">Easy</option>
                                 <option value="medium">Medium</option>
                                 <option value="hard">Hard</option>
@@ -399,7 +399,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                                                 <p><strong>PS ID:</strong> ' . $row['ps_id'] . '</p>
                                                 <p><strong>Name:</strong> ' . $row['ps_name'] . '</p>
                                                 <p><strong>Organization:</strong> ' . $row['ps_given_by'] . '</p>
-                                                <p><strong>Description:</strong> ' . $row['ps_description'] . '</p>
+                                                <p><strong>Description:</strong> <p>' . $row['ps_description'] . '</p></p>
                                                 <p><strong>Total Participation:</strong> ' . $row['no_of_participation'] . '</p>
                                                 <p><strong>Difficulty Level:</strong> ' . $row['ps_difficulty_level'] . '</p>
                                             </div>
