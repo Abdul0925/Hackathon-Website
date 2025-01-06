@@ -209,9 +209,16 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                         </div>
                     </a>
 
+                    <a href="admin_round.php" style="text-decoration: none;">
+                        <div class="nav-option option2" style="color: black;">
+                            <i class="bi-award"></i>
+                            <h3> Rounds</h3>
+                        </div>
+                    </a>
+
                     <a href="admin_payment_approved.php" style="text-decoration: none;">
                         <div class="nav-option option2" style="color: black;">
-                            <i class="bi-patch-check"></i>
+                            <i class="bi-credit-card"></i>
                             <h3> Payment</h3>
                         </div>
                     </a>
@@ -234,7 +241,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                 <a href="admin_problem_statements.php">
                     <div class="box box1">
                         <div class="text">
-                            <h2 class="topic-heading">See</h2>
+                            <h2 class="topic-heading">Add</h2>
                             <h2 class="topic">Problems</h2>
                         </div>
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png" alt="Views">
