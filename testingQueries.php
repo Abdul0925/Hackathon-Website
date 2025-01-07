@@ -9,6 +9,57 @@ require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 session_start();
 
+require 'db.php';
+$isStartedQuery = "SELECT * FROM admin_rounds WHERE on_going = 1 AND title = 'Round 1'";
+$stmt = $conn->prepare($isStartedQuery);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows > 0) {
+    $isStarted = true;
+} else {
+    $isStarted = false;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['startBtn'])) {
+    require 'db.php';
+    $title = "Round 1";
+    $on_going = 1;
+    $query = "INSERT INTO admin_rounds (title, on_going) VALUES (?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('si', $title, $on_going);
+    if ($stmt->execute()) {
+        $stmt->close();
+        $conn->close();
+        // echo "Started";
+    } else {
+        $stmt->close();
+        $conn->close();
+        // echo "false";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" method="POST">
+        <button name="startBtn">
+            <?php
+            echo ($isStarted) ? 'Started' : 'Start';
+            ?>
+        </button>
+    </form>
+</body>
+
+</html>
+
+<?php
 // $memberEmail = "abdulrahim74264@gmail.com";
 // require "db.php";
 
@@ -139,11 +190,7 @@ session_start();
 //     }
 
 
-?>
 
-
-
-<?php
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //     // File details
 //     $leaderEmail = "faf@gmail.com";
@@ -341,16 +388,16 @@ session_start();
 //         echo "<br>";
 //     }
 // }
-$psId = "rth01";
-require "db.php";
-    $updateStmt = $conn->prepare("UPDATE problem_statements SET no_of_participation = no_of_participation + 1 WHERE ps_id = ?");
-    $updateStmt->bind_param("s", $psId);
-    if ($updateStmt->execute()) {
-        $updateStmt->close();
-        echo "true";
-    } else {
-        // Log error for debugging
-        error_log("Execute failed: " . $updateStmt->error);
-        $updateStmt->close();
-        echo "false";
-    }
+// $psId = "rth01";
+// require "db.php";
+//     $updateStmt = $conn->prepare("UPDATE problem_statements SET no_of_participation = no_of_participation + 1 WHERE ps_id = ?");
+//     $updateStmt->bind_param("s", $psId);
+//     if ($updateStmt->execute()) {
+//         $updateStmt->close();
+//         echo "true";
+//     } else {
+//         // Log error for debugging
+//         error_log("Execute failed: " . $updateStmt->error);
+//         $updateStmt->close();
+//         echo "false";
+//     }

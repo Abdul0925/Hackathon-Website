@@ -10,92 +10,101 @@ require 'phpmailer/src/Exception.php';
 require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 
+// Function to validate password complexity
+function isValidPassword($password) {
+    return preg_match('/[0-9]/', $password) &&    // At least one number
+           preg_match('/[\W]/', $password) &&    // At least one special character
+           strlen($password) >= 8;               // Minimum length of 8 characters
+}
 
 // Handle form submission for OTP sending
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
-    $email = $_POST['email'];
-    $new_password = $_POST['new_password'];
-    $confirm_password = $_POST['confirm_password'];
-    $role = $_POST['role'];
+    $email = htmlspecialchars($_POST['email']);
+    $new_password = htmlspecialchars($_POST['new_password']);
+    $confirm_password = htmlspecialchars($_POST['confirm_password']);
+    $role = htmlspecialchars($_POST['role']);
 
-    // echo $email;
     // Validate email
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message1 = "Invalid email address.";
+    } elseif ($new_password !== $confirm_password || strlen($new_password) <= 8) {
+        $message1 = "Passwords do not match or are too short (minimum 8 characters).";
+    } elseif (!isValidPassword($new_password)) {
+        $message1 = "Password must meet the following criteria:\n" .
+                    "- At least one number\n" .
+                    "- At least one special character\n" .
+                    "- Minimum length of 8 characters.";
+    } elseif ($role !== 'Team Leader') {
+        $message1 = "Only Team Leaders can reset passwords. Contact admin if required.";
+    } else {
         // Generate OTP
-        if ($new_password == $confirm_password && strlen($new_password) > 6) {
-            $otp = rand(100000, 999999);
-            if ($role == 'Team Leader') {
+        $otp = rand(100000, 999999);
+
+        // Check if user exists
+        $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
+            $message1 = "User does not exist.";
+        } else {
+            $row = $result->fetch_assoc();
+            $team_id = $row['id'];
+
+            // Check payment approval
+            $payQuery = "SELECT * FROM payment_details WHERE team_id = ?";
+            $payStmt = $conn->prepare($payQuery);
+            $payStmt->bind_param("i", $team_id);
+            $payStmt->execute();
+            $payResult = $payStmt->get_result();
+            $pay = $payResult->fetch_assoc();
+
+            if ($pay['is_approved'] == 0) {
+                $message1 = "Your payment is not approved yet.";
+            } else {
+                // Save OTP and user data in session
                 $_SESSION['otp'] = $otp;
                 $_SESSION['email'] = $email;
-                $_SESSION['new_password'] = $new_password;
+                $_SESSION['new_password'] = password_hash($new_password, PASSWORD_BCRYPT);
                 $_SESSION['role'] = 'Team Leader';
 
-                $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param("s", $email); // 's' specifies that the parameter is a string
-                $stmt->execute();
-
-                $result = $stmt->get_result();
-                if ($result->num_rows == 0) {
-                    echo '<script> alert("User Not Exist!"); window.location.href = "forgetPassword.php"; </script>';
-                } else {
-                    echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
-                        setTimeout(()=>{
-                            document.getElementById('resetButton').disabled = true;
-                        },500)
-                    })</script>";
-                    $mentor = $result->fetch_assoc();
-                    $email = $_POST['email'];
+                // Send OTP email
+                try {
                     $mail = new PHPMailer(true);
-                    // Configure the mail server settings
                     $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';           // SMTP server address
+                    $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
-                    $mail->Password = 'iotg jqut wkks sjrt';       // Your email password (use an app-specific password if needed)
-                    $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
-                    $mail->Port = 465;                        // Port for SSL
+                    $mail->Username = 'abdulrahim74264@gmail.com';
+                    $mail->Password = 'iotg jqut wkks sjrt'; // Use an app password
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->Port = 465;
                     $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
                     $mail->addAddress($email);
                     $mail->isHTML(true);
                     $mail->Subject = "OTP for Reset Password";
-                    $msg = 'Dear ' . strtoupper($mentor['leaderName']) . '<p> your one time password for password process is:</p>' .
-                        '<p>OTP: ' . $_SESSION['otp'] . '</p>';
-                    $mail->Body = $msg;
+                    $mail->Body = 'Dear ' . strtoupper($row['leaderName']) . ',<br>Your one-time password for password reset is:<br><b>' . $otp . '</b>';
+
                     if ($mail->send()) {
-                        $otp_sent = true;
                         $message = "OTP sent successfully to " . $email;
                     } else {
-                        $otp_sent = false;
-                        $message = "Failed to send OTP. Please try again.";
-                        echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
-                            setTimeout(()=>{
-                                document.getElementById('resetButton').disabled = false;
-                            },500)
-                        })</script>";
+                        $message1 = "Failed to send OTP. Please try again.";
                     }
+                } catch (Exception $e) {
+                    $message1 = "Mailer Error: " . $mail->ErrorInfo;
                 }
-            } else {
-                $message1 = "Only Leader can change password If your are already a Leader and got Login credentials plz contact admin";
             }
-        } else {
-            //     echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
-            //     setTimeout(()=>{
-            //         document.getElementById('resetButton').disabled = true;
-            //     },500)
-            // })</script>";
-            $message1 = "Password Not Match OR Please create password more than 6 characters";
         }
-    } else {
-        $otp_sent = false;
-        // echo "<script>document.getElementById('resetButton').addEventListener('click', ()=>{
-        //     setTimeout(()=>{
-        //         document.getElementById('resetButton').disabled = true;
-        //     },500)
-        // })</script>";
-        $message1 = "Invalid email address.";
     }
 }
+
+// Display message
+if (isset($message1)) {
+    echo '<script>alert("' . $message1 . '"); window.location.href = "forgetPassword.php";</script>';
+}
+
+
 
 
 // Handle OTP verification and form submission
@@ -168,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RJH Forget Password</title>
+    <title>RTH 25 Forget Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -420,8 +429,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             </div>
             <div class="validation">
                 <ul>
-                    <li id="lower">At least one lowercase character</li>
-                    <li id="upper">At least one uppercase character</li>
                     <li id="number">At least one number</li>
                     <li id="special">At least one special character</li>
                     <li id="length">At least 8 characters</li>
@@ -490,33 +497,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         // })
     </script>
     <script>
-        let lowerCase = document.getElementById('lower');
-        let upperCase = document.getElementById('upper');
+        
         let digit = document.getElementById('number');
         let specialChar = document.getElementById('special');
         let minLength = document.getElementById('length');
 
         function checkPassword(data) {
             // javascript regular expression pattern
-            const lower = new RegExp('(?=.*[a-z])');
-            const upper = new RegExp('(?=.*[A-Z])');
+            
             const number = new RegExp('(?=.*[0-9])');
             const special = new RegExp('(?=.[!@#\$%\^&\])');
             const length = new RegExp('(?=.{8,})');
 
-            // Lower case validation check
-            if (lower.test(data)) {
-                lowerCase.classList.add('valid');
-            } else {
-                lowerCase.classList.remove('valid');
-            }
-
-            // upper case validation check
-            if (upper.test(data)) {
-                upperCase.classList.add('valid');
-            } else {
-                upperCase.classList.remove('valid');
-            }
+            
 
             // number case validation check
             if (number.test(data)) {
@@ -539,7 +532,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                 minLength.classList.remove('valid');
             }
 
-            if (lower.test(data) && upper.test(data) && number.test(data) && special.test(data) && length.test(data)) {
+            if ( number.test(data) && special.test(data) && length.test(data)) {
                 document.getElementById('resetButton').disabled = false;
                 validation.style.display = 'none';
             } else {
