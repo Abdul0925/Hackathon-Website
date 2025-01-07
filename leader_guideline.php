@@ -65,9 +65,14 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         }
 
         .nav-upper-options {
-            gap: 10px;
+            gap: 0px;
             justify-content: center;
             align-items: center;
+        }
+
+        .nav {
+            padding-top: 20px;
+            padding-left: 5px;
         }
 
         .nav-upper-options h3 {
@@ -151,14 +156,21 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
                     <a href="leader_payment.php" style="text-decoration: none;">
                         <div class="nav-option option3" style="color: black;">
-                            <i class="bi-patch-check"></i>
+                            <i class="bi-credit-card"></i>
                             <h3> Payment</h3>
+                        </div>
+                    </a>
+
+                    <a href="leader_round.php" style="text-decoration: none;">
+                        <div class="nav-option option4" style="color: black;">
+                            <i class="bi-award"></i>
+                            <h3> Rounds</h3>
                         </div>
                     </a>
 
                     <a href="leader_result.php" style="text-decoration: none;">
                         <div class="nav-option option4" style="color: black;">
-                            <i class="bi-award"></i>
+                            <i class="bi-trophy"></i>
                             <h3> Result</h3>
                         </div>
                     </a>

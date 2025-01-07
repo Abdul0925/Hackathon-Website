@@ -15,7 +15,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Profile</title>
+    <title>Admin Rounds</title>
     <link rel="stylesheet" href="admin_dash_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <style>
@@ -90,6 +90,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
         .report-container {
             min-height: 0px;
             margin-top: 20px;
+            height: 400px;
         }
 
         .nav-upper-options {
@@ -131,7 +132,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
         </div>
 
         <div>
-            <H1>Profile</H1>
+            <H1>Rounds</H1>
         </div>
 
         <div class="message">
@@ -156,14 +157,14 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
                     </a>
 
                     <a href="admin_profile.php" style="text-decoration: none;">
-                        <div class="nav-option option1">
+                        <div class="nav-option option2" style="color: black;">
                             <i class="bi-file-person"></i>
                             <h3> Profile</h3>
                         </div>
                     </a>
 
                     <a href="admin_round.php" style="text-decoration: none;">
-                        <div class="nav-option option2" style="color: black;">
+                        <div class="nav-option option1">
                             <i class="bi-award"></i>
                             <h3> Rounds</h3>
                         </div>
@@ -194,46 +195,13 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
             <!-- team detail table -->
             <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">Admin List</h1>
+                    <h1 class="recent-Articles">Rounds</h1>
                 </div>
 
                 <div class="report-body">
-                    <!-- top hedding -->
-                    <div class="table">
-                        <table>
-                            <thead>
-
-                                <tr>
-
-                                    <th scope="col">Sr No</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Password</th>
-                                    <th scope="col">Contact</th>
-                                    <!-- <th scope="col">Action</th> -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $srno = 0;
-                                while ($admin = $adminDetails->fetch_assoc()) {
-                                    $srno++;
-                                ?>
-                                    <tr>
-                                        <td><?php echo $srno ?></td>
-                                        <td><?php echo $admin['username'] ?></td>
-                                        <td><?php echo $admin['password'] ?></td>
-                                        <td><?php echo $admin['contact'] ?></td>
-                                        <!-- <td><button class="primary-btn w-100 view-details-btn" onclick="" style="cursor: pointer;" data-id="<?php //echo $admin['id']; 
-                                                                                                                                                    ?>" disabled>Delete</button></td> -->
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
-
+                    <button>Start Round 1</button>
                 </div>
             </div>
-
         </div>
     </div>
 

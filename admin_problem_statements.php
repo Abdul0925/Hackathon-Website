@@ -287,9 +287,16 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                         </div>
                     </a>
 
+                    <a href="admin_round.php" style="text-decoration: none;">
+                        <div class="nav-option option2" style="color: black;">
+                            <i class="bi-award"></i>
+                            <h3> Rounds</h3>
+                        </div>
+                    </a>
+
                     <a href="admin_payment_approved.php" style="text-decoration: none;">
                         <div class="nav-option option3" style="color: black;">
-                            <i class="bi-patch-check"></i>
+                            <i class="bi-credit-card"></i>
                             <h3> Payment</h3>
                         </div>
                     </a>
@@ -309,7 +316,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             <!-- team detail table -->
             <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">Add New Problem</h1>
+                    <h1 class="recent-Articles">Add New Problem Statement</h1>
                 </div>
 
                 <div class="report-body">

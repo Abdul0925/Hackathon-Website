@@ -85,9 +85,16 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
                         </div>
                     </a>
 
+                    <a href="admin_round.php" style="text-decoration: none;">
+                        <div class="nav-option option2" style="color: black;">
+                            <i class="bi-award"></i>
+                            <h3> Rounds</h3>
+                        </div>
+                    </a>
+
                     <a href="admin_payment_approved.php" style="text-decoration: none;">
                         <div class="nav-option option2" style="color: black;">
-                            <i class="bi-patch-check"></i>
+                            <i class="bi-credit-card"></i>
                             <h3> Payment</h3>
                         </div>
                     </a>

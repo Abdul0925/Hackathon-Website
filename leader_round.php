@@ -23,11 +23,8 @@ if ($result->num_rows > 0) {
     $imagePath = 'https://via.placeholder.com/100';
 }
 
-// $result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
+$result1 = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
 $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
-$countPS = mysqli_query($conn, "SELECT COUNT(*) as total FROM problem_statements");
-$rowPS = mysqli_fetch_assoc($countPS);
-$totalPS = $rowPS['total'];
 
 ?>
 
@@ -43,10 +40,6 @@ $totalPS = $rowPS['total'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .table {
-            margin-bottom: 0rem;
-        }
-
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -171,34 +164,55 @@ $totalPS = $rowPS['total'];
             background-color: rgb(229, 0, 0);
         }
 
+        .mt-5 h5 {
+            color: #5500cb;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            border-bottom: solid rgba(0, 20, 151, 0.59);
+        }
+
         .DHead h1 {
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 0px;
         }
 
-        .table-responsive {
-            padding-top: 20px;
+        .nav-option1 i {
+            color: #fff;
+        }
+
+        .box-container {
+            display: block;
+            margin: 0px 0px 40px 30px;
+        }
+
+        .report-container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .report-container h5 {
+            color: rgb(125, 125, 125);
         }
     </style>
-
 </head>
 
 <body>
     <!-- for header part -->
     <header>
-
         <div class="logosec">
             <a href="leader_dashboard.php" style="text-decoration: none;">
                 <div class="logo">Leader</div>
             </a>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-
         <div class="DHead">
-            <H1>Dashboard</H1>
+            <H1>Result</H1>
         </div>
-
         <div class="message">
             <!-- <div class="circle"></div> -->
             <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
@@ -206,7 +220,6 @@ $totalPS = $rowPS['total'];
                 <a href="leader_team.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
         </div>
-
     </header>
 
     <div class="main-container">
@@ -214,30 +227,30 @@ $totalPS = $rowPS['total'];
             <nav class="nav">
                 <div class="nav-upper-options">
                     <a href="leader_dashboard.php" style="text-decoration: none;">
-                        <div class="nav-option option1">
-                            <i class="bi-columns"></i>
-                            <h3> Dashboard</h3>
+                        <div class="nav-option option2">
+                            <i style="color: black;" class="bi-columns"></i>
+                            <h3 style="color: black;"> Dashboard</h3>
                         </div>
                     </a>
 
                     <a href="leader_team.php" style="text-decoration: none;">
-                        <div class="nav-option option2" style="color: black;">
+                        <div class="nav-option option6" style="color: black;">
                             <i class="bi-file-earmark-person"></i>
                             <h3> My Team</h3>
                         </div>
                     </a>
 
                     <a href="leader_payment.php" style="text-decoration: none;">
-                        <div class="nav-option option3" style="color: black;">
+                        <div class="nav-option option5" style="color: black;">
                             <i class="bi-credit-card"></i>
                             <h3> Payment</h3>
                         </div>
                     </a>
 
                     <a href="leader_round.php" style="text-decoration: none;">
-                        <div class="nav-option option4" style="color: black;">
-                            <i class="bi-award"></i>
-                            <h3> Rounds</h3>
+                        <div class="nav-option option1" style="color: black;">
+                            <i style="color: #fff;" class="bi-award"></i>
+                            <h3 style="color: #fff;"> Rounds</h3>
                         </div>
                     </a>
 
@@ -249,14 +262,14 @@ $totalPS = $rowPS['total'];
                     </a>
 
                     <a href="leader_problem_statement.php" style="text-decoration: none;">
-                        <div class="nav-option option5" style="color: black;">
+                        <div class="nav-option option4" style="color: black;">
                             <i class="bi-eye"></i>
                             <h3> Problems</h3>
                         </div>
                     </a>
 
                     <a href="leader_guideline.php" style="text-decoration: none;">
-                        <div class="nav-option option6" style="color: black;">
+                        <div class="nav-option option3" style="color: black;">
                             <i class="bi-card-checklist"></i>
                             <h3> Guidelines</h3>
                         </div>
@@ -274,132 +287,8 @@ $totalPS = $rowPS['total'];
         </div>
 
         <div class="main">
-
-            <div class="box-container">
-
-                <div class="box box1">
-                    <div class="text">
-                        <h2 class="topic">Hackathon Prize per PS</h2>
-                        <h2 class="topic-heading">Rs. 5,000/-</h2>
-                    </div>
-                    <!-- <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png" alt="Views"> -->
-                </div>
-
-                <div class="box box2">
-                    <div class="text">
-                        <h2 class="topic">Total Problem Statement</h2>
-                        <h2 class="topic-heading"><?php echo $totalPS ?></h2>
-                    </div>
-                    <!-- <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png" alt="likes"> -->
-                </div>
-
-                <div class="box box3">
-                    <div class="text">
-                        <h2 class="topic">Date</h2>
-                        <h2 class="topic-heading">10 Feb 2024</h2>
-                    </div>
-                    <!-- <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png" alt="comments"> -->
-                </div>
-
-            </div>
-
-            <!-- <div class="report-container">
-                <div class="mt-5">
-                    <h5 class="mb-3">Team Details</h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Sr No</th>
-                                    <th>Members</th>
-                                    <th>Mobile</th>
-                                    <th>Email</th>
-                                    <th>Gender</th>
-                                </tr>
-                            </thead>
-                            <tbody> -->
-            <?php //$sr_no= 1 ; 
-            ?>
-            <?php //while ($row1 = $result1->fetch_assoc()) {
-            // $date = date('d-m-Y', strtotime($row1['date']));
-            //$date = "";
-            ?>
-            <tr>
-                <td><?php //echo $sr_no++; 
-                    ?></td>
-                <td><?php //echo $row1['memberName']; 
-                    ?></td>
-                <td><?php //echo $row1['memberMobile']; 
-                    ?></td>
-                <td><?php //echo $row1['memberEmail']; 
-                    ?></td>
-                <td><?php //echo $row1['memberGender']; 
-                    ?></td>
-            </tr>
-            <?php
-            // } 
-            ?>
-            <!-- </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> -->
-
-
             <div class="report-container">
-                <div class="mt-5">
-                    <div class="report-header">
-                        <h1 class="recent-Articles">Notifications</h1>
-                    </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <tbody>
-                                <thead>
-                                    <tr>
-                                        <th>Status</th>
-                                        <th>Notifications</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <?php
-                                $currentDay = date("d");
-                                $currentMonth = date("m");
-                                $currentYaer = date("Y");
-
-                                while ($noti = $result2->fetch_assoc()) {
-
-                                    $date = date('d-m-Y', strtotime($noti['date'])) . " - " . date('h:i a', strtotime($noti['date']));
-                                    $oldDay = date('d', strtotime($noti['date']));
-                                    $oldMonth = date('m', strtotime($noti['date']));
-                                    $oldYear = date('Y', strtotime($noti['date']));
-                                    if ($currentDay - $oldDay > 5 || $currentMonth > $oldMonth || $currentYaer > $oldYear) {
-                                        $new = 0;
-                                    } else {
-                                        $new = 1;
-                                    }
-
-                                ?>
-                                    <tr>
-                                        <?php
-                                        // if ($noti['new'] == 1) {
-                                        if ($new == 1) {
-                                            echo '<td><span class="badge badge-reject">NEW</span></td>';
-                                        } else {
-                                            echo '<td><span class="badge badge-reject"></span></td>';
-                                        }
-                                        ?>
-                                        <!-- <td><span class="badge badge-reject">NEW</span></td> -->
-                                        <td><?php echo $noti['notification']; ?></td>
-                                        <td><?php echo $date; ?></td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
