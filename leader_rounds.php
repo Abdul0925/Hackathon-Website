@@ -46,11 +46,13 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             padding: 0;
             text-align: center;
         }
+
         .tabs {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
+
         .tabs button {
             background-color: #f4f4f4;
             border: 1px solid #ddd;
@@ -58,9 +60,11 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             cursor: pointer;
             font-size: 16px;
         }
+
         .tabs button.active {
             background-color: #ddd;
         }
+
         .content {
             border: 1px solid #ddd;
             margin: 20px auto;
@@ -69,9 +73,11 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             min-height: 200px;
             display: none;
         }
+
         .content.active {
             display: block;
         }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -308,40 +314,40 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                             <h3>Logout</h3>
                         </div>
                     </a>
-                    
+
                 </div>
             </nav>
         </div>
-        
+
         <div class="main">
             <div class="tabs">
                 <button id="round1-tab" class="active" onclick="showContent('round1')">Round 1</button>
-            <button id="round2-tab" onclick="showContent('round2')">Round 2</button>
-        </div>
-        <div id="round1" class="content active">
-            <h2>RTH Round 1</h2>
-            <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
-            <form action="">
-                <label for="">Your PS ID: </label>
-                <span>RTH01</span>
-                <label for="">Problem Statement Title :</label>
-                <input type="text" name="ps_title" id="ps_title">
-                <label for="">Solution Summary :</label>
-                <textarea name="sol_summary" id="sol_summary"></textarea>
-                <label for="">PPT Drive Link :</label>
-                <input type="text" name="ppt_link" id="ppt_link">
-                <label for="">Additional Document Drive Link :</label>
-                <input type="text" name="doc_link" id="doc_link" placeholder="(Optional)">
-                <button class="">Submit</button>
-            </form>
-        </div>
-        <div id="round2" class="content">
-            <h2>Round 2 Content</h2>
-            <p>This is the content for Round 2. Add more details here as needed.</p>
-        </div>
+                <button id="round2-tab" onclick="showContent('round2')">Round 2</button>
+            </div>
+            <div id="round1" class="content active">
+                <h2>RTH Round 1</h2>
+                <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
+                <form action="">
+                    <label for="">Your PS ID: </label>
+                    <span>RTH01</span>
+                    <label for="">Problem Statement Title :</label>
+                    <input type="text" name="ps_title" id="ps_title">
+                    <label for="">Solution Summary :</label>
+                    <textarea name="sol_summary" id="sol_summary"></textarea>
+                    <label for="">PPT Drive Link :</label>
+                    <input type="text" name="ppt_link" id="ppt_link">
+                    <label for="">Additional Document Drive Link :</label>
+                    <input type="text" name="doc_link" id="doc_link" placeholder="(Optional)">
+                    <button class="">Submit</button>
+                </form>
+            </div>
+            <div id="round2" class="content">
+                <h2>Round 2 Content</h2>
+                <p>This is the content for Round 2. Add more details here as needed.</p>
+            </div>
         </div>
     </div>
-        
+
     <script>
         function showContent(round) {
             // Hide all content
