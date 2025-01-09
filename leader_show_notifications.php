@@ -6,7 +6,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 <?php
 session_start();
 //require "db.php";
-if ($_SESSION['admin_logged_in'] != true) {
+if ($_SESSION['leader_logged_in'] != true) {
     header("location:loginPage.php");
 }
 ?>
@@ -19,20 +19,33 @@ if ($_SESSION['admin_logged_in'] != true) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Notifications</title>
-    <link rel="stylesheet" href="admin_dash_style.css">
+    <link rel="stylesheet" href="leader_dashboard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            /* background-color: #f1f2f6; */
+        }
+
+        .main {
+            background-color: #cad7fda4;
+            height: 100vh;
+        }
+
         .main .report-container {
             padding-top: 20px;
             overflow-x: auto;
             min-height: auto;
+            margin-top: 70px;
         }
 
         .report-container .table {
-            border-spacing: 5;
             border-collapse: collapse;
             background-color: #fff;
             width: 100%;
-            
+            margin-bottom: 0px;
         }
 
         .container {
@@ -50,7 +63,7 @@ if ($_SESSION['admin_logged_in'] != true) {
         th {
             text-transform: uppercase;
             font-weight: 500;
-            padding: 15px;
+            padding-top: 20px;
             border-color: black;
 
         }
@@ -82,12 +95,12 @@ if ($_SESSION['admin_logged_in'] != true) {
 
         .badge {
             background-color: rgb(229, 0, 0);
-            text-align: center;
-            color: #fff;
-            font-weight: 700;
-            border-radius: 7px;
-            padding: 1px 7px 1px 7px;
         }
+
+        .dp {
+            align-items: baseline;
+        }
+
 
         @media screen and (max-width: 400px) {
             .report-container {
@@ -108,7 +121,6 @@ if ($_SESSION['admin_logged_in'] != true) {
                 padding: 20px 2px 10px 2px;
             }
         }
-
     </style>
 
 </head>
@@ -118,8 +130,8 @@ if ($_SESSION['admin_logged_in'] != true) {
     <header>
 
         <div class="logosec">
-            <a href="admin_dashboard.php" style="text-decoration: none;">
-                <div class="logo">Admin</div>
+            <a href="leader_dashboard.php" style="text-decoration: none;">
+                <div class="logo">Leader</div>
             </a>
         </div>
 
@@ -129,9 +141,9 @@ if ($_SESSION['admin_logged_in'] != true) {
 
         <div class="message">
             <div class="circle"></div>
-            <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
+            <a href="leader_show_notifications.php" style="display: flex;"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
             <div class="dp">
-                <a href="admin_profile.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
+                <a href="leader_team.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
         </div>
 
@@ -140,13 +152,12 @@ if ($_SESSION['admin_logged_in'] != true) {
     <div class="main">
         <div class="report-container">
             <div class="container">
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">Status</th>
                             <th scope="col">Notification</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -172,12 +183,6 @@ if ($_SESSION['admin_logged_in'] != true) {
                                 </td>
                                 <td><?php echo htmlspecialchars($noti['notification']); ?></td>
                                 <td><?php echo $date; ?></td>
-                                <td>
-                                    <form action="admin_delete_noti_process.php" method="POST" class="d-inline">
-                                        <input type="hidden" name="noti_id" value="<?php echo $noti['id']; ?>">
-                                        <button class="btn-primary">Delete</button>
-                                    </form>
-                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>

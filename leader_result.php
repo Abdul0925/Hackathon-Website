@@ -218,8 +218,8 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             <H1>Result</H1>
         </div>
         <div class="message">
-            <!-- <div class="circle"></div> -->
-            <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
+            <div class="circle"></div>
+            <a href="leader_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
             <div class="dp">
                 <a href="leader_team.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
