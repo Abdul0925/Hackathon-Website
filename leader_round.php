@@ -80,7 +80,8 @@ $psId = $teamDetailsRow['psId'];
         }
 
         .main {
-            padding: 30px;
+            background-color: #cad7fda4;
+            padding: 15px 30px 30px 30px;
         }
 
         .round1btn {
@@ -111,10 +112,6 @@ $psId = $teamDetailsRow['psId'];
 
         .nav-option i {
             font-size: 160%;
-        }
-
-        .main {
-            background-color: #cad7fda4;
         }
 
         .nav-upper-options {
@@ -179,14 +176,13 @@ $psId = $teamDetailsRow['psId'];
         }
 
         .tabs button {
-            background-color:rgb(255, 255, 255);
+            background-color: rgb(255, 255, 255);
             border: none;
             cursor: pointer;
             font-size: 16px;
             border-radius: 50px 0 0 50px;
             height: 40px;
             width: 120px;
-            /* transform: rotateX('angle'); */
             transition: 0.3s;
         }
 
@@ -196,7 +192,6 @@ $psId = $teamDetailsRow['psId'];
         }
 
         .content {
-            margin-top: 10px;
             display: none;
         }
 
@@ -237,6 +232,12 @@ $psId = $teamDetailsRow['psId'];
         .round-form p {
             font-weight: 600;
         }
+
+        .recent-Articles h1 {
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 0px;
+        }
     </style>
 </head>
 
@@ -250,7 +251,7 @@ $psId = $teamDetailsRow['psId'];
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
         <div class="DHead">
-            <H1>Result</H1>
+            <h1>Rounds</h1>
         </div>
         <div class="message">
             <div class="circle"></div>
@@ -366,8 +367,14 @@ $psId = $teamDetailsRow['psId'];
                     </form>
                 </div>
                 <div id="round2" class="content">
-                    <h2>Round 2 Content</h2>
-                    <p>This is the content for Round 2. Add more details here as needed.</p>
+                    <div class="report-header">
+                        <div class="recent-Articles">
+                            <h1>RTH Round 2</h1>
+                        </div>
+                    </div>
+                    <form action="" class="round-form" method="POST">
+                        <p>This is the content for Round 2. Add more details here as needed.</p>
+                    </form>
                 </div>
             </div>
         </div>
