@@ -275,7 +275,7 @@ $psId = $teamDetailsRow['psId'];
 
                     <a href="leader_team.php" style="text-decoration: none;">
                         <div class="nav-option option6" style="color: black;">
-                            <i class="bi-file-earmark-person"></i>
+                            <i class="bi-file-person"></i>
                             <h3> My Team</h3>
                         </div>
                     </a>

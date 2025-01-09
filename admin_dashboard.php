@@ -142,21 +142,20 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
         }
 
         .nav-upper-options {
-            /* gap: 10px; */
+            gap: 0px;
             justify-content: center;
             align-items: center;
         }
 
         .nav-upper-options h3 {
-            font-size: 18px;
-            /* margin-bottom: 0px; */
+            font-size: 16px;
             font-weight: bold;
             padding-left: 10px;
             text-decoration: none;
         }
 
         .nav-option i {
-            font-size: 185%;
+            font-size: 160%;
         }
 
         .report-body {
