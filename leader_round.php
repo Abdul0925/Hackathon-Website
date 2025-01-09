@@ -105,8 +105,12 @@ $psId = $teamDetailsRow['psId'];
             background-color: rgb(97, 19, 207);
         }
 
+        .nav-option {
+            gap: 16px;
+        }
+
         .nav-option i {
-            font-size: 185%;
+            font-size: 160%;
         }
 
         .main {
@@ -125,7 +129,7 @@ $psId = $teamDetailsRow['psId'];
         }
 
         .nav-upper-options h3 {
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 0px;
             font-weight: bold;
             padding-left: 10px;
