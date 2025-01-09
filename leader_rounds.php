@@ -7,24 +7,17 @@ if ($_SESSION['leader_logged_in'] != true) {
 
 $email = $_SESSION['leaderEmail'];
 
-// Query to get the image path
-$sql = "SELECT * FROM mentor_details WHERE email = ?";
+$sql = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $imagePath = $row['image_path']; // The path of the uploaded image
-    $_SESSION['imagePath'] = $imagePath; // The path of the uploaded image
-} else {
-    // If no image found, use a placeholder image
-    $imagePath = 'https://via.placeholder.com/100';
-}
 
-$result1 = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
-$result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
+$row = $result->fetch_assoc();
+$psId = $row['psId'];
+$_SESSION['psId'] = $psId;
+
 
 ?>
 
@@ -35,7 +28,7 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Mentor Dashboard</title>
+    <title>RTH Rounds</title>
     <link rel="stylesheet" href="leader_dashboard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -46,11 +39,13 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             padding: 0;
             text-align: center;
         }
+
         .tabs {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
+
         .tabs button {
             background-color: #f4f4f4;
             border: 1px solid #ddd;
@@ -58,9 +53,11 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             cursor: pointer;
             font-size: 16px;
         }
+
         .tabs button.active {
             background-color: #ddd;
         }
+
         .content {
             border: 1px solid #ddd;
             margin: 20px auto;
@@ -69,9 +66,11 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             min-height: 200px;
             display: none;
         }
+
         .content.active {
             display: block;
         }
+
         table {
             border-collapse: collapse;
             background-color: #fff;
@@ -308,41 +307,49 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
                             <h3>Logout</h3>
                         </div>
                     </a>
-                    
+
                 </div>
             </nav>
         </div>
-        
+
         <div class="main">
             <div class="tabs">
                 <button id="round1-tab" class="active" onclick="showContent('round1')">Round 1</button>
-            <button id="round2-tab" onclick="showContent('round2')">Round 2</button>
-        </div>
-        <div id="round1" class="content active">
-            <h2>RTH Round 1</h2>
-            <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
-            <form action="">
-                <label for="">Your PS ID: </label>
-                <span>RTH01</span>
-                <label for="">Problem Statement Title :</label>
-                <input type="text" name="ps_title" id="ps_title">
-                <label for="">Solution Summary :</label>
-                <textarea name="sol_summary" id="sol_summary"></textarea>
-                <label for="">PPT Drive Link :</label>
-                <input type="text" name="ppt_link" id="ppt_link">
-                <label for="">Additional Document Drive Link :</label>
-                <input type="text" name="doc_link" id="doc_link" placeholder="(Optional)">
-                <button class="">Submit</button>
-            </form>
-        </div>
-        <div id="round2" class="content">
-            <h2>Round 2 Content</h2>
-            <p>This is the content for Round 2. Add more details here as needed.</p>
-        </div>
+                <button id="round2-tab" onclick="showContent('round2')">Round 2</button>
+            </div>
+            <div id="round1" class="content active">
+                <h2>RTH Round 1</h2>
+                <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
+                <form id="idea-submission-form">
+                    <label for="">Your PS ID: </label>
+                    <span><?php echo $psId; ?></span>
+                    <label for="">Problem Statement Title :</label>
+                    <input type="text" name="psTitle" id="psTitle">
+                    <label for="">Solution Summary :</label>
+                    <textarea name="solSummary" id="solSummary"></textarea>
+                    <label for="">PPT Drive Link :</label>
+                    <input type="text" name="pptLink" id="pptLink">
+                    <label for="">Additional Document Drive Link :</label>
+                    <input type="text" name="docLink" id="docLink" placeholder="(Optional)">
+                    <button class="" >Submit</button>
+                </form>
+            </div>
+            <div id="round2" class="content">
+                <h2>Round 2 Content</h2>
+                <p>This is the content for Round 2. Add more details here as needed.</p>
+            </div>
         </div>
     </div>
-        
+
     <script>
+        let menuicn = document.querySelector(".menuicn");
+        let nav = document.querySelector(".navcontainer");
+
+        menuicn.addEventListener("click", () => {
+            nav.classList.toggle("navclose");
+        })
+ 
+ 
         function showContent(round) {
             // Hide all content
             const contents = document.querySelectorAll('.content');
@@ -356,16 +363,33 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             document.getElementById(round).classList.add('active');
             document.getElementById(`${round}-tab`).classList.add('active');
         }
-    </script>
 
+        document.getElementById('idea-submission-form').addEventListener('submit',function(e){
+            e.preventDefault();
 
-    <script>
-        let menuicn = document.querySelector(".menuicn");
-        let nav = document.querySelector(".navcontainer");
-
-        menuicn.addEventListener("click", () => {
-            nav.classList.toggle("navclose");
-        })
+            const formData = new FormData();
+            formData.append('psTitle', document.getElementById('psTitle').value);
+            formData.append('solSummary', document.getElementById('solSummary').value);
+            formData.append('pptLink', document.getElementById('pptLink').value);
+            formData.append('docLink', document.getElementById('docLink').value);
+            
+            fetch('idea_submission_process.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response=> response.json())
+            .then(result=>{
+                if(result.success) {
+                    alert(result.message);
+                    window.location.href = "leader_rounds.php"
+                } else {
+                    alert(result.message);
+                }
+            })
+            .catch(error=>{
+                console.error('Error: ',error);
+            })
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

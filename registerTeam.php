@@ -1107,39 +1107,28 @@ $_SESSION['members'] = [];
 
         document.getElementById('mainForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            console.log("test1");
+
             const registerBtn = document.querySelector('.register-btn');
             registerBtn.disabled = true;
             registerBtn.textContent = 'Registering...';
             registerBtn.style.cursor = 'not-allowed';
             registerBtn.style.backgroundColor = 'gray';
+            
             // Get the form data or the necessary values to send
             const formData = new FormData();
-            console.log("test2");
             formData.append('teamName', document.getElementById('teamName').value);
-            console.log("test3");
             formData.append('psId', document.getElementById('psId').value);
-            console.log("test4");
-            console.log(formData);
-            console.log("test5");
-
             formData.append('leaderName', document.getElementById('leaderName').value);
             formData.append('leaderEmail', document.getElementById('leaderEmail').value);
             formData.append('leaderMobile', document.getElementById('leaderMobile').value);
             formData.append('leaderGender', document.getElementById('leaderGender').value);
-
-            console.log("test6");
             formData.append('transactionId', document.getElementById('transactionId').value);
             formData.append('paymentScreenshot', document.getElementById('paymentScreenshot').files[0]); // Assuming this is a file input
 
-            console.log("test7");
             // Get the members from the session (assuming they're in a variable already)
             const members = (getMemberDetails()) ? getMemberDetails() : <?php echo json_encode($_SESSION['members']); ?>;
-            console.log("test8");
-            console.log(members);
-            console.log("test9");
             formData.append('members', members); // Send members as a JSON string
-            console.log("test10");
+
             // Send the data using fetch
             fetch('register_form_process.php', {
                     method: 'POST',
