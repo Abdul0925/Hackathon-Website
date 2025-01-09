@@ -208,8 +208,8 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
                 <div class="report-body">
                     <!-- top hedding -->
-                    <div class="table">
-                        <table>
+                    <div class="">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">Sr No</th>

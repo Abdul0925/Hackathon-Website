@@ -45,6 +45,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             border: 1px solid rgb(200, 200, 200);
             padding: 8px 30px;
             text-align: center;
+            vertical-align: middle;
         }
 
         th {
@@ -376,8 +377,8 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
                 <!-- <div class="report-body"> -->
                 <!-- top hedding -->
-                <div class="table">
-                    <table>
+                <div class="">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Sr No</th>
