@@ -320,6 +320,7 @@ $_SESSION['psId'] = $psId;
             <div id="round1" class="content active">
                 <h2>RTH Round 1</h2>
                 <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
+
                 <form id="idea-submission-form">
                     <label for="">Your PS ID: </label>
                     <span><?php echo $psId; ?></span>
@@ -332,6 +333,7 @@ $_SESSION['psId'] = $psId;
                     <label for="">Additional Document Drive Link :</label>
                     <input type="text" name="docLink" id="docLink" placeholder="(Optional)">
                     <button class="" >Submit</button>
+
                 </form>
             </div>
             <div id="round2" class="content">

@@ -26,6 +26,14 @@ if ($result->num_rows > 0) {
 $result1 = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
 $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
+$result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
+
+
+$teamDetails = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE leaderEmail='$email'");
+$teamDetailsRow = $teamDetails->fetch_assoc();
+$teamName = $teamDetailsRow['teamName'];
+$psId = $teamDetailsRow['psId'];
+
 ?>
 
 <!DOCTYPE html>
@@ -65,73 +73,36 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             font-size: 13px;
         }
 
-        .popup {
-            border: 1px solid black;
-            border-radius: 10px;
-            width: 500px;
-            height: auto;
-            background: white;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 0 30px 30px;
-            visibility: hidden;
-        }
-
-        .open-popup {
-            visibility: visible;
-        }
-
         .modal-header h2 {
             padding-top: 25px;
             margin-bottom: 20px;
             color: #5500cb;
         }
 
-        .my-primary-btn {
-            background-color: rgb(220, 0, 0);
-            color: white;
-            width: 60px;
-            height: 30px;
-            border-radius: 5px;
-            border: none;
-            margin-top: 25px;
+        .main {
+            padding: 30px;
         }
 
-        .my-primary-btn:hover {
-            background-color: rgb(150, 0, 0);
-            color: white;
-        }
-
-        .my-primary-btn:active {
-            box-shadow: 2px 2px 5px #fc894d;
-            background-color: rgb(220, 0, 0);
-        }
-
-        @media screen and (max-width: 400px) {
-            .popup {
-                width: 300px;
-            }
-        }
-
-        .primary-btn {
-            color: white;
+        .round1btn {
+            display: block;
             width: 100%;
-            height: 30px;
-            background-color: rgb(47, 141, 70);
-            border-radius: 5px;
-            border: none;
-        }
-
-        .primary-btn:hover {
-            background-color: rgb(31, 91, 46);
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
             color: white;
+            background-color: rgb(97, 19, 207);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
-        .primary-btn:active {
-            box-shadow: 2px 2px 5px #fc894d;
-            background-color: rgb(47, 141, 70);
+        .round1btn:hover {
+            background-color: rgb(79, 0, 190);
+        }
+
+        .round1btn:active {
+            background-color: rgb(97, 19, 207);
         }
 
         .nav-option i {
@@ -187,16 +158,80 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         }
 
         .report-container {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            height: 400px;
+            margin-top: 5px;
+            margin-bottom: 0px;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
         }
 
         .report-container h5 {
             color: rgb(125, 125, 125);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 0px;
+        }
+
+        .tabs button {
+            background-color:rgb(255, 255, 255);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 50px 0 0 50px;
+            height: 40px;
+            width: 120px;
+            /* transform: rotateX('angle'); */
+            transition: 0.3s;
+        }
+
+        .tabs button.active {
+            background-color: rgb(97, 19, 207);
+            color: white;
+        }
+
+        .content {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .round-body {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .round-body label {
+            font-weight: 600;
+            padding-right: 10px;
+        }
+
+        .round-control,
+        select,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .round-form {
+            padding: 20px;
+        }
+
+        .round-form p {
+            font-weight: 600;
         }
     </style>
 </head>
@@ -287,8 +322,49 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         </div>
 
         <div class="main">
+            <div class="tabs">
+                <button id="round1-tab" class="active" onclick="showContent('round1')">Round 1</button>
+                <button style="border-radius: 0 50px 50px 0;" id="round2-tab" onclick="showContent('round2')">Round 2</button>
+            </div>
             <div class="report-container">
+                <div id="round1" class="content active">
+                    <div class="report-header">
+                        <div class="recent-Articles">
+                            <h1>RTH Round 1</h1>
+                        </div>
+                    </div>
 
+                    <form action="" class="round-form" method="POST">
+                        <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
+                        <div class="round-body">
+                            <label class="round-label" for="">Your PS ID: </label>
+                            <a href="leader_problem_statement.php">
+                                <strong><?php echo strtoupper($psId); ?></strong>
+                            </a>
+                        </div>
+                        <div class="round-body">
+                            <label style="width: 270px" class="round-label" for="">Problem Statement Title :</label>
+                            <input class="round-control" type="text" name="ps_title" id="ps_title" placeholder="Enter Problem Statement Title" required>
+                        </div>
+                        <div class="round-body">
+                            <label style="width: 149px;" class="round-label" for="">PPT Drive Link :</label>
+                            <input class="round-control" type="text" name="ppt_link" id="ppt_link" placeholder="Enter PPT Drive Link" required>
+                        </div>
+                        <div class="round-body">
+                            <label style="width: 365px;" class="round-label" for="">Additional Document Drive Link :</label>
+                            <input class="round-control" type="text" name="doc_link" id="doc_link" placeholder="(Optional)">
+                        </div>
+                        <div class="round-body">
+                            <label style="width: 203px;" class="round-label" for="">Solution Summary :</label>
+                            <textarea name="sol_summary" id="sol_summary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
+                        </div>
+                        <button class="round1btn">Submit</button>
+                    </form>
+                </div>
+                <div id="round2" class="content">
+                    <h2>Round 2 Content</h2>
+                    <p>This is the content for Round 2. Add more details here as needed.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -300,6 +376,21 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         menuicn.addEventListener("click", () => {
             nav.classList.toggle("navclose");
         })
+    </script>
+    <script>
+        function showContent(round) {
+            // Hide all content
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tabs button');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show the selected content and set the active tab
+            document.getElementById(round).classList.add('active');
+            document.getElementById(`${round}-tab`).classList.add('active');
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
