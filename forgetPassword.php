@@ -11,10 +11,11 @@ require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 
 // Function to validate password complexity
-function isValidPassword($password) {
+function isValidPassword($password)
+{
     return preg_match('/[0-9]/', $password) &&    // At least one number
-           preg_match('/[\W]/', $password) &&    // At least one special character
-           strlen($password) >= 8;               // Minimum length of 8 characters
+        preg_match('/[\W]/', $password) &&    // At least one special character
+        strlen($password) >= 8;               // Minimum length of 8 characters
 }
 
 // Handle form submission for OTP sending
@@ -31,9 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
         $message1 = "Passwords do not match or are too short (minimum 8 characters).";
     } elseif (!isValidPassword($new_password)) {
         $message1 = "Password must meet the following criteria:\n" .
-                    "- At least one number\n" .
-                    "- At least one special character\n" .
-                    "- Minimum length of 8 characters.";
+            "- At least one number\n" .
+            "- At least one special character\n" .
+            "- Minimum length of 8 characters.";
     } elseif ($role !== 'Team Leader') {
         $message1 = "Only Team Leaders can reset passwords. Contact admin if required.";
     } else {
@@ -67,7 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
                 // Save OTP and user data in session
                 $_SESSION['otp'] = $otp;
                 $_SESSION['email'] = $email;
-                $_SESSION['new_password'] = password_hash($new_password, PASSWORD_BCRYPT);
+                $_SESSION['new_password'] = $new_password;
+                $_SESSION['new_hashed_password'] = password_hash($new_password, PASSWORD_BCRYPT);
                 $_SESSION['role'] = 'Team Leader';
 
                 // Send OTP email
@@ -138,10 +140,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
         $mail->addAddress($email);
         $mail->isHTML(true);
-        $mail->Subject = "Login Credentials";
+        $mail->Subject = "Password Reset";
 
         // Construct the email body with the student's login details
-        $msg = 'Dear ' . strtoupper($leaderName) . '<p> Your password for RJH has Changed Successfully if its not you than contact us</p>' .
+        $msg = 'Dear ' . strtoupper($leaderName) . '<p> Your password for RTH 25 has Changed Successfully if its not you than contact us</p>' .
             '<p>Username: ' . $email . '</p>';
 
         // Set the email message content
@@ -154,12 +156,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         $stmt = $conn->prepare($query);
         $stmt->bind_param('ss', $hashedPassword, $email);
         if ($stmt->execute()) {
-            // if ($mail->Send()) {
-            echo '<script> alert("Password Reset successful!"); window.location.href = "loginPage.php"; </script>';
-            // }
-            // } else {
-
-            // echo '<script> alert("Error in reset Password Try Again!"); window.location.href = "loginPage.php"; </script>';
+            if ($mail->Send()) {
+                echo '<script> alert("Password Reset successful!"); window.location.href = "loginPage.php"; </script>';
+            } else {
+                echo '<script> alert("Error in reset Password Try Again!"); window.location.href = "loginPage.php"; </script>';
+            }
         } else {
             echo '<script> alert("Error in reset Password Try Again!"); window.location.href = "loginPage.php"; </script>';
         }
@@ -457,7 +458,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="resetButton">RESET Password</button>
+            <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="resetButton">Reset Password</button>
 
             <!-- Extra Links (Register and Forget Password) -->
 
@@ -497,19 +498,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         // })
     </script>
     <script>
-        
         let digit = document.getElementById('number');
         let specialChar = document.getElementById('special');
         let minLength = document.getElementById('length');
 
         function checkPassword(data) {
             // javascript regular expression pattern
-            
+
             const number = new RegExp('(?=.*[0-9])');
             const special = new RegExp('(?=.[!@#\$%\^&\])');
             const length = new RegExp('(?=.{8,})');
 
-            
+
 
             // number case validation check
             if (number.test(data)) {
@@ -532,7 +532,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
                 minLength.classList.remove('valid');
             }
 
-            if ( number.test(data) && special.test(data) && length.test(data)) {
+            if (number.test(data) && special.test(data) && length.test(data)) {
                 document.getElementById('resetButton').disabled = false;
                 validation.style.display = 'none';
             } else {
