@@ -7,32 +7,28 @@ if ($_SESSION['leader_logged_in'] != true) {
 
 $email = $_SESSION['leaderEmail'];
 
-// Query to get the image path
-$sql = "SELECT * FROM mentor_details WHERE email = ?";
+$sql = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $imagePath = $row['image_path']; // The path of the uploaded image
-    $_SESSION['imagePath'] = $imagePath; // The path of the uploaded image
-} else {
-    // If no image found, use a placeholder image
-    $imagePath = 'https://via.placeholder.com/100';
-}
 
-$result1 = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
-$result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
+$row = $result->fetch_assoc();
+$psId = $row['psId'];
+$_SESSION['psId'] = $psId;
 
-$result1 = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE leaderEmail='$email'");
-
-
-$teamDetails = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE leaderEmail='$email'");
-$teamDetailsRow = $teamDetails->fetch_assoc();
-$teamName = $teamDetailsRow['teamName'];
-$psId = $teamDetailsRow['psId'];
+$ideaQuery = "SELECT * FROM team_idea_submissions WHERE leaderEmail = ?";
+$ideaStmt = $conn->prepare($ideaQuery);
+$ideaStmt->bind_param("s", $email);
+$ideaStmt->execute();
+$ideaResult = $ideaStmt->get_result();
+$ideaRow = $ideaResult->fetch_assoc();
+$psTitle = isset($ideaRow['psTitle']) ? $ideaRow['psTitle'] : '';
+$pptLink = isset($ideaRow['pptLink']) ? $ideaRow['pptLink'] : '';
+$docLink = isset($ideaRow['docLink']) ? $ideaRow['docLink'] : '';
+$solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
+($psTitle == '') ? $isDisplaying = 0 : $isDisplaying = 1;
 
 ?>
 
@@ -43,7 +39,7 @@ $psId = $teamDetailsRow['psId'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Mentor Dashboard</title>
+    <title>RTH Rounds</title>
     <link rel="stylesheet" href="leader_dashboard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -175,7 +171,7 @@ $psId = $teamDetailsRow['psId'];
         }
 
         .tabs button {
-            background-color:rgb(255, 255, 255);
+            background-color: rgb(255, 255, 255);
             border: none;
             cursor: pointer;
             font-size: 16px;
@@ -334,7 +330,7 @@ $psId = $teamDetailsRow['psId'];
                         </div>
                     </div>
 
-                    <form action="" class="round-form" method="POST">
+                    <form id="idea-submission-form">
                         <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
                         <div class="round-body">
                             <label class="round-label" for="">Your PS ID: </label>
@@ -342,24 +338,40 @@ $psId = $teamDetailsRow['psId'];
                                 <strong><?php echo strtoupper($psId); ?></strong>
                             </a>
                         </div>
-                        <div class="round-body">
-                            <label style="width: 270px" class="round-label" for="">Problem Statement Title :</label>
-                            <input class="round-control" type="text" name="ps_title" id="ps_title" placeholder="Enter Problem Statement Title" required>
-                        </div>
-                        <div class="round-body">
-                            <label style="width: 149px;" class="round-label" for="">PPT Drive Link :</label>
-                            <input class="round-control" type="text" name="ppt_link" id="ppt_link" placeholder="Enter PPT Drive Link" required>
-                        </div>
-                        <div class="round-body">
-                            <label style="width: 365px;" class="round-label" for="">Additional Document Drive Link :</label>
-                            <input class="round-control" type="text" name="doc_link" id="doc_link" placeholder="(Optional)">
-                        </div>
-                        <div class="round-body">
-                            <label style="width: 203px;" class="round-label" for="">Solution Summary :</label>
-                            <textarea name="sol_summary" id="sol_summary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
-                        </div>
-                        <button class="round1btn">Submit</button>
+                        <?php if (!$isDisplaying) { ?>
+                            <div class="round-body">
+                                <label style="width: 270px" class="round-label" for="">Problem Statement Title :</label>
+                                <input class="round-control" type="text" name="psTitle" id="psTitle" placeholder="Enter Problem Statement Title" required>
+                            </div>
+                            <div class="round-body">
+                                <label style="width: 149px;" class="round-label" for="">PPT Drive Link :</label>
+                                <input class="round-control" type="text" name="pptLink" id="pptLink" placeholder="Enter PPT Drive Link" required>
+                            </div>
+                            <div class="round-body">
+                                <label style="width: 365px;" class="round-label" for="">Additional Document Drive Link :</label>
+                                <input class="round-control" type="text" name="docLink" id="docLink" placeholder="(Optional)">
+                            </div>
+                            <div class="round-body">
+                                <label style="width: 203px;" class="round-label" for="">Solution Summary :</label>
+                                <textarea name="solSummary" id="solSummary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
+                            </div>
+                            <button class="round1btn">Submit</button>
+                        <?php } ?>
                     </form>
+                    <div>
+                        <?php if ($isDisplaying) { ?>
+                            <form id="idea-deletion-form" method="post" action="delete_idea.php">
+                                <input type="hidden" name="leaderEmail" value="<?php echo $email; ?>">
+                                <button type="submit" class="round1btn" style="background-color: red;">Delete Idea</button>
+                            </form>
+                        <?php } ?>
+                        <?php if ($isDisplaying) {
+                            echo "<strong>Problem Statement Title: </strong> " . $psTitle . "<br><br>";
+                            echo "<strong>PPT Drive Link: </strong> <a href='" . $pptLink . "'>" . $pptLink . "</a><br><br>";
+                            echo "<strong>Additional Document Drive Link: </strong> <a href='" . $docLink . "'>" . $docLink . "</a><br><br>";
+                            echo "<strong>Solution Summary: </strong> " . $solSummary . "<br>";
+                        } ?>
+                    </div>
                 </div>
                 <div id="round2" class="content">
                     <h2>Round 2 Content</h2>
@@ -391,6 +403,56 @@ $psId = $teamDetailsRow['psId'];
             document.getElementById(round).classList.add('active');
             document.getElementById(`${round}-tab`).classList.add('active');
         }
+
+        document.getElementById('idea-submission-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const SubmitBtn = document.querySelector('.round1btn');
+            SubmitBtn.disabled = true;
+            SubmitBtn.textContent = 'Submitting...';
+            SubmitBtn.style.cursor = 'not-allowed';
+            SubmitBtn.style.backgroundColor = 'gray';
+
+            const formData = new FormData();
+            // console.log(1);
+            formData.append('psTitle', document.getElementById('psTitle').value);
+            // console.log(1);
+            formData.append('solSummary', document.getElementById('solSummary').value);
+            formData.append('pptLink', document.getElementById('pptLink').value);
+            formData.append('docLink', document.getElementById('docLink').value);
+
+            fetch('idea_submission_process.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(result.message);
+                        window.location.href = "leader_round.php"
+                    } else {
+                        alert(result.message);
+                        SubmitBtn.disabled = false;
+                        SubmitBtn.textContent = 'Register';
+                        SubmitBtn.style.cursor = 'pointer';
+                        SubmitBtn.style.backgroundColor = 'rgb(97, 19, 207)';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error: ', error);
+                    SubmitBtn.disabled = false;
+                    SubmitBtn.textContent = 'Register';
+                    SubmitBtn.style.cursor = 'pointer';
+                    SubmitBtn.style.backgroundColor = 'rgb(97, 19, 207)';
+                })
+        });
+
+        document.getElementById('idea-deletion-form').addEventListener('submit', function(e) {
+            const confirmation = confirm("Are you sure you want to delete this idea? This action cannot be undone.");
+            if (!confirmation) {
+                e.preventDefault();
+            }
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

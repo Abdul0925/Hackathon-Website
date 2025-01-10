@@ -248,7 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$isVerified) {
         echo json_encode([
             'success' => false,
-            'message' => 'not verified Please Verify Email Before Submitting!',
+            'message' => 'not verified please verify Email before submitting!',
             'name' => 'Leader Email',
         ]);
         return;
