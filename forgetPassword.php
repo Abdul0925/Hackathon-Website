@@ -457,7 +457,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="resetButton">RESET Password</button>
+            <button type="submit" class="btn my-primary-btn w-100" name="sendOtp" id="resetButton">Reset Password</button>
 
             <!-- Extra Links (Register and Forget Password) -->
 

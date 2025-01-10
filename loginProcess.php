@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginBtn'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $role = $_POST['role'];
-    echo $role;
+    // echo $role;
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         if ($role == 'Team Leader') {
             $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
