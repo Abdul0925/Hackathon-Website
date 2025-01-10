@@ -1151,6 +1151,10 @@ $_SESSION['members'] = [];
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                    registerBtn.disabled = false;
+                    registerBtn.textContent = 'Register';
+                    registerBtn.style.cursor = 'pointer';
+                    registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
                 });
         });
     </script>
