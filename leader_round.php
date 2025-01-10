@@ -208,6 +208,7 @@ $psId = $teamDetailsRow['psId'];
         .round-body label {
             font-weight: 600;
             padding-right: 10px;
+            width: 18%;
         }
 
         .round-control,
@@ -231,6 +232,12 @@ $psId = $teamDetailsRow['psId'];
 
         .round-form p {
             font-weight: 600;
+        }
+
+        .round-body-psid label{
+            font-weight: 600;
+            margin-bottom: 15px;
+            width: 15%;
         }
 
         .recent-Articles h1 {
@@ -341,26 +348,26 @@ $psId = $teamDetailsRow['psId'];
 
                     <form action="" class="round-form" method="POST">
                         <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
-                        <div class="round-body">
+                        <div class="round-body-psid">
                             <label class="round-label" for="">Your PS ID: </label>
                             <a href="leader_problem_statement.php">
                                 <strong><?php echo strtoupper($psId); ?></strong>
                             </a>
                         </div>
                         <div class="round-body">
-                            <label style="width: 270px" class="round-label" for="">Problem Statement Title :</label>
+                            <label class="round-label" for="">Title :</label>
                             <input class="round-control" type="text" name="ps_title" id="ps_title" placeholder="Enter Problem Statement Title" required>
                         </div>
                         <div class="round-body">
-                            <label style="width: 149px;" class="round-label" for="">PPT Drive Link :</label>
+                            <label class="round-label" for="">PPT Drive Link :</label>
                             <input class="round-control" type="text" name="ppt_link" id="ppt_link" placeholder="Enter PPT Drive Link" required>
                         </div>
                         <div class="round-body">
-                            <label style="width: 365px;" class="round-label" for="">Additional Document Drive Link :</label>
-                            <input class="round-control" type="text" name="doc_link" id="doc_link" placeholder="(Optional)">
+                            <label class="round-label" for="">Drive Link :</label>
+                            <input class="round-control" type="text" name="doc_link" id="doc_link" placeholder="Additional Document (Optional)">
                         </div>
                         <div class="round-body">
-                            <label style="width: 203px;" class="round-label" for="">Solution Summary :</label>
+                            <label class="round-label" for="">Solution Summary :</label>
                             <textarea name="sol_summary" id="sol_summary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
                         </div>
                         <button class="round1btn">Submit</button>
