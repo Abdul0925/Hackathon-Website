@@ -44,31 +44,6 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        table {
-            border-collapse: collapse;
-            background-color: #fff;
-            border-radius: 10px;
-            margin: auto;
-            width: 100%;
-        }
-
-        th,
-        td {
-            border: 1px solid rgb(200, 200, 200);
-            padding: 8px 30px;
-            text-align: center;
-        }
-
-        th {
-            text-transform: uppercase;
-            font-weight: 500;
-            border-color: black;
-        }
-
-        td {
-            font-size: 13px;
-        }
-
         .modal-header h2 {
             padding-top: 25px;
             margin-bottom: 20px;
@@ -100,6 +75,28 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
 
         .round1btn:active {
             background-color: rgb(97, 19, 207);
+        }
+
+        .round-deletebtn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: rgb(200, 0, 0);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .round-deletebtn:hover {
+            background-color: rgb(150, 0, 0);
+        }
+
+        .round-deletebtn:active {
+            background-color: rgb(200, 0, 0);
         }
 
         .nav-option {
@@ -230,7 +227,7 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
             font-weight: 600;
         }
 
-        .round-body-psid label{
+        .round-body-psid label {
             font-weight: 600;
             margin-bottom: 15px;
             width: 15%;
@@ -244,6 +241,22 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
 
         .round-form p {
             font-weight: 600;
+        }
+
+        .round-submit {
+            padding: 20px;
+        }
+
+        .round-submit p {
+            font-weight: 600;
+        }
+
+        .round-submit p {
+            font-weight: 600;
+        }
+
+        .round-submit span {
+            border: 1px solid black;
         }
     </style>
 </head>
@@ -345,17 +358,15 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
                             <h1>RTH Round 1</h1>
                         </div>
                     </div>
-
-                    <form id="idea-submission-form" class="round-form" method="POST">
-                        <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
-                        <div class="round-body-psid">
-                            <label class="round-label" for="">Your PS ID: </label>
-                            <a href="leader_problem_statement.php">
-                                <strong><?php echo strtoupper($psId); ?></strong>
-                            </a>
-                        </div>
-
-                        <?php if (!$isDisplaying) { ?>
+                    <?php if (!$isDisplaying) { ?>
+                        <form id="idea-submission-form" class="round-form" method="POST">
+                            <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
+                            <div class="round-body-psid">
+                                <label class="round-label" for="">Your PS ID: </label>
+                                <a href="leader_problem_statement.php">
+                                    <strong><?php echo strtoupper($psId); ?></strong>
+                                </a>
+                            </div>
                             <div class="round-body">
                                 <label class="round-label" for="">Title :</label>
                                 <input class="round-control" type="text" name="psTitle" id="psTitle" placeholder="Enter Problem Statement Title" required>
@@ -369,26 +380,41 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
                                 <input class="round-control" type="text" name="docLink" id="docLink" placeholder="Additional Document (Optional)">
                             </div>
                             <div class="round-body">
-                                <label class="round-label" for="">Solution Summary :</label>
+                                <label class="round-label" style="align-self: baseline; padding-top: 5px" for="">Solution Summary :</label>
                                 <textarea name="solSummary" id="solSummary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
                             </div>
                             <button class="round1btn">Submit</button>
-                        <?php } ?>
-                    </form>
-                    <div>
-                        <?php if ($isDisplaying) { ?>
-                            <form id="idea-deletion-form" method="post" action="delete_idea.php">
-                                <input type="hidden" name="leaderEmail" value="<?php echo $email; ?>">
-                                <button type="submit" class="round1btn" style="background-color: red;">Delete Idea</button>
-                            </form>
-                        <?php } ?>
-                        <?php if ($isDisplaying) {
-                            echo "<strong>Problem Statement Title: </strong> " . $psTitle . "<br><br>";
-                            echo "<strong>PPT Drive Link: </strong> <a href='" . $pptLink . "'>" . $pptLink . "</a><br><br>";
-                            echo "<strong>Additional Document Drive Link: </strong> <a href='" . $docLink . "'>" . $docLink . "</a><br><br>";
-                            echo "<strong>Solution Summary: </strong> " . $solSummary . "<br>";
-                        } ?>
-                    </div>
+                        </form>
+                    <?php } ?>
+                    <?php if ($isDisplaying) { ?>
+                        <form class="round-submit" id="idea-deletion-form" method="post" action="delete_idea.php">
+                            <input type="hidden" name="leaderEmail" value="<?php echo $email; ?>">
+                            <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
+                            <div class="round-body-psid">
+                                <label class="round-label" for="">Your PS ID: </label>
+                                <a href="leader_problem_statement.php">
+                                    <strong><?php echo strtoupper($psId); ?></strong>
+                                </a>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" for="">Title :</label>
+                                <span class="round-control"> <?php echo $psTitle; ?> </span>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" for="">PPT Drive Link :</label>
+                                <span class="round-control"> <?php echo "<a href='" . $pptLink . "'>" . $pptLink . "</a>"; ?> </span>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" for="">Drive Link :</label>
+                                <span class="round-control"> <?php echo "<a href='" . $docLink . "'>" . $docLink . "</a>"; ?> </span>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" style="align-self: baseline; padding-top: 10px" for="">Solution Summary :</label>
+                                <span class="round-control"> <?php echo $solSummary; ?> </span>
+                            </div>
+                            <button class="round-deletebtn" type="submit">Delete Idea</button>
+                        </form>
+                    <?php } ?>
                 </div>
                 <div id="round2" class="content">
                     <div class="report-header">
