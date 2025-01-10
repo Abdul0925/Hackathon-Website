@@ -50,7 +50,7 @@ if ($_SESSION['admin_logged_in'] != true) {
         th {
             text-transform: uppercase;
             font-weight: 500;
-            padding-top: 20px;
+            padding: 15px;
             border-color: black;
 
         }

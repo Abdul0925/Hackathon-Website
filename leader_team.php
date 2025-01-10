@@ -146,8 +146,12 @@ $psId = $teamDetailsRow['psId'];
             background-color: rgb(47, 141, 70);
         }
 
+        .nav-option {
+            gap: 16px;
+        }
+
         .nav-option i {
-            font-size: 185%;
+            font-size: 160%;
         }
 
         .main {
@@ -166,7 +170,7 @@ $psId = $teamDetailsRow['psId'];
         }
 
         .nav-upper-options h3 {
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 0px;
             font-weight: bold;
             padding-left: 10px;
@@ -222,8 +226,8 @@ $psId = $teamDetailsRow['psId'];
             <H1>My Team</H1>
         </div>
         <div class="message">
-            <!-- <div class="circle"></div> -->
-            <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
+            <div class="circle"></div>
+            <a href="leader_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
             <div class="dp">
 
                 <a href="leader_team.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
@@ -249,7 +253,7 @@ $psId = $teamDetailsRow['psId'];
                     <a href="leader_team.php" style="text-decoration: none;">
 
                         <div class="nav-option option1" style="color: black;">
-                            <i style="color: #fff;" class="bi-file-earmark-person"></i>
+                            <i style="color: #fff;" class="bi-file-person"></i>
                             <h3 style="color: #fff;"> My Team</h3>
                         </div>
                     </a>

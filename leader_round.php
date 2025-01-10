@@ -76,7 +76,8 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
         }
 
         .main {
-            padding: 30px;
+            background-color: #cad7fda4;
+            padding: 15px 30px 30px 30px;
         }
 
         .round1btn {
@@ -101,12 +102,12 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
             background-color: rgb(97, 19, 207);
         }
 
-        .nav-option i {
-            font-size: 185%;
+        .nav-option {
+            gap: 16px;
         }
 
-        .main {
-            background-color: #cad7fda4;
+        .nav-option i {
+            font-size: 160%;
         }
 
         .nav-upper-options {
@@ -121,7 +122,7 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
         }
 
         .nav-upper-options h3 {
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 0px;
             font-weight: bold;
             padding-left: 10px;
@@ -178,7 +179,6 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
             border-radius: 50px 0 0 50px;
             height: 40px;
             width: 120px;
-            /* transform: rotateX('angle'); */
             transition: 0.3s;
         }
 
@@ -188,7 +188,6 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
         }
 
         .content {
-            margin-top: 10px;
             display: none;
         }
 
@@ -205,6 +204,7 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
         .round-body label {
             font-weight: 600;
             padding-right: 10px;
+            width: 18%;
         }
 
         .round-control,
@@ -229,6 +229,18 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
         .round-form p {
             font-weight: 600;
         }
+
+        .round-body-psid label{
+            font-weight: 600;
+            margin-bottom: 15px;
+            width: 15%;
+        }
+
+        .recent-Articles h1 {
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 0px;
+        }
     </style>
 </head>
 
@@ -242,11 +254,11 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png" class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
         <div class="DHead">
-            <H1>Result</H1>
+            <h1>Rounds</h1>
         </div>
         <div class="message">
-            <!-- <div class="circle"></div> -->
-            <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
+            <div class="circle"></div>
+            <a href="leader_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
             <div class="dp">
                 <a href="leader_team.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
@@ -266,7 +278,7 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
 
                     <a href="leader_team.php" style="text-decoration: none;">
                         <div class="nav-option option6" style="color: black;">
-                            <i class="bi-file-earmark-person"></i>
+                            <i class="bi-file-person"></i>
                             <h3> My Team</h3>
                         </div>
                     </a>
@@ -332,12 +344,13 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
 
                     <form id="idea-submission-form">
                         <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
-                        <div class="round-body">
+                        <div class="round-body-psid">
                             <label class="round-label" for="">Your PS ID: </label>
                             <a href="leader_problem_statement.php">
                                 <strong><?php echo strtoupper($psId); ?></strong>
                             </a>
                         </div>
+
                         <?php if (!$isDisplaying) { ?>
                             <div class="round-body">
                                 <label style="width: 270px" class="round-label" for="">Problem Statement Title :</label>
@@ -374,8 +387,14 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
                     </div>
                 </div>
                 <div id="round2" class="content">
-                    <h2>Round 2 Content</h2>
-                    <p>This is the content for Round 2. Add more details here as needed.</p>
+                    <div class="report-header">
+                        <div class="recent-Articles">
+                            <h1>RTH Round 2</h1>
+                        </div>
+                    </div>
+                    <form action="" class="round-form" method="POST">
+                        <p>This is the content for Round 2. Add more details here as needed.</p>
+                    </form>
                 </div>
             </div>
         </div>

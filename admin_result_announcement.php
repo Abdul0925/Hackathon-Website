@@ -24,19 +24,20 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
         }
 
         .nav-upper-options {
+            gap: 0px;
             justify-content: center;
             align-items: center;
         }
 
         .nav-upper-options h3 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             padding-left: 10px;
             text-decoration: none;
         }
 
         .nav-option i {
-            font-size: 185%;
+            font-size: 160%;
         }
     </style>
 

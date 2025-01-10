@@ -45,6 +45,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             border: 1px solid rgb(200, 200, 200);
             padding: 8px 30px;
             text-align: center;
+            vertical-align: middle;
         }
 
         th {
@@ -144,8 +145,12 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             background-color: rgb(47, 141, 70);
         }
 
+        .nav-option {
+            gap: 16px;
+        }
+
         .nav-option i {
-            font-size: 185%;
+            font-size: 160%;
         }
 
         .main {
@@ -164,7 +169,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         }
 
         .nav-upper-options h3 {
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 0px;
             font-weight: bold;
             padding-left: 10px;
@@ -296,8 +301,8 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
             <H1>Problem</H1>
         </div>
         <div class="message">
-            <!-- <div class="circle"></div> -->
-            <!-- <a href="admin_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a> -->
+            <div class="circle"></div>
+            <a href="leader_show_notifications.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt=""></a>
             <div class="dp">
                 <a href="leader_team.php"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp"></a>
             </div>
@@ -317,7 +322,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
                     <a href="leader_team.php" style="text-decoration: none;">
                         <div class="nav-option option6" style="color: black;">
-                            <i class="bi-file-earmark-person"></i>
+                            <i class="bi-file-person"></i>
                             <h3> My Team</h3>
                         </div>
                     </a>
@@ -376,8 +381,8 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
                 <!-- <div class="report-body"> -->
                 <!-- top hedding -->
-                <div class="table">
-                    <table>
+                <div class="">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Sr No</th>
