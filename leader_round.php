@@ -465,16 +465,16 @@ if ($isSubmittedResult->num_rows > 0) {
                 <?php } ?>
                 </div>
 
-            </div>
-            <div id="round2" class="content">
-                <div class="report-header">
-                    <div class="recent-Articles">
-                        <h1>RTH Round 2</h1>
+                <div id="round2" class="content">
+                    <div class="report-header">
+                        <div class="recent-Articles">
+                            <h1>RTH Round 2</h1>
+                        </div>
                     </div>
+                    <form action="" class="round-form" method="POST">
+                        <p>This is the content for Round 2. Add more details here as needed.</p>
+                    </form>
                 </div>
-                <form action="" class="round-form" method="POST">
-                    <p>This is the content for Round 2. Add more details here as needed.</p>
-                </form>
             </div>
         </div>
     </div>

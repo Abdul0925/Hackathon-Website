@@ -5,7 +5,8 @@ if ($_SESSION['admin_logged_in'] != true) {
 }
 
 require 'db.php';
-$adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
+$approvedTeams = mysqli_query($conn, "SELECT * FROM team_idea_submissions WHERE isApproved = 1");
+
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +40,185 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
         .nav-option i {
             font-size: 160%;
         }
+
+        .nav-upper-options {
+            gap: 0px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav {
+            padding-top: 20px;
+            padding-left: 5px;
+        }
+
+        .nav-upper-options h3 {
+            font-size: 16px;
+            margin-bottom: 0px;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .badge {
+            background-color: rgb(229, 0, 0);
+        }
+
+        .mt-5 h5 {
+            color: #5500cb;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            border-bottom: solid rgba(0, 20, 151, 0.59);
+        }
+
+        .DHead h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 0px;
+        }
+
+        .nav-option1 i {
+            color: #fff;
+        }
+
+        .box-container {
+            display: block;
+            margin: 0px 0px 40px 30px;
+        }
+
+        .report-container {
+            margin-top: 5px;
+            margin-bottom: 0px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .report-container h5 {
+            color: rgb(125, 125, 125);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 0px;
+        }
+
+        .tabs button {
+            background-color: rgb(255, 255, 255);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 50px 0 0 50px;
+            height: 40px;
+            width: 120px;
+            transition: 0.3s;
+        }
+
+        .tabs button.active {
+            background-color: rgb(97, 19, 207);
+            color: white;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .round-body {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .round-body label {
+            font-weight: 600;
+            padding-right: 10px;
+            width: 18%;
+        }
+
+        .round-control,
+        select,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .round-form {
+            padding: 20px;
+        }
+
+        .round-form p {
+            font-weight: 600;
+        }
+
+        .round-body-psid label {
+            font-weight: 600;
+            margin-bottom: 15px;
+            width: 15%;
+        }
+
+        .recent-Articles h1 {
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 0px;
+        }
+
+        .round-form p {
+            font-weight: 600;
+        }
+
+        .round-submit {
+            padding: 20px;
+        }
+
+        .round-submit p {
+            font-weight: 600;
+        }
+
+        .round-submit p {
+            font-weight: 600;
+        }
+
+        .round-submit span {
+            border: 1px solid black;
+        }
+
+        table.approved-teams-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table.approved-teams-table th, table.approved-teams-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table.approved-teams-table th {
+            background-color:rgb(168, 119, 253);
+            color: black;
+            font-weight: bold;
+        }
+
+        table.approved-teams-table tr:nth-child(even) {
+            background-color:rgb(246, 241, 255);
+        }
+
+        table.approved-teams-table tr:hover {
+            background-color: rgb(231, 218, 254);
+        }
+        
     </style>
 
 </head>
@@ -112,12 +292,57 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
         </div>
 
         <div class="main">
-
-
-
-            <!-- team detail table -->
+            <div class="tabs">
+                <button id="round1-tab" class="active" onclick="showContent('round1')">Round 1</button>
+                <button style="border-radius: 0 50px 50px 0;" id="round2-tab" onclick="showContent('round2')">Round 2</button>
+            </div>
             <div class="report-container">
+                <div id="round1" class="content active">
+                    <div class="report-header">
+                        
+                        <div class="recent-Articles">
+                            <h1>RTH Round 1</h1>
+                        </div>
+                            <button id="declareResultBtn">
+                                Declare Result
+                            </button>
+                    </div>
 
+
+                    <p>Deadline: 5 Feb 2025</p>
+                    <div class="round-body-psid">
+                        <label class="round-label" for="">Approved Teams: </label>
+                        <?php
+                        echo "<table class='approved-teams-table'>
+                        <tr>
+                        <th>Team Name</th>
+                        <th>Leader Email</th>
+                        <th>PS ID</th>
+                        </tr>";
+                        
+                        while ($row = mysqli_fetch_assoc($approvedTeams)) {
+                            $teamId = $row['team_id'];
+                            $teamQuery = mysqli_query($conn, "SELECT teamName FROM team_and_leader_details WHERE id = '$teamId'");
+                            $teamRow = mysqli_fetch_assoc($teamQuery);
+                            $teamName = $teamRow['teamName'];
+                            echo "<tr>";
+                            echo "<td>" . $teamName . "</td>";
+                            echo "<td>" . $row['leaderEmail'] . "</td>";
+                            echo "<td>" . $row['psId'] . "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+                        ?>
+                    </div>
+                </div>
+                <div id="round2" class="content">
+                    <div class="report-header">
+                        <div class="recent-Articles">
+                            <h1>RTH Round 2</h1>
+                        </div>
+                    </div>
+                    <p>This is the content for Round 2. Add more details here as needed.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -130,6 +355,55 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM admin_details");
         menuicn.addEventListener("click", () => {
             nav.classList.toggle("navclose");
         })
+
+        function showContent(round) {
+            // Hide all content
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tabs button');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show the selected content and set the active tab
+            document.getElementById(round).classList.add('active');
+            document.getElementById(`${round}-tab`).classList.add('active');
+        }
+
+        document.getElementById('declareResultBtn').addEventListener('click',function(e){
+            const declareResultBtn = document.getElementById('declareResultBtn');
+            declareResultBtn.disabled = true;
+            declareResultBtn.textContent = 'Declaring...';
+            declareResultBtn.style.cursor = 'not-allowed';
+            declareResultBtn.style.backgroundColor = 'gray';
+            fetch('declare_r1_result.php', {
+                    method: 'POST',
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(result.message); // You can log the data received for debugging
+                        alert("Result Declared Successfully")
+                        window.location.href = "admin_result_announcement.php";
+                    } else {
+                        // alert('Failed to submit form: ' + result.message);
+                        alert(result.message); // You can show a success message
+                        declareResultBtn.disabled = false;
+                        declareResultBtn.textContent = 'Decalare Result';
+                        declareResultBtn.style.cursor = 'pointer';
+                        declareResultBtn.style.backgroundColor = 'rgb(255, 255, 255)';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    declareResultBtn.disabled = false;
+                    declareResultBtn.textContent = 'Decalare Result';
+                    declareResultBtn.style.cursor = 'pointer';
+                    declareResultBtn.style.backgroundColor = 'rgb(255, 255, 255)';
+                });
+            
+        });
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
