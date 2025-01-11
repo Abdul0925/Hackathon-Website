@@ -86,7 +86,7 @@ if ($isGoingResult->num_rows > 0) {
             background-color: rgb(97, 19, 207);
         }
 
-        .round-deletebtn {
+        .submited-form button {
             display: block;
             width: 100%;
             padding: 10px;
@@ -100,11 +100,11 @@ if ($isGoingResult->num_rows > 0) {
             margin-top: 10px;
         }
 
-        .round-deletebtn:hover {
+        .submited-form button:hover {
             background-color: rgb(150, 0, 0);
         }
 
-        .round-deletebtn:active {
+        .submited-form button:active {
             background-color: rgb(200, 0, 0);
         }
 
@@ -267,6 +267,12 @@ if ($isGoingResult->num_rows > 0) {
         .round-submit span {
             border: 1px solid black;
         }
+
+        .started-round {
+            display: flex;
+            justify-content: center;
+            color: grey;
+        }
     </style>
 </head>
 
@@ -367,69 +373,62 @@ if ($isGoingResult->num_rows > 0) {
                             <h1>RTH Round 1</h1>
                         </div>
                     </div>
-
-
-                    <form id="idea-submission-form" class="round-form" method="POST">
-                        <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
-                        <div class="round-body-psid">
-                            <label class="round-label" for="">Your PS ID: </label>
-                            <a href="leader_problem_statement.php">
-                                <strong><?php echo strtoupper($psId); ?></strong>
-                            </a>
-                        </div>
-
-                        <?php if ($isR1OnGoing) { ?>
-                            <?php if (!$isDisplaying) { ?>
+                    <div class="round-form">
+                        <form id="idea-submission-form" method="POST">
+                            <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
+                            <div class="round-body-psid" style="display: flex;">
+                                <p style="padding-right: 10px;">Your PS ID: </p>
+                                <a href="leader_problem_statement.php">
+                                    <strong><?php echo strtoupper($psId); ?></strong>
+                                </a>
+                            </div>
+                            <?php if ($isR1OnGoing) { ?>
+                                <?php if (!$isDisplaying) { ?>
+                                    <div class="round-body">
+                                        <label class="round-label" for="">Title :</label>
+                                        <input class="round-control" type="text" name="psTitle" id="psTitle" placeholder="Enter Problem Statement Title" required>
+                                    </div>
+                                    <div class="round-body">
+                                        <label class="round-label" for="">PPT Drive Link :</label>
+                                        <input class="round-control" type="text" name="pptLink" id="pptLink" placeholder="Enter PPT Drive Link" required>
+                                    </div>
+                                    <div class="round-body">
+                                        <label class="round-label" for="">Drive Link :</label>
+                                        <input class="round-control" type="text" name="docLink" id="docLink" placeholder="Additional Document (Optional)">
+                                    </div>
+                                    <div class="round-body">
+                                        <label class="round-label" style="align-self: baseline; padding-top: 5px" for="">Solution Summary :</label>
+                                        <textarea name="solSummary" id="solSummary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
+                                    </div>
+                                    <button class="round1btn">Submit</button>
+                                <?php } ?>
+                        </form>
+                        <form class="submited-form" id="idea-deletion-form" method="post" action="delete_idea.php">
+                            <?php if ($isDisplaying) { ?>
                                 <div class="round-body">
                                     <label class="round-label" for="">Title :</label>
-                                    <input class="round-control" type="text" name="psTitle" id="psTitle" placeholder="Enter Problem Statement Title" required>
+                                    <span class="round-control"> <?php echo $psTitle; ?> </span>
                                 </div>
                                 <div class="round-body">
                                     <label class="round-label" for="">PPT Drive Link :</label>
-                                    <input class="round-control" type="text" name="pptLink" id="pptLink" placeholder="Enter PPT Drive Link" required>
+                                    <span class="round-control"> <?php echo "<a href='" . $pptLink . "'>" . $pptLink . "</a>"; ?> </span>
                                 </div>
                                 <div class="round-body">
                                     <label class="round-label" for="">Drive Link :</label>
-                                    <input class="round-control" type="text" name="docLink" id="docLink" placeholder="Additional Document (Optional)">
+                                    <span class="round-control"> <?php echo "<a href='" . $docLink . "'>" . $docLink . "</a>"; ?> </span>
                                 </div>
                                 <div class="round-body">
-                                    <label class="round-label" for="">Solution Summary :</label>
-                                    <textarea name="solSummary" id="solSummary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
+                                    <label class="round-label" style="align-self: baseline; padding-top: 10px" for="">Solution Summary :</label>
+                                    <span class="round-control"> <?php echo $solSummary; ?> </span>
                                 </div>
-                                <button class="round1btn">Submit</button>
-                            <?php } ?>
-                    </form>
-                    <div>
-                        <?php if ($isDisplaying) { ?>
-                            <div class="round-body">
-                                <label class="round-label" for="">Title :</label>
-                                <span class="round-control"> <?php echo $psTitle; ?> </span>
-                            </div>
-                            <div class="round-body">
-                                <label class="round-label" for="">PPT Drive Link :</label>
-                                <span class="round-control"> <?php echo "<a href='" . $pptLink . "'>" . $pptLink . "</a>"; ?> </span>
-                            </div>
-                            <div class="round-body">
-                                <label class="round-label" for="">Drive Link :</label>
-                                <span class="round-control"> <?php echo "<a href='" . $docLink . "'>" . $docLink . "</a>"; ?> </span>
-                            </div>
-                            <div class="round-body">
-                                <label class="round-label" style="align-self: baseline; padding-top: 10px" for="">Solution Summary :</label>
-                                <span class="round-control"> <?php echo $solSummary; ?> </span>
-                            </div>
-                        <?php } ?>
-                        
-                        <?php if ($isDisplaying) { ?>
-                            <form id="idea-deletion-form" method="post" action="delete_idea.php">
                                 <input type="hidden" name="leaderEmail" value="<?php echo $email; ?>">
-                                <button type="submit" class="round1btn" style="background-color: red;">Delete Idea</button>
-                            </form>
-                        <?php } ?>
-                    <?php } else { ?>
-                        <div>Round 1 is not started yet</div>
+                                <button type="submit" class="round1btn">Delete Idea</button>
+                        </form>
                     <?php } ?>
+                <?php } else { ?>
+                    <div class="started-round">Round 1 is not started yet</div>
+                <?php } ?>
                     </div>
-
                 </div>
                 <div id="round2" class="content">
                     <div class="report-header">
