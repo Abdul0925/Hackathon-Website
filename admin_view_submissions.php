@@ -207,7 +207,7 @@ $result = $conn->query($query);
                     <?php 
                     if ($result->num_rows > 0) {
                         echo "<table>";
-                        echo "<tr><th>PS ID</th><th>Team Leader</th><th>Title</th><th>PPT Link</th><th>Doc Link</th><th>Summary</th></tr>";
+                        echo "<tr><th>PS ID</th><th>Team Leader</th><th>Title</th><th>PPT Link</th><th>Doc Link</th><th>Summary</th><th>Action</th></tr>";
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td>" . $row['psId'] . "</td>";
@@ -216,7 +216,11 @@ $result = $conn->query($query);
                             echo "<td><a href='" . $row['pptLink'] . "'>PPT</a></td>";
                             echo "<td><a href='" . $row['docLink'] . "'>Doc</a></td>";
                             echo "<td><button class='primary-btn' onclick=\"viewSummary('" . addslashes($row['solSummary']) . "')\">View</button></td>";
-                            // echo "<td>" . $row['solSummary'] . "</td>";
+                            echo "<td>
+                            <form id='approve_idea_form'>
+                                <button class='approveIdeaBtn'>Approve Idea</button>
+                            </form>
+                            </td>";
                             echo "</tr>";
                         }
                         echo "</table>";
@@ -337,6 +341,10 @@ $result = $conn->query($query);
             });
         }
 
+        document.getElementById('approve_idea_form').addEventListener('submit',function(e){
+            e.preventDefault();
+            
+        });
     
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

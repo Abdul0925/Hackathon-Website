@@ -39,6 +39,18 @@ if ($isGoingResult->num_rows > 0) {
     $isR1OnGoing = 0;
 }
 
+$isSubmittedQuery = "SELECT leaderEmail FROM team_idea_submissions WHERE leaderEmail = ?";
+$isSubmittedStmt = $conn->prepare($isSubmittedQuery);
+$isSubmittedStmt->bind_param("s", $email);
+$isSubmittedStmt->execute();
+$isSubmittedResult = $isSubmittedStmt->get_result();
+
+if ($isSubmittedResult->num_rows > 0) {
+    $isSubmitted = 1;
+} else {
+    $isSubmitted = 0;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -373,38 +385,21 @@ if ($isGoingResult->num_rows > 0) {
                             <h1>RTH Round 1</h1>
                         </div>
                     </div>
-                    <div class="round-form">
-                        <form id="idea-submission-form" method="POST">
-                            <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
-                            <div class="round-body-psid" style="display: flex;">
-                                <p style="padding-right: 10px;">Your PS ID: </p>
-                                <a href="leader_problem_statement.php">
-                                    <strong><?php echo strtoupper($psId); ?></strong>
-                                </a>
-                            </div>
-                            <?php if ($isR1OnGoing) { ?>
-                                <?php if (!$isDisplaying) { ?>
-                                    <div class="round-body">
-                                        <label class="round-label" for="">Title :</label>
-                                        <input class="round-control" type="text" name="psTitle" id="psTitle" placeholder="Enter Problem Statement Title" required>
-                                    </div>
-                                    <div class="round-body">
-                                        <label class="round-label" for="">PPT Drive Link :</label>
-                                        <input class="round-control" type="text" name="pptLink" id="pptLink" placeholder="Enter PPT Drive Link" required>
-                                    </div>
-                                    <div class="round-body">
-                                        <label class="round-label" for="">Drive Link :</label>
-                                        <input class="round-control" type="text" name="docLink" id="docLink" placeholder="Additional Document (Optional)">
-                                    </div>
-                                    <div class="round-body">
-                                        <label class="round-label" style="align-self: baseline; padding-top: 5px" for="">Solution Summary :</label>
-                                        <textarea name="solSummary" id="solSummary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
-                                    </div>
-                                    <button class="round1btn">Submit</button>
-                                <?php } ?>
-                        </form>
-                        <form class="submited-form" id="idea-deletion-form" method="post" action="delete_idea.php">
-                            <?php if ($isDisplaying) { ?>
+
+
+
+                    <form id="idea-submission-form" class="round-form" method="POST">
+                        <p>Deadline: 5 Feb 2025</p>
+                        <div class="round-body-psid">
+                            <label class="round-label" for="">Your PS ID: </label>
+                            <a href="leader_problem_statement.php">
+                                <strong><?php echo strtoupper($psId); ?></strong>
+                            </a>
+                        </div>
+
+                        <?php if ($isR1OnGoing) { ?>
+                            <?php if (!$isDisplaying) { ?>
+
                                 <div class="round-body">
                                     <label class="round-label" for="">Title :</label>
                                     <span class="round-control"> <?php echo $psTitle; ?> </span>
@@ -421,27 +416,77 @@ if ($isGoingResult->num_rows > 0) {
                                     <label class="round-label" style="align-self: baseline; padding-top: 10px" for="">Solution Summary :</label>
                                     <span class="round-control"> <?php echo $solSummary; ?> </span>
                                 </div>
-                                <input type="hidden" name="leaderEmail" value="<?php echo $email; ?>">
-                                <button type="submit" class="round1btn">Delete Idea</button>
-                        </form>
-                    <?php } ?>
-                <?php } else { ?>
-                    <div class="started-round">Round 1 is not started yet</div>
-                <?php } ?>
-                    </div>
-                </div>
-                <div id="round2" class="content">
-                    <div class="report-header">
-                        <div class="recent-Articles">
-                            <h1>RTH Round 2</h1>
-                        </div>
-                    </div>
-                    <form action="" class="round-form" method="POST">
-                        <p>This is the content for Round 2. Add more details here as needed.</p>
+                                <button class="round1btn">Submit</button>
+                            <?php } ?>
                     </form>
+                    <div>
+                        <?php if ($isDisplaying) { ?>
+                            <div class="round-body">
+                                <label class="round-label" for="">Title :</label>
+                                <span class="round-control"> <?php echo $psTitle; ?> </span>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" for="">PPT Drive Link :</label>
+                                <span class="round-control"> <?php echo "<a href='" . $pptLink . "'>" . $pptLink . "</a>"; ?> </span>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" for="">Drive Link :</label>
+                                <span class="round-control"> <?php echo "<a href='" . $docLink . "'>" . $docLink . "</a>"; ?> </span>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" style="align-self: baseline; padding-top: 10px" for="">Solution Summary :</label>
+                                <span class="round-control"> <?php echo $solSummary; ?> </span>
+                            </div>
+                        <?php } ?>
+
+                        <?php if ($isDisplaying) { ?>
+                            <form id="idea-deletion-form" method="post" action="delete_idea.php">
+                                <input type="hidden" name="leaderEmail" value="<?php echo $email; ?>">
+                                <button type="submit" class="round1btn" style="background-color: red;">Delete Idea</button>
+                            </form>
+                        <?php } ?>
+
+                    <?php } else if (!$isSubmitted) {
+                            echo "<div>Round 1 has ended</div>";
+                            echo "<div>Your Submission: You didnt Submit yor solution </div>";
+                    ?>
+
+                    </div>
+                <?php
+                        } else { ?>
+                    <div class="round-body">
+                        <label class="round-label" for="">Title :</label>
+                        <span class="round-control"> <?php echo $psTitle; ?> </span>
+                    </div>
+                    <div class="round-body">
+                        <label class="round-label" for="">PPT Drive Link :</label>
+                        <span class="round-control"> <?php echo "<a href='" . $pptLink . "'>" . $pptLink . "</a>"; ?> </span>
+                    </div>
+                    <div class="round-body">
+                        <label class="round-label" for="">Drive Link :</label>
+                        <span class="round-control"> <?php echo "<a href='" . $docLink . "'>" . $docLink . "</a>"; ?> </span>
+                    </div>
+                    <div class="round-body">
+                        <label class="round-label" style="align-self: baseline; padding-top: 10px" for="">Solution Summary :</label>
+                        <span class="round-control"> <?php echo $solSummary; ?> </span>
+                    </div>
+                <?php } ?>
+
                 </div>
+
+            </div>
+            <div id="round2" class="content">
+                <div class="report-header">
+                    <div class="recent-Articles">
+                        <h1>RTH Round 2</h1>
+                    </div>
+                </div>
+                <form action="" class="round-form" method="POST">
+                    <p>This is the content for Round 2. Add more details here as needed.</p>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 
     <script>
