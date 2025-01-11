@@ -401,17 +401,30 @@ if ($isGoingResult->num_rows > 0) {
                     </form>
                     <div>
                         <?php if ($isDisplaying) { ?>
+                            <div class="round-body">
+                                <label class="round-label" for="">Title :</label>
+                                <span class="round-control"> <?php echo $psTitle; ?> </span>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" for="">PPT Drive Link :</label>
+                                <span class="round-control"> <?php echo "<a href='" . $pptLink . "'>" . $pptLink . "</a>"; ?> </span>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" for="">Drive Link :</label>
+                                <span class="round-control"> <?php echo "<a href='" . $docLink . "'>" . $docLink . "</a>"; ?> </span>
+                            </div>
+                            <div class="round-body">
+                                <label class="round-label" style="align-self: baseline; padding-top: 10px" for="">Solution Summary :</label>
+                                <span class="round-control"> <?php echo $solSummary; ?> </span>
+                            </div>
+                        <?php } ?>
+                        
+                        <?php if ($isDisplaying) { ?>
                             <form id="idea-deletion-form" method="post" action="delete_idea.php">
                                 <input type="hidden" name="leaderEmail" value="<?php echo $email; ?>">
                                 <button type="submit" class="round1btn" style="background-color: red;">Delete Idea</button>
                             </form>
                         <?php } ?>
-                        <?php if ($isDisplaying) {
-                                echo "<strong>Problem Statement Title: </strong> " . $psTitle . "<br><br>";
-                                echo "<strong>PPT Drive Link: </strong> <a href='" . $pptLink . "'>" . $pptLink . "</a><br><br>";
-                                echo "<strong>Additional Document Drive Link: </strong> <a href='" . $docLink . "'>" . $docLink . "</a><br><br>";
-                                echo "<strong>Solution Summary: </strong> " . $solSummary . "<br>";
-                            } ?>
                     <?php } else { ?>
                         <div>Round 1 is not started yet</div>
                     <?php } ?>
