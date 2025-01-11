@@ -53,31 +53,6 @@ if ($isGoingResult->num_rows > 0) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        table {
-            border-collapse: collapse;
-            background-color: #fff;
-            border-radius: 10px;
-            margin: auto;
-            width: 100%;
-        }
-
-        th,
-        td {
-            border: 1px solid rgb(200, 200, 200);
-            padding: 8px 30px;
-            text-align: center;
-        }
-
-        th {
-            text-transform: uppercase;
-            font-weight: 500;
-            border-color: black;
-        }
-
-        td {
-            font-size: 13px;
-        }
-
         .modal-header h2 {
             padding-top: 25px;
             margin-bottom: 20px;
@@ -109,6 +84,28 @@ if ($isGoingResult->num_rows > 0) {
 
         .round1btn:active {
             background-color: rgb(97, 19, 207);
+        }
+
+        .round-deletebtn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: rgb(200, 0, 0);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .round-deletebtn:hover {
+            background-color: rgb(150, 0, 0);
+        }
+
+        .round-deletebtn:active {
+            background-color: rgb(200, 0, 0);
         }
 
         .nav-option {
@@ -254,6 +251,22 @@ if ($isGoingResult->num_rows > 0) {
         .round-form p {
             font-weight: 600;
         }
+
+        .round-submit {
+            padding: 20px;
+        }
+
+        .round-submit p {
+            font-weight: 600;
+        }
+
+        .round-submit p {
+            font-weight: 600;
+        }
+
+        .round-submit span {
+            border: 1px solid black;
+        }
     </style>
 </head>
 
@@ -355,6 +368,7 @@ if ($isGoingResult->num_rows > 0) {
                         </div>
                     </div>
 
+
                     <form id="idea-submission-form" class="round-form" method="POST">
                         <p>Start Date: 1 Feb 2025 || Deadline: 5 Feb 2025</p>
                         <div class="round-body-psid">
@@ -402,6 +416,7 @@ if ($isGoingResult->num_rows > 0) {
                         <div>Round 1 is not started yet</div>
                     <?php } ?>
                     </div>
+
                 </div>
                 <div id="round2" class="content">
                     <div class="report-header">
