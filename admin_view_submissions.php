@@ -5,19 +5,10 @@ if ($_SESSION['admin_logged_in'] != true) {
 }
 
 require 'db.php';
-$round1Query = "SELECT on_going FROM admin_rounds WHERE on_going = 1 AND title = 'Round 1'";
-$isRound1StartedStmt = $conn->query($round1Query);
+$query = "SELECT * FROM team_idea_submissions";
+$result = $conn->query($query);
 
 
-if ($isRound1StartedStmt->num_rows > 0) {
-    $isR1OnGoing = 1;
-} else {
-    $isR1OnGoing = 0;
-}
-
-$startDateQuery = "SELECT date FROM admin_rounds WHERE title = 'Round 1' AND on_going = 1";
-$startDateStmt = $conn->query($startDateQuery);
-$startDate = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['date'] : null;
 
 
 
@@ -30,7 +21,7 @@ $startDate = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['date'
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Rounds</title>
+    <title>Idea Submissions</title>
     <link rel="stylesheet" href="admin_dash_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <style>
@@ -209,28 +200,60 @@ $startDate = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['date'
             <!-- team detail table -->
             <div class="report-container">
                 <div class="report-header">
-                    <h1 class="recent-Articles">Rounds</h1>
+                    <h1 class="recent-Articles">Round 1</h1>
                 </div>
 
                 <div class="report-body">
-                    Round 1
-                    <?php if (!$isR1OnGoing) { ?>
-                        <form id="start_round1">
-                            <button class="startBtn">Start Round 1</button>
-                        </form>
-                    <?php } else { ?>
-                        <div>Started on: <?php echo $startDate; ?></div>
-                        <form id="stop_round1">
-                            <button class="stopBtn">Stop Round 1</button>
-                        </form>
-                    <?php } ?>
-                    <form id="view_submissions_form">
-                        <button class="ViewBtn">View Submissions</button>
-                    </form>
+                    <?php 
+                    if ($result->num_rows > 0) {
+                        echo "<table>";
+                        echo "<tr><th>PS ID</th><th>Team Leader</th><th>Title</th><th>PPT Link</th><th>Doc Link</th><th>Summary</th></tr>";
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row['psId'] . "</td>";
+                            echo "<td>" . $row['leaderEmail'] . "</td>";
+                            echo "<td>" . $row['psTitle'] . "</td>";
+                            echo "<td><a href='" . $row['pptLink'] . "'>PPT</a></td>";
+                            echo "<td><a href='" . $row['docLink'] . "'>Doc</a></td>";
+                            echo "<td><button class='primary-btn' onclick=\"viewSummary('" . addslashes($row['solSummary']) . "')\">View</button></td>";
+                            // echo "<td>" . $row['solSummary'] . "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+                    } else {
+                        echo "No submissions found.";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal for displaying summary -->
+    <div class="modal fade" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="summaryModalLabel">Solution Summary</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="summaryContent">
+                    <!-- Summary content will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewSummary(summary) {
+            document.getElementById('summaryContent').innerText = summary;
+            var summaryModal = new bootstrap.Modal(document.getElementById('summaryModal'));
+            summaryModal.show();
+        }
+    </script>
 
 
     <script>
@@ -314,10 +337,7 @@ $startDate = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['date'
             });
         }
 
-        document.getElementById('view_submissions_form').addEventListener('submit',function(e){
-            e.preventDefault();
-            window.location.href = "admin_view_submissions.php";
-        })
+    
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
