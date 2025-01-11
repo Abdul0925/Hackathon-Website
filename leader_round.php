@@ -98,7 +98,7 @@ if ($isSubmittedResult->num_rows > 0) {
             background-color: rgb(97, 19, 207);
         }
 
-        .round-deletebtn {
+        .submited-form button {
             display: block;
             width: 100%;
             padding: 10px;
@@ -112,11 +112,11 @@ if ($isSubmittedResult->num_rows > 0) {
             margin-top: 10px;
         }
 
-        .round-deletebtn:hover {
+        .submited-form button:hover {
             background-color: rgb(150, 0, 0);
         }
 
-        .round-deletebtn:active {
+        .submited-form button:active {
             background-color: rgb(200, 0, 0);
         }
 
@@ -279,6 +279,12 @@ if ($isSubmittedResult->num_rows > 0) {
         .round-submit span {
             border: 1px solid black;
         }
+
+        .started-round {
+            display: flex;
+            justify-content: center;
+            color: grey;
+        }
     </style>
 </head>
 
@@ -381,6 +387,7 @@ if ($isSubmittedResult->num_rows > 0) {
                     </div>
 
 
+
                     <form id="idea-submission-form" class="round-form" method="POST">
                         <p>Deadline: 5 Feb 2025</p>
                         <div class="round-body-psid">
@@ -392,21 +399,22 @@ if ($isSubmittedResult->num_rows > 0) {
 
                         <?php if ($isR1OnGoing) { ?>
                             <?php if (!$isDisplaying) { ?>
+
                                 <div class="round-body">
                                     <label class="round-label" for="">Title :</label>
-                                    <input class="round-control" type="text" name="psTitle" id="psTitle" placeholder="Enter Problem Statement Title" required>
+                                    <span class="round-control"> <?php echo $psTitle; ?> </span>
                                 </div>
                                 <div class="round-body">
                                     <label class="round-label" for="">PPT Drive Link :</label>
-                                    <input class="round-control" type="text" name="pptLink" id="pptLink" placeholder="Enter PPT Drive Link" required>
+                                    <span class="round-control"> <?php echo "<a href='" . $pptLink . "'>" . $pptLink . "</a>"; ?> </span>
                                 </div>
                                 <div class="round-body">
                                     <label class="round-label" for="">Drive Link :</label>
-                                    <input class="round-control" type="text" name="docLink" id="docLink" placeholder="Additional Document (Optional)">
+                                    <span class="round-control"> <?php echo "<a href='" . $docLink . "'>" . $docLink . "</a>"; ?> </span>
                                 </div>
                                 <div class="round-body">
-                                    <label class="round-label" for="">Solution Summary :</label>
-                                    <textarea name="solSummary" id="solSummary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
+                                    <label class="round-label" style="align-self: baseline; padding-top: 10px" for="">Solution Summary :</label>
+                                    <span class="round-control"> <?php echo $solSummary; ?> </span>
                                 </div>
                                 <button class="round1btn">Submit</button>
                             <?php } ?>
@@ -463,6 +471,7 @@ if ($isSubmittedResult->num_rows > 0) {
                         <span class="round-control"> <?php echo $solSummary; ?> </span>
                     </div>
                 <?php } ?>
+
                 </div>
 
             </div>
