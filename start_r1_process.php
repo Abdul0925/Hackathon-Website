@@ -18,7 +18,21 @@ function startRound($title, $on_going)
 
     date_default_timezone_set('Asia/Kolkata');
     $currentDate = date('Y-m-d H:i:s');
-    $startRoundQuery = "UPDATE admin_rounds SET on_going = ? , date = ? WHERE title = ?";
+    // Check if the round already exists
+    $checkRoundQuery = "SELECT * FROM admin_rounds WHERE title = ?";
+    $stmt = $conn->prepare($checkRoundQuery);
+    $stmt->bind_param("s", $title);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // If the round exists, update it
+        $startRoundQuery = "UPDATE admin_rounds SET on_going = ?, date = ? WHERE title = ?";
+    } else {
+        // If the round does not exist, insert a new record
+        $startRoundQuery = "INSERT INTO admin_rounds (on_going, date, title) VALUES (?, ?, ?)";
+    }
+    // $startRoundQuery = "UPDATE admin_rounds SET on_going = ? , date = ? WHERE title = ?";
     $stmt = $conn->prepare($startRoundQuery);
     $stmt->bind_param("iss", $on_going, $currentDate, $title);
     if ($stmt->execute()) {
