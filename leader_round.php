@@ -30,6 +30,15 @@ $docLink = isset($ideaRow['docLink']) ? $ideaRow['docLink'] : '';
 $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
 ($psTitle == '') ? $isDisplaying = 0 : $isDisplaying = 1;
 
+$isGoingQuery = "SELECT on_going FROM admin_rounds WHERE on_going = 1 AND title = 'Round 1'";
+$isGoingResult = $conn->query($isGoingQuery);
+
+if ($isGoingResult->num_rows > 0) {
+    $isR1OnGoing = 1;
+} else {
+    $isR1OnGoing = 0;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -230,7 +239,7 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
             font-weight: 600;
         }
 
-        .round-body-psid label{
+        .round-body-psid label {
             font-weight: 600;
             margin-bottom: 15px;
             width: 15%;
@@ -355,25 +364,26 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
                             </a>
                         </div>
 
-                        <?php if (!$isDisplaying) { ?>
-                            <div class="round-body">
-                                <label class="round-label" for="">Title :</label>
-                                <input class="round-control" type="text" name="psTitle" id="psTitle" placeholder="Enter Problem Statement Title" required>
-                            </div>
-                            <div class="round-body">
-                                <label class="round-label" for="">PPT Drive Link :</label>
-                                <input class="round-control" type="text" name="pptLink" id="pptLink" placeholder="Enter PPT Drive Link" required>
-                            </div>
-                            <div class="round-body">
-                                <label class="round-label" for="">Drive Link :</label>
-                                <input class="round-control" type="text" name="docLink" id="docLink" placeholder="Additional Document (Optional)">
-                            </div>
-                            <div class="round-body">
-                                <label class="round-label" for="">Solution Summary :</label>
-                                <textarea name="solSummary" id="solSummary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
-                            </div>
-                            <button class="round1btn">Submit</button>
-                        <?php } ?>
+                        <?php if ($isR1OnGoing) { ?>
+                            <?php if (!$isDisplaying) { ?>
+                                <div class="round-body">
+                                    <label class="round-label" for="">Title :</label>
+                                    <input class="round-control" type="text" name="psTitle" id="psTitle" placeholder="Enter Problem Statement Title" required>
+                                </div>
+                                <div class="round-body">
+                                    <label class="round-label" for="">PPT Drive Link :</label>
+                                    <input class="round-control" type="text" name="pptLink" id="pptLink" placeholder="Enter PPT Drive Link" required>
+                                </div>
+                                <div class="round-body">
+                                    <label class="round-label" for="">Drive Link :</label>
+                                    <input class="round-control" type="text" name="docLink" id="docLink" placeholder="Additional Document (Optional)">
+                                </div>
+                                <div class="round-body">
+                                    <label class="round-label" for="">Solution Summary :</label>
+                                    <textarea name="solSummary" id="solSummary" style="padding: 5px 0px 0px 8px; overflow-y: auto; height: 100px;" placeholder="Type your solution..." required></textarea>
+                                </div>
+                                <button class="round1btn">Submit</button>
+                            <?php } ?>
                     </form>
                     <div>
                         <?php if ($isDisplaying) { ?>
@@ -383,11 +393,14 @@ $solSummary = isset($ideaRow['solSummary']) ? $ideaRow['solSummary'] : '';
                             </form>
                         <?php } ?>
                         <?php if ($isDisplaying) {
-                            echo "<strong>Problem Statement Title: </strong> " . $psTitle . "<br><br>";
-                            echo "<strong>PPT Drive Link: </strong> <a href='" . $pptLink . "'>" . $pptLink . "</a><br><br>";
-                            echo "<strong>Additional Document Drive Link: </strong> <a href='" . $docLink . "'>" . $docLink . "</a><br><br>";
-                            echo "<strong>Solution Summary: </strong> " . $solSummary . "<br>";
-                        } ?>
+                                echo "<strong>Problem Statement Title: </strong> " . $psTitle . "<br><br>";
+                                echo "<strong>PPT Drive Link: </strong> <a href='" . $pptLink . "'>" . $pptLink . "</a><br><br>";
+                                echo "<strong>Additional Document Drive Link: </strong> <a href='" . $docLink . "'>" . $docLink . "</a><br><br>";
+                                echo "<strong>Solution Summary: </strong> " . $solSummary . "<br>";
+                            } ?>
+                    <?php } else { ?>
+                        <div>Round 1 is not started yet</div>
+                    <?php } ?>
                     </div>
                 </div>
                 <div id="round2" class="content">
