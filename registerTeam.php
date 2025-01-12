@@ -5,7 +5,7 @@ require 'db.php';
 if (!isset($_SESSION['members'])) {
     $_SESSION['members'] = [];
 }
-$_SESSION['isVerified'] = false;
+$_SESSION['isVerified'] = true;
 $_SESSION['leaderGender'] = '';
 $_SESSION['maleCount'] = 0;
 
@@ -626,13 +626,13 @@ $_SESSION['members'] = [];
 
 
                             <div>
-                                <input type="tel" id="leaderMobile" name="leaderMobile" required>
+                                <input type="tel" id="leaderMobile" name="leaderMobile" maxlength="10" pattern="\d{10}" required>
                                 <span>Enter mobile number</span>
                             </div>
 
                             <div class="inputBox" style="margin-bottom: 15px">
                                 <label for="leaderGender">Gender:</label>
-                                <select id="leaderGender" name="leaderGender">
+                                <select id="leaderGender" name="leaderGender" required>
                                     <option value="" selected disabled>Choose Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -687,15 +687,15 @@ $_SESSION['members'] = [];
                     </div>
                     <div class="box-body" id="add_member_form">
                         <div class="inputBox">
-                            <input type="text" id="memberName" placeholder="(member)" name="memberName">
+                            <input type="text" id="memberName" name="memberName">
                             <span>Enter name</span>
                         </div>
                         <div class="inputBox">
-                            <input type="tel" id="memberMobile" placeholder="(member)" name="memberMobile">
+                            <input type="tel" id="memberMobile" name="memberMobile">
                             <span>Enter mobile number</span>
                         </div>
                         <div class="inputBox">
-                            <input type="email" id="memberEmail" placeholder="(member)" name="memberEmail">
+                            <input type="email" id="memberEmail" name="memberEmail">
                             <span>Enter email</span>
                         </div>
                         <div class="inputBox">
@@ -707,7 +707,7 @@ $_SESSION['members'] = [];
                             </select>
                         </div>
                         <div class="add-btn">
-                            <button type="button" name="add_member" onclick="submitAddMemberForm()">Add Member</button>
+                            <button type="button" name="add_member" id="addMemberBtn" onclick="submitAddMemberForm()">Add Member</button>
                         </div>
                         <table class="table">
                             <thead>
@@ -1001,18 +1001,50 @@ $_SESSION['members'] = [];
             // const form = document.getElementById('mainForm');
             // form.action = 'register_add_member.php';
             // form.submit();
-            console.log("test1");
+            // console.log("test1");
+
             const name = document.getElementById('memberName').value;
             const mobile = document.getElementById('memberMobile').value;
             const email = document.getElementById('memberEmail').value;
             const memberGender = document.getElementById('memberGender').value;
+            const addMemberBtn = document.getElementById('addMemberBtn').value;
 
 
             // Validate inputs (optional)
-            if (!name || !mobile || !email) {
+            if (!name || !mobile || !email || !memberGender) {
                 alert("All fields are required.");
                 return;
             }
+
+            const checkMemberName = document.getElementById('memberName').value;
+            const memberNamePattern = /^[a-zA-Z ]+$/;
+            if (!memberNamePattern.test(checkMemberName)) {
+                alert('Name can only consist of alphabets');
+                return;
+            }
+            
+            const checkMemberMobile = document.getElementById('memberMobile').value;
+            if (!/^[6-9]/.test(checkMemberMobile)) {
+                alert('Mobile number must start with 6, 7, 8, or 9');
+                return;
+            }
+            const memberMobilePattern = /^[0-9]{10}$/;
+            if (!memberMobilePattern.test(checkMemberMobile)) {
+                alert('Invalid mobile number');
+                return;
+            }
+
+            const checkMemberGender = memberGender;
+            if (!checkMemberGender) {
+                alert('Gender cannot be empty');
+                return;
+            }
+
+            if (checkMemberGender !== 'Male' && checkMemberGender !== 'Female') {
+                alert('Invalid value for gender');
+                return;
+            }
+
 
             // Prepare data to send
             const data = new FormData();
@@ -1113,6 +1145,66 @@ $_SESSION['members'] = [];
             registerBtn.textContent = 'Registering...';
             registerBtn.style.cursor = 'not-allowed';
             registerBtn.style.backgroundColor = 'gray';
+
+            const checkTeamName = document.getElementById('teamName').value;
+            const teamNamePattern = /^[a-zA-Z0-9 _-]+$/;
+            if (!teamNamePattern.test(checkTeamName)) {
+                alert('Team name can only consist of alphabets, numbers, underscores, and hyphens.');
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Register';
+                registerBtn.style.cursor = 'pointer';
+                registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
+                return;
+            }
+            
+            const checkLeaderName = document.getElementById('leaderName').value;
+            const leaderNamePattern = /^[a-zA-Z ]+$/;
+            if (!leaderNamePattern.test(checkLeaderName)) {
+                alert('Name can only consist of alphabets');
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Register';
+                registerBtn.style.cursor = 'pointer';
+                registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
+                return;
+            }
+            
+            const checkLeaderMobile = document.getElementById('leaderMobile').value;
+            if (!/^[6-9]/.test(checkLeaderMobile)) {
+                alert('Mobile number must start with 6, 7, 8, or 9');
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Register';
+                registerBtn.style.cursor = 'pointer';
+                registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
+                return;
+            }
+            const leaderMobilePattern = /^[0-9]{10}$/;
+            if (!leaderMobilePattern.test(checkLeaderMobile)) {
+                alert('Invalid mobile number');
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Register';
+                registerBtn.style.cursor = 'pointer';
+                registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
+                return;
+            }
+
+            const checkLeaderGender = document.getElementById('leaderGender').value;
+            if (!checkLeaderGender) {
+                alert('Gender cannot be empty');
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Register';
+                registerBtn.style.cursor = 'pointer';
+                registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
+                return;
+            }
+
+            if (checkLeaderGender !== 'Male' && checkLeaderGender !== 'Female') {
+                alert('Invalid value for gender');
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Register';
+                registerBtn.style.cursor = 'pointer';
+                registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
+                return;
+            }
             
             // Get the form data or the necessary values to send
             const formData = new FormData();
