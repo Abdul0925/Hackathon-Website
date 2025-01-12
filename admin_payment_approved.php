@@ -293,16 +293,20 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
                                             </a>
                                         </td>
                                         <td>
+                                        <?php if($admin['is_approved'] == 0) { ?>
                                             <button
-                                                class="primary-btn w-100 view-details-btn"
-                                                onclick="approvedPayment(this)"
-                                                style="cursor: pointer;"
-                                                data-id="<?php echo $admin['id']; ?>"
-                                                data-email="<?php echo $team['leaderEmail']; ?>"
-                                                data-name="<?php echo $team['leaderName']; ?>"
-                                                data-pass="<?php echo $team['password']; ?>">
-                                                Approve
-                                            </button>
+                                            class="primary-btn w-100 view-details-btn"
+                                            onclick="approvedPayment(this)"
+                                            style="cursor: pointer;"
+                                            data-id="<?php echo $admin['id']; ?>"
+                                            data-email="<?php echo $team['leaderEmail']; ?>"
+                                            data-name="<?php echo $team['leaderName']; ?>"
+                                            data-pass="<?php echo $team['password']; ?>">
+                                            Approve
+                                        </button>
+                                        <?php } else { ?>
+                                            <div>Approved</div>
+                                        <?php }  ?>
                                         </td>
                                     </tr>
                                 <?php } ?>

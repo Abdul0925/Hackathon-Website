@@ -1,4 +1,9 @@
 <?php
+
+//delete this page
+
+header('location:registerTeam.php');
+
 session_start();
 require 'db.php';
 
@@ -52,8 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';           // SMTP server address
             $mail->SMTPAuth = true;
-            $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
-            $mail->Password = 'iotg jqut wkks sjrt';       // Your email password (use an app-specific password if needed)
+            $mail->Username = ''; // Your email username
+            $mail->Password = '';       // Your email password (use an app-specific password if needed)
             $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
             $mail->Port = 465;                        // Port for SSL
 

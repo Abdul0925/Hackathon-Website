@@ -7,6 +7,14 @@ if ($_SESSION['admin_logged_in'] != true) {
 require 'db.php';
 $approvedTeams = mysqli_query($conn, "SELECT * FROM team_idea_submissions WHERE isApproved = 1");
 
+$isRoundOneResDeclared = false;
+$isRoundOneResDeclaredQuery = mysqli_query($conn, "SELECT isResultAnnounced FROM admin_rounds WHERE title = 'Round 1'");
+if ($isRoundOneResDeclaredQuery) {
+    $row = mysqli_fetch_assoc($isRoundOneResDeclaredQuery);
+    $isRoundOneResDeclared = $row['isResultAnnounced'] == 1;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -218,6 +226,14 @@ $approvedTeams = mysqli_query($conn, "SELECT * FROM team_idea_submissions WHERE 
         table.approved-teams-table tr:hover {
             background-color: rgb(231, 218, 254);
         }
+
+        .teamBtn {
+            border: none;
+            background: none;
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
         
     </style>
 
@@ -303,15 +319,21 @@ $approvedTeams = mysqli_query($conn, "SELECT * FROM team_idea_submissions WHERE 
                         <div class="recent-Articles">
                             <h1>RTH Round 1</h1>
                         </div>
-                            <button id="declareResultBtn">
-                                Declare Result
-                            </button>
+                        <?php if(!$isRoundOneResDeclared){ ?>
+                        <button id="declareResultBtn">
+                            Declare Result
+                        </button>
+                        <?php } else { ?>
+                            <!-- <button id="declareResultBtn"> -->
+                                Result Declared
+                            <!-- </button> -->
+                        <?php } ?>
                     </div>
 
 
                     <p>Deadline: 5 Feb 2025</p>
                     <div class="round-body-psid">
-                        <label class="round-label" for="">Approved Teams: </label>
+                        <label class="round-label" for=""><a href="admin_view_submissions.php"> Approved Teams: </a></label>
                         <?php
                         echo "<table class='approved-teams-table'>
                         <tr>
@@ -326,7 +348,11 @@ $approvedTeams = mysqli_query($conn, "SELECT * FROM team_idea_submissions WHERE 
                             $teamRow = mysqli_fetch_assoc($teamQuery);
                             $teamName = $teamRow['teamName'];
                             echo "<tr>";
-                            echo "<td>" . $teamName . "</td>";
+                            echo "<td><form action='admin_view_teams.php' method='POST' class='d-inline'>
+                            <input type='hidden' name='leaderEmail' value='".$row['leaderEmail']."'>
+                            <button class='teamBtn' style='cursor: pointer;'>".
+                            $teamName."</button></form>
+                            </td>";
                             echo "<td>" . $row['leaderEmail'] . "</td>";
                             echo "<td>" . $row['psId'] . "</td>";
                             echo "</tr>";

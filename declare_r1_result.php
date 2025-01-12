@@ -14,8 +14,20 @@ require "db.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $mail = new PHPMailer(true);
+    $title = 'Round 1';
+    $updateQuery = "UPDATE admin_rounds SET on_going = 0, isResultAnnounced = 1, resultDate = CURRENT_TIMESTAMP WHERE title = ?";
+    $stmt = $conn->prepare($updateQuery);
+    $stmt->bind_param('s', $title);
+    if (!$stmt->execute()) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Failed to update result declaration status',
+        ]);
+        return;
+    }
     
+
+    $mail = new PHPMailer(true);
     $result = mysqli_query($conn, "SELECT leaderEmail FROM team_and_leader_details");
     
     $mail->isSMTP();
