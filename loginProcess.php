@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginBtn'])) {
     // echo $role;
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         if ($role == 'Team Leader') {
-            $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ?";
+            $query = "SELECT * FROM team_and_leader_details WHERE leaderEmail = ? AND isEliminated=0";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('s', $email);
             $stmt->execute();
