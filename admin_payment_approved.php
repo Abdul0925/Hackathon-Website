@@ -190,6 +190,13 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
                         </div>
                     </a>
 
+                    <a href="admin_all_teams.php" style="text-decoration: none;">
+                        <div class="nav-option option2" style="color: black;">
+                            <i class="bi-people-fill"></i>
+                            <h3> Teams</h3>
+                        </div>
+                    </a>
+
                     <a href="admin_round.php" style="text-decoration: none;">
                         <div class="nav-option option2" style="color: black;">
                             <i class="bi-award"></i>

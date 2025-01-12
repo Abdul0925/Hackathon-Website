@@ -210,7 +210,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
 
                     <a href="admin_all_teams.php" style="text-decoration: none;">
                         <div class="nav-option option1">
-                            <i class="bi-columns"></i>
+                            <i class="bi-people-fill"></i>
                             <h3> Teams</h3>
                         </div>
                     </a>

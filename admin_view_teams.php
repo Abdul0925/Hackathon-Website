@@ -254,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <a href="admin_all_teams.php" style="text-decoration: none;">
                         <div class="nav-option option1">
-                            <i class="bi-columns"></i>
+                            <i class="bi-people-fill"></i>
                             <h3> Teams</h3>
                         </div>
                     </a>
