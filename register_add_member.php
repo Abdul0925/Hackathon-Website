@@ -23,14 +23,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
             return;
         }
+        
+        if(!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'Please check email',
+            ]);
+            return;
+        }
 
         if ($_SESSION['leaderGender'] == 'Male') {
             if ($gender == 'Male') {
                 $_SESSION['maleCount']++;
             }
-            if ($gender == 'Female') {
-                $_SESSION['maleCount']--;
-            }
+            // if ($gender == 'Female') {
+            //     $_SESSION['maleCount']--;
+            // }
             if ($_SESSION['maleCount'] > 2) {
                 echo json_encode([
                     'success' => false,
