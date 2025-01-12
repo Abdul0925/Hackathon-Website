@@ -1,31 +1,62 @@
 <?php
 session_start();
 require "db.php";
-if ($_SESSION['leader_logged_in'] != true) {
-    header("location:loginPage.php");
+
+// Redirect to login if the user is not logged in
+if (!isset($_SESSION['leader_logged_in']) || $_SESSION['leader_logged_in'] !== true) {
+    header("Location: loginPage.php");
+    exit;
 }
 
 $email = $_SESSION['leaderEmail'];
 
-// Query to get the image path
-$sql = "SELECT * FROM mentor_details WHERE email = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $imagePath = $row['image_path']; // The path of the uploaded image
-    $_SESSION['imagePath'] = $imagePath; // The path of the uploaded image
-} else {
-    // If no image found, use a placeholder image
-    $imagePath = 'https://via.placeholder.com/100';
+// Fetch results announced
+$srno = 1;
+$isResultAnnounced = false;
+$stmt1 = $conn->prepare("SELECT title FROM admin_rounds WHERE isResultAnnounced = 1");
+$stmt1->execute();
+$result1 = $stmt1->get_result();
+if ($result1->num_rows > 0) {
+    $isResultAnnounced = true;
 }
 
-$result1 = mysqli_query($conn, "SELECT * FROM all_team_members WHERE mentor='$email' AND is_leader = 1");
-$result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
+// Fetch approved team ideas
+$stmt2 = $conn->prepare("SELECT team_id, psId FROM team_idea_submissions WHERE isApproved = 1");
+$stmt2->execute();
+$result2 = $stmt2->get_result();
 
+$dataByPsId = [];
+if ($result2->num_rows > 0) {
+    while ($row = $result2->fetch_assoc()) {
+        $teamId = $row["team_id"];
+        $psId = $row["psId"];
+
+        // Fetch team details
+        $stmt3 = $conn->prepare("SELECT * FROM team_and_leader_details WHERE id = ?");
+        $stmt3->bind_param("i", $teamId);
+        $stmt3->execute();
+        $teamDetailsResult = $stmt3->get_result();
+        while ($teamRow = $teamDetailsResult->fetch_assoc()) {
+            $dataByPsId[$psId][] = [
+                "teamName" => htmlspecialchars($teamRow["teamName"], ENT_QUOTES, 'UTF-8'),
+                "leaderName" => htmlspecialchars($teamRow["leaderName"], ENT_QUOTES, 'UTF-8'),
+            ];
+        }
+        $stmt3->close();
+    }
+}
+
+$isRoundClearedQuery = $conn->prepare("SELECT * FROM team_idea_submissions WHERE leaderEmail = ? AND isApproved = 1");
+$isRoundClearedQuery->bind_param("s", $email);
+$isRoundClearedQuery->execute();
+$teamDetailsResult = $isRoundClearedQuery->get_result();
+$isRoundCleared = 0;
+if ($teamDetailsResult->num_rows > 0) {
+    $isRoundCleared = 1;
+}
+
+$stmt2->close();
+$stmt1->close();
 ?>
 
 <!DOCTYPE html>
@@ -194,6 +225,15 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
             margin-top: 20px;
             margin-bottom: 20px;
             height: 400px;
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .report-container1 {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 400px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -201,6 +241,103 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
 
         .report-container h5 {
             color: rgb(125, 125, 125);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 0px;
+        }
+
+        .tabs button {
+            background-color: rgb(255, 255, 255);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 50px 0 0 50px;
+            height: 40px;
+            width: 120px;
+            transition: 0.3s;
+        }
+
+        .tabs button.active {
+            background-color: rgb(97, 19, 207);
+            color: white;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .round-body {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .round-body label {
+            font-weight: 600;
+            padding-right: 10px;
+            width: 18%;
+        }
+
+        .round-control,
+        select,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .round-form {
+            padding: 20px;
+        }
+
+        .round-form p {
+            font-weight: 600;
+        }
+
+        .round-body-psid label {
+            font-weight: 600;
+            margin-bottom: 15px;
+            width: 15%;
+        }
+
+        .recent-Articles h1 {
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 0px;
+        }
+
+        .round-form p {
+            font-weight: 600;
+        }
+
+        .round-submit {
+            padding: 20px;
+        }
+
+        .round-submit p {
+            font-weight: 600;
+        }
+
+        .round-submit p {
+            font-weight: 600;
+        }
+
+        .round-submit span {
+            border: 1px solid black;
         }
     </style>
 </head>
@@ -291,21 +428,81 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         </div>
 
         <div class="main">
-            <div class="box-container">
-                <div class="box box1">
-                    <div class="text">
-                        <h2 class="topic-heading">Result</h2>
-                        <h2 class="topic">No Result is announced yet</h2>
-                    </div>
-                    <!-- <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png" alt="Views"> -->
-                </div>
+            <div class="tabs">
+                <button id="round1-tab" class="active" onclick="showContent('round1')">Round 1</button>
+                <button style="border-radius: 0 50px 50px 0;" id="round2-tab" onclick="showContent('round2')">Round 2</button>
             </div>
             <div class="report-container">
-                <h5>NO Result is announced yet</h5>
+                <div id="round1" class="content active">
+                    <div class="report-header">
+                        <div class="recent-Articles">
+                            <h1>RTH Round 1</h1>
+                        </div>
+                    </div>
 
+                    <?php if ($isResultAnnounced): ?>
+                        <p>Deadline: 5 Feb 2025</p>
+                        <div class="round-body-psid">
+                            <label class="round-label" for="">Your PS ID: </label>
+                            <a href="leader_round.php">
+                                <strong><?php echo $_SESSION['psId']; ?></strong>
+                            </a>
+                        </div>
+                        <div>
+                            Your Result: <?php echo ($isRoundCleared)?'You have cleared round 1':'Sorry you are not eligible for round 2' ?> 
+
+                        </div>
+                        <p>Following teams are selected for round 2:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>Problem Statement ID</th>
+                                    <th>Team Name</th>
+                                    <th>Leader Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($dataByPsId)): ?>
+                                    <?php foreach ($dataByPsId as $psId => $teams): ?>
+                                        <?php foreach ($teams as $team): ?>
+                                            <tr>
+                                                <td><?= $srno++; ?></td>
+                                                <td><?= htmlspecialchars($psId, ENT_QUOTES, 'UTF-8') ?></td>
+                                                <td><?= $team["teamName"] ?></td>
+                                                <td><?= $team["leaderName"] ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="3">No teams approved yet.</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <div class="report-container1">
+                            <h5>No results announced yet.</h5>
+                        </div>
+                    <?php endif; ?>
+
+                </div>
+                <div id="round2" class="content">
+                    <div class="report-header">
+                        <div class="recent-Articles">
+                            <h1>RTH Round 2</h1>
+                        </div>
+                    </div>
+                    <form action="" class="round-form" method="POST">
+                        <p>This is the content for Round 2. Add more details here as needed.</p>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
+
 
     <script>
         let menuicn = document.querySelector(".menuicn");
@@ -314,6 +511,20 @@ $result2 = mysqli_query($conn, "SELECT * FROM notifications ORDER BY id DESC");
         menuicn.addEventListener("click", () => {
             nav.classList.toggle("navclose");
         })
+
+        function showContent(round) {
+            // Hide all content
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tabs button');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show the selected content and set the active tab
+            document.getElementById(round).classList.add('active');
+            document.getElementById(`${round}-tab`).classList.add('active');
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

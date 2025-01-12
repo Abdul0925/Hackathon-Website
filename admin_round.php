@@ -15,9 +15,10 @@ if ($isRound1StartedStmt->num_rows > 0) {
     $isR1OnGoing = 0;
 }
 
-$startDateQuery = "SELECT date FROM admin_rounds WHERE title = 'Round 1' AND on_going = 1";
+$startDateQuery = "SELECT * FROM admin_rounds WHERE title = 'Round 1' AND on_going = 1";
 $startDateStmt = $conn->query($startDateQuery);
 $startDate = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['date'] : null;
+$isResultDeclared = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['isResultDeclared'] : null;
 
 
 
@@ -214,10 +215,12 @@ $startDate = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['date'
 
                 <div class="report-body">
                     Round 1
-                    <?php if (!$isR1OnGoing) { ?>
+                    <?php if (!$isR1OnGoing && $isResultDeclared) { ?>
                         <form id="start_round1">
                             <button class="startBtn">Start Round 1</button>
                         </form>
+                    <?php } else if (!$isR1OnGoing && !$isResultDeclared) { ?>
+                        <div class="startBtn">Round 1 result is already declared <a href="admin_result_announcement.php">View Result</a> </div>
                     <?php } else { ?>
                         <div>Started on: <?php echo $startDate; ?></div>
                         <form id="stop_round1">
@@ -314,7 +317,7 @@ $startDate = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['date'
             });
         }
 
-        document.getElementById('view_submissions_form').addEventListener('submit',function(e){
+        document.getElementById('view_submissions_form').addEventListener('submit', function(e) {
             e.preventDefault();
             window.location.href = "admin_view_submissions.php";
         })

@@ -478,7 +478,7 @@ if ($isSubmittedResult->num_rows > 0) {
             </div>
         </div>
     </div>
-    </div>
+    <!-- </div> -->
 
     <script>
         let menuicn = document.querySelector(".menuicn");
