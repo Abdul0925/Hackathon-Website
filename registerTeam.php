@@ -5,7 +5,7 @@ require 'db.php';
 if (!isset($_SESSION['members'])) {
     $_SESSION['members'] = [];
 }
-$_SESSION['isVerified'] = true;
+$_SESSION['isVerified'] = false;
 $_SESSION['leaderGender'] = '';
 $_SESSION['maleCount'] = 0;
 
