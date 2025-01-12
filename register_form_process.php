@@ -282,6 +282,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return;
     }
 
+    if ($leaderGender !== 'Female') {
+        $members = $_SESSION['members'] ?? []; // Ensure members are set
+        $hasFemaleMember = false;
+        foreach ($members as $index => $member) {
+            if (strtolower($member['gender']) === 'female') {
+                $hasFemaleMember = true;
+                break;
+            }
+        }
+
+        if (!$hasFemaleMember) {
+            echo json_encode([
+                'success' => false,
+                'message' => ' required in the team.',
+                'name' => 'At least one female member',
+            ]);
+            return;
+        }
+    }
+
+
     $no_of_members = 0;
     // // Member Details
     $members = $_SESSION['members'] ?? []; // Ensure members are set
@@ -375,7 +396,7 @@ function sentmail($leaderEmail, $leaderName, $psId, $teamName)
 
         // Configure the mail server settings
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';           // SMTP server address
+        $mail->Host = 'smtp.gmail.com';           
         $mail->SMTPAuth = true;
         $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
         $mail->Password = 'iotg jqut wkks sjrt';       // Your email password (use an app-specific password if needed)
