@@ -181,6 +181,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
             height: 40px;
             background-color: rgb(255, 255, 255);
             border-radius: 50px 0 0 50px;
+            border-color: rgb(97, 19, 207);
             margin-top: 10px;
             padding-right: 15px;
             padding-left: 15px;
