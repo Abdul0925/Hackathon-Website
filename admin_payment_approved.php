@@ -115,6 +115,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
 
         .report-container {
             margin-top: 20px;
+            min-height: auto;
         }
 
         .nav-upper-options {

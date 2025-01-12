@@ -161,6 +161,56 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
         .report-body {
             padding: 0px 20px 20px 20px;
         }
+
+        .report-container {
+            margin-top: 20px;
+            min-height: auto;
+        }
+
+        .team-buttons{
+            display: flex;
+        }
+
+        .team-buttons a {
+            text-decoration: none;
+        }
+
+        .part-btn {
+            color: white;
+            width: auto;
+            height: 40px;
+            background-color: rgb(97, 19, 207);
+            border-radius: 50px 0 0 50px;
+            border-color: rgb(97, 19, 207);
+            margin-top: 10px;
+            padding-right: 15px;
+            padding-left: 15px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .part-btn:hover {
+            background-color: rgb(79, 0, 190);
+            color: white;
+        }
+
+        .elim-btn {
+            color: black;
+            width: auto;
+            height: 40px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 0 50px 50px 0;
+            margin-top: 10px;
+            padding-right: 15px;
+            padding-left: 15px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .elim-btn:hover {
+            background-color: rgb(229, 229, 229);
+            color: black;
+        }
     </style>
 
 </head>
@@ -245,9 +295,12 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">Teams</h1>
-                    <div>
+                    <div class="team-buttons">
+                        <a href="admin_all_teams.php">
+                            <button class="part-btn">Participating Teams</button>
+                        </a>
                         <a href="admin_all_eliminated_teams.php">
-                            See Eliminated Teams
+                            <button class="elim-btn">Eliminated Teams</button>
                         </a>
                     </div>
                 </div>

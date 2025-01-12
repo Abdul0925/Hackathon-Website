@@ -161,6 +161,10 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
         .report-body {
             padding: 0px 20px 20px 20px;
         }
+
+        .report-container {
+            min-height: auto;
+        }
     </style>
 
 </head>

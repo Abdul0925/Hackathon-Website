@@ -184,6 +184,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 0px 20px 20px 20px;
         }
 
+        .report-container {
+            margin-top: 20px;
+            min-height: auto;
+        }
+
         /* Pop up CSS */
         #eliminateModal {
             display: none;
@@ -198,12 +203,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             z-index: 1;
         }
 
-        #eliminateModal>div {
+        .elim-btn {
+            color: white;
+            width: auto;
+            height: 40px;
+            background-color: rgb(220, 0, 0);
+            border: none;
+            border-radius: 50px;
+            margin-top: 10px;
+            padding-right: 15px;
+            padding-left: 15px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .elim-btn:hover {
+            background-color: rgb(150, 0, 0);
+            color: white;
+        }
+
+        .eliminateSubmitBtn {
+            color: white;
+            width: 80px;
+            height: 40px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 5px;
+            border: none;
+        }
+
+        .eliminateSubmitBtn:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .eliminateCancelBtn {
+            color: white;
+            width: 80px;
+            height: 40px;
+            background-color: rgb(220, 0, 0);
+            border-radius: 5px;
+            border: none;
+        }
+
+        .eliminateCancelBtn:hover {
+            background-color: rgb(150, 0, 0);
+            color: white;
+        }
+
+        .elim-reason {
             background: white;
             padding: 20px;
             border-radius: 8px;
-            width: 300px;
+            width: 400px;
             text-align: center;
+        }
+
+        .elim-reason textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        .reason-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
         }
     </style>
 
@@ -295,7 +366,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     <?php } else { ?>
                         <div>
-                            <button onclick="openEliminateModal()">Eliminate Team</button>
+                            <button class="elim-btn" onclick="openEliminateModal()">Eliminate Team</button>
                         </div>
                     <?php }  ?>
                 </div>
@@ -377,12 +448,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Modal Structure -->
-    <div id="eliminateModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
-        <div style="background: white; padding: 20px; border-radius: 8px; width: 300px; text-align: center;">
+    <div id="eliminateModal" class="reason-popup">
+        <div class="elim-reason">
             <h3>Eliminate Team</h3>
-            <textarea id="eliminationReason" placeholder="Reason for elimination..." style="width: 100%; height: 80px; margin-bottom: 10px; padding: 5px;"></textarea>
+            <textarea id="eliminationReason" placeholder="Reason for elimination..."></textarea>
             <button onclick="submitElimination()" class="eliminateSubmitBtn">Submit</button>
-            <button onclick="closeEliminateModal()">Cancel</button>
+            <button onclick="closeEliminateModal()" class="eliminateCancelBtn">Cancel</button>
         </div>
     </div>
 

@@ -164,7 +164,7 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
         .report-container {
             margin-top: 20px;
             margin-bottom: 20px;
-
+            min-height: auto;
         }
 
         .report-body {
@@ -367,43 +367,43 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
                     <h1 class="recent-Articles">Problems</h1>
                 </div>
 
-                <!-- <div class="report-body"> -->
-                <!-- top hedding -->
-                <div class="table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Sr No</th>
-                                <th scope="col">PS ID</th>
-                                <th scope="col">PS Name</th>
-                                <th scope="col">PS Category</th>
-                                <th scope="col">Total Participation</th>
-                                <th scope="col">View</th>
-                                <th scope="col">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
+                <div class="report-body">
+                    <!-- top hedding -->
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sr No</th>
+                                    <th scope="col">PS ID</th>
+                                    <th scope="col">PS Name</th>
+                                    <th scope="col">PS Category</th>
+                                    <th scope="col">Total Participation</th>
+                                    <th scope="col">View</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
 
-                            // SQL query to fetch all records from the problem_statements table
-                            $sql = "SELECT * FROM problem_statements"; // Assuming your table name is 'ps_data'
-                            $result = $conn->query($sql);
+                                // SQL query to fetch all records from the problem_statements table
+                                $sql = "SELECT * FROM problem_statements"; // Assuming your table name is 'ps_data'
+                                $result = $conn->query($sql);
 
-                            if ($result->num_rows > 0) {
-                                $sr_no = 1;
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>" . $sr_no . "</td>";
-                                    echo "<td>" . $row['ps_id'] . "</td>";
-                                    echo "<td>" . $row['ps_name'] . "</td>";
-                                    echo "<td>" . $row['ps_category'] . "</td>";
-                                    echo "<td>" . $row['no_of_participation'] . "</td>";
-                                    echo '<td> <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button> </td>';
-                                    echo '<td> <button class="delete-btn" onclick="deletePs(this)" data-id="' . $row['ps_id'] . '">Delete</button>';
-                                    echo "</tr>";
+                                if ($result->num_rows > 0) {
+                                    $sr_no = 1;
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>" . $sr_no . "</td>";
+                                        echo "<td>" . $row['ps_id'] . "</td>";
+                                        echo "<td>" . $row['ps_name'] . "</td>";
+                                        echo "<td>" . $row['ps_category'] . "</td>";
+                                        echo "<td>" . $row['no_of_participation'] . "</td>";
+                                        echo '<td> <button class="view-btn" onclick="openPopup(this)" data-id="' . $row['ps_id'] . '">View</button> </td>';
+                                        echo '<td> <button class="delete-btn" onclick="deletePs(this)" data-id="' . $row['ps_id'] . '">Delete</button>';
+                                        echo "</tr>";
 
-                                    // Modal for each problem statement
-                                    echo '
+                                        // Modal for each problem statement
+                                        echo '
                                         <div class="popup" id="' . $row['ps_id'] . '" tabindex="-1">
                                             <div class="modal-header">
                                                 <h2 class="modal-title">Problem Statement Details</h2>
@@ -422,21 +422,21 @@ $teamName = mysqli_query($conn, "SELECT DISTINCT team_name FROM all_team_members
 
                                             </div>
                                         </div>';
-                                    $sr_no++; // Increment the serial number
+                                        $sr_no++; // Increment the serial number
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='5' class='text-center'>No problem statements found</td></tr>";
                                 }
-                            } else {
-                                echo "<tr><td colspan='5' class='text-center'>No problem statements found</td></tr>";
-                            }
 
-                            $conn->close();
+                                $conn->close();
 
-                            ?>
-                        </tbody>
-                    </table>
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <script>
