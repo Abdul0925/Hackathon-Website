@@ -5,7 +5,7 @@ if ($_SESSION['admin_logged_in'] != true) {
 }
 
 require 'db.php';
-$teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE is_leader = 1");
+$teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isEliminated = 0");
 // $teamDetails = mysqli_query($conn, "SELECT * FROM all_team_members");
 ?>
 
@@ -16,7 +16,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>RTH 25 Teams</title>
     <link rel="stylesheet" href="admin_dash_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -177,7 +177,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
         </div>
 
         <div>
-            <H1>Dashboard</H1>
+            <H1>All Teams</H1>
         </div>
 
         <div class="message">
@@ -195,7 +195,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
             <nav class="nav">
                 <div class="nav-upper-options">
                     <a href="admin_dashboard.php" style="text-decoration: none;">
-                        <div class="nav-option option1">
+                        <div class="nav-option option2" style="color: black;">
                             <i class="bi-columns"></i>
                             <h3> Dashboard</h3>
                         </div>
@@ -207,10 +207,10 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                             <h3> Profile</h3>
                         </div>
                     </a>
-                    
+
                     <a href="admin_all_teams.php" style="text-decoration: none;">
-                        <div class="nav-option option2" style="color: black;">
-                            <i class="bi-file-person"></i>
+                        <div class="nav-option option1">
+                            <i class="bi-columns"></i>
                             <h3> Teams</h3>
                         </div>
                     </a>
@@ -241,70 +241,21 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
         </div>
 
         <div class="main">
-
-            <div class="box-container">
-
-                <a href="admin_problem_statements.php">
-                    <div class="box box1">
-                        <div class="text">
-                            <h2 class="topic-heading">Add</h2>
-                            <h2 class="topic">Problems</h2>
-                        </div>
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png" alt="Views">
-                    </div>
-                </a>
-
-                <a href="admin_guidelines.php" class="box box2">
-                    <!-- <div class="box box2"> -->
-                    <div class="text">
-                        <h2 class="topic-heading">Add</h2>
-                        <h2 class="topic">Guidelines</h2>
-                    </div>
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png" alt="likes">
-                    <!-- </div> -->
-                </a>
-
-                <a href="admin_add_notifications.php">
-                    <div class="box box3">
-                        <div class="text">
-                            <h2 class="topic-heading">Add</h2>
-                            <h2 class="topic">Notification</h2>
-                        </div>
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png" alt="comments">
-                    </div>
-                </a>
-
-                <a href="admin_result_announcement.php" class="box box4">
-                    <!-- <div class="box box4"> -->
-                    <div class="text">
-                        <h2 class="topic-heading">Result</h2>
-                        <h2 class="topic">Announcement</h2>
-                    </div>
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
-                    <!-- </div> -->
-                </a>
-
-            </div>
-
             <!-- team detail table -->
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">Teams</h1>
+                    <div>
+                        <a href="admin_all_eliminated_teams.php">
+                            See Eliminated Teams
+                        </a>
+                    </div>
                 </div>
                 <div class="searchFeature">
 
                     <!-- <label for="" class="searchLable">Search: </label> -->
                     <input class="searchInput" type="text" id="searchBox" placeholder="Search by Team Name or Mentor Email">
                 </div>
-
-                <!-- For PPT -->
-                <!-- <label for="">Select PS ID: </label>
-                <select name="" id="searchBox">
-                    <option value="">All</option>
-                    <option value="RTH01">RTH01</option>
-                    <option value="RTH02">RTH02</option>
-                    <option value="RTH03">RTH03</option>
-                </select> -->
 
                 <div class="report-body">
                     <!-- top hedding -->
@@ -334,10 +285,10 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                                         <td><?php echo $leader['leaderEmail'] ?></td>
                                         <td><?php echo  strtoupper($leader['psId']) ?></td>
                                         <td>
-                                            <!-- <form action="" method="POST" class="d-inline"> -->
-                                            <input type="hidden" name="noti_id" value="<?php echo $leader['leaderEmail']; ?>">
-                                            <button class="primary-btn w-100 view-details-btn" onclick="openPopup()" style="cursor: pointer;" data-id="<?php echo $leader['team_id']; ?>">View</button>
-                                            <!-- </form> -->
+                                            <form action="admin_view_teams.php" method="POST" class="d-inline">
+                                                <input type="hidden" name="leaderEmail" value="<?php echo $leader['leaderEmail']; ?>">
+                                                <button class="primary-btn w-100 view-details-btn" style="cursor: pointer;">View</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -385,8 +336,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                 row.style.display = matches ? '' : 'none'; // Show or hide rows
             });
         });
-    </script>
-    <script>
+
         $(document).ready(function() {
             $('th').click(function() {
                 const table = $(this).parents('table');
@@ -415,46 +365,18 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                 });
             });
         });
+
+        function openTeamDetails(button) {
+            // Access the data-id attribute using the dataset property
+            const teamId = button.dataset.id;
+            console.log(teamId);
+
+        }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // When 'View Details' button is clicked
-            $('.view-details-btn').click(function() {
-                var team_id = $(this).data('id'); // Get student ID from button data attribute
-                console.log(team_id)
-                // Make an AJAX request to fetch additional student details
-                $.ajax({
-                    url: 'fetch_team_details.php',
-                    type: 'POST',
-                    data: {
-                        id: team_id
-                    },
-                    success: function(data) {
-                        // console.log(data);
-                        // Insert student details into the modal
-                        $('#student-details').html(data);
 
-                        // Show the modal
-                        $('#teamDetailsModal').modal('show');
-                    }
-                });
-                // Set the delete button with the student ID
-                // $('#delete-btn').data('email', student-details);
-            });
-        });
-        let popup = document.getElementById("popup");
-
-        function openPopup() {
-            popup.classList.add("open-popup")
-        }
-
-        function closePopup() {
-            popup.classList.remove("open-popup")
-        }
-    </script>
 </body>
 
 </html>
