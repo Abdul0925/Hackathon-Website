@@ -319,7 +319,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
                                 <tr>
                                     <th scope="col">Sr No</th>
                                     <th scope="col">Team Name</th>
-                                    <th scope="col">Leader</th>
+                                    <th scope="col">Leader Email</th>
                                     <th scope="col">PS</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -336,7 +336,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
                                     <tr>
                                         <td><?php echo $srno ?></td>
                                         <td>
-                                            <form action="admin_view_teams.php" method="POST" class="d-inline">
+                                            <form action="admin_view_team_eliminate.php" method="POST" class="d-inline">
                                                 <input type="hidden" name="leaderEmail" value="<?php echo $leader['leaderEmail']; ?>">
                                                 <button class="primary-btn w-100 view-details-btn" style="cursor: pointer;"><?php echo $leader['teamName'] ?></button>
                                             </form>

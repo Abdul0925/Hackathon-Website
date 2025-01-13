@@ -319,7 +319,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
                                 <tr>
                                     <th scope="col">Sr No</th>
                                     <th scope="col">Team Name</th>
-                                    <th scope="col">Mentor</th>
+                                    <th scope="col">Leader Email</th>
                                     <th scope="col">PS</th>
                                     <th scope="col">Action</th>
                                 </tr>
