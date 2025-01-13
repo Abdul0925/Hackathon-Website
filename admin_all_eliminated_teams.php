@@ -161,6 +161,57 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
         .report-body {
             padding: 0px 20px 20px 20px;
         }
+
+        .report-container {
+            margin-top: 20px;
+            min-height: auto;
+        }
+
+        .team-buttons{
+            display: flex;
+        }
+
+        .team-buttons a {
+            text-decoration: none;
+        }
+
+        .part-btn {
+            color: black;
+            width: auto;
+            height: 40px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 50px 0 0 50px;
+            border-color: rgb(97, 19, 207);
+            margin-top: 10px;
+            padding-right: 15px;
+            padding-left: 15px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .part-btn:hover {
+            background-color: rgb(229, 229, 229);
+            color: black;
+        }
+
+        .elim-btn {
+            color: white;
+            width: auto;
+            height: 40px;
+            background-color: rgb(97, 19, 207);
+            border-color: rgb(97, 19, 207);
+            border-radius: 0 50px 50px 0;
+            margin-top: 10px;
+            padding-right: 15px;
+            padding-left: 15px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .elim-btn:hover {
+            background-color: rgb(79, 0, 190);
+            color: white;
+        }
     </style>
 
 </head>
@@ -210,7 +261,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
 
                     <a href="admin_all_teams.php" style="text-decoration: none;">
                         <div class="nav-option option1">
-                            <i class="bi-columns"></i>
+                            <i class="bi-people-fill"></i>
                             <h3> Teams</h3>
                         </div>
                     </a>
@@ -245,9 +296,12 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">Teams</h1>
-                    <div>
+                    <div class="team-buttons">
                         <a href="admin_all_teams.php">
-                            See participating teams
+                            <button class="part-btn">Participating Teams</button>
+                        </a>
+                        <a href="admin_all_eliminated_teams.php">
+                            <button class="elim-btn">Eliminated Teams</button>
                         </a>
                     </div>
                 </div>
@@ -265,7 +319,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
                                 <tr>
                                     <th scope="col">Sr No</th>
                                     <th scope="col">Team Name</th>
-                                    <th scope="col">Leader</th>
+                                    <th scope="col">Leader Email</th>
                                     <th scope="col">PS</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -282,7 +336,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
                                     <tr>
                                         <td><?php echo $srno ?></td>
                                         <td>
-                                            <form action="admin_view_teams.php" method="POST" class="d-inline">
+                                            <form action="admin_view_team_eliminate.php" method="POST" class="d-inline">
                                                 <input type="hidden" name="leaderEmail" value="<?php echo $leader['leaderEmail']; ?>">
                                                 <button class="primary-btn w-100 view-details-btn" style="cursor: pointer;"><?php echo $leader['teamName'] ?></button>
                                             </form>

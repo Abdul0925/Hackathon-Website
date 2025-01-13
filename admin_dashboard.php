@@ -161,6 +161,10 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
         .report-body {
             padding: 0px 20px 20px 20px;
         }
+
+        .report-container {
+            min-height: auto;
+        }
     </style>
 
 </head>
@@ -207,10 +211,10 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                             <h3> Profile</h3>
                         </div>
                     </a>
-                    
+
                     <a href="admin_all_teams.php" style="text-decoration: none;">
                         <div class="nav-option option2" style="color: black;">
-                            <i class="bi-file-person"></i>
+                            <i class="bi-people-fill"></i>
                             <h3> Teams</h3>
                         </div>
                     </a>

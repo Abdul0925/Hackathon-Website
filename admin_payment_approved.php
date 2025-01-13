@@ -115,6 +115,7 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
 
         .report-container {
             margin-top: 20px;
+            min-height: auto;
         }
 
         .nav-upper-options {
@@ -187,6 +188,13 @@ $adminDetails = mysqli_query($conn, "SELECT * FROM payment_details");
                         <div class="nav-option option3" style="color: black;">
                             <i class="bi-file-person"></i>
                             <h3> Profile</h3>
+                        </div>
+                    </a>
+
+                    <a href="admin_all_teams.php" style="text-decoration: none;">
+                        <div class="nav-option option2" style="color: black;">
+                            <i class="bi-people-fill"></i>
+                            <h3> Teams</h3>
                         </div>
                     </a>
 

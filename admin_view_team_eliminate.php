@@ -404,15 +404,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles"><?php echo $leader['teamName'] ?></h1>
-                    <?php if ($isEliminated) { ?>
-                        <div>
-                            <button disabled>Eliminated</button>
-                        </div>
-                    <?php } else { ?>
-                        <div>
-                            <button class="elim-btn" onclick="openEliminateModal()">Eliminate Team</button>
-                        </div>
-                    <?php }  ?>
                 </div>
 
                 <div class="report-body">
@@ -472,112 +463,113 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </table>
                     </div>
                 </div>
-                <div class="popup" id="popup" tabindex="-1">
-                    <div class="modal-header">
-                        <h2>Team Details</h2>
-                    </div>
-                    <div class="modal-body" id="modalBody">
-                        <div id="student-details"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="my-primary-btn" onclick="closePopup()" data-bs-dismiss="modal">Close</button>
-                    </div>
+            </div>
+            <div class="popup" id="popup" tabindex="-1">
+                <div class="modal-header">
+                    <h2>Team Details</h2>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <div id="student-details"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="my-primary-btn" onclick="closePopup()" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Modal Structure -->
-        <div id="eliminateModal" class="reason-popup">
-            <div class="elim-reason">
-                <h3>Eliminate Team</h3>
-                <textarea id="eliminationReason" placeholder="Reason for elimination..."></textarea>
-                <button onclick="submitElimination()" class="eliminateSubmitBtn">Submit</button>
-                <button onclick="closeEliminateModal()" class="eliminateCancelBtn">Cancel</button>
-            </div>
+    <!-- Modal Structure -->
+    <div id="eliminateModal" class="reason-popup">
+        <div class="elim-reason">
+            <h3>Eliminate Team</h3>
+            <textarea id="eliminationReason" placeholder="Reason for elimination..."></textarea>
+            <button onclick="submitElimination()" class="eliminateSubmitBtn">Submit</button>
+            <button onclick="closeEliminateModal()" class="eliminateCancelBtn">Cancel</button>
         </div>
+    </div>
 
-        <script>
-            let menuicn = document.querySelector(".menuicn");
-            let nav = document.querySelector(".navcontainer");
+    <script>
+        let menuicn = document.querySelector(".menuicn");
+        let nav = document.querySelector(".navcontainer");
 
-            menuicn.addEventListener("click", () => {
-                nav.classList.toggle("navclose");
-            })
+        menuicn.addEventListener("click", () => {
+            nav.classList.toggle("navclose");
+        })
 
-            function openTeamDetails(button) {
-                // Access the data-id attribute using the dataset property
-                const teamId = button.dataset.id;
-                console.log(teamId);
+        function openTeamDetails(button) {
+            // Access the data-id attribute using the dataset property
+            const teamId = button.dataset.id;
+            console.log(teamId);
 
+        }
+
+        // Open the modal
+        function openEliminateModal() {
+            document.getElementById('eliminateModal').style.display = 'flex';
+        }
+
+        // Close the modal
+        function closeEliminateModal() {
+            document.getElementById('eliminateModal').style.display = 'none';
+        }
+
+        // Submit elimination reason
+        function submitElimination() {
+            const reason = document.getElementById('eliminationReason').value.trim();
+            const leaderEmail = "<?php echo $leader['leaderEmail']; ?>";
+            const leaderName = "<?php echo $leader['leaderName']; ?>";
+            const teamName = "<?php echo $leader['teamName']; ?>";
+            const teamId = "<?php echo $leader['id']; ?>";
+            if (!reason) {
+                alert('Please provide a reason for elimination.');
+                return;
             }
 
-            // Open the modal
-            function openEliminateModal() {
-                document.getElementById('eliminateModal').style.display = 'flex';
-            }
+            const eliminateSubmitBtn = document.querySelector('.eliminateSubmitBtn');
+            eliminateSubmitBtn.disabled = true;
+            eliminateSubmitBtn.textContent = 'Submitting...';
+            eliminateSubmitBtn.style.cursor = 'not-allowed';
+            eliminateSubmitBtn.style.backgroundColor = 'gray';
 
-            // Close the modal
-            function closeEliminateModal() {
-                document.getElementById('eliminateModal').style.display = 'none';
-            }
+            const formData = new FormData();
+            formData.append('reason', reason);
+            formData.append('teamId', teamId);
+            formData.append('teamName', teamName);
+            formData.append('leaderEmail', leaderEmail);
+            formData.append('leaderName', leaderName);
 
-            // Submit elimination reason
-            function submitElimination() {
-                const reason = document.getElementById('eliminationReason').value.trim();
-                const leaderEmail = "<?php echo $leader['leaderEmail']; ?>";
-                const leaderName = "<?php echo $leader['leaderName']; ?>";
-                const teamName = "<?php echo $leader['teamName']; ?>";
-                const teamId = "<?php echo $leader['id']; ?>";
-                if (!reason) {
-                    alert('Please provide a reason for elimination.');
-                    return;
-                }
-
-                const eliminateSubmitBtn = document.querySelector('.eliminateSubmitBtn');
-                eliminateSubmitBtn.disabled = true;
-                eliminateSubmitBtn.textContent = 'Submitting...';
-                eliminateSubmitBtn.style.cursor = 'not-allowed';
-                eliminateSubmitBtn.style.backgroundColor = 'gray';
-
-                const formData = new FormData();
-                formData.append('reason', reason);
-                formData.append('teamId', teamId);
-                formData.append('teamName', teamName);
-                formData.append('leaderEmail', leaderEmail);
-                formData.append('leaderName', leaderName);
-
-                // Send data to admin_eliminate_team.php via fetch
-                fetch('admin_eliminate_team.php', {
-                        method: 'POST',
-                        body: formData,
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.success) {
-                            alert('Team eliminated successfully.');
-                            closeEliminateModal();
-                            window.location.href = "admin_all_eliminated_teams.php";
-                        } else {
-                            alert('Failed to eliminate team. Please try again.');
-                            eliminateSubmitBtn.disabled = false;
-                            eliminateSubmitBtn.textContent = 'Submit';
-                            eliminateSubmitBtn.style.cursor = 'pointer';
-                            eliminateSubmitBtn.style.backgroundColor = 'gray';
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                        alert('An error occurred while eliminating the team.');
+            // Send data to admin_eliminate_team.php via fetch
+            fetch('admin_eliminate_team.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        alert('Team eliminated successfully.');
+                        closeEliminateModal();
+                        window.location.href = "admin_all_eliminated_teams.php";
+                    } else {
+                        alert('Failed to eliminate team. Please try again.');
                         eliminateSubmitBtn.disabled = false;
                         eliminateSubmitBtn.textContent = 'Submit';
                         eliminateSubmitBtn.style.cursor = 'pointer';
                         eliminateSubmitBtn.style.backgroundColor = 'gray';
-                    });
-            }
-        </script>
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('An error occurred while eliminating the team.');
+                    eliminateSubmitBtn.disabled = false;
+                    eliminateSubmitBtn.textContent = 'Submit';
+                    eliminateSubmitBtn.style.cursor = 'pointer';
+                    eliminateSubmitBtn.style.backgroundColor = 'gray';
+                });
+        }
+    </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 
