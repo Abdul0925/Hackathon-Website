@@ -308,7 +308,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
                 <div class="searchFeature">
 
                     <!-- <label for="" class="searchLable">Search: </label> -->
-                    <input class="searchInput" type="text" id="searchBox" placeholder="Search by Team Name or Mentor Email">
+                    <input class="searchInput" type="text" id="searchBox" placeholder="Search by Team Name or Leader Email">
                 </div>
 
                 <div class="report-body">
