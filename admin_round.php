@@ -21,6 +21,7 @@ $startDate = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['date'
 $isResultDeclared = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['isResultDeclared'] : null;
 
 
+k
 
 ?>
 
