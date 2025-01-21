@@ -175,6 +175,7 @@ $stmt1->close();
 
         .main {
             background-color: #cad7fda4;
+            padding: 15px 30px 30px 30px;
         }
 
         .nav-upper-options {
@@ -222,8 +223,8 @@ $stmt1->close();
         }
 
         .report-container {
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 5px;
+            margin-bottom: 0px;
             height: 400px;
             /* display: flex; */
             justify-content: center;
@@ -233,7 +234,7 @@ $stmt1->close();
         .report-container1 {
             margin-top: 20px;
             margin-bottom: 20px;
-            height: 400px;
+            height: 260px;
             display: flex;
             justify-content: center;
             align-items: center;
