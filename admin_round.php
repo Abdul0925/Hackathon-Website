@@ -22,6 +22,7 @@ $isResultDeclared = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()
 
 
 
+
 ?>
 
 <!DOCTYPE html>
