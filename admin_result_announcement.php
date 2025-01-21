@@ -14,6 +14,8 @@ if ($isRoundOneResDeclaredQuery) {
     $isRoundOneResDeclared = $row['isResultAnnounced'] == 1;
 }
 
+$round = isset($_GET['round']) ? $_GET['round'] : 'round1';
+
 
 ?>
 
@@ -207,20 +209,21 @@ if ($isRoundOneResDeclaredQuery) {
             margin-top: 20px;
         }
 
-        table.approved-teams-table th, table.approved-teams-table td {
+        table.approved-teams-table th,
+        table.approved-teams-table td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
 
         table.approved-teams-table th {
-            background-color:rgb(168, 119, 253);
+            background-color: rgb(168, 119, 253);
             color: black;
             font-weight: bold;
         }
 
         table.approved-teams-table tr:nth-child(even) {
-            background-color:rgb(246, 241, 255);
+            background-color: rgb(246, 241, 255);
         }
 
         table.approved-teams-table tr:hover {
@@ -234,7 +237,6 @@ if ($isRoundOneResDeclaredQuery) {
             text-decoration: underline;
             cursor: pointer;
         }
-        
     </style>
 
 </head>
@@ -320,19 +322,19 @@ if ($isRoundOneResDeclaredQuery) {
                 <button style="border-radius: 0 50px 50px 0;" id="round2-tab" onclick="showContent('round2')">Round 2</button>
             </div>
             <div class="report-container">
-                <div id="round1" class="content active">
+                <div id="round1" class="content <?php echo ($round !== 'round2') ? "active" : "" ?> ">
                     <div class="report-header">
-                        
+
                         <div class="recent-Articles">
                             <h1>RTH Round 1</h1>
                         </div>
-                        <?php if(!$isRoundOneResDeclared){ ?>
-                        <button id="declareResultBtn">
-                            Declare Result
-                        </button>
+                        <?php if (!$isRoundOneResDeclared) { ?>
+                            <button id="declareResultBtn">
+                                Declare Result
+                            </button>
                         <?php } else { ?>
                             <!-- <button id="declareResultBtn"> -->
-                                Result Declared
+                            Result Declared
                             <!-- </button> -->
                         <?php } ?>
                     </div>
@@ -348,7 +350,7 @@ if ($isRoundOneResDeclaredQuery) {
                         <th>Leader Email</th>
                         <th>PS ID</th>
                         </tr>";
-                        
+
                         while ($row = mysqli_fetch_assoc($approvedTeams)) {
                             $teamId = $row['team_id'];
                             $teamQuery = mysqli_query($conn, "SELECT teamName FROM team_and_leader_details WHERE id = '$teamId'");
@@ -356,9 +358,9 @@ if ($isRoundOneResDeclaredQuery) {
                             $teamName = $teamRow['teamName'];
                             echo "<tr>";
                             echo "<td><form action='admin_view_teams.php' method='POST' class='d-inline'>
-                            <input type='hidden' name='leaderEmail' value='".$row['leaderEmail']."'>
-                            <button class='teamBtn' style='cursor: pointer;'>".
-                            $teamName."</button></form>
+                            <input type='hidden' name='leaderEmail' value='" . $row['leaderEmail'] . "'>
+                            <button class='teamBtn' style='cursor: pointer;'>" .
+                                $teamName . "</button></form>
                             </td>";
                             echo "<td>" . $row['leaderEmail'] . "</td>";
                             echo "<td>" . $row['psId'] . "</td>";
@@ -368,7 +370,7 @@ if ($isRoundOneResDeclaredQuery) {
                         ?>
                     </div>
                 </div>
-                <div id="round2" class="content">
+                <div id="round2" class="content <?php echo ($round == 'round2') ? "active" : "" ?>">
                     <div class="report-header">
                         <div class="recent-Articles">
                             <h1>RTH Round 2</h1>
@@ -381,6 +383,7 @@ if ($isRoundOneResDeclaredQuery) {
     </div>
 
 
+
     <script>
         let menuicn = document.querySelector(".menuicn");
         let nav = document.querySelector(".navcontainer");
@@ -388,6 +391,14 @@ if ($isRoundOneResDeclaredQuery) {
         menuicn.addEventListener("click", () => {
             nav.classList.toggle("navclose");
         })
+
+        <?php
+        if ($round == 'round2') {
+            echo "showContent('round2')";
+        } else {    
+            echo "showContent('round1')";
+        }
+        ?>
 
         function showContent(round) {
             // Hide all content
@@ -403,7 +414,7 @@ if ($isRoundOneResDeclaredQuery) {
             document.getElementById(`${round}-tab`).classList.add('active');
         }
 
-        document.getElementById('declareResultBtn').addEventListener('click',function(e){
+        document.getElementById('declareResultBtn').addEventListener('click', function(e) {
             const declareResultBtn = document.getElementById('declareResultBtn');
             declareResultBtn.disabled = true;
             declareResultBtn.textContent = 'Declaring...';
@@ -434,9 +445,8 @@ if ($isRoundOneResDeclaredQuery) {
                     declareResultBtn.style.cursor = 'pointer';
                     declareResultBtn.style.backgroundColor = 'rgb(255, 255, 255)';
                 });
-            
-        });
 
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

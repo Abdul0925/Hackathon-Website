@@ -7,8 +7,6 @@ if ($_SESSION['admin_logged_in'] != true) {
 require 'db.php';
 $round1Query = "SELECT on_going FROM admin_rounds WHERE on_going = 1 AND title = 'Round 1'";
 $isRound1StartedStmt = $conn->query($round1Query);
-
-
 if ($isRound1StartedStmt->num_rows > 0) {
     $isR1OnGoing = 1;
 } else {
@@ -17,9 +15,43 @@ if ($isRound1StartedStmt->num_rows > 0) {
 
 $startDateQuery = "SELECT * FROM admin_rounds WHERE title = 'Round 1' AND on_going = 1";
 $startDateStmt = $conn->query($startDateQuery);
-$startDate = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['date'] : null;
-$isResultDeclared = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()['isResultDeclared'] : null;
+if ($startDateStmt->num_rows > 0) {
+    $startDate = $startDateStmt->fetch_assoc()['date'];
+} else {
+    $startDate = null;
+}
 
+$round1ResultQuery = "SELECT on_going FROM admin_rounds WHERE isResultAnnounced = 1 AND title = 'Round 1'";
+$isRResultAnnouncedStmt = $conn->query($round1ResultQuery);
+if ($isRResultAnnouncedStmt->num_rows > 0) {
+    $isResultDeclared = 1;
+} else {
+    $isResultDeclared = 0;
+}
+
+$round2Query = "SELECT on_going FROM admin_rounds WHERE on_going = 1 AND title = 'Round 2'";
+$isRound2StartedStmt = $conn->query($round2Query);
+if ($isRound2StartedStmt->num_rows > 0) {
+    $isR2OnGoing = 1;
+} else {
+    $isR2OnGoing = 0;
+}
+
+$startDateQuery = "SELECT * FROM admin_rounds WHERE title = 'Round 2' AND on_going = 1";
+$startDateStmt = $conn->query($startDateQuery);
+if ($startDateStmt->num_rows > 0) {
+    $startR2Date = $startDateStmt->fetch_assoc()['date'];
+} else {
+    $startR2Date = null;
+}
+
+$round2ResultQuery = "SELECT on_going FROM admin_rounds WHERE isResultAnnounced = 1 AND title = 'Round 2'";
+$isRResultAnnouncedStmt = $conn->query($round2ResultQuery);
+if ($isRResultAnnouncedStmt->num_rows > 0) {
+    $isR2ResultDeclared = 1;
+} else {
+    $isR2ResultDeclared = 0;
+}
 
 
 
@@ -240,22 +272,40 @@ $isResultDeclared = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()
                 </div>
 
                 <div class="report-body">
-                    Round 1
-                    <?php if (!$isR1OnGoing && $isResultDeclared) { ?>
+                    <h2>Round 1</h2>
+                    <?php if (!$isR1OnGoing && !$isResultDeclared) { ?>
                         <form id="start_round1">
                             <button class="startBtn">Start Round 1</button>
                         </form>
-                    <?php } else if (!$isR1OnGoing && !$isResultDeclared) { ?>
+                    <?php } else if ($isResultDeclared) { ?>
                         <div class="startBtn">Round 1 result is already declared <a href="admin_result_announcement.php">View Result</a> </div>
                     <?php } else { ?>
-                        <div>Started on: <?php echo $startDate; ?></div>
                         <form id="stop_round1">
+                            <div>Started on: <?php echo $startDate; ?></div>
                             <button class="stopBtn">Stop Round 1</button>
                         </form>
                     <?php } ?>
                     <form id="view_submissions_form">
                         <button class="ViewBtn">View Submissions</button>
                     </form>
+                </div>
+                
+                <div class="report-body">
+                    <h2>Round 2</h2>
+                    <?php if (!$isResultDeclared) { ?>
+                        <div>Round 1 Result is Pending First <a href="admin_result_announcement.php">declare Round 1 result</a></div>
+                    <?php } else if (!$isR2OnGoing && !$isR2ResultDeclared) { ?>
+                        <form id="start_round2">
+                            <button class="startBtn">Start Round 2</button>
+                        </form>
+                    <?php } else if ($isR2ResultDeclared) { ?>
+                        <div class="startBtn">Round 2 result declared <a href="admin_result_announcement.php?round=round2">View Result</a> </div>
+                    <?php } else { ?>
+                        <form id="stop_round2">
+                            <div>Started on: <?php echo $startDate; ?></div>
+                            <button class="stopBtn">Stop Round 2</button>
+                        </form>
+                    <?php } ?>
                 </div>
             </div>
         </div>
