@@ -132,6 +132,24 @@ $isResultDeclared = $startDateStmt->num_rows > 0 ? $startDateStmt->fetch_assoc()
                 width: 300px;
             }
         }
+
+        #start_round1 .startBtn {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .stopBtn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 
 </head>

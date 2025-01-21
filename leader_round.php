@@ -463,7 +463,6 @@ if ($isSubmittedResult->num_rows > 0) {
                         <span class="round-control"> <?php echo $solSummary; ?> </span>
                     </div>
                 <?php } ?>
-                </div>
 
                 <div id="round2" class="content">
                     <div class="report-header">
@@ -475,6 +474,7 @@ if ($isSubmittedResult->num_rows > 0) {
                         <p>This is the content for Round 2. Add more details here as needed.</p>
                     </form>
                 </div>
+                
             </div>
         </div>
     </div>
