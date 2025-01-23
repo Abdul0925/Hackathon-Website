@@ -432,7 +432,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label><b>PPT link: </b><a href="<?php echo $idea['pptLink'] ?>">See PPT</a></label>
                             <label><b>Doc Link: </b><a href="<?php echo $idea['docLink'] ?>">See Document</a></label>
                             <label><b>Summary: </b><?php echo $idea['solSummary'] ?></label>
-                            <label><b>Idea Approved: </b><?php echo ($idea['isApproved']) ? 'Approved to Round 2' : 'false'; ?></label>
+                            <label><b>Status: </b><?php echo ($idea['isApproved']) ? 'Approved to Round 2' : 'false'; ?></label>
                         </div>
                     <?php } ?>
                     <div class="table">
@@ -455,7 +455,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $stmt->execute();
                                 $teamDetails = $stmt->get_result();
                                 $srNo = 1;
-                                while ($mentorEmail = $teamDetails->fetch_assoc()) {
+                                if ($mentorEmail = $teamDetails->fetch_assoc()) {
                                 ?>
                                     <tr>
                                         <td><?php echo $srNo ?></td>
@@ -467,7 +467,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </tr>
 
                                 <?php $srNo++;
-                                } ?>
+                                } else { ?>
+                                    <tr>
+                                        <td colspan="5">No members found.</td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
