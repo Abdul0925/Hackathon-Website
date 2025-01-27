@@ -78,11 +78,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'abdulrahim74264@gmail.com';
-                    $mail->Password = 'iotg jqut wkks sjrt'; // Use an app password
+                    $mail->Username = 'encartaitcell@ghrcacs.raisoni.net';
+                    $mail->Password = 'encartapass@email'; // Use an app password
                     $mail->SMTPSecure = 'ssl';
                     $mail->Port = 465;
-                    $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
+                    $mail->setFrom('encartaitcell@ghrcacs.raisoni.net', 'Encarta IT Cell');
                     $mail->addAddress($email);
                     $mail->isHTML(true);
                     $mail->Subject = "OTP for Reset Password";
@@ -134,10 +134,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         $mail->Host = 'smtp.gmail.com';           // SMTP server address
         $mail->SMTPAuth = true;
         $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
-        $mail->Password = 'iotg jqut wkks sjrt';       // Your email password (use an app-specific password if needed)
+        $mail->Password = 'encartapass@email';       // Your email password (use an app-specific password if needed)
         $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
         $mail->Port = 465;                        // Port for SSL
-        $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
+        $mail->setFrom('abdulrahim74264@gmail.com', 'Encarta IT Cell');
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = "Password Reset";

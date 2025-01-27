@@ -398,13 +398,13 @@ function sentmail($leaderEmail, $leaderName, $psId, $teamName)
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';           
         $mail->SMTPAuth = true;
-        $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
-        $mail->Password = 'iotg jqut wkks sjrt';       // Your email password (use an app-specific password if needed)
+        $mail->Username = 'encartaitcell@ghrcacs.raisoni.net'; // Your email username
+        $mail->Password = 'encartapass@email';       // Your email password (use an app-specific password if needed)
         $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
         $mail->Port = 465;                        // Port for SSL
 
         // Set the sender's email and name
-        $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
+        $mail->setFrom('encartaitcell@ghrcacs.raisoni.net', 'Encarta IT Cell');
 
         // Add the recipient's email (student's email)
         $mail->addAddress($leaderEmail);
