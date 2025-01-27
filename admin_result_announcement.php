@@ -159,7 +159,7 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
             border-radius: 50px 0 0 50px;
             height: 40px;
             width: 120px;
-            transition: 0.3s;
+            transition: 0.5s;
         }
 
         .tabs button.active {
