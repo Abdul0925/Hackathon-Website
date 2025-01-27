@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'encartaitcell@ghrcacs.raisoni.net';
-        $mail->Password = 'ntkc xkfq oekp tgnw';
+        $mail->Password = 'encartapass@email';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 

@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
                     $mail->Username = 'encartaitcell@ghrcacs.raisoni.net';
-                    $mail->Password = 'ntkc xkfq oekp tgnw'; // Use an app password
+                    $mail->Password = 'encartapass@email'; // Use an app password
                     $mail->SMTPSecure = 'ssl';
                     $mail->Port = 465;
                     $mail->setFrom('encartaitcell@ghrcacs.raisoni.net', 'Encarta IT Cell');
@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verifyOtp'])) {
         $mail->Host = 'smtp.gmail.com';           // SMTP server address
         $mail->SMTPAuth = true;
         $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
-        $mail->Password = 'ntkc xkfq oekp tgnw';       // Your email password (use an app-specific password if needed)
+        $mail->Password = 'encartapass@email';       // Your email password (use an app-specific password if needed)
         $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
         $mail->Port = 465;                        // Port for SSL
         $mail->setFrom('abdulrahim74264@gmail.com', 'Encarta IT Cell');
