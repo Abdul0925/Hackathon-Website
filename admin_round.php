@@ -117,29 +117,29 @@ if ($isRResultAnnouncedStmt->num_rows > 0) {
             color: #5500cb;
         }
 
-        .primary-btn {
-            background-color: rgb(220, 0, 0);
+        .ViewBtn {
+            background-color: rgb(47, 141, 70);
             color: white;
-            width: 60px;
-            height: 30px;
+            width: 150px;
+            height: 40px;
             border-radius: 5px;
             border: none;
         }
 
-        .primary-btn:hover {
-            background-color: rgb(150, 0, 0);
+        .ViewBtn:hover {
+            background-color: rgb(31, 91, 46);
             color: white;
         }
 
-        .primary-btn:active {
+        .ViewBtn:active {
             box-shadow: 2px 2px 5px #fc894d;
-            background-color: rgb(220, 0, 0);
+            background-color: rgb(47, 141, 70);
         }
 
         .report-container {
             min-height: 0px;
             margin-top: 20px;
-            height: 400px;
+            height: auto;
         }
 
         .nav-upper-options {
@@ -165,22 +165,44 @@ if ($isRResultAnnouncedStmt->num_rows > 0) {
             }
         }
 
-        #start_round1 .startBtn {
-            background-color: green;
+        .startBtn {
+            background-color: rgb(47, 141, 70);
             color: white;
-            border: none;
-            padding: 10px 20px;
+            width: 150px;
+            height: 40px;
             border-radius: 5px;
-            cursor: pointer;
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        .startBtn:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .startBtn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
         }
 
         .stopBtn {
-            background-color: red;
+            background-color: rgb(220, 0, 0);
             color: white;
-            border: none;
-            padding: 10px 20px;
+            width: 150px;
+            height: 40px;
             border-radius: 5px;
-            cursor: pointer;
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        .stopBtn:hover {
+            background-color: rgb(150, 0, 0);
+            color: white;
+        }
+
+        .stopBtn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(220, 0, 0);
         }
     </style>
 

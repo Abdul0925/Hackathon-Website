@@ -179,9 +179,9 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
             color: black;
             width: auto;
             height: 40px;
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(225, 225, 225);
             border-radius: 50px 0 0 50px;
-            border-color: rgb(97, 19, 207);
+            border: none;
             margin-top: 10px;
             padding-right: 15px;
             padding-left: 15px;
@@ -190,7 +190,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
         }
 
         .part-btn:hover {
-            background-color: rgb(229, 229, 229);
+            background-color: rgb(200, 200, 200);
             color: black;
         }
 
@@ -199,7 +199,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
             width: auto;
             height: 40px;
             background-color: rgb(97, 19, 207);
-            border-color: rgb(97, 19, 207);
+            border: none;
             border-radius: 0 50px 50px 0;
             margin-top: 10px;
             padding-right: 15px;

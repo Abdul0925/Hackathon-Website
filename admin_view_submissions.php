@@ -35,7 +35,7 @@ $result = $conn->query($query);
         th,
         td {
             border: 1px solid rgb(200, 200, 200);
-            padding: 8px 30px;
+            padding: 8px 10px;
             text-align: center;
         }
 
@@ -52,14 +52,14 @@ $result = $conn->query($query);
         .popup {
             border: 1px solid black;
             border-radius: 10px;
-            width: 500px;
-            height: auto;
+            max-width: 800px;
+            max-height: 500px;
             background: white;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            padding: 0 30px 30px;
+            padding: 0 20px 20px;
             visibility: hidden;
         }
 
@@ -69,12 +69,48 @@ $result = $conn->query($query);
 
         .modal-header h2 {
             padding-top: 25px;
+            padding-bottom: 10px;
             margin-bottom: 20px;
             color: #5500cb;
+            border-bottom: 2px solid rgba(0, 20, 151, 0.59);
+        }
+
+        .modal-body {
+            overflow-y: auto;
+            max-height: 345px;
+        }
+
+        .modal-body p {
+            margin-bottom: 5px;
+        }
+
+        .modal-footer {
+            display: block;
+        }
+
+        .modal-footer button {
+            background-color: rgb(220, 0, 0);
+            color: white;
+            width: 60px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
+            font-size: 90%;
+        }
+
+        .modal-footer button:hover {
+            background-color: rgb(150, 0, 0);
+            color: white;
+        }
+
+        .modal-footer button:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(220, 0, 0);
         }
 
         .primary-btn {
-            background-color: rgb(220, 0, 0);
+            background-color: rgb(47, 141, 70);
             color: white;
             width: 60px;
             height: 30px;
@@ -83,19 +119,19 @@ $result = $conn->query($query);
         }
 
         .primary-btn:hover {
-            background-color: rgb(150, 0, 0);
+            background-color: rgb(31, 91, 46);
             color: white;
         }
 
         .primary-btn:active {
             box-shadow: 2px 2px 5px #fc894d;
-            background-color: rgb(220, 0, 0);
+            background-color: rgb(47, 141, 70);
         }
 
         .report-container {
             min-height: 0px;
             margin-top: 20px;
-            height: 400px;
+            height: auto;
         }
 
         .nav-upper-options {
@@ -119,6 +155,44 @@ $result = $conn->query($query);
             .popup {
                 width: 300px;
             }
+        }
+
+        .approveIdeaBtn {
+            background-color: rgb(47, 141, 70);
+            color: white;
+            width: 130px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .approveIdeaBtn:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .approveIdeaBtn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
+        }
+
+        .disapproveIdeaBtn {
+            background-color: rgb(220, 0, 0);
+            color: white;
+            width: 130px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .disapproveIdeaBtn:hover {
+            background-color: rgb(150, 0, 0);
+            color: white;
+        }
+
+        .disapproveIdeaBtn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(220, 0, 0);
         }
     </style>
 
@@ -213,22 +287,24 @@ $result = $conn->query($query);
                     <?php
                     if ($result->num_rows > 0) {
                         echo "<table>";
-                        echo "<tr><th>PS ID</th><th>Team Leader</th><th>Title</th><th>PPT Link</th><th>Doc Link</th><th>Summary</th><th>Action</th></tr>";
+                        echo "<tr><th>Sr No</th><th>PS ID</th><th>Team Leader</th><th>Title</th><th>Summary</th><th>Status</th><th>Action</th></tr>";
+                        $sr_no = 1;
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
+                            echo "<td>" . $sr_no . "</td>";
                             echo "<td>" . $row['psId'] . "</td>";
                             echo "<td id='leaderEmail'>" . $row['leaderEmail'] . "</td>";
                             echo "<td>" . $row['psTitle'] . "</td>";
-                            echo "<td><a href='" . $row['pptLink'] . "'>PPT</a></td>";
-                            echo "<td><a href='" . $row['docLink'] . "'>Doc</a></td>";
-                            echo "<td><button class='primary-btn' onclick=\"viewSummary('" . addslashes($row['solSummary']) . "')\">View</button></td>";
+                            echo "<td><button class='primary-btn' onclick='openPopup(this)' data-id='" . $row["leaderEmail"] . "')>View</button></td>";
                             if (!$row['isApproved']) {
+                                echo "<td>❌ Disapproved</td>";
                                 echo "<td>
                                 <form id='approve_idea_form'>
                                 <button class='approveIdeaBtn' data-id='" . $row['leaderEmail'] . "'>Approve Idea</button>
                                 </form>
                                 </td>";
                             } else {
+                                echo "<td>✅ Approved</td>";
                                 echo "<td>
                                     <form id='disapprove_idea_form'>
                                     <button class='disapproveIdeaBtn' data-id='" . $row['leaderEmail'] . "'>DisApprove Idea</button>
@@ -236,6 +312,21 @@ $result = $conn->query($query);
                                     </td>";
                             }
                             echo "</tr>";
+
+                            echo '<div class="popup" id="' . $row['leaderEmail'] . '" tabindex="-1">
+                            <div class="modal-header">
+                                <h2 class="modal-title">Problem Statement Details</h2>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>PPT link: </strong> <a href="' . $row["pptLink"] . '">' . $row["pptLink"] . '</a></p>
+                                <p><strong>DOC link: </strong> <a href="' . $row["docLink"] . '">' . $row["docLink"] . '</a></p>
+                                <p><strong>Summary: </strong> ' . $row['solSummary'] . '</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-id="' . $row['leaderEmail'] . '" onclick="closePopup(this)">Close</button>
+                            </div>
+                        </div>';
+                            $sr_no++;
                         }
                         echo "</table>";
                     } else {
@@ -247,29 +338,30 @@ $result = $conn->query($query);
         </div>
     </div>
 
-    <!-- Modal for displaying summary -->
-    <div class="modal fade" id="summaryModal" tabindex="-1" aria-labelledby="summaryModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="summaryModalLabel">Solution Summary</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="summaryContent">
-                    <!-- Summary content will be loaded here -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         function viewSummary(summary) {
             document.getElementById('summaryContent').innerText = summary;
             var summaryModal = new bootstrap.Modal(document.getElementById('summaryModal'));
             summaryModal.show();
+        }
+    </script>
+
+    <script>
+        function openPopup(button) {
+            const dataId = button.getAttribute('data-id'); // Get the data-id value
+
+            const popup = document.getElementById(dataId); // Get the popup element by ID
+            if (popup) {
+                popup.classList.add("open-popup"); // Add the class to open the popup
+            } else {
+                console.error(`Popup with ID "${dataId}" not found`);
+            }
+        }
+
+        function closePopup(button) {
+            const dataId = button.getAttribute('data-id'); // Get the data-id value
+            const popup = document.getElementById(dataId); // Get the popup element by ID
+            popup.classList.remove("open-popup")
         }
     </script>
 
@@ -354,9 +446,7 @@ $result = $conn->query($query);
                     })
             });
         }
-
-
-
+        
         const approveButtons = document.querySelectorAll('.approveIdeaBtn');
 
         approveButtons.forEach(button => {

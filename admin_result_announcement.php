@@ -26,12 +26,90 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Profile</title>
+    <title>Result Announcement</title>
     <link rel="stylesheet" href="admin_dash_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <style>
-        .report-container {
+        .main {
+            padding: 15px 30px 30px 30px;
+        }
+
+        table {
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: auto;
+            width: 100%;
             margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid rgb(200, 200, 200);
+            padding: 8px 30px;
+            text-align: center;
+        }
+
+        th {
+            text-transform: uppercase;
+            font-weight: 500;
+            border-color: black;
+            cursor: pointer;
+        }
+
+        td {
+            font-size: 13px;
+        }
+
+        .popup {
+            border: 1px solid black;
+            border-radius: 10px;
+            width: 500px;
+            height: auto;
+            background: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0 30px 30px;
+            visibility: hidden;
+        }
+
+        .open-popup {
+            visibility: visible;
+        }
+
+        .modal-header h2 {
+            padding-top: 25px;
+            margin-bottom: 20px;
+            color: #5500cb;
+        }
+
+        @media screen and (max-width: 400px) {
+            .popup {
+                width: 300px;
+            }
+        }
+
+        .result-declareBtn {
+            color: white;
+            width: 130px;
+            height: 40px;
+            background-color: rgb(47, 141, 70);
+            border-radius: 50px;
+            border: none;
+        }
+
+        .result-declareBtn:hover {
+            background-color: rgb(31, 91, 46);
+            color: white;
+        }
+
+        .result-declareBtn:active {
+            box-shadow: 2px 2px 5px #fc894d;
+            background-color: rgb(47, 141, 70);
         }
 
         .nav-upper-options {
@@ -51,33 +129,13 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
             font-size: 160%;
         }
 
-        .nav-upper-options {
-            gap: 0px;
-            justify-content: center;
-            align-items: center;
+        .report-body {
+            padding: 0px 20px 20px 20px;
         }
 
-        .nav {
-            padding-top: 20px;
-            padding-left: 5px;
-        }
-
-        .nav-upper-options h3 {
-            font-size: 16px;
-            margin-bottom: 0px;
-            font-weight: bold;
-            padding-left: 10px;
-        }
-
-        .badge {
-            background-color: rgb(229, 0, 0);
-        }
-
-        .mt-5 h5 {
-            color: #5500cb;
-            padding-top: 20px;
-            padding-bottom: 10px;
-            border-bottom: solid rgba(0, 20, 151, 0.59);
+        .report-container {
+            min-height: auto;
+            margin-top: 5px;
         }
 
         .DHead h1 {
@@ -86,25 +144,6 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
             margin-bottom: 0px;
         }
 
-        .nav-option1 i {
-            color: #fff;
-        }
-
-        .box-container {
-            display: block;
-            margin: 0px 0px 40px 30px;
-        }
-
-        .report-container {
-            margin-top: 5px;
-            margin-bottom: 0px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .report-container h5 {
-            color: rgb(125, 125, 125);
-        }
 
         .tabs {
             display: flex;
@@ -120,7 +159,7 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
             border-radius: 50px 0 0 50px;
             height: 40px;
             width: 120px;
-            transition: 0.3s;
+            transition: 0.5s;
         }
 
         .tabs button.active {
@@ -175,6 +214,7 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
             font-weight: 600;
             margin-bottom: 15px;
             width: 15%;
+            color: rgb(97, 19, 207);
         }
 
         .recent-Articles h1 {
@@ -203,39 +243,16 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
             border: 1px solid black;
         }
 
-        table.approved-teams-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table.approved-teams-table th,
-        table.approved-teams-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        table.approved-teams-table th {
-            background-color: rgb(168, 119, 253);
-            color: black;
-            font-weight: bold;
-        }
-
-        table.approved-teams-table tr:nth-child(even) {
-            background-color: rgb(246, 241, 255);
-        }
-
-        table.approved-teams-table tr:hover {
-            background-color: rgb(231, 218, 254);
-        }
-
         .teamBtn {
             border: none;
             background: none;
-            color: blue;
+            color: rgb(97, 19, 207);
             text-decoration: underline;
             cursor: pointer;
+        }
+
+        .result-declare {
+            padding: 10px 20px 20px 20px;
         }
     </style>
 
@@ -329,45 +346,45 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
                             <h1>RTH Round 1</h1>
                         </div>
                         <?php if (!$isRoundOneResDeclared) { ?>
-                            <button id="declareResultBtn">
-                                Declare Result
-                            </button>
+                            <button class="result-declareBtn" id="declareResultBtn">Declare Result</button>
                         <?php } else { ?>
                             <!-- <button id="declareResultBtn"> -->
                             Result Declared
                             <!-- </button> -->
                         <?php } ?>
                     </div>
+                    <div class="result-declare">
+                        <p>Deadline: 5 Feb 2025</p>
+                        <div class="round-body-psid">
+                            <label class="round-label" for=""><a href="admin_view_submissions.php"> Approved Teams: </a></label>
+                            <?php
+                            echo "<table class='table'>
+                                    <tr>
+                                    <th>Team Name</th>
+                                    <th>Leader Email</th>
+                                    <th>PS ID</th>
+                                </tr>";
 
-
-                    <p>Deadline: 5 Feb 2025</p>
-                    <div class="round-body-psid">
-                        <label class="round-label" for=""><a href="admin_view_submissions.php"> Approved Teams: </a></label>
-                        <?php
-                        echo "<table class='approved-teams-table'>
-                        <tr>
-                        <th>Team Name</th>
-                        <th>Leader Email</th>
-                        <th>PS ID</th>
-                        </tr>";
-
-                        while ($row = mysqli_fetch_assoc($approvedTeams)) {
-                            $teamId = $row['team_id'];
-                            $teamQuery = mysqli_query($conn, "SELECT teamName FROM team_and_leader_details WHERE id = '$teamId'");
-                            $teamRow = mysqli_fetch_assoc($teamQuery);
-                            $teamName = $teamRow['teamName'];
-                            echo "<tr>";
-                            echo "<td><form action='admin_view_teams.php' method='POST' class='d-inline'>
+                            if ($row = mysqli_fetch_assoc($approvedTeams)) {
+                                $teamId = $row['team_id'];
+                                $teamQuery = mysqli_query($conn, "SELECT teamName FROM team_and_leader_details WHERE id = '$teamId'");
+                                $teamRow = mysqli_fetch_assoc($teamQuery);
+                                $teamName = $teamRow['teamName'];
+                                echo "<tr>";
+                                echo "<td><form action='admin_view_teams.php' method='POST' class='d-inline'>
                             <input type='hidden' name='leaderEmail' value='" . $row['leaderEmail'] . "'>
                             <button class='teamBtn' style='cursor: pointer;'>" .
-                                $teamName . "</button></form>
-                            </td>";
-                            echo "<td>" . $row['leaderEmail'] . "</td>";
-                            echo "<td>" . $row['psId'] . "</td>";
-                            echo "</tr>";
-                        }
-                        echo "</table>";
-                        ?>
+                                    $teamName . "</button></form>
+                                </td>";
+                                echo "<td>" . $row['leaderEmail'] . "</td>";
+                                echo "<td>" . $row['psId'] . "</td>";
+                                echo "</tr>";
+                            }else{
+                                echo "<tr><td colspan='3'>No teams found</td></tr>";
+                            }
+                            echo "</table>";
+                            ?>
+                        </div>
                     </div>
                 </div>
                 <div id="round2" class="content <?php echo ($round == 'round2') ? "active" : "" ?>">
@@ -376,13 +393,13 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
                             <h1>RTH Round 2</h1>
                         </div>
                     </div>
-                    <p>This is the content for Round 2. Add more details here as needed.</p>
+                    <div class="result-declare">
+                        <p>This is the content for Round 2. Add more details here as needed.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 
     <script>
         let menuicn = document.querySelector(".menuicn");
@@ -391,7 +408,77 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
         menuicn.addEventListener("click", () => {
             nav.classList.toggle("navclose");
         })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('th').click(function() {
+                const table = $(this).parents('table');
+                const tbody = table.find('tbody');
+                const columnIndex = $(this).index();
+                const rows = tbody.find('tr').toArray();
 
+                // Determine sort order
+                const isAscending = $(this).data('isAscending') || false;
+                $(this).data('isAscending', !isAscending);
+
+                rows.sort(function(a, b) {
+                    const cellA = $(a).children('td').eq(columnIndex).text().toLowerCase();
+                    const cellB = $(b).children('td').eq(columnIndex).text().toLowerCase();
+
+                    if ($.isNumeric(cellA) && $.isNumeric(cellB)) {
+                        return isAscending ? cellA - cellB : cellB - cellA;
+                    }
+
+                    return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+                });
+
+                // Append sorted rows to tbody
+                $.each(rows, function(index, row) {
+                    tbody.append(row);
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // When 'View Details' button is clicked
+            $('.view-details-btn').click(function() {
+                var team_id = $(this).data('id'); // Get student ID from button data attribute
+                console.log(team_id)
+                // Make an AJAX request to fetch additional student details
+                $.ajax({
+                    url: 'fetch_team_details.php',
+                    type: 'POST',
+                    data: {
+                        id: team_id
+                    },
+                    success: function(data) {
+                        // console.log(data);
+                        // Insert student details into the modal
+                        $('#student-details').html(data);
+
+                        // Show the modal
+                        $('#teamDetailsModal').modal('show');
+                    }
+                });
+                // Set the delete button with the student ID
+                // $('#delete-btn').data('email', student-details);
+            });
+        });
+        let popup = document.getElementById("popup");
+
+        function openPopup() {
+            popup.classList.add("open-popup")
+        }
+
+        function closePopup() {
+            popup.classList.remove("open-popup")
+        }
+    </script>
+    <script>
         <?php
         if ($round == 'round2') {
             echo "showContent('round2')";
@@ -448,9 +535,6 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
 
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </body>
 
 </html>

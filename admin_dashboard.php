@@ -164,6 +164,7 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
 
         .report-container {
             min-height: auto;
+            margin-top: 50px;
         }
     </style>
 
