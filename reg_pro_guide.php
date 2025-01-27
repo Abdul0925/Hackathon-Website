@@ -189,16 +189,16 @@ $_SESSION['members'] = [];
                 <!-- Center: Links with Dropdowns and Login/Register Button -->
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav c-black">
-                        <!-- Dropdown: About RTH -->
+                        <!-- Dropdown: About Us -->
                         <li class="nav-item dropdown">
                             <a class="nav-link c-black dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                About RTH
+                                About Us
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
                                 <li><a class="dropdown-item" href="processFlow.php">RTH Process Flow</a></li>
-                                <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li>
-                                <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
                                 <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
+                                <li><a class="dropdown-item" href="aboutEncarta.php">About Encarta</a></li>
+                                <li><a class="dropdown-item" href="aboutCreators.php">About Creators</a></li>
                             </ul>
                         </li>
 

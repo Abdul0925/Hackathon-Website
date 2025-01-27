@@ -17,7 +17,7 @@
         .team-member img {
             border-radius: 50%;
             width: 120px;
-            height: 120px;
+            height: 150px;
             object-fit: cover;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -122,7 +122,6 @@
 
     <!-- Team Section -->
     <div class="team-section text-center">
-        <h2 class="mb-4">Our Team</h2>
 
         <!-- Incharge -->
         <h3 class="mb-4">Incharges</h3>
@@ -148,11 +147,9 @@
         <h3 class="my-4">Advisors</h3>
         <div class="row">
             <div class="col-md-3 team-member gallery-item">
-                <a href="https://abdulrahimportfolio.kesug.com">
-                    <img src="./picture/ourteam/abd-removebg-preview-transformed1.png" alt="Advisor">
-                    <h5>Abdul Rahim</h5>
-                    <p>Advisor</p>
-                </a>
+                <img src="./picture/ourteam/abd-removebg-preview-transformed1.png" alt="Advisor">
+                <h5>Abdul Rahim</h5>
+                <p>Advisor</p>
             </div>
             <div class="col-md-3 team-member gallery-item">
                 <img src="./picture/ourteam/vedant.jpg" alt="Advisor">
@@ -174,7 +171,7 @@
         <h3 class="my-4">President and Vice President</h3>
         <div class="row justify-content-center mb-5">
             <div class="col-md-4 team-member gallery-item">
-                <img src="./picture/ourteam/neeraj.jpg" alt="President">
+                <img src="./picture/ourteam/Neeraj.png" alt="President">
                 <h5>Neeraj Paswan</h5>
                 <p>President</p>
             </div>
@@ -203,11 +200,11 @@
                 <p>Marketing Head</p>
             </div>
             <div class="col-md-3 team-member text-center gallery-item">
-                <img src="./picture/ourteam/yash_photo.jpg" alt="Head">
-                <h5>Yash Talati</h5>
+                <img src="./picture/ourteam/.jpg" alt="Head">
+                <h5>Unknown</h5>
                 <p>Technical Head</p>
             </div>
-            <div class="col-md-3 team-member text-center gallery-i">
+            <div class="col-md-3 team-member text-center gallery-item">
                 <img src="./picture/ourteam/pawan.jpg" alt="Head">
                 <h5>Pawan Kadam</h5>
                 <p>PR Head</p>
