@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'abdulrahim74264@gmail.com';
-    $mail->Password = 'iotg jqut wkks sjrt'; // Use an app password
+    $mail->Username = 'encartaitcell@ghrcacs.raisoni.net';
+    $mail->Password = 'encartapass@email'; // Use an app password
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
-    $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
+    $mail->setFrom('encartaitcell@ghrcacs.raisoni.net', 'Encarta IT Cell');
     $mail->Subject = "Results Declared";
     
     while ($row = mysqli_fetch_assoc($result)) {

@@ -13,7 +13,9 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
+
             /* background: radial-gradient(circle,rgb(161, 161, 255), #111118); */
+
             color: #fff;
             overflow-x: hidden;
         }
@@ -31,8 +33,10 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 10px;
+
             color:rgb(0, 0, 0);
             /* text-shadow: 0 0 15px #09d6f3, 0 0 25px #09d6f3; */
+
         }
 
         .header p {
@@ -98,10 +102,12 @@
         }
 
 
+
         /* Footer Section */
         footer {
             background: #333;
             color: #fff;
+
             padding: 40px 20px;
             text-align: center;
         }
@@ -175,7 +181,9 @@
 <body>
     <?php include('indexNavbar.php'); ?>
 
+
     <div class="container-mid">
+
         <div class="header">
             <h1>Hackathon Process Flow</h1>
             <p>Embark on an exciting journey to innovate and create!</p>
@@ -286,7 +294,9 @@
                     <h3>GHRCACS NAGPUR</h3>
                     <p>Riaan Tower, Mangalwari Bazar Rd, Sadar, Nagpur, Maharashtra 440001</p>
                     <p>📞 8275435110 / 9307900682</p>
-                    <p>✉ <a href="mailto:encarta@ghrstu.edu.in">encarta@ghrstu.edu.in</a></p>
+
+                    <p>✉ <a href="mailto:encartaitcell@ghrcacs.raisoni.net">encartaitcell@ghrcacs.raisoni.net</a></p>
+
                 </div>
             </div>
 

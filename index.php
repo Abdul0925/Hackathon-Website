@@ -434,9 +434,10 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
                                 <li><a class="dropdown-item" href="processFlow.php">RTH Process Flow</a></li>
-                                <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li>
-                                <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
+                                <!-- <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li> -->
+                                <!-- <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li> -->
                                 <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
+                                <li><a class="dropdown-item" href="aboutEncarta.php">About US</a></li>
                             </ul>
                         </li>
 
@@ -447,8 +448,8 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="guidelinesDropdown">
                                 <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank">For Institutes</a></li>
-                                <li><a class="dropdown-item" href="./downloadable/Idea-Presentation-Format-SIH2023-College[1].pptx" target="_blank" rel="noopener noreferrer">Idea PPT</a></li>
-                                <li><a class="dropdown-item" href="hackProcess.php">Hackathon Process</a></li>
+                                <li><a class="dropdown-item" href="./downloadable/RTH 2025 IDEA PPT.pptx" target="_blank" rel="noopener noreferrer">Idea PPT</a></li>
+                                <!-- <li><a class="dropdown-item" href="hackProcess.php">Hackathon Process</a></li> -->
                                 <li><a class="dropdown-item" href="hackTimeline.php">Hackathon Timeline</a></li>
                             </ul>
                         </li>
@@ -565,7 +566,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm border-0">
                         <div class="card-body text-center">
-                            <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Client 1">
+                            <img src="./picture/RamGhonmode_img.jpg" width="75px" class="rounded-circle mb-3" alt="Client 1">
                             <h5 class="card-title">Ram Ghonmode</h5>
                             <p class="card-text text-muted">"Great experience! The team was professional, and the service exceeded my expectations."</p>
                             <small class="text-muted">Founder and Director @ Azlogics Private Limited</small>
@@ -577,7 +578,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm border-0">
                         <div class="card-body text-center">
-                            <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Client 2">
+                            <img src="./picture/VaishnaviKancharla_img.jpg" width="75px" class="rounded-circle mb-3" alt="Client 2">
                             <h5 class="card-title">Vaishnavi Kancharla</h5>
                             <p class="card-text text-muted">"Fantastic platform! I was able to achieve my goals faster with their support."</p>
                             <small class="text-muted">SDE @ Cisco</small>
