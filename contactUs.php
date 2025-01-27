@@ -104,7 +104,8 @@
         }
 
         .contactForm .inputBox input,
-        .contactForm .inputBox textarea {
+        .contactForm .inputBox textarea,
+        .contactForm .inputBox select {
             width: 100%;
             padding: 5px 0;
             font-size: 16px;
@@ -113,6 +114,15 @@
             border-bottom: 2px solid #333;
             outline: none;
             resize: none;
+        }
+
+        .contactForm .inputBox1 textarea {
+            width: 100%;
+            padding: 5px 4px;
+            font-size: 16px;
+            margin: 10px 0;
+            border: none;
+            border: 2px solid #333;
         }
 
         .contactForm .inputBox span {
@@ -372,12 +382,12 @@
                     <div class="icon"><i class="bi-envelope-fill"></i></i></div>
                     <div class="text">
                         <h3>Email</h3>
-                        <p><a href="mailto:encarta@ghrcacs.edu.in">encarta@ghrcacs.edu.in</a></p>
+                        <p><a href="mailto:encartaitcell@ghrcacs.raisoni.net">encartaitcell@ghrcacs.raisoni.net</a></p>
                     </div>
                 </div>
             </div>
             <div class="contactForm">
-                <form method="POST">
+                <form method="POST" id="contactForm">
                     <h2>Send Message</h2>
                     <div class="inputBox">
                         <input type="text" name="name" required="required">
@@ -389,17 +399,38 @@
                     </div>
                     <div class="inputBox">
                         <input type="text" name="contact" required="required">
-                        <span>Contact </span>
+                        <span>Contact</span>
                     </div>
+
                     <div class="inputBox">
-                        <input type="text" name="msg" required="required">
-                        <span>Type your Message...</span>
+                        <select name="query" id="query" onchange="handleQueryChange(this)" required>
+                            <option value="" disabled selected>Select your query</option>
+                            <option value="login">Login credentials not received</option>
+                            <option value="registration">Registration page is not working</option>
+                            <option value="ppt">Error in submitting the idea PPT</option>
+                            <option value="elimination">Why my team is eliminated?</option>
+                            <option value="details">Details filled by mistake, how to change it?</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <!-- <span>Select Query</span> -->
                     </div>
+
+                    <div class="inputBox1" id="optionalMessage" required>
+                        <textarea name="optional_message" rows="4" placeholder="Describe your problem"></textarea>
+                    </div>
+
+                    <!-- <div class="inputBox" id="otherMessage" style="display: none;"> -->
+                    <!-- <textarea name="other_message" rows="4" placeholder="Type your message..."></textarea> -->
+                    <!-- </div> -->
+
                     <div>
-                        <input type="submit" class="btn my-primary-btn" style="width: 100px; padding: 10px; margin-top: 10px; font-size: 18px;" name="send" value="Send" />
+                        <input id="submitBtn" type="submit" class="btn my-primary-btn" style="width: 100px; padding: 10px; margin-top: 10px; font-size: 18px;" name="send" value="Send">
                     </div>
                 </form>
             </div>
+
+
+
         </div>
     </section>
     <!-- Footer  -->
@@ -468,6 +499,60 @@
     </footer>
 
     <!-- Font Awesome for Icons -->
+    <script>
+        function handleQueryChange(select) {
+            // const otherMessage = document.getElementById('otherMessage');
+            const optionalMessage = document.getElementById('optionalMessage');
+
+            // Dynamically update the optional text area placeholder based on query
+            const placeholderMap = {
+                "login": "Describe the issue with receiving login credentials...",
+                "registration": "Provide details about the issue with the registration page...",
+                "ppt": "What error are you facing while submitting the PPT?",
+                "elimination": "Why do you think your team was eliminated?",
+                "details": "Explain the mistake and the details you want to change...",
+            };
+
+            const placeholder = placeholderMap[select.value] || "Describe your problem";
+            optionalMessage.querySelector('textarea').placeholder = placeholder;
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.style.cursor = 'pointer';
+            submitBtn.style.backgroundColor = 'rgb(221, 182, 255)';
+            const formData = new FormData(this);
+
+            fetch('contactUsProcess.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert(result.message); // You can log the data received for debugging
+                        window.location.href = "contactUs.php";
+                    } else {
+                        // alert('Failed to submit form: ' + result.message);
+                        alert(result.name + ' is ' + result.message); // You can show a success message
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Send';
+                        submitBtn.style.cursor = 'pointer';
+                        submitBtn.style.backgroundColor = '#5C0F8B';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send';
+                    submitBtn.style.cursor = 'pointer';
+                    submitBtn.style.backgroundColor = '#5C0F8B';
+                });
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 

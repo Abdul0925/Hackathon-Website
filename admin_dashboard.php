@@ -232,6 +232,13 @@ $teamName = mysqli_query($conn, "SELECT * FROM leader_and_member_details WHERE i
                             <h3> Payment</h3>
                         </div>
                     </a>
+                    
+                    <a href="admin_queries.php" style="text-decoration: none;">
+                        <div class="nav-option option2" style="color: black;">
+                            <i class="bi bi-patch-question"></i>
+                            <h3> Queries</h3>
+                        </div>
+                    </a>
 
                     <a href="logout.php" style="text-decoration: none;">
                         <div class="nav-option logout" style="color: black;">

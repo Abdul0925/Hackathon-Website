@@ -533,9 +533,9 @@ $_SESSION['members'] = [];
                                 Guidelines
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="guidelinesDropdown">
-                                <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank">For Institutes</a></li>
+                                <li><a class="dropdown-item" href="reg_pro_guide.php">Registration Process</a></li>
                                 <li><a class="dropdown-item" href="./downloadable/Idea-Presentation-Format-SIH2023-College[1].pptx" target="_blank" rel="noopener noreferrer">Idea PPT</a></li>
-                                <li><a class="dropdown-item" href="hackProcess.php">Hackathon Process</a></li>
+                                <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank" href="hackProcess.php">Hackathon Process</a></li>
                                 <li><a class="dropdown-item" href="hackTimeline.php">Hackathon Timeline</a></li>
                             </ul>
                         </li>
@@ -566,7 +566,45 @@ $_SESSION['members'] = [];
     </div>
 
     <div class="container">
-        <h1>Team Registration Form</h1>
+        <h1>Team Registration Form</h1> 
+
+        <div class="instructions">
+            <h2>Instructions:</h2>
+            <ol>
+                <li>Each team can have a maximum of 4 members, with at least one female participant being mandatory.</li>
+                <li>Ensure all details are filled out accurately before submitting the registration form.</li>
+                <li>Login credentials will be provided after approval of your registration.</li>
+                <li>Once the form is submitted, no changes will be allowed to any details mentioned before.</li>
+                <li>A mentor's name can also be added after logging in (if required).</li>
+                <li>All further instructions and updates will be communicated through the team leader’s dashboard.</li>
+                <li>If you encounter any unexpected issues while filling out the form, try accessing the site in an incognito window.</li>
+                <li><b>Any <a href="reg_pro_guide.php">misinformation*</a> can lead to the elimination of your team.</b></li>
+                <li><b>See <a href="reg_pro_guide.php">Eligibility Criterie*</a> before participating.</b></li>
+            </ol>
+        </div>
+
+        <style>
+            .instructions {
+                background-color:rgb(255, 187, 185);
+                border: 1px solid rgb(3, 0, 99);
+                border-radius: 5px;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .instructions h2 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            .instructions ol {
+                padding-left: 20px;
+            }
+
+            .instructions li {
+                margin-bottom: 10px;
+            }
+        </style>
 
         <!-- <form action="submitRegistration.php" method="POST" enctype="multipart/form-data"> -->
         <!-- <form method="POST" action="register_form_process.php" id="mainForm"> -->
@@ -687,15 +725,15 @@ $_SESSION['members'] = [];
                     </div>
                     <div class="box-body" id="add_member_form">
                         <div class="inputBox">
-                            <input type="text" id="memberName" name="memberName">
+                            <input type="text" id="memberName" name="memberName" required>
                             <span>Enter name</span>
                         </div>
                         <div class="inputBox">
-                            <input type="tel" id="memberMobile" name="memberMobile">
+                            <input type="tel" id="memberMobile" name="memberMobile" maxlength="10" pattern="\d{10}" required>
                             <span>Enter mobile number</span>
                         </div>
                         <div class="inputBox">
-                            <input type="email" id="memberEmail" name="memberEmail">
+                            <input type="email" id="memberEmail" name="memberEmail" required>
                             <span>Enter email</span>
                         </div>
                         <div class="inputBox">

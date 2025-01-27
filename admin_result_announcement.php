@@ -395,7 +395,7 @@ $round = isset($_GET['round']) ? $_GET['round'] : 'round1';
         <?php
         if ($round == 'round2') {
             echo "showContent('round2')";
-        } else {    
+        } else {
             echo "showContent('round1')";
         }
         ?>

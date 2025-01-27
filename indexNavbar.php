@@ -72,9 +72,10 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
                                 <li><a class="dropdown-item" href="processFlow.php">RTH Process Flow</a></li>
-                                <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li>
-                                <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
+                                <!-- <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li> -->
+                                <!-- <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li> -->
                                 <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
+                                <li><a class="dropdown-item" href="aboutEncarta.php">About Us</a></li>
                             </ul>
                         </li>
 
@@ -86,7 +87,7 @@
                             <ul class="dropdown-menu" aria-labelledby="guidelinesDropdown">
                                 <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank">For Institutes</a></li>
                                 <li><a class="dropdown-item" href="./downloadable/Idea-Presentation-Format-SIH2023-College[1].pptx" target="_blank" rel="noopener noreferrer">Idea PPT</a></li>
-                                <li><a class="dropdown-item" href="hackProcess.php">Hackathon Process</a></li>
+                                <!-- <li><a class="dropdown-item" href="hackProcess.php">Hackathon Process</a></li> -->
                                 <li><a class="dropdown-item" href="hackTimeline.php">Hackathon Timeline</a></li>
                             </ul>
                         </li>
