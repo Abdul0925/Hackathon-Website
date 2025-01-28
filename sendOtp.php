@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendOtp'])) {
         $mail->Host = 'smtp.gmail.com';           // SMTP server address
         $mail->SMTPAuth = true;
         $mail->Username = 'encartaitcell@ghrcacs.raisoni.net'; // Your email username
-        $mail->Password = 'encartapass@email';       // Your email password (use an app-specific password if needed)
+        $mail->Password = 'ntkc xkfq oekp tgnw';       // Your email password (use an app-specific password if needed)
         $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
         $mail->Port = 465;                        // Port for SSL
     

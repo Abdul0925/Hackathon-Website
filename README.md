@@ -129,7 +129,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 For queries or suggestions, feel free to reach out:
 
 - **Project Maintainer**: Abdul and Team
-- **Email**: [abdulrahim74264@gmail.com](mailto:abdulrahim74264@gmail.com)
+- **Email**: [encartaitcell@ghrcacs.raisoni.net](mailto:encartaitcell@ghrcacs.raisoni.net)
 
 ---
 

@@ -22,6 +22,8 @@ $_SESSION['members'] = [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RTH 25 Team Registration Form</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
     <!-- Bootstrap and Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Bootstrap JS with Popper -->
@@ -32,7 +34,6 @@ $_SESSION['members'] = [];
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/components/alerts/" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
     <!-- Custom Styles -->
     <style>
@@ -486,7 +487,7 @@ $_SESSION['members'] = [];
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                <img src="./picture/ghrce-logo-white.png" alt="Error Loading" height="" width="100px">
+                <img src="./picture/ghru-nagpur.webp" alt="Error Loading" height="" width="100px">
             </a>
 
             <div class="d-flex">
@@ -514,16 +515,16 @@ $_SESSION['members'] = [];
                 <!-- Center: Links with Dropdowns and Login/Register Button -->
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav c-black">
-                        <!-- Dropdown: About RTH -->
+                        <!-- Dropdown: About Us -->
                         <li class="nav-item dropdown">
                             <a class="nav-link c-black dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                About RTH
+                                About Us
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
                                 <li><a class="dropdown-item" href="processFlow.php">RTH Process Flow</a></li>
-                                <li><a class="dropdown-item" href="themes.php">RTH Themes</a></li>
-                                <li><a class="dropdown-item" href="implementationTeam.php">Implementation Team</a></li>
                                 <li><a class="dropdown-item" href="pastHackathons.php">Our Past Hackathons</a></li>
+                                <li><a class="dropdown-item" href="aboutEncarta.php">About Encarta</a></li>
+                                <li><a class="dropdown-item" href="aboutCreators.php">About Creators</a></li>
                             </ul>
                         </li>
 
@@ -566,9 +567,9 @@ $_SESSION['members'] = [];
     </div>
 
     <div class="container">
-        <h1>Team Registration Form</h1> 
+        <h1>Team Registration Form</h1>
 
-        <div class="instructions">
+        <!-- <div class="instructions">
             <h2>Instructions:</h2>
             <ol>
                 <li>Each team can have a maximum of 4 members, with at least one female participant being mandatory.</li>
@@ -581,12 +582,12 @@ $_SESSION['members'] = [];
                 <li><b>Any <a href="reg_pro_guide.php">misinformation*</a> can lead to the elimination of your team.</b></li>
                 <li><b>See <a href="reg_pro_guide.php">Eligibility Criterie*</a> before participating.</b></li>
             </ol>
-        </div>
+        </div> -->
 
         <style>
             .instructions {
-                background-color:rgb(255, 187, 185);
-                border: 1px solid rgb(3, 0, 99);
+                background-color: rgb(255, 187, 185);
+                /* border: 1px solid rgb(3, 0, 99); */
                 border-radius: 5px;
                 padding: 20px;
                 margin-bottom: 20px;
@@ -625,7 +626,7 @@ $_SESSION['members'] = [];
                             <div class="mb-3">
                                 <label for="psId" class="form-label">Problem Statement</label>
                                 <div class="d-flex">
-                                    <select id="psId" name="psId" class="form-select me-2" required>
+                                    <select id="psId" name="psId" class="form-select me-2" >
                                         <option value="" disabled selected>Select Problem Statement</option>
 
                                         <?php
@@ -641,7 +642,7 @@ $_SESSION['members'] = [];
                                         }
                                         $conn->close();
                                         ?>
-                                        
+
                                     </select>
                                     <div class="prob-btn">
                                         <a href="problemStatements.php"><button type="button">Problems</button></a>
@@ -783,8 +784,8 @@ $_SESSION['members'] = [];
                     </div>
                     <div class="box-body">
                         <div class="QR-code">
-                            <img src="picture\QRcodephoto.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
-                            <p>Scan the QR code to make the payment.</p>
+                            <img src="picture/payment.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
+                            <p>Scan QR to pay Rs. 800/-</p>
                         </div>
 
                         <div class="payment-box">
@@ -801,6 +802,28 @@ $_SESSION['members'] = [];
                     </div>
                 </div>
             </div>
+            <div class="instructions" id="instructionsBox">
+                <input type="checkbox" name="" id="termsCheckbox" onclick="toggleInstructionsColor()"> I accept <a href="reg_pro_guide.php">terms and conditions</a>
+            </div>
+
+            <script>
+                const checkbox = document.getElementById('termsCheckbox');
+                const instructionsBox = document.getElementById('instructionsBox');
+                if (checkbox.checked) {
+                    instructionsBox.style.backgroundColor = 'rgb(185, 255, 198)';
+                } else {
+                    instructionsBox.style.backgroundColor = 'rgb(255, 187, 185)';
+                }
+                function toggleInstructionsColor() {
+                    const checkbox = document.getElementById('termsCheckbox');
+                    const instructionsBox = document.getElementById('instructionsBox');
+                    if (checkbox.checked) {
+                        instructionsBox.style.backgroundColor = 'rgb(185, 255, 198)';
+                    } else {
+                        instructionsBox.style.backgroundColor = 'rgb(255, 187, 185)';
+                    }
+                }
+            </script>
 
             <!-- Submit Button -->
             <div class="text-center">
@@ -834,6 +857,7 @@ $_SESSION['members'] = [];
         </tr> -->
     <?php //endforeach; 
     ?>
+
 
     <!-- OTP Modal -->
     <div class="modal-overlay" id="modal-overlay" style="display: none;"></div>
@@ -1060,7 +1084,7 @@ $_SESSION['members'] = [];
                 alert('Name can only consist of alphabets');
                 return;
             }
-            
+
             const checkMemberMobile = document.getElementById('memberMobile').value;
             if (!/^[6-9]/.test(checkMemberMobile)) {
                 alert('Mobile number must start with 6, 7, 8, or 9');
@@ -1179,6 +1203,17 @@ $_SESSION['members'] = [];
             e.preventDefault();
 
             const registerBtn = document.querySelector('.register-btn');
+            const checkbox = document.getElementById('termsCheckbox');
+                    const instructionsBox = document.getElementById('instructionsBox');
+            if (!checkbox.checked) {
+                instructionsBox.style.backgroundColor = 'rgb(255, 187, 185)';
+                alert('Please accept our terms and conditions.');
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Register';
+                registerBtn.style.cursor = 'pointer';
+                registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
+                return;
+            }
             registerBtn.disabled = true;
             registerBtn.textContent = 'Registering...';
             registerBtn.style.cursor = 'not-allowed';
@@ -1194,7 +1229,7 @@ $_SESSION['members'] = [];
                 registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
                 return;
             }
-            
+
             const checkLeaderName = document.getElementById('leaderName').value;
             const leaderNamePattern = /^[a-zA-Z ]+$/;
             if (!leaderNamePattern.test(checkLeaderName)) {
@@ -1205,7 +1240,7 @@ $_SESSION['members'] = [];
                 registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
                 return;
             }
-            
+
             const checkLeaderMobile = document.getElementById('leaderMobile').value;
             if (!/^[6-9]/.test(checkLeaderMobile)) {
                 alert('Mobile number must start with 6, 7, 8, or 9');
@@ -1243,7 +1278,7 @@ $_SESSION['members'] = [];
                 registerBtn.style.backgroundColor = 'rgb(47, 141, 70)';
                 return;
             }
-            
+
             // Get the form data or the necessary values to send
             const formData = new FormData();
             formData.append('teamName', document.getElementById('teamName').value);

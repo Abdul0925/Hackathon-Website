@@ -471,7 +471,7 @@ if ($isSubmittedResult->num_rows > 0) {
                         </div>
                     </div>
                     <form action="" class="round-form" method="POST">
-                        <p>This is the content for Round 2. Add more details here as needed.</p>
+                        <p>Round 2 is not started yet.</p>
                     </form>
                 </div>
                 

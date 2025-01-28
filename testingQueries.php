@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['startBtn'])) {
 </html>
 
 <?php
-// $memberEmail = "abdulrahim74264@gmail.com";
+// $memberEmail = "encartaitcell@ghrcacs.raisoni.net";
 // require "db.php";
 
 // $team_id = 0;
@@ -307,13 +307,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['startBtn'])) {
 //         $mail->isSMTP();
 //         $mail->Host = 'smtp.gmail.com';           // SMTP server address
 //         $mail->SMTPAuth = true;
-//         $mail->Username = 'abdulrahim74264@gmail.com'; // Your email username
+//         $mail->Username = 'encartaitcell@ghrcacs.raisoni.net'; // Your email username
 //         $mail->Password = 'iotg jqut wkks sjrt';       // Your email password (use an app-specific password if needed)
 //         $mail->SMTPSecure = 'ssl';                // Enable SSL encryption
 //         $mail->Port = 465;                        // Port for SSL
 
 //         // Set the sender's email and name
-//         $mail->setFrom('abdulrahim74264@gmail.com', 'Abdul Rahim');
+//         $mail->setFrom('encartaitcell@ghrcacs.raisoni.net', 'Abdul Rahim');
 
 //         // Add the recipient's email (student's email)
 //         $mail->addAddress($leaderEmail);
@@ -347,7 +347,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['startBtn'])) {
 // }
 
 // require "db.php";
-// $leaderEmail = "abdulrahim74264@gmail.com";
+// $leaderEmail = "encartaitcell@ghrcacs.raisoni.net";
 // $password = "QGH331RT";
 // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 // echo $hashedPassword;

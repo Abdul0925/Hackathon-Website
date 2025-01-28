@@ -17,6 +17,8 @@ $teamName = mysqli_query($conn, "SELECT * FROM team_and_leader_details WHERE isE
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>RTH 25 Teams</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
     <link rel="stylesheet" href="admin_dash_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
