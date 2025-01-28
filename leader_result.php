@@ -67,6 +67,8 @@ $stmt1->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>RTH 25 Results</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
     <link rel="stylesheet" href="leader_dashboard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -496,7 +498,7 @@ $stmt1->close();
                         </div>
                     </div>
                     <form action="" class="round-form" method="POST">
-                        <p>This is the content for Round 2. Add more details here as needed.</p>
+                        <p>No results announced yet.</p>
                     </form>
                 </div>
             </div>

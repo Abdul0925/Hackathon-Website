@@ -161,7 +161,7 @@ $_SESSION['members'] = [];
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                <img src="./picture/ghrce-logo-white.png" alt="Error Loading" height="" width="100px">
+                <img src="./picture/ghru-nagpur.webp" alt="Error Loading" height="" width="100px">
             </a>
 
             <div class="d-flex">

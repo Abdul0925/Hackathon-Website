@@ -281,7 +281,7 @@
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                <img src="./picture/ghrce-logo-white.png" alt="Error Loading" height="" width="100px">
+                <img src="./picture/ghru-nagpur.webp" alt="Error Loading" height="" width="100px">
             </a>
 
             <div class="d-flex">
@@ -327,7 +327,7 @@
                                 Guidelines
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="guidelinesDropdown">
-                                <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank">For Institutes</a></li>
+                                <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank">Hackathon Booklet</a></li>
                                 <li><a class="dropdown-item" href="./downloadable/Idea-Presentation-Format-SIH2023-College[1].pptx" target="_blank" rel="noopener noreferrer">Idea PPT</a></li>
                                 <li><a class="dropdown-item" href="hackProcess.php">Hackathon Process</a></li>
                                 <li><a class="dropdown-item" href="hackTimeline.php">Hackathon Timeline</a></li>

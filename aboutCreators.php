@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackathon Process Flow</title>
+    <title>About Creators</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
@@ -109,6 +111,7 @@
         .social-icons a:hover {
             color: #f44f36;
         }
+
         @media (max-width: 767px) {
             .team-member img {
                 border-radius: 12%;
@@ -132,7 +135,7 @@
     <!-- Team Section -->
     <!-- Team Section -->
     <div class="team-section text-center py-5">
-        <img src="./picture/ourteam/AbdulandShad.jpg" class="img-fluid " alt="Abdul Rahim" height="100px" width="250px">
+        <!-- <img src="./picture/ourteam/AbdulandShad.jpg" class="img-fluid " alt="Abdul Rahim" height="100px" width="250px"> -->
         <div class="container">
             <h2 class="mb-5">Our Team</h2>
             <div class="row justify-content-center">
@@ -141,7 +144,9 @@
                     <div class="row align-items-center">
                         <!-- Left Column: Photo -->
                         <div class="col-4 team-member">
-                            <img src="./picture/ourteam/Abdul2.jpg" class="img-fluid " alt="Abdul Rahim">
+                            <a href="https://abdulrahimportfolio.kesug.com">
+                                <img src="./picture/ourteam/Abdul2.jpg" class="img-fluid " alt="Abdul Rahim">
+                            </a>
                         </div>
                         <!-- Right Column: Info -->
                         <div class="col-8 text-start">

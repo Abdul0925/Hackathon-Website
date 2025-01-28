@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackathon Process Flow</title>
+    <title>Past Hackthon</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <style>
-        
-
         .gallery-container {
             padding: 50px 15px;
         }
@@ -17,11 +19,15 @@
         .gallery-item img {
             border-radius: 8px;
             transition: transform 0.3s ease-in-out;
+            width: 400px;
+            height: 200px;
+            object-fit: cover;
         }
 
         .gallery-item img:hover {
             transform: scale(1.05);
         }
+
         /* Footer Section */
         footer {
             background: #333;
@@ -64,11 +70,9 @@
         .social-icons a:hover {
             color: #f44f36;
         }
-
-
-        
     </style>
 </head>
+
 <body>
     <?php include('indexNavbar.php'); ?>
     <!-- Header -->
@@ -81,32 +85,42 @@
     <div class="container gallery-container">
         <div class="row g-4">
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5197.JPG" alt="Gallery Image 1" class="img-fluid shadow">
+                <img src="./picture/pasthackathon/rthimg110.jpg" alt="Gallery Image 1" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5229.JPG" alt="Gallery Image 2" class="img-fluid shadow">
+                <img src="./picture/pasthackathon/rthimg111.jpg" alt="Gallery Image 1" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5230.JPG" alt="Gallery Image 3" class="img-fluid shadow">
+                <img src="./picture/pasthackathon/rthimg112.jpg" alt="Gallery Image 1" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5231.JPG" alt="Gallery Image 4" class="img-fluid shadow">
+                <img src="./picture/pasthackathon/rthimg101.jpg" alt="Gallery Image 2" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5231.JPG" alt="Gallery Image 5" class="img-fluid shadow">
+                <img src="./picture/pasthackathon/rthimg102.jpg" alt="Gallery Image 1" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5232.JPG" alt="Gallery Image 6" class="img-fluid shadow">
+                <img src="./picture/pasthackathon/rthimg103.jpg" alt="Gallery Image 1" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5233.JPG" alt="Gallery Image 6" class="img-fluid shadow">
+                <img src="./picture/pasthackathon/rthimg104.jpg" alt="Gallery Image 2" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5360.JPG" alt="Gallery Image 6" class="img-fluid shadow">
+                <img src="./picture/pasthackathon/rthimg105.jpg" alt="Gallery Image 1" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5361.JPG" alt="Gallery Image 6" class="img-fluid shadow">
+                <img src="./picture/pasthackathon/rthimg106.jpg" alt="Gallery Image 1" class="img-fluid shadow">
             </div>
+            <div class="col-md-4 col-sm-6 gallery-item">
+                <img src="./picture/pasthackathon/rthimg107.jpg" alt="Gallery Image 2" class="img-fluid shadow">
+            </div>
+            <div class="col-md-4 col-sm-6 gallery-item">
+                <img src="./picture/pasthackathon/rthimg108.jpg" alt="Gallery Image 1" class="img-fluid shadow">
+            </div>
+            <div class="col-md-4 col-sm-6 gallery-item">
+                <img src="./picture/pasthackathon/rthimg109.jpg" alt="Gallery Image 1" class="img-fluid shadow">
+            </div>
+
         </div>
     </div>
     <!-- Footer  -->
@@ -177,4 +191,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

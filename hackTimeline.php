@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hackathon Process Flow</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <style>
-
-body {
+        body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
@@ -26,58 +28,47 @@ body {
 
         h1 {
             font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            color: #FFC107;
+            margin-bottom: 20px;
         }
 
         .timeline {
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            margin-top: 40px;
-        }
-
-        .line {
-            position: absolute;
-            width: 4px;
-            height: 100%;
-            background-color: #FFC107;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 20px;
+            gap: 20px;
         }
 
         .event {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             width: 100%;
-            max-width: 800px;
-            margin: 20px 0;
+            max-width: 600px;
             padding: 20px;
             background: #001F3F;
             border-radius: 8px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            gap: 10px;
         }
-
-        /* .event:nth-child(odd) {
-            flex-direction: row-reverse;
-        } */
 
         .event-date {
             font-size: 1.2rem;
             color: #FFC107;
             font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .event-icon {
+            font-size: 2.5rem;
+            color: #FFC107;
+            margin: 0 10px;
+            flex-shrink: 0;
         }
 
         .event-content {
             text-align: left;
-            max-width: 400px;
+            flex: 1;
         }
 
         .event-title {
@@ -92,15 +83,26 @@ body {
             color: #F1F1F1;
         }
 
-        .event-icon {
-            font-size: 2rem;
-            color: #FFC107;
-            margin-right: 20px;
-        }
+        @media (max-width: 768px) {
+            .event {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+                gap: 15px;
+            }
 
-        .event:nth-child(odd) .event-icon {
-            margin-right: 0;
-            margin-left: 20px;
+            .event-date {
+                order: 1;
+            }
+
+            .event-icon {
+                order: 2;
+            }
+
+            .event-content {
+                order: 3;
+                text-align: center;
+            }
         }
 
         /* Footer Section */
@@ -151,15 +153,19 @@ body {
             from {
                 box-shadow: 0 0 10px #c800ff, 0 0 20px #09d6f3;
             }
+
             to {
                 box-shadow: 0 0 20px #c800ff, 0 0 40px #09d6f3;
             }
         }
 
         @keyframes bounce {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-10px);
             }
@@ -172,62 +178,57 @@ body {
         }
     </style>
 </head>
+
 <body>
     <?php include('indexNavbar.php'); ?>
-    
+
 
     <div class="container">
         <h1>Event Timeline</h1>
-
         <div class="timeline">
-            <!-- <div class="line"></div> -->
-
             <div class="event">
-                <span class="event-date">20th Feb</span>
+                <span class="event-date">15th Feb</span>
+                <div class="event-icon">📝</div>
                 <div class="event-content">
                     <h3 class="event-title">Registration</h3>
                     <p class="event-description">Begin your journey by signing up for the event.</p>
                 </div>
-                <div class="event-icon">📝</div>
             </div>
-
             <div class="event">
-                <span class="event-date">25th Feb</span>
+                <span class="event-date">17th Feb</span>
+                <div class="event-icon">🏆</div>
                 <div class="event-content">
                     <h3 class="event-title">Round 1</h3>
                     <p class="event-description">The first step to showcase your talent.</p>
                 </div>
-                <div class="event-icon">🏆</div>
             </div>
-
             <div class="event">
-                <span class="event-date">28th Feb - 1st March</span>
+                <span class="event-date">19th Feb</span>
+                <div class="event-icon">🎯</div>
                 <div class="event-content">
                     <h3 class="event-title">Nominations</h3>
                     <p class="event-description">The best performers get nominated.</p>
                 </div>
-                <div class="event-icon">🎯</div>
             </div>
-
             <div class="event">
-                <span class="event-date">28th Feb - 1st March</span>
+                <span class="event-date">24th Feb - 25th Feb</span>
+                <div class="event-icon">🎤</div>
                 <div class="event-content">
                     <h3 class="event-title">Grand Finale</h3>
                     <p class="event-description">The final stage to shine and perform.</p>
                 </div>
-                <div class="event-icon">🎤</div>
             </div>
-
             <div class="event">
-                <span class="event-date">1st March</span>
+                <span class="event-date">25th Feb</span>
+                <div class="event-icon">🎉</div>
                 <div class="event-content">
                     <h3 class="event-title">Awards & Prizes</h3>
                     <p class="event-description">Celebrate success and receive awards.</p>
                 </div>
-                <div class="event-icon">🎉</div>
             </div>
         </div>
     </div>
+
 
 
     <!-- Footer  -->
@@ -298,4 +299,5 @@ body {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hackathon Process Flow</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
@@ -194,7 +196,7 @@
             <div class="timeline-item">
                 <div class="timeline-item-box">
                     <i class="fas fa-user-plus"></i>
-                    <h2>Step 1: Team Formation:</h2>
+                    <h2>Step 1: Team Formation</h2>
                     <p>Bring together bright minds and form a team of 4 members (1 girl compulsory )to unleash your collective creativity and skills. Collaborate with peers to brainstorm innovative ideas and create solutions that stand out.</p>
                 </div>
             </div>
@@ -203,7 +205,7 @@
             <div class="timeline-item">
                 <div class="timeline-item-box">
                     <i class="fas fa-users"></i>
-                    <h2>Step 2: Registration:</h2>
+                    <h2>Step 2: Registration</h2>
                     <p>Register your team for the Raisoni Tech Hackathon S2 by filling out the registration form. Secure your spot in this exciting competition and take the first step toward turning your ideas into reality.</p>
                 </div>
             </div>
@@ -212,7 +214,7 @@
             <div class="timeline-item">
                 <div class="timeline-item-box">
                     <i class="fas bi-credit-card"></i>
-                    <h2>Step 3: Payment:</h2>
+                    <h2>Step 3: Payment</h2>
                     <p>Complete the registration process by submitting 800rs as the registration fee. Confirm your participation and gear up for a thrilling hackathon experience.</p>
                 </div>
             </div>
@@ -221,7 +223,7 @@
             <div class="timeline-item">
                 <div class="timeline-item-box">
                     <i class="fas fa-upload"></i>
-                    <h2>Step 4: PPT Submission :</h2>
+                    <h2>Step 4: PPT Submission</h2>
                     <p>Submit your detailed idea in the form of a PPT. Highlight your concept, problem statement, proposed solution and its implementation plan to impress the judges and secure your place in the next round.</p>
                 </div>
             </div>
@@ -230,7 +232,7 @@
             <div class="timeline-item">
                 <div class="timeline-item-box">
                     <i class="fas bi-award"></i>
-                    <h2>Step 5: Round 1 Results:</h2>
+                    <h2>Step 5: Round 1 Results</h2>
                     <p>Discover the teams that impressed the judges with their innovative ideas and creative solutions. These shortlisted teams will proceed to the next stage, bringing them one step closer to the grand finale.</p>
                 </div>
             </div>
@@ -239,7 +241,7 @@
             <div class="timeline-item">
                 <div class="timeline-item-box">
                     <i class="fas fa-trophy"></i>
-                    <h2>Step 6: Grand finale :</h2>
+                    <h2>Step 6: Grand finale</h2>
                     <p>The final stage of the hackathon! Compete with the best minds, refine your solution and present your masterpiece to impress the judges with your creativity, technical expertise and problem-solving skills to claim the title of hackathon champion.</p>
                 </div>
             </div>
@@ -248,7 +250,7 @@
             <div class="timeline-item">
                 <div class="timeline-item-box">
                     <i class="fas bi-stars"></i>
-                    <h2>Step 7: Recognizing Brilliance and Innovation:</h2>
+                    <h2>Step 7: Recognizing Brilliance and Innovation</h2>
                     <p>Join us for a memorable award ceremony where we applaud the winners of Raisoni tech hackathon S2 . From innovative solutions to exceptional teamwork , this award ceremony will be a memorable closure to this incredible journey of innovation and collaboration.</p>
                 </div>
             </div>

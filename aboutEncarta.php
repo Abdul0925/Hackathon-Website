@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackathon Process Flow</title>
+    <title>ENCARTA IT CELL</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
@@ -127,7 +129,7 @@
         <h3 class="mb-4">Incharges</h3>
         <div class="row">
             <div class="col-md-4 team-member gallery-item">
-                <img src="./picture/ourteam/vishalSir.png" alt="Incharge">
+                <img src="./picture/ourteam/VishalSir.jpg" alt="Incharge">
                 <h5>Vishal Dhabaliya</h5>
                 <p>Incharge</p>
             </div>
@@ -137,7 +139,7 @@
                 <p>Incharge</p>
             </div>
             <div class="col-md-4 team-member gallery-item">
-                <img src="./picture/ourteam/prajaktaMam.jpg" alt="Incharge">
+                <img src="./picture/ourteam/prajaktaMam1.jpg" alt="Incharge">
                 <h5>Prajakta Kotkar</h5>
                 <p>Incharge</p>
             </div>
@@ -200,8 +202,8 @@
                 <p>Marketing Head</p>
             </div>
             <div class="col-md-3 team-member text-center gallery-item">
-                <img src="./picture/ourteam/.jpg" alt="Head">
-                <h5>Unknown</h5>
+                <img src="./picture/ourteam/yash_photo.jpg" alt="Head">
+                <h5>Yash Talati</h5>
                 <p>Technical Head</p>
             </div>
             <div class="col-md-3 team-member text-center gallery-item">
@@ -212,36 +214,36 @@
         </div>
     </div>
 
-    <h1>Gallery </h1>
     <!-- Gallery Section -->
     <div class="container gallery-container">
+        <h1>Gallery </h1>
         <div class="row g-4">
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5197.JPG" alt="Gallery Image 1" class="img-fluid shadow">
+                <img src="./picture/ourclub/img01.jpg" alt="Gallery Image 1" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5229.JPG" alt="Gallery Image 2" class="img-fluid shadow">
+                <img src="./picture/ourclub/SWRJ5229.JPG" alt="Gallery Image 2" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5230.JPG" alt="Gallery Image 3" class="img-fluid shadow">
+                <img src="./picture/ourclub/SWRJ5230.JPG" alt="Gallery Image 3" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5231.JPG" alt="Gallery Image 4" class="img-fluid shadow">
+                <img src="./picture/ourclub/SWRJ5231.JPG" alt="Gallery Image 4" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5231.JPG" alt="Gallery Image 5" class="img-fluid shadow">
+                <img src="./picture/ourclub/SWRJ5231.JPG" alt="Gallery Image 5" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5232.JPG" alt="Gallery Image 6" class="img-fluid shadow">
+                <img src="./picture/ourclub/SWRJ5232.JPG" alt="Gallery Image 6" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5233.JPG" alt="Gallery Image 6" class="img-fluid shadow">
+                <img src="./picture/ourclub/SWRJ5233.JPG" alt="Gallery Image 6" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5360.JPG" alt="Gallery Image 6" class="img-fluid shadow">
+                <img src="./picture/ourclub/SWRJ5360.JPG" alt="Gallery Image 6" class="img-fluid shadow">
             </div>
             <div class="col-md-4 col-sm-6 gallery-item">
-                <img src="./picture/pasthackathon/SWRJ5361.JPG" alt="Gallery Image 6" class="img-fluid shadow">
+                <img src="./picture/ourclub/SWRJ5361.JPG" alt="Gallery Image 6" class="img-fluid shadow">
             </div>
         </div>
     </div>

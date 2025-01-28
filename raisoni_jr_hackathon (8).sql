@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2025 at 08:03 AM
+-- Generation Time: Jan 28, 2025 at 10:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -51,8 +51,18 @@ CREATE TABLE `admin_rounds` (
   `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `on_going` tinyint(1) NOT NULL
+  `on_going` tinyint(1) NOT NULL,
+  `isResultAnnounced` tinyint(1) NOT NULL,
+  `resultDate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_rounds`
+--
+
+INSERT INTO `admin_rounds` (`id`, `title`, `date`, `on_going`, `isResultAnnounced`, `resultDate`) VALUES
+(1, 'Round 1', '2025-01-27 09:46:53', 1, 0, '2025-01-15 10:16:03'),
+(2, 'Round 2', '2025-01-12 12:59:45', 0, 0, '2025-01-12 12:59:45');
 
 -- --------------------------------------------------------
 
@@ -71,6 +81,35 @@ CREATE TABLE `all_team_members` (
   `ps` varchar(255) NOT NULL,
   `is_leader` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_us`
+--
+
+CREATE TABLE `contact_us` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `contact` varchar(100) NOT NULL,
+  `query` varchar(255) NOT NULL,
+  `optional_message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `eliminated_teams`
+--
+
+CREATE TABLE `eliminated_teams` (
+  `id` int(11) NOT NULL,
+  `teamId` int(11) NOT NULL,
+  `teamName` varchar(255) NOT NULL,
+  `leaderEmail` varchar(255) NOT NULL,
+  `reasoneOfElimination` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -188,6 +227,7 @@ CREATE TABLE `team_and_leader_details` (
   `role` varchar(20) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `no_of_members` int(11) NOT NULL,
+  `isEliminated` tinyint(1) NOT NULL,
   `image_name` varchar(100) NOT NULL,
   `image_path` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -206,7 +246,10 @@ CREATE TABLE `team_idea_submissions` (
   `psTitle` varchar(255) NOT NULL,
   `pptLink` varchar(255) NOT NULL,
   `docLink` varchar(255) NOT NULL,
-  `solSummary` mediumtext NOT NULL
+  `solSummary` mediumtext NOT NULL,
+  `isApproved` tinyint(1) NOT NULL,
+  `isWinner` tinyint(1) NOT NULL,
+  `rank` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -229,6 +272,18 @@ ALTER TABLE `admin_rounds`
 -- Indexes for table `all_team_members`
 --
 ALTER TABLE `all_team_members`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contact_us`
+--
+ALTER TABLE `contact_us`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `eliminated_teams`
+--
+ALTER TABLE `eliminated_teams`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -295,12 +350,24 @@ ALTER TABLE `admin_details`
 -- AUTO_INCREMENT for table `admin_rounds`
 --
 ALTER TABLE `admin_rounds`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `all_team_members`
 --
 ALTER TABLE `all_team_members`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `contact_us`
+--
+ALTER TABLE `contact_us`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `eliminated_teams`
+--
+ALTER TABLE `eliminated_teams`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

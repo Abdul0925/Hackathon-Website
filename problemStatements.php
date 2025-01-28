@@ -10,6 +10,8 @@ require 'db.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RTH 25 Problem Statements</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
@@ -307,7 +309,7 @@ require 'db.php';
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                <img src="./picture/ghrce-logo-white.png" alt="Error Loading" height="" width="100px">
+                <img src="./picture/ghru-nagpur.webp" alt="Error Loading" height="" width="100px">
             </a>
 
             <div class="d-flex">
@@ -353,7 +355,7 @@ require 'db.php';
                                 Guidelines
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="guidelinesDropdown">
-                                <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank">For Institutes</a></li>
+                                <li><a class="dropdown-item" href="./downloadable/Hackfest Booklet.pdf" target="_blank">Hackathon Booklet</a></li>
                                 <li><a class="dropdown-item" href="./downloadable/Idea-Presentation-Format-SIH2023-College[1].pptx" target="_blank" rel="noopener noreferrer">Idea PPT</a></li>
                                 <li><a class="dropdown-item" href="hackProcess.php">Hackathon Process</a></li>
                                 <li><a class="dropdown-item" href="hackTimeline.php">Hackathon Timeline</a></li>

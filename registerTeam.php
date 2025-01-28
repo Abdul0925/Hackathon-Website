@@ -22,6 +22,8 @@ $_SESSION['members'] = [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RTH 25 Team Registration Form</title>
+    <link rel="icon" href="./picture/rthlogotest1.png" type="image/x-icon">
+
     <!-- Bootstrap and Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Bootstrap JS with Popper -->
@@ -485,7 +487,7 @@ $_SESSION['members'] = [];
         <div class="container-fluid">
             <!-- Left: Logo -->
             <a class="navbar-brand" href="https://ghrstu.edu.in/">
-                <img src="./picture/ghrce-logo-white.png" alt="Error Loading" height="" width="100px">
+                <img src="./picture/ghru-nagpur.webp" alt="Error Loading" height="" width="100px">
             </a>
 
             <div class="d-flex">
@@ -782,8 +784,8 @@ $_SESSION['members'] = [];
                     </div>
                     <div class="box-body">
                         <div class="QR-code">
-                            <img src="picture\QRcodephoto.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
-                            <p>Scan the QR code to make the payment.</p>
+                            <img src="picture/payment.jpg" alt="QR Code" class="img-fluid mb-3" style="max-width: 200px;">
+                            <p>Scan QR to pay Rs. 800/-</p>
                         </div>
 
                         <div class="payment-box">
